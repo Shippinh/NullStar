@@ -1,0 +1,5 @@
+*
+!Assets/
+!Assets/*
+Assets/Other/
+!.gitignore
