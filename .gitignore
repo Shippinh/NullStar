@@ -1,5 +1,5 @@
 *
 !Assets/
-!Assets/*
+!Assets/**
 Assets/Other/
 !.gitignore
