@@ -24,6 +24,8 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 1000f)]
     float maxSpeed = 10f;
     [SerializeField, Range(0f, 1000f)]
+    float maxOverboostSpeed = 20f;
+    [SerializeField, Range(0f, 1000f)]
     float maxVerticalSpeed = 10f;
     [SerializeField, Range(0f, 1000f)]
     float maxAcceleration = 10f, maxAirAcceleration = 1f;
@@ -75,7 +77,7 @@ public class SpaceShooterController : MonoBehaviour
                                 Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z :
                                 Camera.main.transform.right * moveDirection.x + Vector3.up * moveDirection.y + Camera.main.transform.forward * moveDirection.z;
         worldDirection.Normalize();
-        desiredVelocity = new Vector3(worldDirection.x * maxSpeed, worldDirection.y * maxVerticalSpeed, worldDirection.z * maxSpeed);
+        desiredVelocity = new Vector3(overboostMode ? worldDirection.x * maxOverboostSpeed : worldDirection.x * maxSpeed, worldDirection.y * maxVerticalSpeed, overboostMode ? worldDirection.z * maxOverboostSpeed : worldDirection.z * maxSpeed);
     }
 
     void FixedUpdate()

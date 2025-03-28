@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public CustomInputs inputConfig;
+
     public Vector3 offset = new Vector3(0, 1, -10);
     [Range(0f, 5f)]
     public float cameraRotationSpeed = 3f;
@@ -16,8 +18,11 @@ public class CameraController : MonoBehaviour
     public float handResetSpeedVertical = 8f;  // Speed for resetting hands (up/down) to neutral rotation
     public float handResetSpeedHorizontal = 8f; // More aggressive resetting for horizontal rotation
 
+    public float cameraTiltSpeed = 2f; // Speed of tilt
+    public float maxTiltAngle = 10f;   // Maximum tilt angle
+
     private float inputX, inputY;
-    private float yaw = 0f, pitch = 0f;
+    private float yaw = 0f, pitch = 0f, roll = 0f;
     public GameObject target;
 
     // Hands for rotation
@@ -63,12 +68,40 @@ public class CameraController : MonoBehaviour
             RotateCameraMouse(inputX, inputY);
             RotatePlayerHandsSmoothly();
             AttachHandsToCamera();
+            TiltCameraBasedOnInput();
         }
     }
 
     private (float x, float y) GetMouseInput()
     {
         return (Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+    }
+
+    private void TiltCameraBasedOnInput()
+    {
+        bool movingLeft = Input.GetKey(inputConfig.MoveLeft);
+        bool movingRight = Input.GetKey(inputConfig.MoveRight);
+
+        if (movingLeft)
+        {
+            roll = Mathf.Lerp(roll, maxTiltAngle, Time.deltaTime * cameraTiltSpeed);
+        }
+        else if (movingRight)
+        {
+            roll = Mathf.Lerp(roll, -maxTiltAngle, Time.deltaTime * cameraTiltSpeed);
+        }
+        else
+        {
+            // Reset tilt smoothly
+            roll = Mathf.Lerp(roll, 0f, Time.deltaTime * cameraTiltSpeed);
+        }
+
+        // Apply rotation using Quaternion
+        Quaternion rotation = Quaternion.Euler(pitch * cameraRotationSpeed, yaw * cameraRotationSpeed, roll);
+        transform.rotation = rotation;
+
+        // Rotate player's body (yaw only)
+        target.transform.rotation = Quaternion.Euler(0, yaw * cameraRotationSpeed, 0);
     }
 
     private void RotateCameraMouse(float x, float y)
