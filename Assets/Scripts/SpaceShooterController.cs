@@ -11,20 +11,25 @@ public class SpaceShooterController : MonoBehaviour
     public int rightInput;
     public bool jumpInput;
 
-    public int overboostInput;
+    public InputToggle overboostToggle;
+    public bool overboostMode;
+
     public int dodgeInput;
     public int parryInput;
     public int shootInput;
     public int rageInput;
     public int adrenalineInput;
+    
 
-    [SerializeField, Range(0f, 100f)]
+    [SerializeField, Range(0f, 1000f)]
     float maxSpeed = 10f;
-    [SerializeField, Range(0f, 100f)]
+    [SerializeField, Range(0f, 1000f)]
+    float maxVerticalSpeed = 10f;
+    [SerializeField, Range(0f, 1000f)]
     float maxAcceleration = 10f, maxAirAcceleration = 1f;
-    [SerializeField, Range(0f, 10f)]
+    [SerializeField, Range(0f, 100f)]
     float jumpForce = 2f;
-    [SerializeField, Range(0f, 200f)]
+    [SerializeField, Range(0f, 2000f)]
     float jetpackForce = 10f;
     [SerializeField, Range(0, 90)]
     float maxGroundAngle = 25f;
@@ -44,6 +49,7 @@ public class SpaceShooterController : MonoBehaviour
     void Awake() 
     {
         body = GetComponent<Rigidbody>();
+        overboostToggle = new InputToggle(inputConfig.Overboost);
         OnValidate();
     }
 
@@ -55,17 +61,21 @@ public class SpaceShooterController : MonoBehaviour
         rightInput = Input.GetKey(inputConfig.MoveRight) ? 1 : 0;
         jumpInput = Input.GetKey(inputConfig.Ascend);
 
-        overboostInput = Input.GetKey(inputConfig.Overboost) ? 1 : 0;
         dodgeInput = Input.GetKey(inputConfig.Dodge) ? 1 : 0;
         parryInput = Input.GetKey(inputConfig.Parry) ? 1 : 0;
         shootInput = Input.GetKey(inputConfig.Shoot) ? 1 : 0;
         rageInput = Input.GetKey(inputConfig.RageMode) ? 1 : 0;
         adrenalineInput = Input.GetKey(inputConfig.AdrenalineMode) ? 1 : 0;
 
-        Vector3 moveDirection = new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput);
-        Vector3 worldDirection = Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z;
-        desiredVelocity = worldDirection.normalized * maxSpeed;
+        overboostToggle.UpdateToggle();
+        overboostMode = overboostToggle.GetCurrentToggleState();
 
+        Vector3 moveDirection = new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
+        Vector3 worldDirection = overboostMode ? 
+                                Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z :
+                                Camera.main.transform.right * moveDirection.x + Vector3.up * moveDirection.y + Camera.main.transform.forward * moveDirection.z;
+        worldDirection.Normalize();
+        desiredVelocity = new Vector3(worldDirection.x * maxSpeed, worldDirection.y * maxVerticalSpeed, worldDirection.z * maxSpeed);
     }
 
     void FixedUpdate()
@@ -86,7 +96,7 @@ public class SpaceShooterController : MonoBehaviour
             }
             else
             {
-                ApplyJetpack();
+                AdjustAirVelocity();
             }
         }
 
@@ -96,7 +106,7 @@ public class SpaceShooterController : MonoBehaviour
 
     void ApplyGravity()
     {
-        float gravityMultiplier = 2f; // Increase for stronger gravity
+        float gravityMultiplier = 4f; // Increase for stronger gravity
         velocity += Physics.gravity * gravityMultiplier * Time.deltaTime;
     }
 
@@ -150,9 +160,16 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
-    void ApplyJetpack()
+    void AdjustAirVelocity()
     {
-        velocity += Vector3.up * jetpackForce * Time.deltaTime;
+        Vector3 yAxis = Vector3.up; // Ensure we are using global up
+
+        float currentY = Vector3.Dot(velocity, yAxis);
+        float maxSpeedChange = jetpackForce * Time.deltaTime;
+
+        float newY = Mathf.MoveTowards(currentY, desiredVelocity.y, maxSpeedChange);
+
+        velocity += yAxis * (newY - currentY);
     }
 
     void OnCollisionEnter(Collision collision) 
@@ -183,3 +200,51 @@ public class SpaceShooterController : MonoBehaviour
         return vector - contactNormal * Vector3.Dot(vector, contactNormal);
     }
 }
+
+
+public class InputToggle
+{
+    private string axisName;
+    private KeyCode keyName;
+    private bool currentToggleState;
+    private bool isAxis;
+
+    public InputToggle(string axisName)
+    {
+        this.axisName = axisName;
+        this.currentToggleState = false;
+        this.isAxis = true;
+    }
+
+    public InputToggle(KeyCode keyName)
+    {
+        this.keyName = keyName;
+        this.currentToggleState = false;
+        this.isAxis = false;
+    }
+
+    public void UpdateToggle()
+    {
+        if (isAxis)
+        {
+            if (Input.GetButtonDown(axisName)) // Use Unity's button system
+            {
+                currentToggleState = !currentToggleState;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(keyName)) // Directly toggles on key press
+            {
+                currentToggleState = !currentToggleState;
+            }
+        }
+    }
+
+    public bool GetCurrentToggleState()
+    {
+        return currentToggleState;
+    }
+}
+
+

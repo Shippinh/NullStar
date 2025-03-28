@@ -2038,17 +2038,18 @@ MonoBehaviour:
   leftInput: 0
   rightInput: 0
   jumpInput: 0
-  overboostInput: 0
+  overboostMode: 0
   dodgeInput: 0
   parryInput: 0
   shootInput: 0
   rageInput: 0
   adrenalineInput: 0
-  maxSpeed: 61.3
+  maxSpeed: 302
+  maxVerticalSpeed: 31
   maxAcceleration: 100
   maxAirAcceleration: 100
   jumpForce: 2
-  jetpackForce: 50
+  jetpackForce: 160
   maxGroundAngle: 25
 --- !u!54 &691622030
 Rigidbody:
