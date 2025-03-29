@@ -932,6 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e542a85099ad0d4d84bc19124fcda0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputConfig: {fileID: 11400000, guid: 57c7208d781943446a81b405bf7a963b, type: 2}
   offset: {x: 0, y: 0.8, z: 0}
   cameraRotationSpeed: 3
   minRotationY: -84
@@ -941,6 +942,8 @@ MonoBehaviour:
   handRotationSpeed: 15
   handResetSpeedVertical: 8
   handResetSpeedHorizontal: 8
+  cameraTiltSpeed: 10
+  maxTiltAngle: 1.2
   target: {fileID: 1944553957}
   leftHand: {fileID: 317917909}
   rightHand: {fileID: 767223727}
@@ -2076,7 +2079,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!1 &695677900

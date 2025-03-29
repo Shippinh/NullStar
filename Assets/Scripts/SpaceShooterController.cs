@@ -24,7 +24,7 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 1000f)]
     float maxSpeed = 10f;
     [SerializeField, Range(0f, 1000f)]
-    float maxOverboostSpeed = 20f;
+    float maxOverboostSpeed = 20f, maxOverboostVerticalSpeed;
     [SerializeField, Range(0f, 1000f)]
     float maxVerticalSpeed = 10f;
     [SerializeField, Range(0f, 1000f)]
@@ -72,12 +72,14 @@ public class SpaceShooterController : MonoBehaviour
         overboostToggle.UpdateToggle();
         overboostMode = overboostToggle.GetCurrentToggleState();
 
-        Vector3 moveDirection = new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
+        Vector3 moveDirection = overboostMode ? 
+                                new Vector3(rightInput + leftInput, 1, 1) :
+                                new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
         Vector3 worldDirection = overboostMode ? 
                                 Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z :
                                 Camera.main.transform.right * moveDirection.x + Vector3.up * moveDirection.y + Camera.main.transform.forward * moveDirection.z;
         worldDirection.Normalize();
-        desiredVelocity = new Vector3(overboostMode ? worldDirection.x * maxOverboostSpeed : worldDirection.x * maxSpeed, worldDirection.y * maxVerticalSpeed, overboostMode ? worldDirection.z * maxOverboostSpeed : worldDirection.z * maxSpeed);
+        desiredVelocity = new Vector3(overboostMode ? worldDirection.x * maxOverboostSpeed : worldDirection.x * maxSpeed, overboostMode ? worldDirection.y * maxOverboostVerticalSpeed : worldDirection.y * maxVerticalSpeed, overboostMode ? worldDirection.z * maxOverboostSpeed : worldDirection.z * maxSpeed);
     }
 
     void FixedUpdate()
@@ -90,7 +92,7 @@ public class SpaceShooterController : MonoBehaviour
             ApplyGravity();
         }
 
-        if (jumpInput)
+        if (jumpInput && overboostMode == false)
         {
             if (OnGround)
             {
@@ -100,6 +102,10 @@ public class SpaceShooterController : MonoBehaviour
             {
                 AdjustAirVelocity();
             }
+        }
+        else if (overboostMode == true)
+        {
+            AdjustAirVelocity();
         }
 
         body.velocity = velocity;
