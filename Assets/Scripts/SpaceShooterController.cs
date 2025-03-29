@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class SpaceShooterController : MonoBehaviour
 {
@@ -21,34 +22,23 @@ public class SpaceShooterController : MonoBehaviour
     public int adrenalineInput;
     
 
-    [SerializeField, Range(0f, 1000f)]
-    float maxSpeed = 10f;
-    [SerializeField, Range(0f, 1000f)]
-    float maxOverboostSpeed = 20f, maxOverboostVerticalSpeed;
-    [SerializeField, Range(0f, 1000f)]
-    float maxVerticalSpeed = 10f;
-    [SerializeField, Range(0f, 1000f)]
-    float maxAcceleration = 10f, maxAirAcceleration = 1f;
-    [SerializeField, Range(0f, 100f)]
-    float jumpForce = 2f;
-    [SerializeField, Range(0f, 2000f)]
-    float jetpackAcceleration = 10f;
-    [SerializeField, Range(0f, 2000f)]
-    float dodgeAcceleration = 10f;
-    [SerializeField, Range(0f, 1000f)]
-    float dodgeMaxSpeed = 10f;
-    [SerializeField, Range(0f, 1000f)]
-    float perDodgeMaxSpeedIncrease = 6.5f;
-    [SerializeField]
-    float dodgeMaxSpeedCap;
-    [SerializeField, Range(1, 10)]
-    int dodgeMaxCount = 5;
-    int dodgeCount = 0;
-    [SerializeField, Range(0, 90)]
-    float maxGroundAngle = 25f;
+    [SerializeField, Range(0f, 1000f)] float maxSpeed = 10f;
+    [SerializeField, Range(0f, 1000f)] float maxOverboostSpeed = 20f, maxOverboostVerticalSpeed;
+    [SerializeField, Range(0f, 1000f)] float maxVerticalSpeed = 10f;
+    [SerializeField, Range(0f, 1000f)] float maxAcceleration = 10f, maxAirAcceleration = 1f;
+    [SerializeField, Range(0f, 100f)] float jumpForce = 2f;
+    [SerializeField, Range(0f, 2000f)] float jetpackAcceleration = 10f;
+    [SerializeField, Range(0f, 2000f)] float dodgeAcceleration = 10f;
+    [SerializeField, Range(0f, 1000f)] float dodgeMaxSpeed = 10f;
+    [SerializeField, Range(0f, 1000f)] float perDodgeMaxSpeedIncrease = 6.5f;
+    [SerializeField] float dodgeMaxSpeedCap;
+    [SerializeField] private int maxDodgeCharges = 5;
+    [SerializeField] private int dodgeCharges;
+    [SerializeField] private float dodgeRechargeTime = 1.5f;
+    [SerializeField] private float dodgeRechargeTimer;
+    [SerializeField, Range(0, 90)] float maxGroundAngle = 25f;
     [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
-    [SerializeField]
-    float defaultMaxSpeed;
+    [SerializeField] float defaultMaxSpeed;
     float dodgeTime;
     Rigidbody body;
     Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
@@ -68,14 +58,27 @@ public class SpaceShooterController : MonoBehaviour
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
         defaultMaxSpeed = maxSpeed;
-        dodgeMaxSpeedCap = defaultMaxSpeed + (dodgeMaxCount - 1) * perDodgeMaxSpeedIncrease;
+        dodgeMaxSpeedCap = defaultMaxSpeed + (maxDodgeCharges - 1) * perDodgeMaxSpeedIncrease;
         OnValidate();
+        dodgeCharges = maxDodgeCharges; // Initialize full charges
+        dodgeRechargeTimer = 0f;
     }
 
-    public void Update()
+    void Update()
     {
         HandleInput();
         CalculateDesiredVelocity();
+
+        // Regenerate dodge charges over time
+        if (dodgeCharges < maxDodgeCharges)
+        {
+            dodgeRechargeTimer += Time.deltaTime;
+            if (dodgeRechargeTimer >= dodgeRechargeTime)
+            {
+                dodgeCharges++;
+                dodgeRechargeTimer = 0f; // Reset timer after regenerating a charge
+            }
+        }
     }
 
     void FixedUpdate()
@@ -174,33 +177,28 @@ public class SpaceShooterController : MonoBehaviour
         velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
     }
 
+    // Modify AdjustDodgeVelocity()
     void AdjustDodgeVelocity()
     {
-        if (dodgeInput > 0 && !isDodging)
+        if (dodgeInput > 0 && !isDodging && dodgeCharges > 0)
         {
             isDodging = true;
             dodgeTime = 0f;
+            dodgeCharges--;  // Consume one dodge charge
+            dodgeRechargeTimer = 0f; // Reset recharge timer since a dodge was used
 
-            // Create dodge direction based on inputs
-            Vector3 dodgeDirection = new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
-
-            // If overboost mode, ignore forward/backward input and only use X (horizontal)
+            // Dodge direction calculation (unchanged)
+            desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
             if (overboostMode)
             {
-                dodgeDirection = new Vector3(rightInput + leftInput, 0, 1).normalized;
+                desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, 1).normalized;
             }
-
-            // Get camera's right and forward vectors, ignoring vertical (y)
             Vector3 camRight = Camera.main.transform.right;
             Vector3 camForward = Camera.main.transform.forward;
             camRight.y = 0;
             camForward.y = 0;
-
-            // Convert dodge direction to camera-relative space
-            dodgeDirection = camRight * dodgeDirection.x + camForward * dodgeDirection.z;
-
-            // Normalize the dodge direction
-            dodgeDirection.Normalize();
+            desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
+            desiredDodgeVelocity.Normalize();
 
             // Update dodge speed
             if (maxSpeed < dodgeMaxSpeedCap)
@@ -208,23 +206,20 @@ public class SpaceShooterController : MonoBehaviour
             else
                 maxSpeed = dodgeMaxSpeedCap;
 
-            // Set the velocity based on dodge direction
-            velocity = dodgeDirection * maxSpeed;
+            velocity = desiredDodgeVelocity * maxSpeed;
         }
 
-        // Dodge duration logic
+        // Dodge duration logic (unchanged)
         if (isDodging)
         {
             dodgeTime += Time.fixedDeltaTime;
-            if (dodgeTime >= 0.2f) // 0.2s dodge duration
+            if (dodgeTime >= 0.2f) 
             {
                 isDodging = false;
                 dodgeTime = 0f;
             }
         }
     }
-
-
 
     void Jump()
     {

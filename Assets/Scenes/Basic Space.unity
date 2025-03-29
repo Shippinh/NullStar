@@ -2053,9 +2053,16 @@ MonoBehaviour:
   maxVerticalSpeed: 30
   maxAcceleration: 100
   maxAirAcceleration: 100
-  jumpForce: 2
-  jetpackForce: 160
+  jumpForce: 6
+  jetpackAcceleration: 120
+  dodgeAcceleration: 10
+  dodgeMaxSpeed: 10
+  perDodgeMaxSpeedIncrease: 6.5
+  dodgeMaxSpeedCap: 0
+  dodgeMaxCount: 5
   maxGroundAngle: 25
+  maxSpeedDecayRate: 81.6
+  defaultMaxSpeed: 0
 --- !u!54 &691622030
 Rigidbody:
   m_ObjectHideFlags: 0
