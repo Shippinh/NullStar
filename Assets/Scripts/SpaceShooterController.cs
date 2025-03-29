@@ -32,15 +32,30 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 100f)]
     float jumpForce = 2f;
     [SerializeField, Range(0f, 2000f)]
-    float jetpackForce = 10f;
+    float jetpackAcceleration = 10f;
+    [SerializeField, Range(0f, 2000f)]
+    float dodgeAcceleration = 10f;
+    [SerializeField, Range(0f, 1000f)]
+    float dodgeMaxSpeed = 10f;
+    [SerializeField, Range(0f, 1000f)]
+    float perDodgeMaxSpeedIncrease = 6.5f;
+    [SerializeField]
+    float dodgeMaxSpeedCap;
+    [SerializeField, Range(1, 10)]
+    int dodgeMaxCount = 5;
+    int dodgeCount = 0;
     [SerializeField, Range(0, 90)]
     float maxGroundAngle = 25f;
+    [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
+    [SerializeField]
+    float defaultMaxSpeed;
+    float dodgeTime;
     Rigidbody body;
-    Vector3 velocity, desiredVelocity;
+    Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
     Vector3 contactNormal;
     int groundContactCount;
     bool OnGround => groundContactCount > 0;
-    int jumpPhase;
+    bool isDodging;
     float minGroundDotProduct;
 
     void OnValidate() 
@@ -52,41 +67,24 @@ public class SpaceShooterController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
+        defaultMaxSpeed = maxSpeed;
+        dodgeMaxSpeedCap = defaultMaxSpeed + (dodgeMaxCount - 1) * perDodgeMaxSpeedIncrease;
         OnValidate();
     }
 
     public void Update()
     {
-        forwardInput = Input.GetKey(inputConfig.MoveUp) ? 1 : 0;
-        backwardInput = Input.GetKey(inputConfig.MoveDown) ? -1 : 0;
-        leftInput = Input.GetKey(inputConfig.MoveLeft) ? -1 : 0;
-        rightInput = Input.GetKey(inputConfig.MoveRight) ? 1 : 0;
-        jumpInput = Input.GetKey(inputConfig.Ascend);
-
-        dodgeInput = Input.GetKey(inputConfig.Dodge) ? 1 : 0;
-        parryInput = Input.GetKey(inputConfig.Parry) ? 1 : 0;
-        shootInput = Input.GetKey(inputConfig.Shoot) ? 1 : 0;
-        rageInput = Input.GetKey(inputConfig.RageMode) ? 1 : 0;
-        adrenalineInput = Input.GetKey(inputConfig.AdrenalineMode) ? 1 : 0;
-
-        overboostToggle.UpdateToggle();
-        overboostMode = overboostToggle.GetCurrentToggleState();
-
-        Vector3 moveDirection = overboostMode ? 
-                                new Vector3(rightInput + leftInput, 1, 1) :
-                                new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
-        Vector3 worldDirection = overboostMode ? 
-                                Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z :
-                                Camera.main.transform.right * moveDirection.x + Vector3.up * moveDirection.y + Camera.main.transform.forward * moveDirection.z;
-        worldDirection.Normalize();
-        desiredVelocity = new Vector3(overboostMode ? worldDirection.x * maxOverboostSpeed : worldDirection.x * maxSpeed, overboostMode ? worldDirection.y * maxOverboostVerticalSpeed : worldDirection.y * maxVerticalSpeed, overboostMode ? worldDirection.z * maxOverboostSpeed : worldDirection.z * maxSpeed);
+        HandleInput();
+        CalculateDesiredVelocity();
     }
 
     void FixedUpdate()
     {
         UpdateState();
+
         AdjustVelocity();
-        
+        AdjustDodgeVelocity();
+
         if (!OnGround) 
         {
             ApplyGravity();
@@ -110,8 +108,14 @@ public class SpaceShooterController : MonoBehaviour
 
         body.velocity = velocity;
         ClearState();
+
+        if (!AnyMovementInput() && !isDodging)
+        {
+            maxSpeed = Mathf.MoveTowards(maxSpeed, defaultMaxSpeed, maxSpeedDecayRate * Time.deltaTime);
+        }
     }
 
+    // Custom gravity
     void ApplyGravity()
     {
         float gravityMultiplier = 4f; // Increase for stronger gravity
@@ -130,7 +134,6 @@ public class SpaceShooterController : MonoBehaviour
         velocity = body.velocity;
         if (OnGround) 
         {
-            jumpPhase = 0;
             if (groundContactCount > 1) 
             {
                 contactNormal.Normalize();
@@ -140,6 +143,18 @@ public class SpaceShooterController : MonoBehaviour
         {
             contactNormal = Vector3.up;
         }
+    }
+
+    void CalculateDesiredVelocity()
+    {
+        Vector3 moveDirection = overboostMode ? 
+                                new Vector3(rightInput + leftInput, 1, 1) :
+                                new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
+        Vector3 worldDirection = overboostMode ? 
+                                Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z :
+                                Camera.main.transform.right * moveDirection.x + Vector3.up * moveDirection.y + Camera.main.transform.forward * moveDirection.z;
+        worldDirection.Normalize();
+        desiredVelocity = new Vector3(overboostMode ? worldDirection.x * maxOverboostSpeed : worldDirection.x * maxSpeed, overboostMode ? worldDirection.y * maxOverboostVerticalSpeed : worldDirection.y * maxVerticalSpeed, overboostMode ? worldDirection.z * maxOverboostSpeed : worldDirection.z * maxSpeed);
     }
 
     void AdjustVelocity() 
@@ -159,11 +174,62 @@ public class SpaceShooterController : MonoBehaviour
         velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
     }
 
+    void AdjustDodgeVelocity()
+    {
+        if (dodgeInput > 0 && !isDodging)
+        {
+            isDodging = true;
+            dodgeTime = 0f;
+
+            // Create dodge direction based on inputs
+            Vector3 dodgeDirection = new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
+
+            // If overboost mode, ignore forward/backward input and only use X (horizontal)
+            if (overboostMode)
+            {
+                dodgeDirection = new Vector3(rightInput + leftInput, 0, 1).normalized;
+            }
+
+            // Get camera's right and forward vectors, ignoring vertical (y)
+            Vector3 camRight = Camera.main.transform.right;
+            Vector3 camForward = Camera.main.transform.forward;
+            camRight.y = 0;
+            camForward.y = 0;
+
+            // Convert dodge direction to camera-relative space
+            dodgeDirection = camRight * dodgeDirection.x + camForward * dodgeDirection.z;
+
+            // Normalize the dodge direction
+            dodgeDirection.Normalize();
+
+            // Update dodge speed
+            if (maxSpeed < dodgeMaxSpeedCap)
+                maxSpeed += perDodgeMaxSpeedIncrease;
+            else
+                maxSpeed = dodgeMaxSpeedCap;
+
+            // Set the velocity based on dodge direction
+            velocity = dodgeDirection * maxSpeed;
+        }
+
+        // Dodge duration logic
+        if (isDodging)
+        {
+            dodgeTime += Time.fixedDeltaTime;
+            if (dodgeTime >= 0.2f) // 0.2s dodge duration
+            {
+                isDodging = false;
+                dodgeTime = 0f;
+            }
+        }
+    }
+
+
+
     void Jump()
     {
         if (OnGround)
         {
-            jumpPhase = 1;
             velocity += Vector3.up * jumpForce;
         }
     }
@@ -173,7 +239,7 @@ public class SpaceShooterController : MonoBehaviour
         Vector3 yAxis = Vector3.up; // Ensure we are using global up
 
         float currentY = Vector3.Dot(velocity, yAxis);
-        float maxSpeedChange = jetpackForce * Time.deltaTime;
+        float maxSpeedChange = jetpackAcceleration * Time.deltaTime;
 
         float newY = Mathf.MoveTowards(currentY, desiredVelocity.y, maxSpeedChange);
 
@@ -206,6 +272,28 @@ public class SpaceShooterController : MonoBehaviour
     Vector3 ProjectOnContactPlane(Vector3 vector) 
     {
         return vector - contactNormal * Vector3.Dot(vector, contactNormal);
+    }
+
+    void HandleInput()
+    {
+        forwardInput = Input.GetKey(inputConfig.MoveUp) ? 1 : 0;
+        backwardInput = Input.GetKey(inputConfig.MoveDown) ? -1 : 0;
+        leftInput = Input.GetKey(inputConfig.MoveLeft) ? -1 : 0;
+        rightInput = Input.GetKey(inputConfig.MoveRight) ? 1 : 0;
+        jumpInput = Input.GetKey(inputConfig.Ascend);
+        dodgeInput = Input.GetKeyDown(inputConfig.Dodge) ? 1 : 0;
+        parryInput = Input.GetKey(inputConfig.Parry) ? 1 : 0;
+        shootInput = Input.GetKey(inputConfig.Shoot) ? 1 : 0;
+        rageInput = Input.GetKey(inputConfig.RageMode) ? 1 : 0;
+        adrenalineInput = Input.GetKey(inputConfig.AdrenalineMode) ? 1 : 0;
+
+        overboostToggle.UpdateToggle();
+        overboostMode = overboostToggle.GetCurrentToggleState();
+    }
+
+    bool AnyMovementInput()
+    {
+        return overboostMode ? true : forwardInput != 0 || backwardInput != 0 || leftInput != 0 || rightInput != 0;
     }
 }
 

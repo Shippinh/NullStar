@@ -2049,6 +2049,7 @@ MonoBehaviour:
   adrenalineInput: 0
   maxSpeed: 65
   maxOverboostSpeed: 150
+  maxOverboostVerticalSpeed: 142
   maxVerticalSpeed: 30
   maxAcceleration: 100
   maxAirAcceleration: 100
