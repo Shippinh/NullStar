@@ -2042,6 +2042,9 @@ MonoBehaviour:
   rightInput: 0
   jumpInput: 0
   overboostMode: 0
+  overboostInitiated: 0
+  overboostActivationDelay: 1
+  overboostChargeTimer: 0
   dodgeInput: 0
   parryInput: 0
   shootInput: 0
@@ -2055,11 +2058,12 @@ MonoBehaviour:
   maxAirAcceleration: 100
   jumpForce: 6
   jetpackAcceleration: 120
-  dodgeAcceleration: 10
-  dodgeMaxSpeed: 10
   perDodgeMaxSpeedIncrease: 6.5
   dodgeMaxSpeedCap: 0
-  dodgeMaxCount: 5
+  maxDodgeCharges: 5
+  dodgeCharges: 0
+  dodgeRechargeTime: 1.5
+  dodgeRechargeTimer: 0
   maxGroundAngle: 25
   maxSpeedDecayRate: 81.6
   defaultMaxSpeed: 0

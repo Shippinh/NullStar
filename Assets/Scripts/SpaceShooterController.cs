@@ -14,6 +14,10 @@ public class SpaceShooterController : MonoBehaviour
 
     public InputToggle overboostToggle;
     public bool overboostMode;
+    public bool overboostInitiated;
+    public float overboostActivationDelay = 2f;
+    [SerializeField] float overboostChargeTimer;
+    [SerializeField, Range(0f, 1000f)] float maxOverboostInitiationSpeed = 5f;
 
     public int dodgeInput;
     public int parryInput;
@@ -28,17 +32,16 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 1000f)] float maxAcceleration = 10f, maxAirAcceleration = 1f;
     [SerializeField, Range(0f, 100f)] float jumpForce = 2f;
     [SerializeField, Range(0f, 2000f)] float jetpackAcceleration = 10f;
-    [SerializeField, Range(0f, 2000f)] float dodgeAcceleration = 10f;
-    [SerializeField, Range(0f, 1000f)] float dodgeMaxSpeed = 10f;
+    [SerializeField, Range(0f, 1000)] float dodgeMaxSpeed = 10f;
     [SerializeField, Range(0f, 1000f)] float perDodgeMaxSpeedIncrease = 6.5f;
     [SerializeField] float dodgeMaxSpeedCap;
     [SerializeField] private int maxDodgeCharges = 5;
     [SerializeField] private int dodgeCharges;
-    [SerializeField] private float dodgeRechargeTime = 1.5f;
+    [SerializeField] float dodgeRechargeTime = 1.5f;
     [SerializeField] private float dodgeRechargeTimer;
     [SerializeField, Range(0, 90)] float maxGroundAngle = 25f;
     [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
-    [SerializeField] float defaultMaxSpeed;
+    [SerializeField] float defaultMaxSpeed, defaultMaxOverboostSpeed;
     float dodgeTime;
     Rigidbody body;
     Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
@@ -58,16 +61,46 @@ public class SpaceShooterController : MonoBehaviour
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
         defaultMaxSpeed = maxSpeed;
+        defaultMaxOverboostSpeed = maxOverboostSpeed;
         dodgeMaxSpeedCap = defaultMaxSpeed + (maxDodgeCharges - 1) * perDodgeMaxSpeedIncrease;
         OnValidate();
         dodgeCharges = maxDodgeCharges; // Initialize full charges
         dodgeRechargeTimer = 0f;
+        overboostChargeTimer = 0f;
     }
 
     void Update()
     {
         HandleInput();
         CalculateDesiredVelocity();
+
+        if (overboostMode == true && overboostInitiated == false)
+        {
+            body.useGravity = false;
+            maxOverboostSpeed = maxOverboostInitiationSpeed;
+            overboostChargeTimer += Time.deltaTime;
+
+            float t = overboostChargeTimer / (overboostActivationDelay + 2f); // Normalized time (0 to 1)
+            float factor = 1f - (t * t);
+
+            body.velocity = new Vector3(body.velocity.x, body.velocity.y * factor, body.velocity.z);
+
+            if(overboostChargeTimer >= overboostActivationDelay)
+            {
+                maxOverboostSpeed = defaultMaxOverboostSpeed;
+                body.velocity = Camera.main.transform.forward * dodgeMaxSpeed;
+                overboostInitiated = true;
+                body.useGravity = true;
+                overboostChargeTimer = 0f;
+            }
+        }
+
+        if(overboostToggle.GetCurrentToggleState() == false)
+        {
+            overboostInitiated = false;
+            body.useGravity = true;
+            overboostChargeTimer = 0f;
+        }
 
         // Regenerate dodge charges over time
         if (dodgeCharges < maxDodgeCharges)
@@ -88,7 +121,7 @@ public class SpaceShooterController : MonoBehaviour
         AdjustVelocity();
         AdjustDodgeVelocity();
 
-        if (!OnGround) 
+        if (!OnGround && body.useGravity) 
         {
             ApplyGravity();
         }
@@ -104,7 +137,8 @@ public class SpaceShooterController : MonoBehaviour
                 AdjustAirVelocity();
             }
         }
-        else if (overboostMode == true)
+        
+        if (overboostInitiated == true)
         {
             AdjustAirVelocity();
         }
@@ -150,10 +184,10 @@ public class SpaceShooterController : MonoBehaviour
 
     void CalculateDesiredVelocity()
     {
-        Vector3 moveDirection = overboostMode ? 
+        Vector3 moveDirection = overboostMode && overboostInitiated ? 
                                 new Vector3(rightInput + leftInput, 1, 1) :
                                 new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
-        Vector3 worldDirection = overboostMode ? 
+        Vector3 worldDirection = overboostMode && overboostInitiated ? 
                                 Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z :
                                 Camera.main.transform.right * moveDirection.x + Vector3.up * moveDirection.y + Camera.main.transform.forward * moveDirection.z;
         worldDirection.Normalize();
@@ -177,7 +211,6 @@ public class SpaceShooterController : MonoBehaviour
         velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
     }
 
-    // Modify AdjustDodgeVelocity()
     void AdjustDodgeVelocity()
     {
         if (dodgeInput > 0 && !isDodging && dodgeCharges > 0)
@@ -187,33 +220,49 @@ public class SpaceShooterController : MonoBehaviour
             dodgeCharges--;  // Consume one dodge charge
             dodgeRechargeTimer = 0f; // Reset recharge timer since a dodge was used
 
-            // Dodge direction calculation (unchanged)
-            desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
-            if (overboostMode)
-            {
-                desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, 1).normalized;
-            }
+            desiredDodgeVelocity = overboostMode
+                ? new Vector3(rightInput + leftInput, 0, 0).normalized
+                : new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
+
             Vector3 camRight = Camera.main.transform.right;
             Vector3 camForward = Camera.main.transform.forward;
             camRight.y = 0;
             camForward.y = 0;
-            desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
+
+            if(overboostMode)
+                desiredDodgeVelocity = Camera.main.transform.right * desiredDodgeVelocity.x + Camera.main.transform.forward * desiredDodgeVelocity.z;
+            else
+            {
+                if(desiredDodgeVelocity == Vector3.zero)
+                    desiredDodgeVelocity = transform.forward;
+                desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
+            }
+
             desiredDodgeVelocity.Normalize();
 
-            // Update dodge speed
-            if (maxSpeed < dodgeMaxSpeedCap)
+            if(maxSpeed < dodgeMaxSpeedCap)
                 maxSpeed += perDodgeMaxSpeedIncrease;
             else
                 maxSpeed = dodgeMaxSpeedCap;
 
-            velocity = desiredDodgeVelocity * maxSpeed;
+            if (desiredDodgeVelocity != Vector3.zero)
+            {
+                if(overboostMode)
+                {
+                    desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, 1).normalized;
+                    desiredDodgeVelocity = Camera.main.transform.right * desiredDodgeVelocity.x + Camera.main.transform.forward * desiredDodgeVelocity.z;
+                    velocity = desiredDodgeVelocity * dodgeMaxSpeed;
+                }
+                else
+                    velocity = desiredDodgeVelocity * dodgeMaxSpeed;
+            }
         }
-
-        // Dodge duration logic (unchanged)
+        
         if (isDodging)
         {
+            // Dodge time logic to end dodge after a short duration
             dodgeTime += Time.fixedDeltaTime;
-            if (dodgeTime >= 0.2f) 
+            if (dodgeTime >= 0.2f) // 0.2s dodge duration
             {
                 isDodging = false;
                 dodgeTime = 0f;
@@ -288,7 +337,7 @@ public class SpaceShooterController : MonoBehaviour
 
     bool AnyMovementInput()
     {
-        return overboostMode ? true : forwardInput != 0 || backwardInput != 0 || leftInput != 0 || rightInput != 0;
+        return overboostMode && overboostInitiated ? true : forwardInput != 0 || backwardInput != 0 || leftInput != 0 || rightInput != 0;
     }
 }
 
