@@ -14,7 +14,7 @@ public class SpaceShooterController : MonoBehaviour
 
     public InputToggle overboostToggle;
     public bool overboostMode;
-    public bool overboostInitiated;
+    public bool overboostInitiated = false;
     public float overboostActivationDelay = 2f;
     [SerializeField] float overboostChargeTimer;
     [SerializeField, Range(0f, 1000f)] float maxOverboostInitiationSpeed = 5f;
@@ -48,7 +48,7 @@ public class SpaceShooterController : MonoBehaviour
     Vector3 contactNormal;
     int groundContactCount;
     bool OnGround => groundContactCount > 0;
-    bool isDodging;
+    public bool isDodging = false;
     float minGroundDotProduct;
 
     void OnValidate() 

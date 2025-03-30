@@ -933,6 +933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputConfig: {fileID: 11400000, guid: 57c7208d781943446a81b405bf7a963b, type: 2}
+  playerRef: {fileID: 691622029}
   offset: {x: 0, y: 0.8, z: 0}
   cameraRotationSpeed: 3
   minRotationY: -84
@@ -944,6 +945,8 @@ MonoBehaviour:
   handResetSpeedHorizontal: 8
   cameraTiltSpeed: 10
   maxTiltAngle: 1.2
+  dodgeTiltModifier: 1
+  overboostTiltModifier: 0.5
   target: {fileID: 1944553957}
   leftHand: {fileID: 317917909}
   rightHand: {fileID: 767223727}
@@ -2045,6 +2048,7 @@ MonoBehaviour:
   overboostInitiated: 0
   overboostActivationDelay: 1
   overboostChargeTimer: 0
+  maxOverboostInitiationSpeed: 5
   dodgeInput: 0
   parryInput: 0
   shootInput: 0
@@ -2058,6 +2062,7 @@ MonoBehaviour:
   maxAirAcceleration: 100
   jumpForce: 6
   jetpackAcceleration: 120
+  dodgeMaxSpeed: 132
   perDodgeMaxSpeedIncrease: 6.5
   dodgeMaxSpeedCap: 0
   maxDodgeCharges: 5
@@ -2067,6 +2072,8 @@ MonoBehaviour:
   maxGroundAngle: 25
   maxSpeedDecayRate: 81.6
   defaultMaxSpeed: 0
+  defaultMaxOverboostSpeed: 0
+  isDodging: 0
 --- !u!54 &691622030
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2091,7 +2098,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!1 &695677900

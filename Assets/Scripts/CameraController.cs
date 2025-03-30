@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public CustomInputs inputConfig;
+    public SpaceShooterController playerRef;
 
     public Vector3 offset = new Vector3(0, 1, -10);
     [Range(0f, 5f)]
@@ -20,6 +21,8 @@ public class CameraController : MonoBehaviour
 
     public float cameraTiltSpeed = 2f; // Speed of tilt
     public float maxTiltAngle = 10f;   // Maximum tilt angle
+    public float dodgeTiltModifier = 2f;
+    public float overboostTiltModifier = 1f;
 
     private float inputX, inputY;
     private float yaw = 0f, pitch = 0f, roll = 0f;
@@ -79,16 +82,30 @@ public class CameraController : MonoBehaviour
 
     private void TiltCameraBasedOnInput()
     {
+        float tiltModifier = 1f;
+
         bool movingLeft = Input.GetKey(inputConfig.MoveLeft);
         bool movingRight = Input.GetKey(inputConfig.MoveRight);
 
+        if(playerRef.overboostInitiated)
+            tiltModifier += overboostTiltModifier;
+
+        if(playerRef.isDodging)
+            tiltModifier += dodgeTiltModifier;
+
         if (movingLeft)
         {
-            roll = Mathf.Lerp(roll, maxTiltAngle, Time.deltaTime * cameraTiltSpeed);
+            if(playerRef.isDodging)
+                roll = Mathf.Lerp(roll, maxTiltAngle * tiltModifier, Time.deltaTime * (cameraTiltSpeed * 2));
+            else
+                roll = Mathf.Lerp(roll, maxTiltAngle * tiltModifier, Time.deltaTime * cameraTiltSpeed);
         }
         else if (movingRight)
         {
-            roll = Mathf.Lerp(roll, -maxTiltAngle, Time.deltaTime * cameraTiltSpeed);
+            if(playerRef.isDodging)
+                roll = Mathf.Lerp(roll, -maxTiltAngle * tiltModifier, Time.deltaTime * (cameraTiltSpeed * 2));
+            else
+                roll = Mathf.Lerp(roll, -maxTiltAngle * tiltModifier, Time.deltaTime * cameraTiltSpeed);
         }
         else
         {
