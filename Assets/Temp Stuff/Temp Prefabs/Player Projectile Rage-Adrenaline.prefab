@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5975280190035157473}
   - component: {fileID: 3318402012965150411}
   - component: {fileID: 2723227406094554068}
+  - component: {fileID: -270158909891561068}
   m_Layer: 0
   m_Name: Player Projectile Rage-Adrenaline
   m_TagString: Untagged
@@ -97,7 +98,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1015
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -105,3 +106,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-270158909891561068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781730700649855329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1a4d8a1d5461448a0f1863d2173082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 170
+  maxLifetime: 3

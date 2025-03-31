@@ -85,7 +85,7 @@ public class SpaceShooterController : MonoBehaviour
         rageChargeTimer = 0f;
         adrenalineChargeTimer = 0f;
         rageDurationCurrent = rageDuration;
-        adrenalineDuration = adrenalineDurationCurrent;
+        adrenalineDurationCurrent = adrenalineDuration;
     }
 
     void Update()
@@ -94,6 +94,7 @@ public class SpaceShooterController : MonoBehaviour
         CalculateDesiredVelocity();
         HandleOverboostInitiation();
         HandleRageCharge();
+        HandleAdrenalineCharge();
         HandleDodgeRecharge();
     }
 
@@ -315,6 +316,37 @@ public class SpaceShooterController : MonoBehaviour
                 rageCharged = false;
                 rageDurationCurrent = rageDuration;
                 rageChargeTimer = 0f;
+            }
+        }
+    }
+
+    // This has to be updated in the future when it will be possible to track hits on player character
+    // For now it's just like rage
+    void HandleAdrenalineCharge()
+    {
+        if(adrenalineCharged == false)
+        {
+            adrenalineChargeTimer += Time.deltaTime;
+            if(adrenalineChargeTimer >= adrenalineRechargeTimer)
+            {
+                adrenalineCharged = true;
+            }
+        }
+
+        if(adrenalineCharged && adrenalineInput)
+        {
+            adrenalineActive = true;
+        }
+
+        if(adrenalineActive)
+        {
+            adrenalineDurationCurrent -= Time.deltaTime;
+            if(adrenalineDurationCurrent <= 0f)
+            {
+                adrenalineActive = false;
+                adrenalineCharged = false;
+                adrenalineDurationCurrent = adrenalineDuration;
+                adrenalineChargeTimer = 0f;
             }
         }
     }

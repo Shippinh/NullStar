@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShooterPlasmaGunControllers : MonoBehaviour
+public class SpaceShooterPlasmaGunController : MonoBehaviour
 {
     public CustomInputs inputConfig;
     public SpaceShooterController playerRef;
@@ -12,11 +12,10 @@ public class SpaceShooterPlasmaGunControllers : MonoBehaviour
     public Camera playerCamera;
     public LayerMask hitLayers;
     public float fireRate = 0.2f;
+    public float hitscanRange = 2000f;
     private float nextFireTime;
     
     [Header("Power-ups")]
-    public bool rageActive;
-    public bool adrenalineActive;
     private float fireRateMultiplier = 1f;
     
     [Header("Pooling")]
@@ -37,50 +36,74 @@ public class SpaceShooterPlasmaGunControllers : MonoBehaviour
     void UpdatePowerUps()
     {
         fireRateMultiplier = 1f;
-        if (rageActive) fireRateMultiplier *= 2f;
-        if (adrenalineActive) fireRateMultiplier *= 4f;
+        if (playerRef.rageActive) fireRateMultiplier *= 2f;
+        if (playerRef.adrenalineActive) fireRateMultiplier *= 4f;
     }
 
     void Fire()
     {
         Ray cameraRay = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit cameraHit;
-        Vector3 targetPoint = cameraRay.origin + cameraRay.direction * 100f;
+        Vector3 targetPoint = cameraRay.origin + cameraRay.direction * hitscanRange;
         
-        if (Physics.Raycast(cameraRay, out cameraHit, 100f, hitLayers))
+        if (Physics.Raycast(cameraRay, out cameraHit, hitscanRange, hitLayers))
         {
             targetPoint = cameraHit.point;
-            HandleImpact(cameraHit);
+            Debug.Log("Hit an enemy");
+            //HandleImpact(cameraHit);
         }
 
         // Muzzle Raycast (For visual alignment)
         Ray muzzleRay = new Ray(muzzlePoint.position, (targetPoint - muzzlePoint.position).normalized);
         RaycastHit muzzleHit;
-        if (Physics.Raycast(muzzleRay, out muzzleHit, 100f, hitLayers))
+        if (Physics.Raycast(muzzleRay, out muzzleHit, hitscanRange, hitLayers))
         {
             targetPoint = muzzleHit.point;
         }
 
         // Fire visual projectile
-        GameObject projectile = projectilePool.GetPooledObject();
+        string projectileTag = "";
+
+        if(playerRef.rageActive && !playerRef.adrenalineActive)
+        {
+            projectileTag = "Rage Projectile";
+        }
+        else if(!playerRef.rageActive && playerRef.adrenalineActive)
+        {
+            projectileTag = "Adrenaline Projectile";
+        }
+
+        if(playerRef.rageActive && playerRef.adrenalineActive)
+        {
+            projectileTag = "Rage-Adrenaline Projectile";
+        }
+        else if(!playerRef.rageActive && !playerRef.adrenalineActive)
+        {
+            projectileTag = "Normal Projectile";
+        }
+
+        GameObject projectile = projectilePool.GetPooledObject(projectileTag);
         if (projectile != null)
         {
             projectile.transform.position = muzzlePoint.position;
             projectile.transform.rotation = Quaternion.LookRotation(targetPoint - muzzlePoint.position);
+
+            projectile.GetComponent<Projectile>().Initialize(muzzlePoint.position, targetPoint);
+
             projectile.SetActive(true);
         }
 
         // Fire tracer effect
-        GameObject tracer = tracerPool.GetPooledObject();
+        /*GameObject tracer = tracerPool.GetPooledObject();
         if (tracer != null)
         {
             tracer.transform.position = muzzlePoint.position;
             tracer.transform.rotation = Quaternion.LookRotation(targetPoint - muzzlePoint.position);
             tracer.SetActive(true);
-        }
+        }*/
     }
     
-    void HandleImpact(RaycastHit hit)
+    /*void HandleImpact(RaycastHit hit)
     {
         GameObject impact = impactEffectPool.GetPooledObject();
         if (impact != null)
@@ -89,35 +112,5 @@ public class SpaceShooterPlasmaGunControllers : MonoBehaviour
             impact.transform.rotation = Quaternion.LookRotation(hit.normal);
             impact.SetActive(true);
         }
-    }
-}
-
-public class ObjectPool : MonoBehaviour
-{
-    public GameObject prefab;
-    public int poolSize = 10;
-    private List<GameObject> pool;
-    
-    void Awake()
-    {
-        pool = new List<GameObject>();
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject obj = Instantiate(prefab);
-            obj.SetActive(false);
-            pool.Add(obj);
-        }
-    }
-    
-    public GameObject GetPooledObject()
-    {
-        foreach (GameObject obj in pool)
-        {
-            if (!obj.activeInHierarchy)
-            {
-                return obj;
-            }
-        }
-        return null;
-    }
+    }*/
 }
