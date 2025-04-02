@@ -82,6 +82,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
             projectileTag = "Normal Projectile";
         }
 
+        // This is for visuals ONLY
         GameObject projectile = projectilePool.GetPooledObject(projectileTag);
         if (projectile != null)
         {
