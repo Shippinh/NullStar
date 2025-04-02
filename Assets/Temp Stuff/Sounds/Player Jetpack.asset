@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Player Jetpack
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: b8e5a183b3788ff4caa1d85234161df6, type: 3}
-  volume: 1
+  volume: 0
   pitch: 1
-  isVariablePitch: 0
-  variationRange: 0.1
-  variationFrequency: 0.5
-  randomiseFrequency: 0
-  loop: 0
+  isVariablePitch: 1
+  variationRange: 0.017
+  variationFrequency: 0.2
+  randomiseFrequency: 1
+  loop: 1
   spatialBlend: 0
   rolloffMode: 0
   minDistance: 1
@@ -29,16 +29,16 @@ MonoBehaviour:
   lowPassResonanceQ: 1
   highPassCutoffFrequency: 5000
   highPassResonanceQ: 1
-  dryLevel: 0
-  room: 0
-  roomHF: 0
+  dryLevel: -2153
+  room: -5853
+  roomHF: -4000
   roomLF: 0
-  decayTime: 1
-  decayHFRatio: 0.5
-  reflectionsLevel: -10000
+  decayTime: 1.49
+  decayHFRatio: 0.1
+  reflectionsLevel: -449
   reflectionsDelay: 0
-  reverbLevel: 0
-  reverbDelay: 0.04
+  reverbLevel: 1700
+  reverbDelay: 0.011
   hfReference: 5000
   lfReference: 250
   diffusion: 100
