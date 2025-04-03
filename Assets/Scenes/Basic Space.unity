@@ -359,7 +359,7 @@ MonoBehaviour:
   nextHandler: {fileID: 0}
   fadeDuration: 2
   useAttachedHandler: 1
-  playOnStart: 1
+  playOnStart: 0
 --- !u!114 &85021527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4858,7 +4858,7 @@ MonoBehaviour:
   nextHandler: {fileID: 0}
   fadeDuration: 2
   useAttachedHandler: 1
-  playOnStart: 1
+  playOnStart: 0
 --- !u!114 &1592895853
 MonoBehaviour:
   m_ObjectHideFlags: 0
