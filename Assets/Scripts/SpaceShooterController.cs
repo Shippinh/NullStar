@@ -14,10 +14,21 @@ public class SpaceShooterController : MonoBehaviour
 
     public InputToggle overboostToggle;
     public bool overboostMode;
+    public bool overboostOverheatMode;
     public bool overboostInitiated = false;
     public float overboostActivationDelay = 2f;
     [SerializeField] float overboostChargeTimer;
     [SerializeField, Range(0f, 1000f)] float maxOverboostInitiationSpeed = 5f;
+
+    public float overboostDuration = 7.5f;
+    public float overboostDurationCurrent;
+
+    public float overboostOverheatDuration = 10f;
+    public float overboostOverheatDurationCurrent;
+
+    //public float overboostDrainRate = 1f;
+    public float overboostDurationRestoreRate = 1f;
+    public float overboostOverheatDurationRestoreRate = 1f;
 
     public int dodgeInput;
     public int parryInput;
@@ -86,6 +97,8 @@ public class SpaceShooterController : MonoBehaviour
         adrenalineChargeTimer = 0f;
         rageDurationCurrent = rageDuration;
         adrenalineDurationCurrent = adrenalineDuration;
+        overboostDurationCurrent = 0f;
+        overboostOverheatDurationCurrent = 0f;
     }
 
     void Update()
@@ -96,6 +109,7 @@ public class SpaceShooterController : MonoBehaviour
         HandleRageCharge();
         HandleAdrenalineCharge();
         HandleDodgeRecharge();
+        HandleOverboostDuration();
     }
 
     void FixedUpdate()
@@ -130,6 +144,11 @@ public class SpaceShooterController : MonoBehaviour
         body.velocity = velocity;
         ClearState();
 
+        DecayMaxSpeedToDefault();
+    }
+
+    void DecayMaxSpeedToDefault()
+    {
         if (!AnyMovementInput() && !isDodging)
         {
             maxSpeed = Mathf.MoveTowards(maxSpeed, defaultMaxSpeed, maxSpeedDecayRate * Time.deltaTime);
@@ -288,6 +307,54 @@ public class SpaceShooterController : MonoBehaviour
             overboostInitiated = false;
             body.useGravity = true;
             overboostChargeTimer = 0f;
+            overboostOverheatMode = false;
+        }
+    }
+
+    void HandleOverboostDuration()
+    {
+        // When in overboost
+        if(overboostMode == true && overboostInitiated == true)
+        {
+            // When not overheating
+            if(overboostOverheatMode == false)
+            {
+                overboostDurationCurrent += Time.deltaTime;
+
+                // If we overboost when we can overheat
+                if(overboostDurationCurrent >= overboostDuration && overboostOverheatDurationCurrent < overboostOverheatDuration)
+                {
+                    overboostOverheatMode = true;
+                }
+                // If we overboost when we cannot overheat
+                else if(overboostDurationCurrent >= overboostOverheatDuration && overboostOverheatDurationCurrent >= overboostOverheatDuration)
+                {
+                    overboostMode = false;
+                    overboostToggle.ForceToggle(false);
+                    overboostInitiated = false;
+                    overboostOverheatMode = false;
+                }
+            }
+            // When overheating
+            else
+            {
+                overboostOverheatDurationCurrent += Time.deltaTime;
+
+                // If we overheat before death - initiate cooling and disable overboost
+                if(overboostOverheatDurationCurrent >= overboostOverheatDuration)
+                {
+                    overboostMode = false;
+                    overboostToggle.ForceToggle(false);
+                    overboostInitiated = false;
+                    overboostOverheatMode = false;
+                }
+            }
+        }
+        // When not in overboost
+        else if(overboostMode == false && overboostInitiated == false)
+        {
+            overboostDurationCurrent = Mathf.MoveTowards(overboostDurationCurrent, 0f, overboostDurationRestoreRate * Time.deltaTime);
+            overboostOverheatDurationCurrent = Mathf.MoveTowards(overboostOverheatDurationCurrent, 0f, overboostOverheatDurationRestoreRate * Time.deltaTime);
         }
     }
 
@@ -479,6 +546,11 @@ public class InputToggle
     public bool GetCurrentToggleState()
     {
         return currentToggleState;
+    }
+
+    public void ForceToggle(bool value)
+    {
+        currentToggleState = value;
     }
 }
 
