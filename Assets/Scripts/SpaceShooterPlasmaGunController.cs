@@ -50,7 +50,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
         {
             targetPoint = cameraHit.point;
             Debug.Log("Hit an enemy");
-            //HandleImpact(cameraHit);
+            HandleImpact(cameraHit);
         }
 
         // Muzzle Raycast (For visual alignment)
@@ -104,14 +104,23 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
         }*/
     }
     
-    /*void HandleImpact(RaycastHit hit)
+    void HandleImpact(RaycastHit hit)
     {
-        GameObject impact = impactEffectPool.GetPooledObject();
+        /*GameObject impact = impactEffectPool.GetPooledObject();
         if (impact != null)
         {
             impact.transform.position = hit.point;
             impact.transform.rotation = Quaternion.LookRotation(hit.normal);
             impact.SetActive(true);
+        }*/
+        Transform hitTransform = hit.transform;
+        if(hitTransform != null)
+        {
+            EntityHealthController hitHealthController = hitTransform.GetComponent<EntityHealthController>();
+            if(hitHealthController != null)
+            {
+                hitHealthController.TakeDamage(1);
+            }
         }
-    }*/
+    }
 }

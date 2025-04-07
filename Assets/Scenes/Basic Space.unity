@@ -1877,8 +1877,9 @@ GameObject:
   - component: {fileID: 629115014}
   - component: {fileID: 629115013}
   - component: {fileID: 629115012}
+  - component: {fileID: 629115015}
   m_Layer: 3
-  m_Name: Cube (6)
+  m_Name: GIANT ENEMY CUBE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1970,6 +1971,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629115010}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &629115015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629115010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 100
+  CurrentHP: 100
+  isAlive: 1
+  isInvincible: 0
+  invincibilityDuration: 0
 --- !u!1 &631830407
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,6 +2351,7 @@ GameObject:
   - component: {fileID: 691622028}
   - component: {fileID: 691622029}
   - component: {fileID: 691622030}
+  - component: {fileID: 691622031}
   m_Layer: 0
   m_Name: Player Object
   m_TagString: Untagged
@@ -2370,6 +2389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputConfig: {fileID: 11400000, guid: 57c7208d781943446a81b405bf7a963b, type: 2}
+  healthController: {fileID: 691622031}
   forwardInput: 0
   backwardInput: 0
   leftInput: 0
@@ -2453,6 +2473,23 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &691622031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691622027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 100
+  CurrentHP: 100
+  isAlive: 1
+  isInvincible: 0
+  invincibilityDuration: 2
 --- !u!1 &695677900
 GameObject:
   m_ObjectHideFlags: 0
@@ -4417,7 +4454,7 @@ MonoBehaviour:
   nextHandler: {fileID: 0}
   fadeDuration: 2
   useAttachedHandler: 1
-  playOnStart: 1
+  playOnStart: 0
 --- !u!114 &1282884303
 MonoBehaviour:
   m_ObjectHideFlags: 0

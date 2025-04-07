@@ -5,6 +5,7 @@ using System.Collections;
 public class SpaceShooterController : MonoBehaviour
 {
     public CustomInputs inputConfig;
+    public EntityHealthController healthController;
     
     public int forwardInput;
     public int backwardInput;
@@ -339,6 +340,8 @@ public class SpaceShooterController : MonoBehaviour
             else
             {
                 overboostOverheatDurationCurrent += Time.deltaTime;
+
+                healthController.TakeDamage(1);
 
                 // If we overheat before death - initiate cooling and disable overboost
                 if(overboostOverheatDurationCurrent >= overboostOverheatDuration)
