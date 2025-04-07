@@ -18,7 +18,7 @@ public class EntityHealthController : MonoBehaviour
 
     public void TakeDamage(int takenDamage)
     {
-        if(isInvincible == false)
+        if(isInvincible == false && isAlive == true)
         {
             isInvincible = true;
             if(takenDamage > MaxHP)
