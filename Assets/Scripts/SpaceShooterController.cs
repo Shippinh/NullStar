@@ -77,6 +77,11 @@ public class SpaceShooterController : MonoBehaviour
     public bool isDodging = false;
     float minGroundDotProduct;
 
+    public event Action OnOverboostInitiation;
+    public event Action OnOverboostInitiationCancel;
+    public event Action OnOverboostActivation;
+    public event Action OnOverboostStop;
+
     void OnValidate() 
     {
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
@@ -305,6 +310,8 @@ public class SpaceShooterController : MonoBehaviour
     {
         if (overboostMode == true && overboostInitiated == false)
         {
+            if(body.useGravity == true)
+                OnOverboostInitiation?.Invoke();
             body.useGravity = false;
             maxOverboostSpeed = maxOverboostInitiationSpeed;
             overboostChargeTimer += Time.deltaTime;
@@ -321,12 +328,17 @@ public class SpaceShooterController : MonoBehaviour
                 overboostInitiated = true;
                 body.useGravity = true;
                 overboostChargeTimer = 0f;
+                OnOverboostActivation?.Invoke();
             }
         }
 
         if(overboostToggle.GetCurrentToggleState() == false)
         {
+            if(overboostInitiated)
+                OnOverboostStop?.Invoke();
             overboostInitiated = false;
+            if(body.useGravity == false)
+                OnOverboostInitiationCancel?.Invoke();
             body.useGravity = true;
             overboostChargeTimer = 0f;
             overboostOverheatMode = false;
@@ -353,6 +365,7 @@ public class SpaceShooterController : MonoBehaviour
                 {
                     overboostMode = false;
                     overboostToggle.ForceToggle(false);
+                    OnOverboostStop?.Invoke();
                     overboostInitiated = false;
                     overboostOverheatMode = false;
                 }
@@ -369,6 +382,7 @@ public class SpaceShooterController : MonoBehaviour
                 {
                     overboostMode = false;
                     overboostToggle.ForceToggle(false);
+                    OnOverboostStop?.Invoke();
                     overboostInitiated = false;
                     overboostOverheatMode = false;
                 }

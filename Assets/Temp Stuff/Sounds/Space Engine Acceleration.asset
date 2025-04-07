@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4076586b3cf939e4fbd896cb580635fa, type: 3}
-  m_Name: Gun
+  m_Name: Space Engine Acceleration
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: eb458408c8461ff418d2125566ba8ca4, type: 3}
+  audioClip: {fileID: 8300000, guid: 9aad991fd33f49b46b34e8f24161377d, type: 3}
   volume: 1
-  pitch: 1
+  pitch: 0.6
   isVariablePitch: 0
   variationRange: 0.1
   variationFrequency: 0.5

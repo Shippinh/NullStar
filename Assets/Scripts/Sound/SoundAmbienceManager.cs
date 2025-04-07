@@ -27,6 +27,25 @@ public class SoundAmbienceManager : MonoBehaviour
         }
     }
 
+    public void PlayCurrentHandlerSound()
+    {
+        if(currentHandler != null)
+        {
+            currentHandler.AudioSource.Play();
+        }
+    }
+
+    public void GraduallyIncreasePitch(float increaseDuration)
+    {
+        var defaultPitchValue = currentHandler.soundPreset.pitch;
+        var timer = 0f;
+        while(timer < increaseDuration)
+        {
+            timer += Time.deltaTime;
+            currentHandler.soundPreset.pitch += Time.deltaTime/2;
+        }
+    }
+
     private void StartPitchVariation()
     {
         // Check if the current handler or its sound preset is null
