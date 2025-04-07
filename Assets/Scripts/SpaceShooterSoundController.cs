@@ -24,11 +24,17 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostActivation()
     {
         Debug.Log("Overboost activated");
+        overboostEngineImpactSound.Play();
+        overboostAccelerationSound.Play();
+        hardBurnSoundLoop.Play();
+        hardBurnSoundLoop.Play();
     }
 
     void HandleOverboostStop()
     {
         Debug.Log("Overboost concluded");
+        overboostAccelerationSound.Stop();
+        hardBurnSoundLoop.Stop();
     }
 
     void HandleOverboostInitiationCancel()
@@ -39,5 +45,6 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostInitiation()
     {
         Debug.Log("Initiated overboost");
+        overboostSwitchSound.Play();
     }
 }
