@@ -2376,10 +2376,17 @@ MonoBehaviour:
   rightInput: 0
   jumpInput: 0
   overboostMode: 0
+  overboostOverheatMode: 0
   overboostInitiated: 0
   overboostActivationDelay: 1
   overboostChargeTimer: 0
   maxOverboostInitiationSpeed: 5
+  overboostDuration: 7.5
+  overboostDurationCurrent: 0
+  overboostOverheatDuration: 10
+  overboostOverheatDurationCurrent: 0
+  overboostDurationRestoreRate: 1
+  overboostOverheatDurationRestoreRate: 1
   dodgeInput: 0
   parryInput: 0
   shootInput: 0
@@ -4410,7 +4417,7 @@ MonoBehaviour:
   nextHandler: {fileID: 0}
   fadeDuration: 2
   useAttachedHandler: 1
-  playOnStart: 0
+  playOnStart: 1
 --- !u!114 &1282884303
 MonoBehaviour:
   m_ObjectHideFlags: 0
