@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class EntityHealthController : MonoBehaviour
     public float invincibilityDuration = 2f;
     float currentInvincibilityDuration;
 
+    public event Action TookHit;
+
     void Awake()
     {
         currentInvincibilityDuration = 0f;
@@ -21,6 +24,7 @@ public class EntityHealthController : MonoBehaviour
         if(isInvincible == false && isAlive == true)
         {
             isInvincible = true;
+            TookHit?.Invoke();
             if(takenDamage > MaxHP)
             {
                 CurrentHP = 0;

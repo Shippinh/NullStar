@@ -86,6 +86,8 @@ public class SpaceShooterController : MonoBehaviour
     {
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
+        healthController.TookHit += HandleTakenHits;
+
         defaultMaxSpeed = maxSpeed;
         defaultMaxOverboostSpeed = maxOverboostSpeed;
         dodgeMaxSpeedCap = defaultMaxSpeed + (maxDodgeCharges - 1) * perDodgeMaxSpeedIncrease;
@@ -146,6 +148,21 @@ public class SpaceShooterController : MonoBehaviour
         ClearState();
 
         DecayMaxSpeedToDefault();
+    }
+
+    // Gets invoked whenever the referenced entity gets hit
+    void HandleTakenHits()
+    {
+        // Taking hits resets adrenaline meter
+        ResetAdrenaline();
+    }
+
+    void ResetAdrenaline()
+    {
+        if(!adrenalineActive)
+        {
+            adrenalineChargeTimer = 0f;
+        }
     }
 
     void DecayMaxSpeedToDefault()
