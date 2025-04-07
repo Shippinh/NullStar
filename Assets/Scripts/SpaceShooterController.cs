@@ -162,6 +162,10 @@ public class SpaceShooterController : MonoBehaviour
         if(!adrenalineActive)
         {
             adrenalineChargeTimer = 0f;
+            if(adrenalineCharged)
+            {
+                adrenalineCharged = false;
+            }
         }
     }
 
