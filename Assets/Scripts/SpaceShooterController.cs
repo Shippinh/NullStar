@@ -81,6 +81,7 @@ public class SpaceShooterController : MonoBehaviour
     public event Action OnOverboostInitiationCancel;
     public event Action OnOverboostActivation;
     public event Action OnOverboostStop;
+    public event Action OnOverboostOverheat;
 
     void OnValidate() 
     {
@@ -358,6 +359,8 @@ public class SpaceShooterController : MonoBehaviour
                 // If we overboost when we can overheat
                 if(overboostDurationCurrent >= overboostDuration && overboostOverheatDurationCurrent < overboostOverheatDuration)
                 {
+                    if(overboostOverheatMode == false)
+                        OnOverboostOverheat?.Invoke();
                     overboostOverheatMode = true;
                 }
                 // If we overboost when we cannot overheat

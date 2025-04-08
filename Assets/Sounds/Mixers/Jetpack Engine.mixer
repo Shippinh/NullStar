@@ -72,7 +72,31 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 7bcfb38f8c898324a8f48dec5de24d1e
+    name: Vol
+  - guid: 5fa0aad81fd152742923f307d2656683
+    name: Pitch
+  - guid: 1962ce7f4be919f4db1d55f214638274
+    name: Vol
+  - guid: eb527c4e75d26094196cc5256e480c8d
+    name: Pitch
+  - guid: c77fe956bc539b247929267e37cedb19
+    name: Vol
+  - guid: 93d1b28f566a3a947a16881b5116d16c
+    name: Pitch
+  - guid: b877e44c454e90c4db80250312ccd3d4
+    name: Engine Master Pitch
+  - guid: e4dc9719ab24b3f40bc1255db60579b9
+    name: Engine Master Volume
+  - guid: 587f920751706f548803237a5cd615aa
+    name: Vol
+  - guid: ee8ea571f3ce09c4bb69b53505bce549
+    name: Pitch
+  - guid: cbbd8592d6991c6468bc64c4e086c300
+    name: Vol
+  - guid: af32f32bf420a5d4eae637eebabd518f
+    name: Pitch
   m_AudioMixerGroupViews:
   - guids:
     - a9b286de13199d64f9a2b6f10842cdb1
@@ -133,6 +157,7 @@ AudioMixerSnapshotController:
     3218a6304af48c24d8f4ab5e8adb9c46: 0.039
     234c6d50f788ad74397dcb1ea1298731: 6440
     3b2176823ea112c41927ec66b0f545df: 2879
+    cbbd8592d6991c6468bc64c4e086c300: 0.17321092
     f7bc79d22579b0e4b8d9b58551750a62: 1
     7d6cd003078574a46a47eb937c3088c2: 1
     f7371833f5080bb4da0a8e68f0263589: 0.01
@@ -140,12 +165,13 @@ AudioMixerSnapshotController:
     58253983bf502dd4082e582ea7140a53: 0
     0412be14049eb5b40ad5a65bfcc2d8f9: 0.146
     34863536873b30d448a93201e58510b1: 0.091000006
-    c77fe956bc539b247929267e37cedb19: 2.5779903
+    c77fe956bc539b247929267e37cedb19: 0.0057556033
     587f920751706f548803237a5cd615aa: 0.27000841
     894621374b74edf4eb97306c12c3a6c1: 0.492
     fb1950b75c5b5bf4ab4db5101c1fc82b: 5000
     9767ca58471903d438caeceb72dfc200: 1
     db666cd87f0d5e0499e6f86aff9e6a08: 10
+    e4dc9719ab24b3f40bc1255db60579b9: 0
     96b3a1791f0fba64f9e8b902808af063: 7.81
     c5a876b9ff9949c409566d4981c359c2: 6
     1c93c2bada2480a47b6bf47d5a58afad: 3057
@@ -153,6 +179,7 @@ AudioMixerSnapshotController:
     9dcd240bdd8f1f84b8018cb2bcd60993: 50
     0131a97e45e16464ba0a646344d37f21: 0.02
     1962ce7f4be919f4db1d55f214638274: 0
+    7bcfb38f8c898324a8f48dec5de24d1e: -1.5191216
     dcf85ddfd8960e74591aeba605227e07: 0
   m_TransitionOverrides: {}
 --- !u!244 &560227742926589734

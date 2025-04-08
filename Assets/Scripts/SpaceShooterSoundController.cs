@@ -9,14 +9,24 @@ public class SpaceShooterSoundController : MonoBehaviour
     public AudioSource blowerSoundLoop;
     public AudioSource airIntakeSoundLoop;
     public AudioSource hardBurnSoundLoop;
-    [Range(0f, 1f)] public float hardBurnFadeDuration;
+    [Range(0f, 1f)] public float hardBurnFadeOutDuration;
+    [Range(0f, 15f)] public float hardBurnFadeInDuration;
+    [Range(0f, 3f)] public float hardBurnFadePitch;
+
     public AudioSource overboostSwitchSound;
+    [Range(0f, 1f)] public float overboostSwitchFadeOutDuration;
+    [Range(0f, 1f)] public float overboostSwitchFadeInDuration;
     public AudioSource overboostEngineImpactSound;
+    public AudioSource overboostCancelSound;
     public AudioSource overboostAccelerationSound;
     [Range(0f, 1f)] public float overboostAccelerationFadeDuration;
 
-    AudioFadeData hardBurnFade;
-    AudioFadeData overboostAccelerationFade;
+    public AudioSource overboostOverheatAlarmSound;
+    public AudioSource overboostOverheatDamageSound;
+
+    AudioTransitionController hardBurnFade;
+    AudioTransitionController overboostAccelerationFade;
+    AudioTransitionController overboostSwitchFade;
 
     void Awake()
     {
@@ -24,16 +34,18 @@ public class SpaceShooterSoundController : MonoBehaviour
         playerController.OnOverboostStop += HandleOverboostStop;
         playerController.OnOverboostInitiation += HandleOverboostInitiation;
         playerController.OnOverboostInitiationCancel += HandleOverboostInitiationCancel;
+        playerController.OnOverboostOverheat += HandleOverboostOverheat;
 
-        hardBurnFade = new AudioFadeData(hardBurnSoundLoop);
-        overboostAccelerationFade = new AudioFadeData(overboostAccelerationSound);
-
+        hardBurnFade = new AudioTransitionController(hardBurnSoundLoop);
+        overboostAccelerationFade = new AudioTransitionController(overboostAccelerationSound);
+        overboostSwitchFade = new AudioTransitionController(overboostSwitchSound);
     }
 
     void Update()
     {
         hardBurnFade.Update();
         overboostAccelerationFade.Update();
+        overboostSwitchFade.Update();
     }
 
 
@@ -43,104 +55,131 @@ public class SpaceShooterSoundController : MonoBehaviour
         overboostEngineImpactSound.Play();
         overboostAccelerationSound.Play();
         hardBurnSoundLoop.Play();
-        hardBurnSoundLoop.Play();
+        hardBurnFade.SetPitchOverTime(hardBurnFadePitch, hardBurnFadeInDuration);
+        hardBurnFade.SetVolumeOverTime(1f, hardBurnFadeInDuration);
     }
 
     void HandleOverboostStop()
     {
         Debug.Log("Overboost concluded");
-        overboostAccelerationFade.FadeVolume(0f, overboostAccelerationFadeDuration);
-        hardBurnFade.FadeVolume(0f, hardBurnFadeDuration);
+        overboostAccelerationFade.SetVolumeOverTime(0f, overboostAccelerationFadeDuration);
+        
+        hardBurnFade.SetVolumeOverTime(0f, hardBurnFadeOutDuration);
+        hardBurnFade.SetPitchOverTime(1f, hardBurnFadeOutDuration);
     }
 
     void HandleOverboostInitiationCancel()
     {
         Debug.Log("Overboost initiation cancelled");
+        overboostSwitchFade.SetPitchOverTime(0.5f, overboostSwitchFadeOutDuration);
+        overboostSwitchFade.SetVolumeOverTime(0f, overboostSwitchFadeOutDuration);
     }
 
     void HandleOverboostInitiation()
     {
         Debug.Log("Initiated overboost");
+        overboostSwitchFade.SetPitchOverTime(1f, 0f);
         overboostSwitchSound.Play();
+    }
+
+    void HandleOverboostOverheat()
+    {
+        Debug.Log("Overboost Overeating");
     }
 }
 
-public class AudioFadeData
+class AudioTransitionController
 {
     public AudioSource source;
-    public float targetVolume;
-    public float targetPitch;
-    public float defaultVolume;
-    public float defaultPitch;
-    public float fadeDuration;
-    public float fadeElapsed;
-    public bool isFadingVolume;
-    public bool isFadingPitch;
 
-    public AudioFadeData(AudioSource source)
+    // Volume
+    float volumeTarget;
+    float volumeSpeed;
+    bool volumeRunning;
+
+    // Pitch
+    float pitchTarget;
+    float pitchSpeed;
+    bool pitchRunning;
+
+    float defaultVolume;
+    float defaultPitch;
+
+    public AudioTransitionController(AudioSource source)
     {
         this.source = source;
-        this.targetVolume = source.volume;
-        this.targetPitch = source.pitch;
-        this.defaultVolume = source.volume;
-        this.defaultPitch = source.pitch;
-        this.fadeDuration = 0f;
-        this.fadeElapsed = 0f;
-        this.isFadingVolume = false;
-        this.isFadingPitch = false;
+        defaultVolume = source.volume;
+        defaultPitch = source.pitch;
     }
 
-    // Combined Fade method (can be used for both Fade In and Fade Out)
-    public void FadeVolume(float target, float duration)
+    public void SetVolumeOverTime(float target, float duration)
     {
-        if (!source.isPlaying) return;
+        if (duration <= 0f)
+        {
+            source.volume = target;
+            volumeRunning = false;
+            return;
+        }
 
-        targetVolume = target;
-        fadeDuration = Mathf.Max(duration, 0.0001f);
-        fadeElapsed = 0f;
-        isFadingVolume = true;
+        volumeTarget = target;
+        volumeSpeed = (target - source.volume) / duration;
+        volumeRunning = true;
     }
 
-    public void FadePitch(float target, float duration)
+    public void SetPitchOverTime(float target, float duration)
     {
-        if (!source.isPlaying) return;
+        if (duration <= 0f)
+        {
+            source.pitch = target;
+            pitchRunning = false;
+            return;
+        }
 
-        targetPitch = target;
-        fadeDuration = Mathf.Max(duration, 0.0001f);
-        fadeElapsed = 0f;
-        isFadingPitch = true;
+        pitchTarget = target;
+        pitchSpeed = (target - source.pitch) / duration;
+        pitchRunning = true;
     }
 
     public void Update()
     {
-        if (source == null || (!isFadingVolume && !isFadingPitch) || !source.isPlaying)
-            return;
-
-        fadeElapsed += Time.deltaTime;
-        float t = Mathf.Clamp01(fadeElapsed / fadeDuration);
-
-        // Fade volume
-        if (isFadingVolume)
+        if (volumeRunning)
         {
-            source.volume = Mathf.Lerp(source.volume, targetVolume, t);
-            if (t >= 1f)
-                isFadingVolume = false;
+            float delta = volumeSpeed * Time.deltaTime;
+            float remaining = volumeTarget - source.volume;
+
+            if (Mathf.Abs(delta) >= Mathf.Abs(remaining))
+            {
+                source.volume = volumeTarget;
+                volumeRunning = false;
+
+                if (volumeTarget == 0f)
+                {
+                    source.Stop();
+                    source.volume = defaultVolume;
+                }
+            }
+            else
+            {
+                source.volume += delta;
+            }
         }
 
-        // Fade pitch
-        if (isFadingPitch)
+        if (pitchRunning)
         {
-            source.pitch = Mathf.Lerp(source.pitch, targetPitch, t);
-            if (t >= 1f)
-                isFadingPitch = false;
-        }
+            float delta = pitchSpeed * Time.deltaTime;
+            float remaining = pitchTarget - source.pitch;
 
-        // If both fades are complete, reset and stop
-        if (!isFadingVolume && !isFadingPitch)
-        {
-            source.Stop();
-            source.volume = defaultVolume; // Ensure we restore the volume to default
-            source.pitch = defaultPitch;  // Ensure we restore the pitch to default
+            if (Mathf.Abs(delta) >= Mathf.Abs(remaining))
+            {
+                source.pitch = pitchTarget;
+                pitchRunning = false;
+            }
+            else
+            {
+                source.pitch += delta;
+            }
         }
     }
 }
+
+
