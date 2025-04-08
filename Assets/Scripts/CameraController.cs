@@ -19,10 +19,15 @@ public class CameraController : MonoBehaviour
     public float handResetSpeedVertical = 8f;  // Speed for resetting hands (up/down) to neutral rotation
     public float handResetSpeedHorizontal = 8f; // More aggressive resetting for horizontal rotation
 
+    float defaultFieldOfView;
     public float cameraTiltSpeed = 2f; // Speed of tilt
     public float maxTiltAngle = 10f;   // Maximum tilt angle
     public float dodgeTiltModifier = 2f;
     public float overboostTiltModifier = 1f;
+    [Range(-30f, 30f)]public float extraOverboostFieldOfView = 5f;
+    [Range(0f, 10f)] public float fieldOfViewChangeRate = 3f;
+    [Range(0f, 300f)] public float fieldOfViewResetRate = 3f;
+
 
     private float inputX, inputY;
     private float yaw = 0f, pitch = 0f, roll = 0f;
@@ -53,6 +58,8 @@ public class CameraController : MonoBehaviour
         {
             rightHandInitialOffset = rightHand.position - Camera.main.transform.position;
         }
+
+        defaultFieldOfView = Camera.main.fieldOfView;
     }
 
     void Update()
@@ -71,8 +78,9 @@ public class CameraController : MonoBehaviour
             RotateCameraMouse(inputX, inputY);
             RotatePlayerHandsSmoothly();
             AttachHandsToCamera();
-            TiltCameraBasedOnInput();
         }
+        TiltCameraBasedOnInput();
+        AdjustOverboostFoV();
     }
 
     private (float x, float y) GetMouseInput()
@@ -119,6 +127,19 @@ public class CameraController : MonoBehaviour
 
         // Rotate player's body (yaw only)
         target.transform.rotation = Quaternion.Euler(0, yaw * cameraRotationSpeed, 0);
+    }
+
+    private void AdjustOverboostFoV()
+    {
+        
+        if(playerRef.overboostMode && playerRef.overboostInitiated)
+        {
+            Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, defaultFieldOfView + extraOverboostFieldOfView, fieldOfViewChangeRate * Time.deltaTime);
+        }
+        else if(!playerRef.overboostMode && !playerRef.overboostInitiated)
+        {
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, defaultFieldOfView, fieldOfViewResetRate * Time.deltaTime);
+        }
     }
 
     private void RotateCameraMouse(float x, float y)
