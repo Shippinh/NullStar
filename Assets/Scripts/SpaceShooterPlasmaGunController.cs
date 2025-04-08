@@ -6,6 +6,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
 {
     public CustomInputs inputConfig;
     public SpaceShooterController playerRef;
+    public int damage = 1;
     
     [Header("Shooting Settings")]
     public Transform muzzlePoint;
@@ -119,7 +120,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
             EntityHealthController hitHealthController = hitTransform.GetComponent<EntityHealthController>();
             if(hitHealthController != null)
             {
-                hitHealthController.TakeDamage(1);
+                hitHealthController.TakeDamage(damage);
             }
         }
     }
