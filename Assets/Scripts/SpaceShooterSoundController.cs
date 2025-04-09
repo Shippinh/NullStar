@@ -72,13 +72,14 @@ public class SpaceShooterSoundController : MonoBehaviour
     {
         Debug.Log("Overboost initiation cancelled");
         overboostSwitchFade.SetPitchOverTime(0.5f, overboostSwitchFadeOutDuration);
-        overboostSwitchFade.SetVolumeOverTime(0f, overboostSwitchFadeOutDuration);
+        overboostSwitchFade.SetVolumeOverTime(0.1f, overboostSwitchFadeOutDuration);
     }
 
     void HandleOverboostInitiation()
     {
         Debug.Log("Initiated overboost");
         overboostSwitchFade.SetPitchOverTime(1f, 0f);
+        overboostSwitchFade.SetVolumeOverTime(1f, 0f);
         overboostSwitchSound.Play();
     }
 
