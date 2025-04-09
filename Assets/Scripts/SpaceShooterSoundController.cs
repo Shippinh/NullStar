@@ -8,6 +8,13 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     public AudioSource blowerSoundLoop;
     public AudioSource airIntakeSoundLoop;
+    [Header("Movement Pitch Settings")]
+    [Range(0.5f, 3f)] public float basePitch = 1f;
+    [Range(0.5f, 3f)] public float targetPitch = 1.5f;
+    [Range(0f, 3f)] public float pitchChangeDuration = 0.5f;
+
+
+
     public AudioSource hardBurnSoundLoop;
     [Range(0f, 1f)] public float hardBurnFadeOutDuration;
     [Range(0f, 15f)] public float hardBurnFadeInDuration;
@@ -22,11 +29,13 @@ public class SpaceShooterSoundController : MonoBehaviour
     [Range(0f, 1f)] public float overboostAccelerationFadeDuration;
 
     public AudioSource overboostOverheatAlarmSound;
+    public AudioSource overboostOverheatCoolingIndicatorSound;
     public AudioSource overboostOverheatDamageSound;
 
     AudioTransitionController hardBurnFade;
     AudioTransitionController overboostAccelerationFade;
     AudioTransitionController overboostSwitchFade;
+    AudioTransitionController overheatAlarmFade;
 
     void Awake()
     {
@@ -35,10 +44,13 @@ public class SpaceShooterSoundController : MonoBehaviour
         playerController.OnOverboostInitiation += HandleOverboostInitiation;
         playerController.OnOverboostInitiationCancel += HandleOverboostInitiationCancel;
         playerController.OnOverboostOverheat += HandleOverboostOverheat;
+        playerController.OnOverheatCoolingInitiated += HandleOverboostCooling;
+        playerController.OnOverheatCoolingConcluded += HandleOverboostCoolingConcluded;
 
         hardBurnFade = new AudioTransitionController(hardBurnSoundLoop);
         overboostAccelerationFade = new AudioTransitionController(overboostAccelerationSound);
         overboostSwitchFade = new AudioTransitionController(overboostSwitchSound);
+        overheatAlarmFade = new AudioTransitionController(overboostOverheatAlarmSound);
     }
 
     void Update()
@@ -46,6 +58,38 @@ public class SpaceShooterSoundController : MonoBehaviour
         hardBurnFade.Update();
         overboostAccelerationFade.Update();
         overboostSwitchFade.Update();
+        overheatAlarmFade.Update();
+
+        MovementBasedPitch();
+    }
+
+    void MovementBasedPitch()
+    {
+        float delta = Time.deltaTime;
+        float pitchDelta = (targetPitch - basePitch) / pitchChangeDuration;
+
+        // Player is providing movement input
+        if (playerController.AnyMovementInput() || playerController.jumpInput)
+        {
+            if(playerController.AnyMovementInput() && playerController.jumpInput)
+            {
+                blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, targetPitch + 0.5f, pitchDelta * delta);
+                airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, targetPitch + 0.5f, pitchDelta * delta);
+            }
+            else
+            {
+                blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, targetPitch, pitchDelta * delta);
+                airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, targetPitch, pitchDelta * delta);
+            }
+        }
+        // No input, return to base pitch
+        else
+        {
+            blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, basePitch, pitchDelta * delta);
+            airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, basePitch, pitchDelta * delta);
+        }
+
+        
     }
 
 
@@ -66,6 +110,7 @@ public class SpaceShooterSoundController : MonoBehaviour
         
         hardBurnFade.SetVolumeOverTime(0f, hardBurnFadeOutDuration);
         hardBurnFade.SetPitchOverTime(1f, hardBurnFadeOutDuration);
+        overheatAlarmFade.SetVolumeOverTime(0f, 0.1f);;
     }
 
     void HandleOverboostInitiationCancel()
@@ -78,14 +123,28 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostInitiation()
     {
         Debug.Log("Initiated overboost");
+        overboostOverheatCoolingIndicatorSound.Stop();
         overboostSwitchFade.SetPitchOverTime(1f, 0f);
-        overboostSwitchFade.SetVolumeOverTime(1f, 0f);
+        overboostSwitchFade.SetVolumeOverTime(0.6f, 0f);
         overboostSwitchSound.Play();
     }
 
     void HandleOverboostOverheat()
     {
-        Debug.Log("Overboost Overeating");
+        Debug.Log("Overboost Overheating");
+        overboostOverheatAlarmSound.Play();
+    }
+
+    void HandleOverboostCooling()
+    {
+        Debug.Log("Overboost Overheat Cooling Initiated");
+        overboostOverheatCoolingIndicatorSound.Play();
+    }
+
+    void HandleOverboostCoolingConcluded()
+    {
+        Debug.Log("Overboost Overheat Cooling Concluded");
+        overboostOverheatCoolingIndicatorSound.Stop();
     }
 }
 

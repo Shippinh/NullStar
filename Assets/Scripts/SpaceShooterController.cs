@@ -30,6 +30,7 @@ public class SpaceShooterController : MonoBehaviour
     //public float overboostDrainRate = 1f;
     public float overboostDurationRestoreRate = 1f;
     public float overboostOverheatDurationRestoreRate = 1f;
+    public bool isCooled = true;
 
     public int dodgeInput;
     public int parryInput;
@@ -82,6 +83,8 @@ public class SpaceShooterController : MonoBehaviour
     public event Action OnOverboostActivation;
     public event Action OnOverboostStop;
     public event Action OnOverboostOverheat;
+    public event Action OnOverheatCoolingInitiated;
+    public event Action OnOverheatCoolingConcluded;
 
     void OnValidate() 
     {
@@ -369,6 +372,7 @@ public class SpaceShooterController : MonoBehaviour
                     overboostMode = false;
                     overboostToggle.ForceToggle(false);
                     OnOverboostStop?.Invoke();
+                    OnOverheatCoolingInitiated?.Invoke();
                     overboostInitiated = false;
                     overboostOverheatMode = false;
                 }
@@ -386,6 +390,7 @@ public class SpaceShooterController : MonoBehaviour
                     overboostMode = false;
                     overboostToggle.ForceToggle(false);
                     OnOverboostStop?.Invoke();
+                    OnOverheatCoolingInitiated?.Invoke();
                     overboostInitiated = false;
                     overboostOverheatMode = false;
                 }
@@ -396,6 +401,15 @@ public class SpaceShooterController : MonoBehaviour
         {
             overboostDurationCurrent = Mathf.MoveTowards(overboostDurationCurrent, 0f, overboostDurationRestoreRate * Time.deltaTime);
             overboostOverheatDurationCurrent = Mathf.MoveTowards(overboostOverheatDurationCurrent, 0f, overboostOverheatDurationRestoreRate * Time.deltaTime);
+        }
+
+        if(overboostOverheatDurationCurrent > 0)
+            isCooled = false;
+
+        if(overboostOverheatDurationCurrent <= 0f &&!isCooled)
+        {
+            isCooled = true;
+            OnOverheatCoolingConcluded?.Invoke();
         }
     }
 
@@ -538,7 +552,7 @@ public class SpaceShooterController : MonoBehaviour
         overboostMode = overboostToggle.GetCurrentToggleState();
     }
 
-    bool AnyMovementInput()
+    public bool AnyMovementInput()
     {
         return overboostMode && overboostInitiated ? true : forwardInput != 0 || backwardInput != 0 || leftInput != 0 || rightInput != 0;
     }
