@@ -20,6 +20,11 @@ public class SpaceShooterController : MonoBehaviour
     public float overboostActivationDelay = 2f;
     [SerializeField] float overboostChargeTimer;
     [SerializeField, Range(0f, 1000f)] float maxOverboostInitiationSpeed = 5f;
+    public float maxExtraOverboostSpeed;
+    public float defaultMaxExtraOverboostSpeed;
+    [SerializeField, Range(0f, 1000f)] float currentExtraOverboostSpeed;
+    [SerializeField, Range(0f, 500f)] float extraOverboostSpeedRate = 5f; // Speed per second
+
 
     public float overboostDuration = 7.5f;
     public float overboostDurationCurrent;
@@ -99,8 +104,9 @@ public class SpaceShooterController : MonoBehaviour
 
         defaultMaxSpeed = maxSpeed;
         defaultMaxOverboostSpeed = maxOverboostSpeed;
+        defaultMaxExtraOverboostSpeed = maxExtraOverboostSpeed;
         dodgeMaxSpeedCap = defaultMaxSpeed + (maxDodgeCharges - 1) * perDodgeMaxSpeedIncrease;
-        dodgeMaxOverboostSpeedCap = defaultMaxOverboostSpeed + (maxDodgeCharges - 1) * perDodgeMaxOverboostSpeedIncrease;
+        dodgeMaxOverboostSpeedCap = defaultMaxOverboostSpeed + defaultMaxExtraOverboostSpeed + (maxDodgeCharges - 1) * perDodgeMaxOverboostSpeedIncrease;
         OnValidate();
         dodgeCharges = maxDodgeCharges; // Initialize full charges
         dodgeRechargeTimer = 0f;
@@ -115,6 +121,7 @@ public class SpaceShooterController : MonoBehaviour
 
     void Update()
     {
+        AdjustMaxOverboostSpeed();
         HandleInput();
         CalculateDesiredVelocity();
         HandleOverboostInitiation();
@@ -158,6 +165,40 @@ public class SpaceShooterController : MonoBehaviour
 
         DecayMaxSpeedToDefault();
     }
+
+    // Replace this portion in your class
+    void AdjustMaxOverboostSpeed()
+    {
+        // Calculate current dodge-contributed max speeds before clamping
+        float dodgeBonusSpeed = (maxDodgeCharges - dodgeCharges) * perDodgeMaxSpeedIncrease;
+        float dodgeBonusOverboostSpeed = (maxDodgeCharges - dodgeCharges) * perDodgeMaxOverboostSpeedIncrease;
+
+        // Cap dodge bonuses
+        dodgeBonusSpeed = Mathf.Min(dodgeBonusSpeed, dodgeMaxSpeedCap - defaultMaxSpeed);
+        dodgeBonusOverboostSpeed = Mathf.Min(dodgeBonusOverboostSpeed, dodgeMaxOverboostSpeedCap - defaultMaxOverboostSpeed - defaultMaxExtraOverboostSpeed);
+
+        // Update maxSpeed and base overboost speed with dodge bonuses
+        maxSpeed = defaultMaxSpeed + dodgeBonusSpeed;
+
+        if (overboostMode && overboostInitiated)
+        {
+            float rateMultiplier = overboostOverheatMode ? 2f : 1f;
+            currentExtraOverboostSpeed = Mathf.MoveTowards(
+                currentExtraOverboostSpeed,
+                maxExtraOverboostSpeed,
+                extraOverboostSpeedRate * rateMultiplier * Time.deltaTime
+            );
+        }
+        else
+        {
+            currentExtraOverboostSpeed = 0f;
+        }
+
+        // Final max overboost speed
+        maxOverboostSpeed = defaultMaxOverboostSpeed + currentExtraOverboostSpeed + dodgeBonusOverboostSpeed;
+    }
+
+
 
     // Gets invoked whenever the referenced entity gets hit
     void HandleTakenHits()

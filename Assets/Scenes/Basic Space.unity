@@ -2445,9 +2445,12 @@ MonoBehaviour:
   overboostActivationDelay: 1
   overboostChargeTimer: 0
   maxOverboostInitiationSpeed: 5
+  maxExtraOverboostSpeed: 0
+  currentExtraOverboostSpeed: 0
+  extraOverboostSpeedRate: 5
   overboostDuration: 7.5
   overboostDurationCurrent: 0
-  overboostOverheatDuration: 10
+  overboostOverheatDuration: 7.5
   overboostOverheatDurationCurrent: 0
   overboostDurationRestoreRate: 1
   overboostOverheatDurationRestoreRate: 1
