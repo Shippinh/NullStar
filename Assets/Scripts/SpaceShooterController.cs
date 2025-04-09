@@ -559,6 +559,11 @@ public class SpaceShooterController : MonoBehaviour
     {
         return overboostMode && overboostInitiated ? true : forwardInput != 0 || backwardInput != 0 || leftInput != 0 || rightInput != 0;
     }
+
+    public bool AnySidewaysMovementInput()
+    {
+        return leftInput != 0 || rightInput != 0;
+    }
 }
 
 

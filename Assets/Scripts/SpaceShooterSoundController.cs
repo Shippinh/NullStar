@@ -71,29 +71,29 @@ public class SpaceShooterSoundController : MonoBehaviour
         float delta = Time.deltaTime;
         float pitchDelta = (targetPitch - basePitch) / pitchChangeDuration;
 
-        // Player is providing movement input
-        if (playerController.AnyMovementInput() || playerController.jumpInput)
+        // Get stackable pitch multiplier
+        float extraPitch = 0f;
+
+        if (!playerController.overboostInitiated)
         {
-            if(playerController.AnyMovementInput() && playerController.jumpInput)
-            {
-                blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, targetPitch + 0.5f, pitchDelta * delta);
-                airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, targetPitch + 0.5f, pitchDelta * delta);
-            }
-            else
-            {
-                blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, targetPitch, pitchDelta * delta);
-                airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, targetPitch, pitchDelta * delta);
-            }
-        }
-        // No input, return to base pitch
-        else
-        {
-            blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, basePitch, pitchDelta * delta);
-            airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, basePitch, pitchDelta * delta);
+            if (playerController.jumpInput) extraPitch += 0.5f;
         }
 
-        
+        if (playerController.AnySidewaysMovementInput()) extraPitch += 0.25f;
+
+        float desiredPitch = basePitch + extraPitch;
+
+        // Movement input detected
+        if ((playerController.AnyMovementInput() || playerController.jumpInput) && !playerController.overboostInitiated)
+        {
+            desiredPitch = targetPitch + extraPitch;
+        }
+
+        // Smoothly transition blower and air intake pitch
+        blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, desiredPitch, pitchDelta * delta);
+        airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, desiredPitch, pitchDelta * delta);
     }
+
 
 
     void HandleOverboostActivation()
@@ -132,7 +132,7 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostInitiation()
     {
         Debug.Log("Initiated overboost");
-        overheatCoolingFade.SetVolumeOverTime(0.1f, 0.1f);
+        overheatCoolingFade.SetVolumeOverTime(0.1f, 0.01f);
         overboostOverheatCoolingIndicatorSound.Stop();
         overboostSwitchFade.SetPitchOverTime(1f, 0f);
         overboostSwitchFade.SetVolumeOverTime(0.6f, 0f);
@@ -155,7 +155,7 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostCoolingConcluded()
     {
         Debug.Log("Overboost Overheat Cooling Concluded");
-        overheatCoolingFade.SetVolumeOverTime(0.1f, 0.1f);
+        overheatCoolingFade.SetVolumeOverTime(0.1f, 0.01f);
         overboostOverheatCoolingIndicatorSound.Stop();
     }
 }
