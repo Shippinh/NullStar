@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2494,6 +2494,7 @@ MonoBehaviour:
   maxSpeedDecayRate: 81.6
   defaultMaxSpeed: 0
   defaultMaxOverboostSpeed: 0
+  overboostTurnMultiplier: 0.5
   isDodging: 0
 --- !u!54 &691622030
 Rigidbody:
@@ -3444,7 +3445,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: d176e7986938c80458ce4453f3f60a4c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.8
   m_Pitch: 0.1
   Loop: 1
   Mute: 0

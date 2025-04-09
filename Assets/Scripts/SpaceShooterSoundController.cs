@@ -117,7 +117,7 @@ public class SpaceShooterSoundController : MonoBehaviour
 
         if(!playerController.isCooled)
         {
-            overboostOverheatCoolingIndicatorSound.volume = 0.5f;
+            overboostOverheatCoolingIndicatorSound.volume = 0.8f;
             overboostOverheatCoolingIndicatorSound.Play();
         }
     }
@@ -148,7 +148,7 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostCooling()
     {
         Debug.Log("Overboost Overheat Cooling Initiated");
-        overboostOverheatCoolingIndicatorSound.volume = 0.5f;
+        overboostOverheatCoolingIndicatorSound.volume = 0.8f;
         overboostOverheatCoolingIndicatorSound.Play();
     }
 

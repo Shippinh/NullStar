@@ -74,6 +74,7 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0, 90)] float maxGroundAngle = 25f;
     [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
     [SerializeField] float defaultMaxSpeed, defaultMaxOverboostSpeed;
+    [SerializeField, Range(0, 1f)] float overboostTurnMultiplier;
     float dodgeTime;
     Rigidbody body;
     Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
@@ -260,32 +261,71 @@ public class SpaceShooterController : MonoBehaviour
 
     void CalculateDesiredVelocity()
     {
-        Vector3 moveDirection = overboostMode && overboostInitiated ? 
-                                new Vector3(rightInput + leftInput, 1, 1) :
+        // Step 1: Create input direction
+        Vector3 moveDirection = overboostMode && overboostInitiated ?
+                                new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 1, 1) : // Overboost: use fixed vertical and forward input
                                 new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
-        Vector3 worldDirection = overboostMode && overboostInitiated ? 
-                                Camera.main.transform.right * moveDirection.x + Camera.main.transform.forward * moveDirection.z :
-                                Camera.main.transform.right * moveDirection.x + Vector3.up * moveDirection.y + Camera.main.transform.forward * moveDirection.z;
-        worldDirection.Normalize();
-        desiredVelocity = new Vector3(overboostMode ? worldDirection.x * maxOverboostSpeed : worldDirection.x * maxSpeed, overboostMode ? worldDirection.y * maxOverboostVerticalSpeed : worldDirection.y * maxVerticalSpeed, overboostMode ? worldDirection.z * maxOverboostSpeed : worldDirection.z * maxSpeed);
+
+        Vector3 worldDirection;
+
+        if (overboostMode && overboostInitiated)
+        {
+            // Step 2A: Overboost - full 3D movement direction based on camera
+            worldDirection = 
+                Camera.main.transform.right * moveDirection.x +
+                Camera.main.transform.forward * moveDirection.z;
+
+            worldDirection.Normalize(); // Let camera pitch determine final direction (includes vertical movement)
+        }
+        else
+        {
+            // Step 2B: Normal mode - movement restricted to horizontal plane, with separate Y input
+            Vector3 camRight = Camera.main.transform.right;
+            Vector3 camForward = Camera.main.transform.forward;
+            camForward.y = 0; // Flatten forward to horizontal
+            camForward.Normalize();
+
+            worldDirection = camRight * moveDirection.x + camForward * moveDirection.z;
+            worldDirection.Normalize(); // Horizontal movement only
+        }
+
+        // Step 3: Apply speed based on mode
+        float horizontalSpeed = overboostMode ? maxOverboostSpeed : maxSpeed;
+        if(overboostMode && !overboostInitiated)
+        {
+            horizontalSpeed = maxOverboostInitiationSpeed;
+        }
+        float verticalSpeed = overboostMode ? maxOverboostVerticalSpeed : maxVerticalSpeed;
+
+        desiredVelocity = new Vector3(
+            worldDirection.x * horizontalSpeed,
+            (overboostMode && overboostInitiated ? worldDirection.y : moveDirection.y) * verticalSpeed,
+            worldDirection.z * horizontalSpeed
+        );
     }
 
-    void AdjustVelocity() 
+
+    void AdjustVelocity()
     {
         Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
         Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
-        
+
+        // Get the component of the velocity along the respective axes
         float currentX = Vector3.Dot(velocity, xAxis);
         float currentZ = Vector3.Dot(velocity, zAxis);
 
+        // Determine if the character is on the ground or in the air for acceleration
         float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-        float maxSpeedChange = acceleration * Time.deltaTime;
+        
+        // Apply the full acceleration directly to the components
+        float deltaX = desiredVelocity.x - currentX;
+        float deltaZ = desiredVelocity.z - currentZ;
 
-        float newX = Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
-        float newZ = Mathf.MoveTowards(currentZ, desiredVelocity.z, maxSpeedChange);
-
-        velocity += xAxis * (newX - currentX) + zAxis * (newZ - currentZ);
+        // Cap the speed change based on max acceleration, but without smoothing
+        velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), acceleration * Time.deltaTime);
+        velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), acceleration * Time.deltaTime);
     }
+
 
     void AdjustDodgeVelocity()
     {
@@ -297,7 +337,7 @@ public class SpaceShooterController : MonoBehaviour
             dodgeRechargeTimer = 0f; // Reset recharge timer since a dodge was used
 
             desiredDodgeVelocity = overboostMode
-                ? new Vector3(rightInput + leftInput, 0, 0).normalized
+                ? new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 0, 0).normalized
                 : new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
 
             Vector3 camRight = Camera.main.transform.right;
@@ -332,7 +372,7 @@ public class SpaceShooterController : MonoBehaviour
                 {
                     desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, 1).normalized;
                     desiredDodgeVelocity = Camera.main.transform.right * desiredDodgeVelocity.x + Camera.main.transform.forward * desiredDodgeVelocity.z;
-                    velocity = desiredDodgeVelocity * dodgeMaxSpeed;
+                    velocity = desiredDodgeVelocity * dodgeMaxSpeed * 1.5f;
                 }
                 else
                     velocity = desiredDodgeVelocity * dodgeMaxSpeed;
