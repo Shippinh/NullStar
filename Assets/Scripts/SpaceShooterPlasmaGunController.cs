@@ -120,7 +120,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
             EntityHealthController hitHealthController = hitTransform.GetComponent<EntityHealthController>();
             if(hitHealthController != null)
             {
-                hitHealthController.TakeDamage(damage);
+                hitHealthController.TakeDamage(damage, true);
             }
         }
     }

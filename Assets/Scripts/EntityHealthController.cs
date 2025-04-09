@@ -19,12 +19,13 @@ public class EntityHealthController : MonoBehaviour
         currentInvincibilityDuration = 0f;
     }
 
-    public void TakeDamage(int takenDamage)
+    public void TakeDamage(int takenDamage, bool shouldInvoke)
     {
         if(isInvincible == false && isAlive == true)
         {
             isInvincible = true;
-            TookHit?.Invoke();
+            if(shouldInvoke)
+                TookHit?.Invoke();
             if(takenDamage > MaxHP)
             {
                 CurrentHP = 0;

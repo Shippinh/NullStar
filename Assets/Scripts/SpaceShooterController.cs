@@ -382,7 +382,7 @@ public class SpaceShooterController : MonoBehaviour
             {
                 overboostOverheatDurationCurrent += Time.deltaTime;
 
-                healthController.TakeDamage(1);
+                healthController.TakeDamage(1, false);
 
                 // If we overheat before death - initiate cooling and disable overboost
                 if(overboostOverheatDurationCurrent >= overboostOverheatDuration)
@@ -548,8 +548,11 @@ public class SpaceShooterController : MonoBehaviour
         rageInput = Input.GetKey(inputConfig.RageMode);
         adrenalineInput = Input.GetKey(inputConfig.AdrenalineMode);
 
-        overboostToggle.UpdateToggle();
-        overboostMode = overboostToggle.GetCurrentToggleState();
+        if(isCooled || overboostMode)
+        {
+            overboostToggle.UpdateToggle();
+            overboostMode = overboostToggle.GetCurrentToggleState();
+        }
     }
 
     public bool AnyMovementInput()

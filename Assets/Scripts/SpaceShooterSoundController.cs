@@ -36,6 +36,7 @@ public class SpaceShooterSoundController : MonoBehaviour
     AudioTransitionController overboostAccelerationFade;
     AudioTransitionController overboostSwitchFade;
     AudioTransitionController overheatAlarmFade;
+    AudioTransitionController overheatCoolingFade;
 
     void Awake()
     {
@@ -51,6 +52,7 @@ public class SpaceShooterSoundController : MonoBehaviour
         overboostAccelerationFade = new AudioTransitionController(overboostAccelerationSound);
         overboostSwitchFade = new AudioTransitionController(overboostSwitchSound);
         overheatAlarmFade = new AudioTransitionController(overboostOverheatAlarmSound);
+        overheatCoolingFade = new AudioTransitionController(overboostOverheatCoolingIndicatorSound);
     }
 
     void Update()
@@ -59,6 +61,7 @@ public class SpaceShooterSoundController : MonoBehaviour
         overboostAccelerationFade.Update();
         overboostSwitchFade.Update();
         overheatAlarmFade.Update();
+        overheatCoolingFade.Update();
 
         MovementBasedPitch();
     }
@@ -110,7 +113,13 @@ public class SpaceShooterSoundController : MonoBehaviour
         
         hardBurnFade.SetVolumeOverTime(0f, hardBurnFadeOutDuration);
         hardBurnFade.SetPitchOverTime(1f, hardBurnFadeOutDuration);
-        overheatAlarmFade.SetVolumeOverTime(0f, 0.1f);;
+        overheatAlarmFade.SetVolumeOverTime(0f, 0.1f);
+
+        if(!playerController.isCooled)
+        {
+            overboostOverheatCoolingIndicatorSound.volume = 0.5f;
+            overboostOverheatCoolingIndicatorSound.Play();
+        }
     }
 
     void HandleOverboostInitiationCancel()
@@ -123,6 +132,7 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostInitiation()
     {
         Debug.Log("Initiated overboost");
+        overheatCoolingFade.SetVolumeOverTime(0.1f, 0.1f);
         overboostOverheatCoolingIndicatorSound.Stop();
         overboostSwitchFade.SetPitchOverTime(1f, 0f);
         overboostSwitchFade.SetVolumeOverTime(0.6f, 0f);
@@ -138,12 +148,14 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostCooling()
     {
         Debug.Log("Overboost Overheat Cooling Initiated");
+        overboostOverheatCoolingIndicatorSound.volume = 0.5f;
         overboostOverheatCoolingIndicatorSound.Play();
     }
 
     void HandleOverboostCoolingConcluded()
     {
         Debug.Log("Overboost Overheat Cooling Concluded");
+        overheatCoolingFade.SetVolumeOverTime(0.1f, 0.1f);
         overboostOverheatCoolingIndicatorSound.Stop();
     }
 }
