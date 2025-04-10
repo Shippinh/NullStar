@@ -1206,13 +1206,19 @@ MonoBehaviour:
   dodgeTiltModifier: 1
   overboostTiltModifier: 0.5
   extraOverboostFieldOfView: 30
-  fieldOfViewChangeRate: 2
+  fieldOfViewChangeRate: 0.95
   fieldOfViewResetRate: 5
   target: {fileID: 1944553957}
   leftHand: {fileID: 317917909}
   rightHand: {fileID: 767223727}
   left: {fileID: 619769866}
   right: {fileID: 657565285}
+  shakeMagnitude: 0.05
+  shakeDuration: 0.25
+  overheatShakeFadeRate: 0.0015
+  currentOverheatShakeMagnitude: 0
+  minShakeMagnitude: 0.0005
+  maxShakeMagnitude: 0.25
 --- !u!1 &351981544
 GameObject:
   m_ObjectHideFlags: 0

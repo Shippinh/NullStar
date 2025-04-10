@@ -45,9 +45,22 @@ public class CameraController : MonoBehaviour
     private Vector3 leftHandInitialOffset;
     private Vector3 rightHandInitialOffset;
 
+    public float shakeMagnitude = 0.1f; // How strong the shake is
+    public float shakeDuration = 0.5f; // How long the shake lasts
+    private float shakeTime = 0f; // Timer to track the duration of the shake
+
+    public float overheatShakeFadeRate = 0.005f; // Rate at which shake intensity increases
+    public float currentOverheatShakeMagnitude = 0f; // Current magnitude of shake
+
+    // New variables for dynamic shake magnitude based on overheat
+    public float minShakeMagnitude = 0.1f;  // Minimum shake magnitude
+    public float maxShakeMagnitude = 1f;    // Maximum shake magnitude
+
 
     void Start()
     {
+        playerRef.OnOverboostActivation += HandleOverboostActivation;
+
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
 
@@ -85,6 +98,75 @@ public class CameraController : MonoBehaviour
         }
         TiltCameraBasedOnInput();
         AdjustOverboostFoV();
+        
+        if(playerRef.overboostMode && playerRef.overboostOverheatMode)
+            AdjustShakeOverheat();
+        else
+            AdjustShake();
+    }
+
+    void HandleOverboostActivation()
+    {
+        TriggerShake();
+        currentOverheatShakeMagnitude = 0f;
+    }
+
+    void AdjustShake()
+    {
+        Vector3 currentCameraPosition = transform.position;
+        
+        // Apply camera shake if it is active
+        if (shakeTime > 0)
+        {
+            // Calculate a fade factor based on remaining shake time
+            float fadeFactor = shakeTime / shakeDuration;
+
+            // Apply the fade factor to the shake magnitude (so it decreases over time)
+            float currentNormalShakeMagnitude = shakeMagnitude * fadeFactor;
+
+            // Generate random shake offsets based on the faded magnitude
+            float shakeX = Random.Range(-currentNormalShakeMagnitude, currentNormalShakeMagnitude);
+            float shakeY = Random.Range(-currentNormalShakeMagnitude, currentNormalShakeMagnitude);
+
+            // Apply the shake offsets to the camera position
+            transform.position = currentCameraPosition + new Vector3(shakeX, shakeY, 0f);
+
+            // Decrease the shake time
+            shakeTime -= Time.deltaTime;
+        }
+        else
+        {
+            // Reset to the original camera position if no shake is active
+            transform.position = currentCameraPosition;
+        }
+    }
+
+    void AdjustShakeOverheat()
+    {
+        Vector3 currentCameraPosition = transform.position;
+
+        // Map overboost overheat duration to shake magnitude range
+        float targetMagnitude = Mathf.Lerp(minShakeMagnitude, maxShakeMagnitude, playerRef.overboostOverheatDurationCurrent);
+
+        // Increase the shake magnitude until it reaches the target magnitude
+        currentOverheatShakeMagnitude = Mathf.MoveTowards(currentOverheatShakeMagnitude, targetMagnitude, overheatShakeFadeRate * Time.deltaTime);
+
+        // Generate random shake offsets based on the current shake magnitude
+        float shakeX = Random.Range(-currentOverheatShakeMagnitude, currentOverheatShakeMagnitude);
+        float shakeY = Random.Range(-currentOverheatShakeMagnitude, currentOverheatShakeMagnitude);
+
+        // Apply the shake offsets to the camera position
+        transform.position = currentCameraPosition + new Vector3(shakeX, shakeY, 0f);
+    }
+
+    private void ResetOverheatShake()
+    {
+
+    }
+
+    private void TriggerShake()
+    {
+        shakeTime = shakeDuration; // Reset shake time
     }
 
     private (float x, float y) GetMouseInput()
