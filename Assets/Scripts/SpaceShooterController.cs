@@ -68,8 +68,8 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 1000)] float dodgeMaxSpeed = 10f;
     [SerializeField, Range(0f, 1000f)] float perDodgeMaxSpeedIncrease = 6.5f, perDodgeMaxOverboostSpeedIncrease = 8f;
     [SerializeField] float dodgeMaxSpeedCap, dodgeMaxOverboostSpeedCap;
-    [SerializeField] private int maxDodgeCharges = 5;
-    [SerializeField] private int dodgeCharges;
+    [SerializeField] public int maxDodgeCharges = 5;
+    [SerializeField] public int dodgeCharges;
     [SerializeField] float dodgeRechargeTime = 1.5f;
     [SerializeField] private float dodgeRechargeTimer;
     [SerializeField] private float dodgeRechargeDelay = 1f;

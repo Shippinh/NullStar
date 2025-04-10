@@ -32,9 +32,17 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     public AudioSource dodgeSound1;
     public AudioSource dodgeSound2;
-    public bool isAlternateDodgeSource;
+    public AudioSource dodgeSound3;
+    public AudioSource dodgeSound4;
+    public AudioSource dodgeSound5;
+    public int alternateDodgeSource = 0;
+
     public AudioSource dodgeRechargeIndicator;
     public AudioSource dodgeChargeGainedIndicator;
+
+    public float perDodgeExtraPitch = 0.3f;
+    [SerializeField] private float totalExtraPitch = 0f;
+    private float defaultDodgePitch = 1f;
 
     AudioTransitionController hardBurnFade;
     AudioTransitionController overboostAccelerationFade;
@@ -64,6 +72,8 @@ public class SpaceShooterSoundController : MonoBehaviour
         overheatCoolingFade = new AudioTransitionController(overboostOverheatCoolingIndicatorSound);
         dodgeRechargeIndicatorFade = new AudioTransitionController(dodgeRechargeIndicator);
         dodgeChargeGainedIndicatorFade = new AudioTransitionController(dodgeChargeGainedIndicator);
+
+        defaultDodgePitch = dodgeSound1.pitch;
     }
 
     void Update()
@@ -77,6 +87,7 @@ public class SpaceShooterSoundController : MonoBehaviour
         dodgeChargeGainedIndicatorFade.Update();
 
         MovementBasedPitch();
+        totalExtraPitch = (playerController.maxDodgeCharges - playerController.dodgeCharges) * perDodgeExtraPitch;
     }
 
     void MovementBasedPitch()
@@ -173,16 +184,47 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     void HandleDodgeUsed()
     {
-        if(isAlternateDodgeSource)
-        {
-            dodgeSound1.Play();
-        }
-        else
-        {
-            dodgeSound2.Play();
-        }
+        float desiredPitch = defaultDodgePitch + totalExtraPitch;
 
-        isAlternateDodgeSource = !isAlternateDodgeSource;
+        dodgeSound1.pitch = desiredPitch; 
+        dodgeSound2.pitch = desiredPitch;
+        dodgeSound3.pitch = desiredPitch;
+        dodgeSound4.pitch = desiredPitch;
+        dodgeSound5.pitch = desiredPitch;
+
+        switch (alternateDodgeSource)
+        {
+            case 0:
+            {
+                dodgeSound1.Play();
+                alternateDodgeSource++;
+                break;
+            }
+            case 1:
+            {
+                dodgeSound2.Play();
+                alternateDodgeSource++;
+                break;
+            }
+            case 2:
+            {
+                dodgeSound3.Play();
+                alternateDodgeSource++;
+                break;
+            }
+            case 3:
+            {
+                dodgeSound4.Play();
+                alternateDodgeSource++;
+                break;
+            }
+            case 4:
+            {
+                dodgeSound5.Play();
+                alternateDodgeSource = 0;
+                break;
+            }
+        }
         Debug.Log("Dodge initiated");
         dodgeRechargeIndicatorFade.SetVolumeOverTime(0f, 0.3f);
         dodgeRechargeIndicatorFade.SetPitchOverTime(0.8f, 0.3f);
