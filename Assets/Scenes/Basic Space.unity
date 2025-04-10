@@ -1215,7 +1215,7 @@ MonoBehaviour:
   right: {fileID: 657565285}
   shakeMagnitude: 0.05
   shakeDuration: 0.25
-  overheatShakeFadeRate: 0.0015
+  overheatShakeFadeRate: 0.002
   currentOverheatShakeMagnitude: 0
   minShakeMagnitude: 0.0005
   maxShakeMagnitude: 0.25
