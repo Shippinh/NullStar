@@ -13,8 +13,6 @@ public class SpaceShooterSoundController : MonoBehaviour
     [Range(0.5f, 3f)] public float targetPitch = 1.5f;
     [Range(0f, 3f)] public float pitchChangeDuration = 0.5f;
 
-
-
     public AudioSource hardBurnSoundLoop;
     [Range(0f, 1f)] public float hardBurnFadeOutDuration;
     [Range(0f, 15f)] public float hardBurnFadeInDuration;
@@ -32,11 +30,19 @@ public class SpaceShooterSoundController : MonoBehaviour
     public AudioSource overboostOverheatCoolingIndicatorSound;
     public AudioSource overboostOverheatDamageSound;
 
+    public AudioSource dodgeSound1;
+    public AudioSource dodgeSound2;
+    public bool isAlternateDodgeSource;
+    public AudioSource dodgeRechargeIndicator;
+    public AudioSource dodgeChargeGainedIndicator;
+
     AudioTransitionController hardBurnFade;
     AudioTransitionController overboostAccelerationFade;
     AudioTransitionController overboostSwitchFade;
     AudioTransitionController overheatAlarmFade;
     AudioTransitionController overheatCoolingFade;
+    AudioTransitionController dodgeRechargeIndicatorFade;
+    AudioTransitionController dodgeChargeGainedIndicatorFade;
 
     void Awake()
     {
@@ -47,12 +53,17 @@ public class SpaceShooterSoundController : MonoBehaviour
         playerController.OnOverboostOverheat += HandleOverboostOverheat;
         playerController.OnOverheatCoolingInitiated += HandleOverboostCooling;
         playerController.OnOverheatCoolingConcluded += HandleOverboostCoolingConcluded;
+        playerController.OnDodgeUsed += HandleDodgeUsed;
+        playerController.OnDodgeActualRechargeStart += HandleDodgeActualRechargeStart;
+        playerController.OnDodgeChargeGain += HandleDodgeChargeGain;
 
         hardBurnFade = new AudioTransitionController(hardBurnSoundLoop);
         overboostAccelerationFade = new AudioTransitionController(overboostAccelerationSound);
         overboostSwitchFade = new AudioTransitionController(overboostSwitchSound);
         overheatAlarmFade = new AudioTransitionController(overboostOverheatAlarmSound);
         overheatCoolingFade = new AudioTransitionController(overboostOverheatCoolingIndicatorSound);
+        dodgeRechargeIndicatorFade = new AudioTransitionController(dodgeRechargeIndicator);
+        dodgeChargeGainedIndicatorFade = new AudioTransitionController(dodgeChargeGainedIndicator);
     }
 
     void Update()
@@ -62,6 +73,8 @@ public class SpaceShooterSoundController : MonoBehaviour
         overboostSwitchFade.Update();
         overheatAlarmFade.Update();
         overheatCoolingFade.Update();
+        dodgeRechargeIndicatorFade.Update();
+        dodgeChargeGainedIndicatorFade.Update();
 
         MovementBasedPitch();
     }
@@ -93,7 +106,6 @@ public class SpaceShooterSoundController : MonoBehaviour
         blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, desiredPitch, pitchDelta * delta);
         airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, desiredPitch, pitchDelta * delta);
     }
-
 
 
     void HandleOverboostActivation()
@@ -157,6 +169,37 @@ public class SpaceShooterSoundController : MonoBehaviour
         Debug.Log("Overboost Overheat Cooling Concluded");
         overheatCoolingFade.SetVolumeOverTime(0.1f, 0.01f);
         overboostOverheatCoolingIndicatorSound.Stop();
+    }
+
+    void HandleDodgeUsed()
+    {
+        if(isAlternateDodgeSource)
+        {
+            dodgeSound1.Play();
+        }
+        else
+        {
+            dodgeSound2.Play();
+        }
+
+        isAlternateDodgeSource = !isAlternateDodgeSource;
+        Debug.Log("Dodge initiated");
+        dodgeRechargeIndicatorFade.SetVolumeOverTime(0f, 0.3f);
+        dodgeRechargeIndicatorFade.SetPitchOverTime(0.8f, 0.3f);
+    }
+
+    void HandleDodgeActualRechargeStart()
+    {
+        Debug.Log("Dodge recharge has actually begun");
+        dodgeRechargeIndicator.pitch = 1f;
+        dodgeRechargeIndicator.Play();
+        dodgeRechargeIndicatorFade.SetPitchOverTime(1.5f, 2f);
+    }
+
+    void HandleDodgeChargeGain()
+    {
+        Debug.Log("Dodge charge gained");
+        dodgeChargeGainedIndicator.Play();
     }
 }
 

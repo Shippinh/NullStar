@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class SpaceShooterController : MonoBehaviour
 {
@@ -64,6 +64,7 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 1000f)] float maxAcceleration = 10f, maxAirAcceleration = 1f;
     [SerializeField, Range(0f, 100f)] float jumpForce = 2f;
     [SerializeField, Range(0f, 2000f)] float jetpackAcceleration = 10f;
+
     [SerializeField, Range(0f, 1000)] float dodgeMaxSpeed = 10f;
     [SerializeField, Range(0f, 1000f)] float perDodgeMaxSpeedIncrease = 6.5f, perDodgeMaxOverboostSpeedIncrease = 8f;
     [SerializeField] float dodgeMaxSpeedCap, dodgeMaxOverboostSpeedCap;
@@ -71,11 +72,17 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField] private int dodgeCharges;
     [SerializeField] float dodgeRechargeTime = 1.5f;
     [SerializeField] private float dodgeRechargeTimer;
+    [SerializeField] private float dodgeRechargeDelay = 1f;
+    [SerializeField] private float dodgeRechargeDelayTimer;
+    [SerializeField] private bool dodgeRecharging;
+
     [SerializeField, Range(0, 90)] float maxGroundAngle = 25f;
     [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
     [SerializeField] float defaultMaxSpeed, defaultMaxOverboostSpeed;
     [SerializeField, Range(0, 1f)] float overboostTurnMultiplier;
+
     float dodgeTime;
+
     Rigidbody body;
     Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
     Vector3 contactNormal;
@@ -91,6 +98,9 @@ public class SpaceShooterController : MonoBehaviour
     public event Action OnOverboostOverheat;
     public event Action OnOverheatCoolingInitiated;
     public event Action OnOverheatCoolingConcluded;
+    public event Action OnDodgeUsed; // Invoked on each dodge
+    public event Action OnDodgeActualRechargeStart; // Invoked after the dodge cd delay
+    public event Action OnDodgeChargeGain; // Invoked when a dodge charge is gained
 
     void OnValidate() 
     {
@@ -109,7 +119,7 @@ public class SpaceShooterController : MonoBehaviour
         dodgeMaxSpeedCap = defaultMaxSpeed + (maxDodgeCharges - 1) * perDodgeMaxSpeedIncrease;
         dodgeMaxOverboostSpeedCap = defaultMaxOverboostSpeed + defaultMaxExtraOverboostSpeed + (maxDodgeCharges - 1) * perDodgeMaxOverboostSpeedIncrease;
         OnValidate();
-        dodgeCharges = maxDodgeCharges; // Initialize full charges
+        dodgeCharges = maxDodgeCharges;
         dodgeRechargeTimer = 0f;
         overboostChargeTimer = 0f;
         rageChargeTimer = 0f;
@@ -333,8 +343,13 @@ public class SpaceShooterController : MonoBehaviour
         {
             isDodging = true;
             dodgeTime = 0f;
-            dodgeCharges--;  // Consume one dodge charge
-            dodgeRechargeTimer = 0f; // Reset recharge timer since a dodge was used
+            dodgeCharges--;
+
+            // Start the delay before recharge begins
+            dodgeRechargeDelayTimer = 0f;
+            dodgeRecharging = false;
+
+            OnDodgeUsed?.Invoke();
 
             desiredDodgeVelocity = overboostMode
                 ? new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 0, 0).normalized
@@ -345,48 +360,79 @@ public class SpaceShooterController : MonoBehaviour
             camRight.y = 0;
             camForward.y = 0;
 
-            if(overboostMode)
-                desiredDodgeVelocity = Camera.main.transform.right * desiredDodgeVelocity.x + Camera.main.transform.forward * desiredDodgeVelocity.z;
+            if (overboostMode)
+                desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
             else
             {
-                if(desiredDodgeVelocity == Vector3.zero)
+                if (desiredDodgeVelocity == Vector3.zero)
                     desiredDodgeVelocity = transform.forward;
                 desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
             }
 
             desiredDodgeVelocity.Normalize();
 
-            if(maxSpeed < dodgeMaxSpeedCap)
-                maxSpeed += perDodgeMaxSpeedIncrease;
-            else
-                maxSpeed = dodgeMaxSpeedCap;
-
-            if(maxOverboostSpeed < dodgeMaxOverboostSpeedCap)
-                maxOverboostSpeed += perDodgeMaxOverboostSpeedIncrease;
-            else
-                maxOverboostSpeed = dodgeMaxOverboostSpeedCap;
+            maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
+            maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
 
             if (desiredDodgeVelocity != Vector3.zero)
             {
-                if(overboostMode)
+                if (overboostMode)
                 {
                     desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, 1).normalized;
-                    desiredDodgeVelocity = Camera.main.transform.right * desiredDodgeVelocity.x + Camera.main.transform.forward * desiredDodgeVelocity.z;
+                    desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
                     velocity = desiredDodgeVelocity * dodgeMaxSpeed * 1.5f;
                 }
                 else
                     velocity = desiredDodgeVelocity * dodgeMaxSpeed;
             }
         }
-        
+
         if (isDodging)
         {
-            // Dodge time logic to end dodge after a short duration
             dodgeTime += Time.fixedDeltaTime;
-            if (dodgeTime >= 0.2f) // 0.2s dodge duration
+            if (dodgeTime >= 0.2f)
             {
                 isDodging = false;
                 dodgeTime = 0f;
+            }
+        }
+    }
+
+
+    void HandleDodgeRecharge()
+    {
+        if (dodgeCharges >= maxDodgeCharges)
+            return;
+
+        if (!dodgeRecharging)
+        {
+            dodgeRechargeDelayTimer += Time.deltaTime;
+            if (dodgeRechargeDelayTimer >= dodgeRechargeDelay)
+            {
+                dodgeRecharging = true;
+                dodgeRechargeTimer = 0f;
+                OnDodgeActualRechargeStart?.Invoke();
+            }
+        }
+        else
+        {
+            dodgeRechargeTimer += Time.deltaTime;
+            if (dodgeRechargeTimer >= dodgeRechargeTime)
+            {
+                dodgeCharges++;
+                dodgeRechargeTimer = 0f;
+                OnDodgeChargeGain?.Invoke();
+
+                // If still not full, stay in recharge state
+                if (dodgeCharges < maxDodgeCharges)
+                {
+                    dodgeRecharging = true;
+                    dodgeRechargeDelayTimer = 0f;
+                }
+                else
+                {
+                    dodgeRecharging = false;
+                }
             }
         }
     }
@@ -550,20 +596,6 @@ public class SpaceShooterController : MonoBehaviour
                 adrenalineCharged = false;
                 adrenalineDurationCurrent = adrenalineDuration;
                 adrenalineChargeTimer = 0f;
-            }
-        }
-    }
-
-    void HandleDodgeRecharge()
-    {
-        // Regenerate dodge charges over time
-        if (dodgeCharges < maxDodgeCharges)
-        {
-            dodgeRechargeTimer += Time.deltaTime;
-            if (dodgeRechargeTimer >= dodgeRechargeTime)
-            {
-                dodgeCharges++;
-                dodgeRechargeTimer = 0f; // Reset timer after regenerating a charge
             }
         }
     }
