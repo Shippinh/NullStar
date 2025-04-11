@@ -44,6 +44,20 @@ public class SpaceShooterSoundController : MonoBehaviour
     [SerializeField] private float totalExtraPitch = 0f;
     private float defaultDodgePitch = 1f;
 
+    [Header("Shooting Sounds")]
+    public AudioSource plasmaShootingLoop;
+    public AudioSource plasmaGeneratorLoop;
+    public AudioClip plasmaShootingEnd;
+    public AudioSource plasmaGeneratorEndOneShot;
+    public AudioSource plasmaEndOneShotSource;
+    private bool wasShootingPlasmaLastFrame = false;
+    private float plasmaShootEndDelay = 0.1f;
+    private float plasmaShootEndTimer = 0f;
+    public float plasmaPitchExtraMagnitude = 0.08f;
+
+    [HideInInspector] public bool isShootingPlasma;
+
+
     AudioTransitionController hardBurnFade;
     AudioTransitionController overboostAccelerationFade;
     AudioTransitionController overboostSwitchFade;
@@ -51,6 +65,8 @@ public class SpaceShooterSoundController : MonoBehaviour
     AudioTransitionController overheatCoolingFade;
     AudioTransitionController dodgeRechargeIndicatorFade;
     AudioTransitionController dodgeChargeGainedIndicatorFade;
+    AudioTransitionController shootingFade;
+    AudioTransitionController generatorFade;
 
     void Awake()
     {
@@ -72,12 +88,16 @@ public class SpaceShooterSoundController : MonoBehaviour
         overheatCoolingFade = new AudioTransitionController(overboostOverheatCoolingIndicatorSound);
         dodgeRechargeIndicatorFade = new AudioTransitionController(dodgeRechargeIndicator);
         dodgeChargeGainedIndicatorFade = new AudioTransitionController(dodgeChargeGainedIndicator);
+        shootingFade = new AudioTransitionController(plasmaShootingLoop);
+        generatorFade = new AudioTransitionController(plasmaGeneratorLoop);
 
         defaultDodgePitch = dodgeSound1.pitch;
     }
 
     void Update()
     {
+        isShootingPlasma = Input.GetKey(playerController.inputConfig.Shoot);
+
         hardBurnFade.Update();
         overboostAccelerationFade.Update();
         overboostSwitchFade.Update();
@@ -85,9 +105,13 @@ public class SpaceShooterSoundController : MonoBehaviour
         overheatCoolingFade.Update();
         dodgeRechargeIndicatorFade.Update();
         dodgeChargeGainedIndicatorFade.Update();
+        shootingFade.Update();
+        generatorFade.Update();
 
         MovementBasedPitch();
         totalExtraPitch = (playerController.maxDodgeCharges - playerController.dodgeCharges) * perDodgeExtraPitch;
+
+        HandlePlasmaShootingSound();
     }
 
     void MovementBasedPitch()
@@ -118,6 +142,65 @@ public class SpaceShooterSoundController : MonoBehaviour
         airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, desiredPitch, pitchDelta * delta);
     }
 
+    void HandlePlasmaShootingSound()
+    {
+        float desiredPitch = 1f;
+
+        if(playerController.rageActive)
+        {
+            desiredPitch = 1.2f;
+        }
+
+        if(playerController.adrenalineActive)
+        {
+            desiredPitch = 1.5f;
+        }
+
+        if(playerController.rageActive && playerController.adrenalineActive)
+        {
+            desiredPitch = 1.9f;
+        }
+
+        desiredPitch = desiredPitch + Random.Range(plasmaPitchExtraMagnitude, -plasmaPitchExtraMagnitude);
+
+        if (isShootingPlasma)
+        {
+            shootingFade.SetPitchOverTime(desiredPitch, 0.1f);
+            if (!wasShootingPlasmaLastFrame)
+            {
+                // Just started firing
+                plasmaGeneratorLoop.volume = 0.3f;
+                plasmaShootingLoop.Play();
+                plasmaGeneratorLoop.Play();
+            }
+
+            // Reset end timer
+            plasmaShootEndTimer = 0f;
+        }
+        else
+        {
+            if (wasShootingPlasmaLastFrame)
+            {
+                // Just stopped firing
+                plasmaShootEndTimer = plasmaShootEndDelay;
+            }
+
+            if (plasmaShootEndTimer > 0f)
+            {
+                plasmaShootEndTimer -= Time.deltaTime;
+                if (plasmaShootEndTimer <= 0f)
+                {
+                    // Stop loop and play end
+                    plasmaShootingLoop.Stop();
+                    generatorFade.SetVolumeOverTime(0f, 0.2f);
+                    plasmaGeneratorEndOneShot.PlayOneShot(plasmaGeneratorEndOneShot.clip);
+                    plasmaEndOneShotSource.PlayOneShot(plasmaShootingEnd);
+                }
+            }
+        }
+
+        wasShootingPlasmaLastFrame = isShootingPlasma;
+    }
 
     void HandleOverboostActivation()
     {
