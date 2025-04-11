@@ -54,6 +54,7 @@ public class SpaceShooterSoundController : MonoBehaviour
     private float plasmaShootEndDelay = 0.1f;
     private float plasmaShootEndTimer = 0f;
     public float plasmaPitchExtraMagnitude = 0.08f;
+    [Range(0f, 1f)] public float plasmaGeneratorVolume = 0.5f;
 
     [HideInInspector] public bool isShootingPlasma;
 
@@ -162,14 +163,16 @@ public class SpaceShooterSoundController : MonoBehaviour
         }
 
         desiredPitch = desiredPitch + Random.Range(plasmaPitchExtraMagnitude, -plasmaPitchExtraMagnitude);
+        float desiredOscialtionVolume = plasmaGeneratorVolume + Random.Range(plasmaPitchExtraMagnitude, -plasmaPitchExtraMagnitude);
+
 
         if (isShootingPlasma)
         {
             shootingFade.SetPitchOverTime(desiredPitch, 0.1f);
+            generatorFade.SetVolumeOverTime(desiredOscialtionVolume, 0.01f);
             if (!wasShootingPlasmaLastFrame)
             {
                 // Just started firing
-                plasmaGeneratorLoop.volume = 0.3f;
                 plasmaShootingLoop.Play();
                 plasmaGeneratorLoop.Play();
             }
@@ -192,7 +195,7 @@ public class SpaceShooterSoundController : MonoBehaviour
                 {
                     // Stop loop and play end
                     plasmaShootingLoop.Stop();
-                    generatorFade.SetVolumeOverTime(0f, 0.2f);
+                    generatorFade.SetVolumeOverTime(0.0001f, 0.2f);
                     plasmaGeneratorEndOneShot.PlayOneShot(plasmaGeneratorEndOneShot.clip);
                     plasmaEndOneShotSource.PlayOneShot(plasmaShootingEnd);
                 }
