@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -334,6 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 112680247}
   - component: {fileID: 112680248}
+  - component: {fileID: 112680249}
   m_Layer: 0
   m_Name: Dodge Burst 3
   m_TagString: Untagged
@@ -370,7 +371,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: c9f418cf08bd58f45a5ec8da99f5a3df, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -453,6 +454,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!165 &112680249
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112680246}
+  m_Enabled: 0
+  m_CutoffFrequency: 90
+  m_HighpassResonanceQ: 1
 --- !u!1 &133455781
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +855,7 @@ GameObject:
   m_Component:
   - component: {fileID: 232814904}
   - component: {fileID: 232814903}
+  - component: {fileID: 232814905}
   m_Layer: 0
   m_Name: Dodge Burst 2
   m_TagString: Untagged
@@ -865,7 +877,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: c9f418cf08bd58f45a5ec8da99f5a3df, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -963,6 +975,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 516775138}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!165 &232814905
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232814902}
+  m_Enabled: 0
+  m_CutoffFrequency: 90
+  m_HighpassResonanceQ: 1
 --- !u!1 &236972415
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,7 +2270,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 103908d5f685a524a98ed1aeb9b60bb5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2420,6 +2442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 561026328}
   - component: {fileID: 561026329}
+  - component: {fileID: 561026330}
   m_Layer: 0
   m_Name: Dodge Burst 4
   m_TagString: Untagged
@@ -2456,7 +2479,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: c9f418cf08bd58f45a5ec8da99f5a3df, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2539,6 +2562,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!165 &561026330
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561026327}
+  m_Enabled: 0
+  m_CutoffFrequency: 90
+  m_HighpassResonanceQ: 1
 --- !u!1 &561299038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3463,7 +3496,7 @@ MonoBehaviour:
   alternateDodgeSource: 0
   dodgeRechargeIndicator: {fileID: 1739086785}
   dodgeChargeGainedIndicator: {fileID: 1318970908}
-  perDodgeExtraPitch: 0.025
+  perDodgeExtraPitch: 0.05
   totalExtraPitch: 0
   plasmaShootingLoop: {fileID: 1182716585}
   plasmaGeneratorLoop: {fileID: 472297554}
@@ -3471,7 +3504,7 @@ MonoBehaviour:
   plasmaGeneratorEndOneShot: {fileID: 1924822595}
   plasmaEndOneShotSource: {fileID: 1697317173}
   plasmaPitchExtraMagnitude: 0.09
-  plasmaGeneratorVolume: 0.25
+  plasmaGeneratorVolume: 0.05
   isShootingPlasma: 0
 --- !u!1 &694664779
 GameObject:
@@ -4013,6 +4046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 783362412}
   - component: {fileID: 783362413}
+  - component: {fileID: 783362414}
   m_Layer: 0
   m_Name: Thrust
   m_TagString: Untagged
@@ -4132,6 +4166,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!170 &783362414
+AudioDistortionFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783362411}
+  m_Enabled: 1
+  m_DistortionLevel: 0.3
 --- !u!1 &817007978
 GameObject:
   m_ObjectHideFlags: 0
@@ -5297,7 +5340,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: d176e7986938c80458ce4453f3f60a4c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.8
   m_Pitch: 1.3
   Loop: 1
   Mute: 0
@@ -5971,7 +6014,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: a5d57d43359b114459e4a19641d1d305, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6349,7 +6392,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: d176e7986938c80458ce4453f3f60a4c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.9
   m_Pitch: 2.7
   Loop: 0
   Mute: 0
@@ -6479,6 +6522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1335006515}
   - component: {fileID: 1335006516}
+  - component: {fileID: 1335006517}
   m_Layer: 0
   m_Name: Dodge Burst 1
   m_TagString: Untagged
@@ -6515,7 +6559,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: c9f418cf08bd58f45a5ec8da99f5a3df, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -6598,6 +6642,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!165 &1335006517
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335006514}
+  m_Enabled: 0
+  m_CutoffFrequency: 90
+  m_HighpassResonanceQ: 1
 --- !u!1 &1428494249
 GameObject:
   m_ObjectHideFlags: 0
@@ -7132,6 +7186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663382699}
   - component: {fileID: 1663382700}
+  - component: {fileID: 1663382701}
   m_Layer: 0
   m_Name: Air Bursts
   m_TagString: Untagged
@@ -7251,6 +7306,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!170 &1663382701
+AudioDistortionFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663382698}
+  m_Enabled: 1
+  m_DistortionLevel: 0.5
 --- !u!1 &1697317171
 GameObject:
   m_ObjectHideFlags: 0
@@ -7296,8 +7360,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 1ddcd30721fcb7e4cba4cbaa25411763, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
-  m_Pitch: 1
+  m_Volume: 0.5
+  m_Pitch: 0.7
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -7777,7 +7841,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: ffeb24b94502efa468dec64f83dd788a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -7991,6 +8055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1820492801}
   - component: {fileID: 1820492802}
+  - component: {fileID: 1820492803}
   m_Layer: 0
   m_Name: Dodge Burst 5
   m_TagString: Untagged
@@ -8027,7 +8092,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: c9f418cf08bd58f45a5ec8da99f5a3df, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -8110,6 +8175,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!165 &1820492803
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820492800}
+  m_Enabled: 0
+  m_CutoffFrequency: 90
+  m_HighpassResonanceQ: 1
 --- !u!1 &1902300742
 GameObject:
   m_ObjectHideFlags: 0
