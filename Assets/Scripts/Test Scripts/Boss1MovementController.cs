@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Boss1MovementController : MonoBehaviour
@@ -54,6 +55,7 @@ public class Boss1MovementController : MonoBehaviour
         Vector3 flatToPlayer = new Vector3(toPlayer.x, 0f, toPlayer.z);
         float distanceToPlayer = flatToPlayer.magnitude;
 
+        /*
         if (distanceToPlayer != proxyMinDistanceToPlayer)
         {
             Vector3 moveDir = flatToPlayer.normalized;
@@ -63,6 +65,9 @@ public class Boss1MovementController : MonoBehaviour
             float moveAmount = Mathf.Min(moveStep, Mathf.Abs(distanceToPlayer - proxyMinDistanceToPlayer));
             proxyTarget.position += new Vector3(moveDir.x, 0f, moveDir.z) * moveAmount * directionMultiplier;
         }
+        */ //ads
+
+        UpdateProxyTargetAlt();
 
         float targetY = player.position.y + yBalanceOffset;
         float yDiff = Mathf.Abs(proxyTarget.position.y - targetY);
@@ -75,6 +80,21 @@ public class Boss1MovementController : MonoBehaviour
         {
             proxyTarget.position = new Vector3(proxyTarget.position.x, targetY, proxyTarget.position.z);
         }
+    }
+
+    void UpdateProxyTargetAlt()
+    {
+        Vector3 toPlayer = player.position - proxyTarget.position;      // Find vector leading to the player
+        Vector3 flatToPlayer = new Vector3(toPlayer.x, 0f, toPlayer.z); // Limit this vector to x z planes
+
+        float distance = Vector3.Distance(proxyTarget.position, player.position);   // Calculate distance
+
+        if (distance > proxyMinDistanceToPlayer)    // Adjust horizontal position only when not in radius
+        {
+            proxyTarget.position = Mathf.MoveTowards(proxyTarget, player.position, proxyFollowSpeed) * Time.fixedDeltaTime;
+        }
+
+
     }
 
     void UpdateBossModel()
