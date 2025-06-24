@@ -38,7 +38,7 @@ public class SpaceShooterController : MonoBehaviour
     public bool isCooled = true;
 
     public int dodgeInput;
-    public int parryInput;
+    public bool healInput;
     public int shootInput;
 
     public bool rageInput;
@@ -109,6 +109,8 @@ public class SpaceShooterController : MonoBehaviour
 
     void Awake() 
     {
+        Application.targetFrameRate = 120; // stupid hack to prevent high fps issues with inputs
+
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
         healthController.TookHit += HandleTakenHits;
@@ -169,6 +171,11 @@ public class SpaceShooterController : MonoBehaviour
         if (overboostInitiated == true)
         {
             AdjustAirVelocity();
+        }
+
+        if(healInput)
+        {
+            healthController.Heal(100, true);
         }
 
         body.velocity = velocity;
@@ -656,7 +663,7 @@ public class SpaceShooterController : MonoBehaviour
         rightInput = Input.GetKey(inputConfig.MoveRight) ? 1 : 0;
         jumpInput = Input.GetKey(inputConfig.Ascend);
         dodgeInput = Input.GetKeyDown(inputConfig.Dodge) ? 1 : 0;
-        parryInput = Input.GetKey(inputConfig.Parry) ? 1 : 0;
+        healInput = Input.GetKey(inputConfig.Heal);
         shootInput = Input.GetKey(inputConfig.Shoot) ? 1 : 0;
         rageInput = Input.GetKey(inputConfig.RageMode);
         adrenalineInput = Input.GetKey(inputConfig.AdrenalineMode);

@@ -7,16 +7,25 @@ public class EntityHealthController : MonoBehaviour
 {
     public int MaxHP = 100;
     public int CurrentHP = 1;
+
     public bool isAlive = true;
     public bool isInvincible = false;
     public float invincibilityDuration = 2f;
     float currentInvincibilityDuration;
 
+    public bool hasHealed = false;
+    public float healingCooldown = 60f;
+    public float currentHealingCooldown;
+
+    public event Action BecameInvincible;
     public event Action TookHit;
+    public event Action Healed;
+    public event Action Died;
 
     void Awake()
     {
         currentInvincibilityDuration = 0f;
+        currentHealingCooldown = 0f;
     }
 
     public void TakeDamage(int takenDamage, bool shouldInvoke)
@@ -24,8 +33,10 @@ public class EntityHealthController : MonoBehaviour
         if(isInvincible == false && isAlive == true)
         {
             isInvincible = true;
-            if(shouldInvoke)
-                TookHit?.Invoke();
+
+            if (shouldInvoke)
+                BecameInvincible?.Invoke();
+
             if(takenDamage > MaxHP)
             {
                 CurrentHP = 0;
@@ -42,6 +53,29 @@ public class EntityHealthController : MonoBehaviour
             {
                 CurrentHP = newHP;
             }
+
+            if (shouldInvoke)
+                TookHit?.Invoke();
+        }
+    }
+
+    public void Heal(int healAmount, bool shouldInvoke)
+    {
+        if (hasHealed == false && isAlive == true)
+        {
+
+            if ((healAmount + CurrentHP) >= MaxHP)
+            {
+                CurrentHP = MaxHP;
+            }
+            else
+            {
+                CurrentHP += healAmount;
+            }
+
+            hasHealed = true;
+            if (shouldInvoke)
+                Healed?.Invoke();
         }
     }
 
@@ -50,6 +84,7 @@ public class EntityHealthController : MonoBehaviour
     {
         DetectDeath();
         HandleInvincibility();
+        HandleHealing();
     }
 
     private void HandleInvincibility()
@@ -66,10 +101,25 @@ public class EntityHealthController : MonoBehaviour
         }
     }
 
+    private void HandleHealing()
+    {
+        if (hasHealed)
+        {
+            currentHealingCooldown += Time.deltaTime;
+
+            if (currentHealingCooldown >= healingCooldown)
+            {
+                hasHealed = false;
+                currentHealingCooldown = 0f;
+            }
+        }
+    }
+
     private void DetectDeath()
     {
         if(isAlive && CurrentHP <= 0)
         {
+            Died?.Invoke();
             isAlive = false;
         }
     }

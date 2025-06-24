@@ -12,7 +12,7 @@ public class CustomInputs : ScriptableObject
     public KeyCode Ascend = KeyCode.Space;
     public KeyCode Shoot = KeyCode.Mouse0;
     public KeyCode Overboost = KeyCode.Q;
-    public KeyCode Parry = KeyCode.F;
+    public KeyCode Heal = KeyCode.F;
     public KeyCode RageMode = KeyCode.R;
     public KeyCode AdrenalineMode = KeyCode.E;
 
@@ -26,7 +26,7 @@ public class CustomInputs : ScriptableObject
         PlayerPrefs.SetString("Ascend", Ascend.ToString());
         PlayerPrefs.SetString("Shoot", Shoot.ToString());
         PlayerPrefs.SetString("Overboost", Overboost.ToString());
-        PlayerPrefs.SetString("Parry", Parry.ToString());
+        PlayerPrefs.SetString("Heal", Heal.ToString());
         PlayerPrefs.SetString("RageMode", RageMode.ToString());
         PlayerPrefs.SetString("AdrenalineMode", AdrenalineMode.ToString());
 
@@ -43,7 +43,7 @@ public class CustomInputs : ScriptableObject
         Ascend = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Ascend", Ascend.ToString()));
         Shoot = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Shoot", Shoot.ToString()));
         Overboost = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Overboost", Overboost.ToString()));
-        Parry = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Parry", Parry.ToString()));
+        Heal = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Heal", Heal.ToString()));
         RageMode = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("RageMode", RageMode.ToString()));
         AdrenalineMode = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("AdrenalineMode", AdrenalineMode.ToString()));
     }

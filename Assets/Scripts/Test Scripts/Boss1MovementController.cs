@@ -1,129 +1,55 @@
 using UnityEngine;
-using Unity;
 
-[RequireComponent(typeof(Rigidbody))]
-public class Boss1MovementController : MonoBehaviour
+public class FlyingBossController : MonoBehaviour
 {
     [Header("References")]
     public Transform player;
-    public Transform proxyTarget;
-    public Transform bossModel;
-    private Rigidbody bossRb;
 
-    [Header("Proxy Target Behavior")]
-    public float proxyFollowSpeed = 10f;
-    public float proxyMinDistanceToPlayer = 3f;
+    [Header("Pivot Settings")]
+    public Vector3 pivotOffset = new Vector3(0, 2f, 6f); // Default: in front and slightly above player
 
-    [Header("Boss Model Behavior")]
-    public float bossFollowSpeed = 5f;
-    public float maxDistanceFromProxy = 8f;
-    public float stopDistanceThreshold = 0.1f;
-    public float yStopDistanceThresholdModel = 0.1f;
-    public float driftStrength = 1f;
-    public float driftRadius = 2f;
+    [Header("Movement Settings")]
+    public float lerpSpeed = 3f;
+    public float smoothDampTime = 0.3f;
+    public float springFrequency = 2f;
+    public float springDamping = 0.7f;
 
-    [Header("Proxy Y-Position Balance")]
-    public float yBalanceOffset = 2f;
-    public float proxyYFollowSpeed = 5f;
-    public float yStopDistanceThreshold = 0.1f;
+    private Vector3 currentVelocity;     // For SmoothDamp
+    private Vector3 springVelocity;      // For Spring
+    private Vector3 targetPosition;      // Updated each frame
 
-    void Start()
+    public enum InterpolationMode { Lerp, SmoothDamp }
+    public InterpolationMode interpolationMode = InterpolationMode.Lerp;
+
+    void Update()
     {
-        if (bossModel.TryGetComponent(out Rigidbody rb))
+        if (!player) return;
+
+        // Step 1: Compute pivot world position based on offset
+        targetPosition = player.TransformPoint(pivotOffset); // keeps pivot relative to player's movement and rotation
+
+        // Step 2: Move toward the pivot based on selected interpolation
+        switch (interpolationMode)
         {
-            bossRb = rb;
-            bossRb.useGravity = false;
-            bossRb.constraints = RigidbodyConstraints.FreezeRotation;
-        }
-        else
-        {
-            Debug.LogError("Boss model requires a Rigidbody.");
+            case InterpolationMode.Lerp:
+                transform.position = Vector3.Lerp(transform.position, targetPosition, lerpSpeed * Time.deltaTime);
+                break;
+
+            case InterpolationMode.SmoothDamp:
+                transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, smoothDampTime);
+                break;
         }
     }
 
-    void FixedUpdate()
+    // Runtime method to set new pivot offset
+    public void SetPivotOffset(Vector3 newOffset)
     {
-        if (player == null || proxyTarget == null || bossModel == null || bossRb == null) return;
-
-        UpdateProxyTarget();
-        UpdateBossModel();
+        pivotOffset = newOffset;
     }
 
-    void UpdateProxyTarget()
+    // Runtime method to change interpolation style
+    public void SetInterpolation(InterpolationMode mode)
     {
-        Vector3 toPlayer = player.position - proxyTarget.position;
-        Vector3 flatToPlayer = new Vector3(toPlayer.x, 0f, toPlayer.z);
-        float distanceToPlayer = flatToPlayer.magnitude;
-
-        /*
-        if (distanceToPlayer != proxyMinDistanceToPlayer)
-        {
-            Vector3 moveDir = flatToPlayer.normalized;
-            float directionMultiplier = distanceToPlayer > proxyMinDistanceToPlayer ? 1f : -1f;
-
-            float moveStep = proxyFollowSpeed * Time.fixedDeltaTime;
-            float moveAmount = Mathf.Min(moveStep, Mathf.Abs(distanceToPlayer - proxyMinDistanceToPlayer));
-            proxyTarget.position += new Vector3(moveDir.x, 0f, moveDir.z) * moveAmount * directionMultiplier;
-        }
-        */ //ads
-
-        UpdateProxyTargetAlt();
-
-        float targetY = player.position.y + yBalanceOffset;
-        float yDiff = Mathf.Abs(proxyTarget.position.y - targetY);
-        if (yDiff > yStopDistanceThreshold)
-        {
-            float newY = Mathf.Lerp(proxyTarget.position.y, targetY, proxyYFollowSpeed * Time.fixedDeltaTime);
-            proxyTarget.position = new Vector3(proxyTarget.position.x, newY, proxyTarget.position.z);
-        }
-        else
-        {
-            proxyTarget.position = new Vector3(proxyTarget.position.x, targetY, proxyTarget.position.z);
-        }
-    }
-
-    void UpdateProxyTargetAlt()
-    {
-        Vector3 toPlayer = player.position - proxyTarget.position;      // Find vector leading to the player
-        Vector3 flatToPlayer = new Vector3(toPlayer.x, 0f, toPlayer.z); // Limit this vector to x z planes
-
-        float distance = Vector3.Distance(proxyTarget.position, player.position);   // Calculate distance
-
-        if (distance > proxyMinDistanceToPlayer)    // Adjust horizontal position only when not in radius
-        {
-            proxyTarget.position = Mathf.MoveTowards(proxyTarget, player.position, proxyFollowSpeed) * Time.fixedDeltaTime;
-        }
-
-
-    }
-
-    void UpdateBossModel()
-    {
-        Vector3 toProxy = proxyTarget.position - bossModel.position;
-        float distance = toProxy.magnitude;
-
-        Vector3 desiredVelocity = Vector3.zero;
-
-        // Smooth follow when outside the stop threshold
-        if (distance > stopDistanceThreshold)
-        {
-            desiredVelocity = toProxy.normalized * bossFollowSpeed;
-        }
-
-        // Apply drift if within drift radius
-        if (distance < driftRadius)
-        {
-            Vector3 drift = new Vector3(
-                Mathf.PerlinNoise(Time.time * 0.5f, 0f) - 0.5f,
-                Mathf.PerlinNoise(0f, Time.time * 0.5f) - 0.5f,
-                Mathf.PerlinNoise(Time.time * 0.5f, Time.time * 0.5f) - 0.5f
-            );
-
-            drift *= driftStrength;
-            desiredVelocity += drift;
-        }
-
-        // Smooth velocity change
-        bossRb.velocity = Vector3.Lerp(bossRb.velocity, desiredVelocity, Time.fixedDeltaTime * 2f);
+        interpolationMode = mode;
     }
 }
