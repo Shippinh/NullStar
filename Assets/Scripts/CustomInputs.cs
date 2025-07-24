@@ -8,7 +8,8 @@ public class CustomInputs : ScriptableObject
     public KeyCode MoveLeft = KeyCode.A;
     public KeyCode MoveRight = KeyCode.D;
 
-    public KeyCode Dodge = KeyCode.LeftShift;
+    public KeyCode HorizontalDodge = KeyCode.LeftShift;
+    public KeyCode VerticalDodge = KeyCode.LeftControl;
     public KeyCode Ascend = KeyCode.Space;
     public KeyCode Shoot = KeyCode.Mouse0;
     public KeyCode Overboost = KeyCode.Q;
@@ -22,7 +23,8 @@ public class CustomInputs : ScriptableObject
         PlayerPrefs.SetString("MoveDown", MoveDown.ToString());
         PlayerPrefs.SetString("MoveLeft", MoveLeft.ToString());
         PlayerPrefs.SetString("MoveRight", MoveRight.ToString());
-        PlayerPrefs.SetString("Dodge", Dodge.ToString());
+        PlayerPrefs.SetString("HorizontalDodge", HorizontalDodge.ToString());
+        PlayerPrefs.SetString("VerticalDodge", VerticalDodge.ToString());
         PlayerPrefs.SetString("Ascend", Ascend.ToString());
         PlayerPrefs.SetString("Shoot", Shoot.ToString());
         PlayerPrefs.SetString("Overboost", Overboost.ToString());
@@ -39,7 +41,8 @@ public class CustomInputs : ScriptableObject
         MoveDown = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveDown", MoveDown.ToString()));
         MoveLeft = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveLeft", MoveLeft.ToString()));
         MoveRight = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveRight", MoveRight.ToString()));
-        Dodge = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Dodge", Dodge.ToString()));
+        HorizontalDodge = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("HorizontalDodge", HorizontalDodge.ToString()));
+        VerticalDodge = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("VerticalDodge", VerticalDodge.ToString()));
         Ascend = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Ascend", Ascend.ToString()));
         Shoot = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Shoot", Shoot.ToString()));
         Overboost = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Overboost", Overboost.ToString()));

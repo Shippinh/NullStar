@@ -37,7 +37,8 @@ public class SpaceShooterController : MonoBehaviour
     public float overboostOverheatDurationRestoreRate = 1f;
     public bool isCooled = true;
 
-    public int dodgeInput;
+    public int horizontalDodgeInput;
+    public int verticalDodgeInput;
     public bool healInput;
     public int shootInput;
 
@@ -343,10 +344,24 @@ public class SpaceShooterController : MonoBehaviour
         velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), acceleration * Time.deltaTime);
     }
 
+    void AdjustAirVelocity()
+    {
+        Vector3 yAxis = Vector3.up;
+
+        float currentY = Vector3.Dot(velocity, yAxis);
+        float targetY = desiredVelocity.y;
+
+        float deltaY = targetY - currentY;
+
+        float change = Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), jetpackAcceleration * Time.deltaTime);
+        velocity += yAxis * change;
+    }
+
 
     void AdjustDodgeVelocity()
     {
-        if (dodgeInput > 0 && !isDodging && dodgeCharges > 0)
+        // Horizontal dodge
+        if (horizontalDodgeInput > 0 && !isDodging && verticalDodgeInput == 0 && dodgeCharges > 0)
         {
             isDodging = true;
             dodgeTime = 0f;
@@ -392,6 +407,40 @@ public class SpaceShooterController : MonoBehaviour
                 else
                     velocity = desiredDodgeVelocity * dodgeMaxSpeed;
             }
+        }
+
+        // Vertical dodge
+        if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && overboostMode == false)
+        {
+            isDodging = true;
+            dodgeTime = 0f;
+            dodgeCharges--;
+
+            // Start the delay before recharge begins
+            dodgeRechargeDelayTimer = 0f;
+            dodgeRecharging = false;
+
+            OnDodgeUsed?.Invoke();
+
+            desiredDodgeVelocity = new Vector3(rightInput + leftInput, 1f, forwardInput + backwardInput).normalized;
+
+            Vector3 camRight = Camera.main.transform.right;
+            Vector3 camForward = Camera.main.transform.forward;
+            camRight.y = 0f;
+            camForward.y = 0f;
+
+            if (desiredDodgeVelocity == Vector3.zero)
+                desiredDodgeVelocity = transform.up;
+
+            desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
+            desiredDodgeVelocity = new Vector3(desiredDodgeVelocity.x, 1f, desiredDodgeVelocity.z);
+            desiredDodgeVelocity.Normalize();
+
+            maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
+
+            if (desiredDodgeVelocity != Vector3.zero)
+                velocity = desiredDodgeVelocity * dodgeMaxSpeed * 0.75f;
+
         }
 
         if (isDodging)
@@ -615,18 +664,6 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
-    void AdjustAirVelocity()
-    {
-        Vector3 yAxis = Vector3.up; // Ensure we are using global up
-
-        float currentY = Vector3.Dot(velocity, yAxis);
-        float maxSpeedChange = jetpackAcceleration * Time.deltaTime;
-
-        float newY = Mathf.MoveTowards(currentY, desiredVelocity.y, maxSpeedChange);
-
-        velocity += yAxis * (newY - currentY);
-    }
-
     void OnCollisionEnter(Collision collision) 
     {
         EvaluateCollision(collision);
@@ -662,7 +699,8 @@ public class SpaceShooterController : MonoBehaviour
         leftInput = Input.GetKey(inputConfig.MoveLeft) ? -1 : 0;
         rightInput = Input.GetKey(inputConfig.MoveRight) ? 1 : 0;
         jumpInput = Input.GetKey(inputConfig.Ascend);
-        dodgeInput = Input.GetKeyDown(inputConfig.Dodge) ? 1 : 0;
+        horizontalDodgeInput = Input.GetKeyDown(inputConfig.HorizontalDodge) ? 1 : 0;
+        verticalDodgeInput = Input.GetKeyDown(inputConfig.VerticalDodge) ? 1 : 0;
         healInput = Input.GetKey(inputConfig.Heal);
         shootInput = Input.GetKey(inputConfig.Shoot) ? 1 : 0;
         rageInput = Input.GetKey(inputConfig.RageMode);

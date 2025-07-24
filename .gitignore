@@ -2,4 +2,5 @@
 !Assets/
 !Assets/**
 Assets/Other/
+Assets/Separate Assets/
 !.gitignore
