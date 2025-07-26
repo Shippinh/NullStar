@@ -26,6 +26,8 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 500f)] float extraOverboostSpeedRate = 5f; // Speed per second
 
 
+    public bool overboostForward = true; // Overboost direction - either forward or backward. By default - forward
+
     public float overboostDuration = 7.5f;
     public float overboostDurationCurrent;
 
@@ -281,7 +283,7 @@ public class SpaceShooterController : MonoBehaviour
     {
         // Step 1: Create input direction
         Vector3 moveDirection = overboostMode && overboostInitiated ?
-                                new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 1, 1) : // Overboost: use fixed vertical and forward input
+                                new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 1, overboostForward ? 1 : -1) : // Overboost: use fixed vertical input, decide if overboost goes forward or backwards based on the input
                                 new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
 
         Vector3 worldDirection;
@@ -400,7 +402,7 @@ public class SpaceShooterController : MonoBehaviour
             {
                 if (overboostMode)
                 {
-                    desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, 1).normalized;
+                    desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, overboostForward ? 1 : -1).normalized;
                     desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
                     velocity = desiredDodgeVelocity * dodgeMaxSpeed * 1.5f;
                 }
@@ -410,6 +412,10 @@ public class SpaceShooterController : MonoBehaviour
         }
 
         // Vertical dodge
+        /* This has a more apparent bug where after dodging upwards while flying upwards
+         * it just doesn't do the full thrust resulting in a worse dodge compared
+         * to when you would dodge without accelerating upwards
+        */ 
         if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && overboostMode == false)
         {
             isDodging = true;
@@ -493,6 +499,7 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
+    // Handles a brief stop before overboost starts, as well as overboost cancel
     void HandleOverboostInitiation()
     {
         if (overboostMode == true && overboostInitiated == false)
@@ -511,7 +518,7 @@ public class SpaceShooterController : MonoBehaviour
             if(overboostChargeTimer >= overboostActivationDelay)
             {
                 maxOverboostSpeed = defaultMaxOverboostSpeed;
-                body.velocity = Camera.main.transform.forward * dodgeMaxSpeed;
+                body.velocity = overboostForward ? Camera.main.transform.forward * dodgeMaxSpeed : -Camera.main.transform.forward * dodgeMaxSpeed;
                 overboostInitiated = true;
                 body.useGravity = true;
                 overboostChargeTimer = 0f;
@@ -708,6 +715,12 @@ public class SpaceShooterController : MonoBehaviour
 
         if(isCooled || overboostMode)
         {
+            // Determine in which direction to overboost
+            if (forwardInput == 1 && (backwardInput == 0 || backwardInput == -1))
+                overboostForward = true;
+            else if (forwardInput == 0 && backwardInput == -1)
+                overboostForward = false;
+
             overboostToggle.UpdateToggle();
             overboostMode = overboostToggle.GetCurrentToggleState();
         }
