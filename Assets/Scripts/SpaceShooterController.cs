@@ -715,14 +715,17 @@ public class SpaceShooterController : MonoBehaviour
 
         if(isCooled || overboostMode)
         {
+            overboostToggle.UpdateToggle();
+            overboostMode = overboostToggle.GetCurrentToggleState();
+        }
+
+        if(overboostInitiated == false)
+        {
             // Determine in which direction to overboost
             if (forwardInput == 1 && (backwardInput == 0 || backwardInput == -1))
                 overboostForward = true;
             else if (forwardInput == 0 && backwardInput == -1)
                 overboostForward = false;
-
-            overboostToggle.UpdateToggle();
-            overboostMode = overboostToggle.GetCurrentToggleState();
         }
     }
 
