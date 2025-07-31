@@ -4,16 +4,25 @@ using System.Collections.Generic;
 //omni.OS
 public class SpaceShooterController : MonoBehaviour
 {
+    // References
+    [field: Header("References")]
     public CustomInputs inputConfig;
     public EntityHealthController healthController;
-    
-    public int forwardInput;
-    public int backwardInput;
-    public int leftInput;
-    public int rightInput;
-    public bool jumpInput;
+    Rigidbody body;
 
-    public InputToggle overboostToggle;
+    // Movement
+    [field: Header("Basic Movement")]
+    [SerializeField, Range(0f, 1000f)] float maxSpeed = 10f;
+    [SerializeField, Range(0f, 1000f)] float maxVerticalSpeed = 10f;
+    [SerializeField, Range(0f, 1000f)] float maxAcceleration = 10f;
+    [SerializeField, Range(0f, 1000f)] float maxAirAcceleration = 1f;
+    [SerializeField, Range(0f, 100f)] float jumpForce = 2f;
+    [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
+    [SerializeField, Range(0f, 2000f)] float jetpackAcceleration = 10f;
+    [SerializeField] float defaultMaxSpeed;
+
+    // Overboost System
+    [field: Header("Overboost Movement")]
     public bool overboostMode;
     public bool overboostOverheatMode;
     public bool overboostInitiated = false;
@@ -23,54 +32,37 @@ public class SpaceShooterController : MonoBehaviour
     public float maxExtraOverboostSpeed;
     public float defaultMaxExtraOverboostSpeed;
     [SerializeField, Range(0f, 1000f)] float currentExtraOverboostSpeed;
-    [SerializeField, Range(0f, 500f)] float extraOverboostSpeedRate = 5f; // Speed per second
-
-
-    public bool overboostForward = true; // Overboost direction - either forward or backward. By default - forward
-
+    [SerializeField, Range(0f, 500f)] float extraOverboostSpeedRate = 5f;
+    [SerializeField, Range(0f, 1000f)] float maxOverboostSpeed = 20f;
+    [SerializeField] float defaultMaxOverboostSpeed;
+    [SerializeField] float overboostTurnMultiplier;
+    [SerializeField] float maxOverboostVerticalSpeed;
     public float overboostDuration = 7.5f;
     public float overboostDurationCurrent;
-
+    public float overboostDurationRestoreRate = 1f;
     public float overboostOverheatDuration = 10f;
     public float overboostOverheatDurationCurrent;
-
-    //public float overboostDrainRate = 1f;
-    public float overboostDurationRestoreRate = 1f;
     public float overboostOverheatDurationRestoreRate = 1f;
-    public bool isCooled = true;
+    public bool overboostForward = true;
 
-    public int horizontalDodgeInput;
-    public int verticalDodgeInput;
-    public bool healInput;
-    public int shootInput;
+    // Boost System
+    [field: Header("Boost Movement")]
+    public bool boostMode = false; // What type of gameplay is happening right now.
+    public bool boostInitiated = false; // Is the mode initiated? Game feel setting
+    public float boostActivationDelay = 5f;
+    public float boostStaticSpeed = 50f;
+    public bool boostForward = true; // Fly in or against the passed direction?
+    public Vector3 boostDirection;
+    public float boostChargeTimer = 0f;
 
-    public bool rageInput;
-    public bool rageCharged = false;
-    public bool rageActive = false;
-    public float rageDuration = 5f;
-    public float rageDurationCurrent;
-    [SerializeField] float rageChargeTimer;
-    public float rageRechargeTimer = 40f;
 
-    public bool adrenalineInput;
-    public bool adrenalineCharged = false;
-    public bool adrenalineActive = false;
-    public float adrenalineDuration = 3f;
-    public float adrenalineDurationCurrent;
-    [SerializeField] float adrenalineChargeTimer;
-    public float adrenalineRechargeTimer = 20f;
-    
-
-    [SerializeField, Range(0f, 1000f)] float maxSpeed = 10f;
-    [SerializeField, Range(0f, 1000f)] float maxOverboostSpeed = 20f, maxOverboostVerticalSpeed;
-    [SerializeField, Range(0f, 1000f)] float maxVerticalSpeed = 10f;
-    [SerializeField, Range(0f, 1000f)] float maxAcceleration = 10f, maxAirAcceleration = 1f;
-    [SerializeField, Range(0f, 100f)] float jumpForce = 2f;
-    [SerializeField, Range(0f, 2000f)] float jetpackAcceleration = 10f;
-
+    // Dodge System
+    [field: Header("Dodge Movement")]
     [SerializeField, Range(0f, 1000)] float dodgeMaxSpeed = 10f;
-    [SerializeField, Range(0f, 1000f)] float perDodgeMaxSpeedIncrease = 6.5f, perDodgeMaxOverboostSpeedIncrease = 8f;
-    [SerializeField] float dodgeMaxSpeedCap, dodgeMaxOverboostSpeedCap;
+    [SerializeField] float dodgeMaxSpeedCap;
+    [SerializeField, Range(0f, 1000f)] float perDodgeMaxSpeedIncrease = 6.5f;
+    [SerializeField, Range(0f, 1000f)] float perDodgeMaxOverboostSpeedIncrease = 8f;
+    [SerializeField] float dodgeMaxOverboostSpeedCap;
     [SerializeField] public int maxDodgeCharges = 5;
     [SerializeField] public int dodgeCharges;
     [SerializeField] float dodgeRechargeTime = 1.5f;
@@ -78,22 +70,54 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField] private float dodgeRechargeDelay = 1f;
     [SerializeField] private float dodgeRechargeDelayTimer;
     [SerializeField] private bool dodgeRecharging;
-
-    [SerializeField, Range(0, 90)] float maxGroundAngle = 25f;
-    [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
-    [SerializeField] float defaultMaxSpeed, defaultMaxOverboostSpeed;
-    [SerializeField, Range(0, 1f)] float overboostTurnMultiplier;
-
     float dodgeTime;
-
-    Rigidbody body;
-    Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
-    Vector3 contactNormal;
-    int groundContactCount;
-    bool OnGround => groundContactCount > 0;
     public bool isDodging = false;
-    float minGroundDotProduct;
 
+    // Rage System
+    [field: Header("Rage")]
+    public bool rageCharged = false;
+    public bool rageActive = false;
+    public float rageDuration = 5f;
+    public float rageDurationCurrent;
+    [SerializeField] float rageChargeTimer;
+    public float rageRechargeTimer = 40f;
+
+    // Adrenaline System
+    [field: Header("Adrenaline")]
+    public bool adrenalineCharged = false;
+    public bool adrenalineActive = false;
+    public float adrenalineDuration = 3f;
+    public float adrenalineDurationCurrent;
+    [SerializeField] float adrenalineChargeTimer;
+    public float adrenalineRechargeTimer = 20f;
+
+    // Player Input
+    [field: Header("Inputs")]
+    public int forwardInput;
+    public int backwardInput;
+    public int leftInput;
+    public int rightInput;
+    public bool jumpInput;
+    public bool healInput;
+    public int shootInput;
+    public int horizontalDodgeInput;
+    public int verticalDodgeInput;
+    public bool rageInput;
+    public bool adrenalineInput;
+    public InputToggle overboostToggle;
+
+    // State Flags
+    [field: Header("Other")]
+    public bool isCooled = true;
+    public bool playerHasControl = true;
+
+    // Timers and Durations
+    // (already included under each system above for clarity)
+
+    // Stats / Tuning (General)
+    [SerializeField, Range(0, 90)] float maxGroundAngle = 25f;
+
+    // Events
     public event Action OnOverboostInitiation;
     public event Action OnOverboostInitiationCancel;
     public event Action OnOverboostActivation;
@@ -101,9 +125,19 @@ public class SpaceShooterController : MonoBehaviour
     public event Action OnOverboostOverheat;
     public event Action OnOverheatCoolingInitiated;
     public event Action OnOverheatCoolingConcluded;
-    public event Action OnDodgeUsed; // Invoked on each dodge
-    public event Action OnDodgeActualRechargeStart; // Invoked after the dodge cd delay
-    public event Action OnDodgeChargeGain; // Invoked when a dodge charge is gained
+    public event Action OnDodgeUsed;
+    public event Action OnDodgeActualRechargeStart;
+    public event Action OnDodgeChargeGain;
+
+    // Physics and Grounding
+    Vector3 contactNormal;
+    int groundContactCount;
+    bool OnGround => groundContactCount > 0;
+    float minGroundDotProduct;
+
+    // Internal State Vectors
+    Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
+
 
     void OnValidate() 
     {
@@ -133,6 +167,9 @@ public class SpaceShooterController : MonoBehaviour
         adrenalineDurationCurrent = adrenalineDuration;
         overboostDurationCurrent = 0f;
         overboostOverheatDurationCurrent = 0f;
+
+        // DEBUG
+        //boostDirection = Vector3.zero;
     }
 
     void Update()
@@ -140,7 +177,10 @@ public class SpaceShooterController : MonoBehaviour
         AdjustMaxOverboostSpeed();
         HandleInput();
         CalculateDesiredVelocity();
-        HandleOverboostInitiation();
+        if (!boostMode && !boostInitiated)
+        {
+            HandleOverboostInitiation();
+        }
         HandleRageCharge();
         HandleAdrenalineCharge();
         HandleDodgeRecharge();
@@ -152,7 +192,12 @@ public class SpaceShooterController : MonoBehaviour
         UpdateState();
 
         AdjustVelocity();
+        if (boostMode)
+        {
+            AdjustBoostAirVelocity();
+        }
         AdjustDodgeVelocity();
+
 
         if (!OnGround && body.useGravity) 
         {
@@ -187,7 +232,6 @@ public class SpaceShooterController : MonoBehaviour
         DecayMaxSpeedToDefault();
     }
 
-    // Replace this portion in your class
     void AdjustMaxOverboostSpeed()
     {
         // Calculate current dodge-contributed max speeds before clamping
@@ -282,24 +326,87 @@ public class SpaceShooterController : MonoBehaviour
     void CalculateDesiredVelocity()
     {
         // Step 1: Create input direction
-        Vector3 moveDirection = overboostMode && overboostInitiated ?
-                                new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 1, overboostForward ? 1 : -1) : // Overboost: use fixed vertical input, decide if overboost goes forward or backwards based on the input
-                                new Vector3(rightInput + leftInput, jumpInput ? 1 : 0, forwardInput + backwardInput);
+        Vector3 moveDirection = Vector3.zero;
 
-        Vector3 worldDirection;
+        if (overboostMode && overboostInitiated)
+        {
+            float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier; // left or right on demand
+            float verticalInput = 1; //constant jump
+            float forwardBackwardInput = overboostForward ? 1 : -1; // either constant forward or constant backward
+
+            moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
+        }
+
+        if (boostMode && boostInitiated)
+        {
+            float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier;
+            float verticalInput = (forwardInput + backwardInput) * overboostTurnMultiplier;
+            float forwardBackwardInput = 0;
+
+            moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
+        }
+
+        if ((overboostMode && overboostInitiated) == false && (boostMode && boostInitiated) == false)
+        {
+            float horizontalInput = rightInput + leftInput;
+            float verticalInput = jumpInput ? 1 : 0;
+            float forwardBackwardInput = forwardInput + backwardInput;
+
+            moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
+        }
+
+        Vector3 worldDirection = Vector3.zero;
 
         if (overboostMode && overboostInitiated)
         {
             // Step 2A: Overboost - full 3D movement direction based on camera
-            worldDirection = 
+            worldDirection =
                 Camera.main.transform.right * moveDirection.x +
                 Camera.main.transform.forward * moveDirection.z;
 
             worldDirection.Normalize(); // Let camera pitch determine final direction (includes vertical movement)
         }
-        else
+
+        if (boostMode && boostInitiated)
         {
-            // Step 2B: Normal mode - movement restricted to horizontal plane, with separate Y input
+            // Step 2B: Boost - constant forward movement + relative input handling
+
+            // 1. Compute relative axes to boostDirection
+            Vector3 forwardDir = boostForward ? boostDirection : -boostDirection;
+            forwardDir.Normalize();
+
+            Vector3 upDir = Vector3.up;
+            Vector3 rightDir = Vector3.Cross(upDir, forwardDir);
+
+            // Fallback if forwardDir is vertical and causes rightDir to collapse
+            if (rightDir.sqrMagnitude < 0.001f)
+            {
+                // Use character's local right vector to define horizontal plane
+                rightDir = transform.right;
+            }
+
+            rightDir.Normalize();
+
+
+            // 2. Invert horizontal if camera is facing away from boost direction
+            float camDot = Vector3.Dot(Camera.main.transform.forward, forwardDir);
+            bool invertHorizontal = camDot < 0f;
+
+            float adjustedHorizontal = invertHorizontal ? -moveDirection.x : moveDirection.x;
+
+            // 3. Combine input with movement basis
+            Vector3 inputOffset =
+                rightDir * adjustedHorizontal +
+                upDir * moveDirection.y;
+
+            // 4. Final world direction: forward boost + input offsets
+            worldDirection = forwardDir + inputOffset;
+            worldDirection.Normalize();
+        }
+
+        if ((overboostMode && overboostInitiated) == false && (boostMode && boostInitiated) == false)
+        {
+            // Step 2C: Normal mode - movement restricted to horizontal plane, with separate Y input
             Vector3 camRight = Camera.main.transform.right;
             Vector3 camForward = Camera.main.transform.forward;
             camForward.y = 0; // Flatten forward to horizontal
@@ -310,18 +417,68 @@ public class SpaceShooterController : MonoBehaviour
         }
 
         // Step 3: Apply speed based on mode
-        float horizontalSpeed = overboostMode ? maxOverboostSpeed : maxSpeed;
-        if(overboostMode && !overboostInitiated)
+        float horizontalSpeed;
+        float verticalSpeed;
+
+        // Set horizontal speed
+        if (overboostMode)
         {
-            horizontalSpeed = maxOverboostInitiationSpeed;
+            if (!overboostInitiated)
+            {
+                horizontalSpeed = maxOverboostInitiationSpeed;
+            }
+            else
+            {
+                horizontalSpeed = maxOverboostSpeed;
+            }
         }
-        float verticalSpeed = overboostMode ? maxOverboostVerticalSpeed : maxVerticalSpeed;
+        else if (boostMode)
+        {
+            if (!boostInitiated)
+            {
+                horizontalSpeed = maxOverboostInitiationSpeed;
+            }
+            else
+            {
+                horizontalSpeed = maxOverboostSpeed;
+            }
+        }
+        else
+        {
+            horizontalSpeed = maxSpeed;
+        }
+
+        // Set vertical speed
+        if (overboostMode)
+        {
+            verticalSpeed = maxOverboostVerticalSpeed;
+        }
+        else if (boostMode)
+        {
+            verticalSpeed = maxOverboostVerticalSpeed;
+        }
+        else
+        {
+            verticalSpeed = maxVerticalSpeed;
+        }
+
+        // Compute desired velocity
+        float verticalComponent;
+        if (overboostMode && overboostInitiated)
+        {
+            verticalComponent = worldDirection.y;
+        }
+        else
+        {
+            verticalComponent = moveDirection.y;
+        }
 
         desiredVelocity = new Vector3(
             worldDirection.x * horizontalSpeed,
-            (overboostMode && overboostInitiated ? worldDirection.y : moveDirection.y) * verticalSpeed,
+            verticalComponent * verticalSpeed,
             worldDirection.z * horizontalSpeed
         );
+
     }
 
 
@@ -330,20 +487,23 @@ public class SpaceShooterController : MonoBehaviour
         Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
         Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
 
-        // Get the component of the velocity along the respective axes
         float currentX = Vector3.Dot(velocity, xAxis);
         float currentZ = Vector3.Dot(velocity, zAxis);
 
-        // Determine if the character is on the ground or in the air for acceleration
         float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-        
-        // Apply the full acceleration directly to the components
+
         float deltaX = desiredVelocity.x - currentX;
         float deltaZ = desiredVelocity.z - currentZ;
 
-        // Cap the speed change based on max acceleration, but without smoothing
         velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), acceleration * Time.deltaTime);
         velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), acceleration * Time.deltaTime);
+    }
+    void AdjustBoostAirVelocity()
+    {
+        float currentY = velocity.y;
+        float deltaY = desiredVelocity.y - currentY;
+
+        velocity.y += Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), maxAcceleration*2 * Time.deltaTime);
     }
 
     void AdjustAirVelocity()
@@ -363,7 +523,7 @@ public class SpaceShooterController : MonoBehaviour
     void AdjustDodgeVelocity()
     {
         // Horizontal dodge
-        if (horizontalDodgeInput > 0 && !isDodging && verticalDodgeInput == 0 && dodgeCharges > 0)
+        if (horizontalDodgeInput > 0 && !isDodging && verticalDodgeInput == 0 && dodgeCharges > 0 && boostMode == false)
         {
             isDodging = true;
             dodgeTime = 0f;
@@ -416,7 +576,7 @@ public class SpaceShooterController : MonoBehaviour
          * it just doesn't do the full thrust resulting in a worse dodge compared
          * to when you would dodge without accelerating upwards
         */ 
-        if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && overboostMode == false)
+        if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && overboostMode == false && boostMode == false)
         {
             isDodging = true;
             dodgeTime = 0f;
@@ -448,6 +608,67 @@ public class SpaceShooterController : MonoBehaviour
                 velocity = desiredDodgeVelocity * dodgeMaxSpeed * 0.75f;
 
         }
+
+        if (!isDodging && dodgeCharges > 0 && boostMode && !overboostMode && horizontalDodgeInput > 0f)
+        {
+            float horizontal = rightInput + leftInput;
+            float vertical = forwardInput + backwardInput;
+
+            if (horizontal == 0f && vertical == 0f && boostDirection.sqrMagnitude < 0.001f)
+                return;
+
+            Vector3 inputDirection = Vector3.zero;
+
+            if (horizontal != 0f || vertical != 0f)
+                inputDirection = new Vector3(horizontal, vertical, 0f);
+            else
+                inputDirection = Vector3.forward;
+
+            inputDirection.Normalize();
+
+            // Fallback for zero boostDirection
+            Vector3 forwardDir = boostDirection.sqrMagnitude < 0.001f
+                ? transform.forward
+                : boostDirection.normalized;
+
+            Vector3 rightDir = Vector3.Cross(Vector3.up, forwardDir).normalized;
+            Vector3 upDir = Vector3.up;
+
+            Vector3 camForward = Camera.main.transform.forward;
+            camForward.y = 0f;
+            camForward.Normalize();
+
+            bool invert = Vector3.Dot(camForward, forwardDir) < 0f;
+            if (invert)
+                inputDirection.x *= -1f;
+
+            Vector3 dodgeDirection =
+                rightDir * inputDirection.x +
+                upDir * inputDirection.y +
+                forwardDir * inputDirection.z;
+
+            dodgeDirection.Normalize();
+
+            float baseBoostSpeed = boostStaticSpeed;
+            Vector3 forwardVelocity = forwardDir * baseBoostSpeed;
+            Vector3 finalVelocity = forwardVelocity + dodgeDirection * dodgeMaxSpeed;
+
+            isDodging = true;
+            dodgeTime = 0f;
+            dodgeCharges--;
+
+            dodgeRechargeDelayTimer = 0f;
+            dodgeRecharging = false;
+
+            OnDodgeUsed?.Invoke();
+
+            desiredDodgeVelocity = dodgeDirection;
+            velocity = finalVelocity;
+
+            maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
+            maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
+        }
+
 
         if (isDodging)
         {
