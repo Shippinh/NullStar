@@ -21,11 +21,13 @@ public class CameraController : MonoBehaviour
     public float handResetSpeedHorizontal = 8f; // More aggressive resetting for horizontal rotation
 
     float defaultFieldOfView;
+    float pitchTilt = 0f;
     public float cameraTiltSpeed = 2f; // Speed of tilt
-    public float maxTiltAngle = 10f;   // Maximum tilt angle
+    public float maxHorizontalTiltAngle = 1.2f;   // Maximum tilt angle
+    public float maxVerticalTiltAngle = 1.1f;
     public float dodgeTiltModifier = 2f;
     public float overboostTiltModifier = 1f;
-    [Range(-30f, 30f)]public float extraOverboostFieldOfView = 5f;
+    [Range(-30f, 30f)] public float extraOverboostFieldOfView = 5f;
     [Range(0f, 10f)] public float fieldOfViewChangeRate = 3f;
     [Range(0f, 300f)] public float fieldOfViewResetRate = 3f;
 
@@ -98,8 +100,8 @@ public class CameraController : MonoBehaviour
         }
         TiltCameraBasedOnInput();
         AdjustOverboostFoV();
-        
-        if(playerRef.overboostMode && playerRef.overboostOverheatMode)
+
+        if (playerRef.overboostMode && playerRef.overboostOverheatMode)
             AdjustShakeOverheat();
         else
             AdjustShake();
@@ -114,7 +116,7 @@ public class CameraController : MonoBehaviour
     void AdjustShake()
     {
         Vector3 currentCameraPosition = transform.position;
-        
+
         // Apply camera shake if it is active
         if (shakeTime > 0)
         {
@@ -180,49 +182,77 @@ public class CameraController : MonoBehaviour
 
         bool movingLeft = Input.GetKey(inputConfig.MoveLeft);
         bool movingRight = Input.GetKey(inputConfig.MoveRight);
+        bool movingUp = Input.GetKey(inputConfig.MoveUp);
+        bool movingDown = Input.GetKey(inputConfig.MoveDown);
 
-        if(playerRef.overboostInitiated)
+        if (playerRef.overboostInitiated || playerRef.boostInitiated)
             tiltModifier += overboostTiltModifier;
 
-        if(playerRef.isDodging)
+        if (playerRef.isDodging)
             tiltModifier += dodgeTiltModifier;
 
+        // --- Horizontal Tilt (Roll) ---
         if (movingLeft)
         {
-            if(playerRef.isDodging)
-                roll = Mathf.Lerp(roll, maxTiltAngle * tiltModifier, Time.deltaTime * (cameraTiltSpeed * 2));
+            if (playerRef.isDodging)
+                roll = Mathf.Lerp(roll, maxHorizontalTiltAngle * tiltModifier, Time.deltaTime * (cameraTiltSpeed * 2));
             else
-                roll = Mathf.Lerp(roll, maxTiltAngle * tiltModifier, Time.deltaTime * cameraTiltSpeed);
+                roll = Mathf.Lerp(roll, maxHorizontalTiltAngle * tiltModifier, Time.deltaTime * cameraTiltSpeed);
         }
         else if (movingRight)
         {
-            if(playerRef.isDodging)
-                roll = Mathf.Lerp(roll, -maxTiltAngle * tiltModifier, Time.deltaTime * (cameraTiltSpeed * 2));
+            if (playerRef.isDodging)
+                roll = Mathf.Lerp(roll, -maxHorizontalTiltAngle * tiltModifier, Time.deltaTime * (cameraTiltSpeed * 2));
             else
-                roll = Mathf.Lerp(roll, -maxTiltAngle * tiltModifier, Time.deltaTime * cameraTiltSpeed);
+                roll = Mathf.Lerp(roll, -maxHorizontalTiltAngle * tiltModifier, Time.deltaTime * cameraTiltSpeed);
         }
         else
         {
-            // Reset tilt smoothly
             roll = Mathf.Lerp(roll, 0f, Time.deltaTime * cameraTiltSpeed);
         }
 
+        // --- Vertical Tilt (pitchTilt) ONLY DURING BOOST ---
+        if (playerRef.boostInitiated)
+        {
+            if (movingDown)
+            {
+                float target = maxVerticalTiltAngle * tiltModifier;
+                pitchTilt = Mathf.Lerp(pitchTilt, target, Time.deltaTime * cameraTiltSpeed);
+            }
+            else if (movingUp)
+            {
+                float target = -maxVerticalTiltAngle * tiltModifier;
+                pitchTilt = Mathf.Lerp(pitchTilt, target, Time.deltaTime * cameraTiltSpeed);
+            }
+            else
+            {
+                pitchTilt = Mathf.Lerp(pitchTilt, 0f, Time.deltaTime * cameraTiltSpeed);
+            }
+        }
+        else
+        {
+            // Not boosting — reset pitchTilt smoothly
+            pitchTilt = Mathf.Lerp(pitchTilt, 0f, Time.deltaTime * cameraTiltSpeed);
+        }
+
         // Apply rotation using Quaternion
-        Quaternion rotation = Quaternion.Euler(pitch * cameraRotationSpeed, yaw * cameraRotationSpeed, roll);
+        float combinedPitch = pitch + pitchTilt; // Additive tilt
+        Quaternion rotation = Quaternion.Euler(combinedPitch * cameraRotationSpeed, yaw * cameraRotationSpeed, roll);
         transform.rotation = rotation;
 
         // Rotate player's body (yaw only)
         target.transform.rotation = Quaternion.Euler(0, yaw * cameraRotationSpeed, 0);
     }
 
+
     private void AdjustOverboostFoV()
     {
-        
-        if(playerRef.overboostMode && playerRef.overboostInitiated)
+
+        if (playerRef.overboostMode && playerRef.overboostInitiated)
         {
             Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, defaultFieldOfView + extraOverboostFieldOfView, fieldOfViewChangeRate * Time.deltaTime);
         }
-        else if(!playerRef.overboostMode && !playerRef.overboostInitiated)
+        else if (!playerRef.overboostMode && !playerRef.overboostInitiated)
         {
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, defaultFieldOfView, fieldOfViewResetRate * Time.deltaTime);
         }

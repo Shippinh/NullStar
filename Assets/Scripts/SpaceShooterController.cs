@@ -136,7 +136,7 @@ public class SpaceShooterController : MonoBehaviour
     float minGroundDotProduct;
 
     // Internal State Vectors
-    Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
+    [SerializeField]Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
 
 
     void OnValidate() 
@@ -464,7 +464,7 @@ public class SpaceShooterController : MonoBehaviour
 
         // Compute desired velocity
         float verticalComponent;
-        if (overboostMode && overboostInitiated)
+        if (overboostMode || boostMode)
         {
             verticalComponent = worldDirection.y;
         }
@@ -473,11 +473,24 @@ public class SpaceShooterController : MonoBehaviour
             verticalComponent = moveDirection.y;
         }
 
-        desiredVelocity = new Vector3(
-            worldDirection.x * horizontalSpeed,
-            verticalComponent * verticalSpeed,
-            worldDirection.z * horizontalSpeed
-        );
+        if (boostMode == false)
+        {
+            desiredVelocity = new Vector3(
+                worldDirection.x * horizontalSpeed,
+                verticalComponent * verticalSpeed,
+                worldDirection.z * horizontalSpeed
+
+            );
+        }
+        else
+        {
+            desiredVelocity = new Vector3(
+                worldDirection.x * horizontalSpeed,
+                verticalComponent * horizontalSpeed,
+                worldDirection.z * horizontalSpeed
+
+            );
+        }
 
     }
 
@@ -501,9 +514,12 @@ public class SpaceShooterController : MonoBehaviour
     void AdjustBoostAirVelocity()
     {
         float currentY = velocity.y;
+
+        float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
+
         float deltaY = desiredVelocity.y - currentY;
 
-        velocity.y += Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), maxAcceleration*2 * Time.deltaTime);
+        velocity.y += Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), acceleration * Time.deltaTime);
     }
 
     void AdjustAirVelocity()
@@ -575,6 +591,7 @@ public class SpaceShooterController : MonoBehaviour
         /* This has a more apparent bug where after dodging upwards while flying upwards
          * it just doesn't do the full thrust resulting in a worse dodge compared
          * to when you would dodge without accelerating upwards
+         * This happens because of the acceleration and speed limits for jetpack mode
         */ 
         if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && overboostMode == false && boostMode == false)
         {
@@ -614,15 +631,12 @@ public class SpaceShooterController : MonoBehaviour
             float horizontal = rightInput + leftInput;
             float vertical = forwardInput + backwardInput;
 
-            if (horizontal == 0f && vertical == 0f && boostDirection.sqrMagnitude < 0.001f)
+            bool hasDirectionalInput = horizontal != 0f || vertical != 0f;
+
+            if (!hasDirectionalInput)
                 return;
 
-            Vector3 inputDirection = Vector3.zero;
-
-            if (horizontal != 0f || vertical != 0f)
-                inputDirection = new Vector3(horizontal, vertical, 0f);
-            else
-                inputDirection = Vector3.forward;
+            Vector3 inputDirection = new Vector3(horizontal, vertical, 0f);
 
             inputDirection.Normalize();
 
@@ -662,11 +676,11 @@ public class SpaceShooterController : MonoBehaviour
 
             OnDodgeUsed?.Invoke();
 
-            desiredDodgeVelocity = dodgeDirection;
-            velocity = finalVelocity;
-
             maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
             maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
+
+            desiredDodgeVelocity = dodgeDirection;
+            velocity = finalVelocity;
         }
 
 
@@ -934,14 +948,18 @@ public class SpaceShooterController : MonoBehaviour
         rageInput = Input.GetKey(inputConfig.RageMode);
         adrenalineInput = Input.GetKey(inputConfig.AdrenalineMode);
 
-        if(isCooled || overboostMode)
+        if (boostMode == false)
         {
-            overboostToggle.UpdateToggle();
-            overboostMode = overboostToggle.GetCurrentToggleState();
+            if (isCooled || overboostMode)
+            {
+                overboostToggle.UpdateToggle();
+                overboostMode = overboostToggle.GetCurrentToggleState();
+            }
         }
 
         if(overboostInitiated == false)
         {
+            overboostForward = true;
             // Determine in which direction to overboost
             if (forwardInput == 1 && (backwardInput == 0 || backwardInput == -1))
                 overboostForward = true;

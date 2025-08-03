@@ -5701,7 +5701,8 @@ MonoBehaviour:
   handResetSpeedVertical: 8
   handResetSpeedHorizontal: 8
   cameraTiltSpeed: 10
-  maxTiltAngle: 1.2
+  maxHorizontalTiltAngle: 1.2
+  maxVerticalTiltAngle: 0.325
   dodgeTiltModifier: 1
   overboostTiltModifier: 0.5
   extraOverboostFieldOfView: 30
@@ -11641,7 +11642,7 @@ MonoBehaviour:
   overboostActivationDelay: 1
   overboostChargeTimer: 0
   maxOverboostInitiationSpeed: 5
-  maxExtraOverboostSpeed: 50
+  maxExtraOverboostSpeed: 100
   defaultMaxExtraOverboostSpeed: 0
   currentExtraOverboostSpeed: 0
   extraOverboostSpeedRate: 5
@@ -11656,8 +11657,8 @@ MonoBehaviour:
   overboostOverheatDurationCurrent: 0
   overboostOverheatDurationRestoreRate: 1
   overboostForward: 1
-  boostMode: 1
-  boostInitiated: 1
+  boostMode: 0
+  boostInitiated: 0
   boostActivationDelay: 0
   boostStaticSpeed: 150
   boostForward: 1
@@ -11702,6 +11703,9 @@ MonoBehaviour:
   isCooled: 1
   playerHasControl: 1
   maxGroundAngle: 25
+  velocity: {x: 0, y: 0, z: 0}
+  desiredVelocity: {x: 0, y: 0, z: 0}
+  desiredDodgeVelocity: {x: 0, y: 0, z: 0}
 --- !u!54 &691622030
 Rigidbody:
   m_ObjectHideFlags: 0
