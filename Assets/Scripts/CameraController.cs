@@ -89,12 +89,19 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (canRotate)
+        {
+            RotateCameraMouse(inputX, inputY);
+        }
+    }
+
     void LateUpdate()
     {
         AttachCamera();
         if (canRotate)
         {
-            RotateCameraMouse(inputX, inputY);
             RotatePlayerHandsSmoothly();
             AttachHandsToCamera();
         }
