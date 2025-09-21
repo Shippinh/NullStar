@@ -8,12 +8,13 @@ public class SpaceShooterController : MonoBehaviour
     [field: Header("References")]
     public CustomInputs inputConfig;
     public EntityHealthController healthController;
-    Rigidbody body;
+    public Rigidbody body;
 
     // Movement
     [field: Header("Basic Movement")]
     [SerializeField, Range(0f, 1000f)] float maxSpeed = 10f;
     [SerializeField, Range(0f, 1000f)] float maxVerticalSpeed = 10f;
+    [SerializeField, Range(0f, -1000f)] float maxFallSpeed = -10f;
     [SerializeField, Range(0f, 1000f)] float maxAcceleration = 10f;
     [SerializeField, Range(0f, 1000f)] float maxAirAcceleration = 1f;
     [SerializeField, Range(0f, 100f)] float jumpForce = 2f;
@@ -47,11 +48,11 @@ public class SpaceShooterController : MonoBehaviour
 
     // Boost System
     [field: Header("Boost Movement")]
-    public bool boostMode = false; // What type of gameplay is happening right now.
-    public bool boostInitiated = false; // Is the mode initiated? Game feel setting
+    public bool boostMode = false;
+    public bool boostInitiated = false;
     public float boostActivationDelay = 5f;
     public float boostStaticSpeed = 50f;
-    public bool boostForward = true; // Fly in or against the passed direction?
+    public bool boostForward = true; 
     public Vector3 boostDirection;
     public float boostChargeTimer = 0f;
 
@@ -66,10 +67,8 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField] public int maxDodgeCharges = 5;
     [SerializeField] public int dodgeCharges;
     [SerializeField] float dodgeRechargeTime = 1.5f;
-    [SerializeField] private float dodgeRechargeTimer;
-    [SerializeField] private float dodgeRechargeDelay = 1f;
-    [SerializeField] private float dodgeRechargeDelayTimer;
-    [SerializeField] private bool dodgeRecharging;
+    [SerializeField] private List<float> dodgeCooldowns;
+    [SerializeField] private bool allDodgesFull = true;
     float dodgeTime;
     public bool isDodging = false;
 
@@ -111,6 +110,25 @@ public class SpaceShooterController : MonoBehaviour
     public bool isCooled = true;
     public bool playerHasControl = true;
 
+    // AI Dynamic Orbit Calculation
+    [Header("AI Dynamic Orbit Calculation")]
+    public float baseMinRange = 1000f;
+    public float baseMaxRange = 1500f;
+
+    public float safeBuffer = 5f;
+    public LayerMask obstacleMask;
+
+    public Color minRangeColor = Color.cyan;
+    public Color maxRangeColor = Color.magenta;
+    public Color safeRadiusColor = Color.yellow;
+
+    [SerializeField] public float minRange;
+    [SerializeField] public float maxRange;
+    [SerializeField] public float currentSafeRadius;
+
+    // Precompute sampling directions over a sphere
+    private List<Vector3> sampleDirections;
+
     // Timers and Durations
     // (already included under each system above for clarity)
 
@@ -136,7 +154,7 @@ public class SpaceShooterController : MonoBehaviour
     float minGroundDotProduct;
 
     // Internal State Vectors
-    [SerializeField]Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
+    [SerializeField] public Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
 
 
     void OnValidate() 
@@ -147,6 +165,7 @@ public class SpaceShooterController : MonoBehaviour
     void Awake() 
     {
         Application.targetFrameRate = 120; // stupid hack to prevent high fps issues with inputs
+        QualitySettings.vSyncCount = 0;
 
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
@@ -159,7 +178,9 @@ public class SpaceShooterController : MonoBehaviour
         dodgeMaxOverboostSpeedCap = defaultMaxOverboostSpeed + defaultMaxExtraOverboostSpeed + (maxDodgeCharges - 1) * perDodgeMaxOverboostSpeedIncrease;
         OnValidate();
         dodgeCharges = maxDodgeCharges;
-        dodgeRechargeTimer = 0f;
+        dodgeCooldowns = new List<float>(maxDodgeCharges);
+        for (int i = 0; i < maxDodgeCharges; i++)
+            dodgeCooldowns.Add(0f);
         overboostChargeTimer = 0f;
         rageChargeTimer = 0f;
         adrenalineChargeTimer = 0f;
@@ -167,6 +188,8 @@ public class SpaceShooterController : MonoBehaviour
         adrenalineDurationCurrent = adrenalineDuration;
         overboostDurationCurrent = 0f;
         overboostOverheatDurationCurrent = 0f;
+
+        sampleDirections = GenerateSphereDirections(42); // ~42 evenly distributed directions
 
         // DEBUG
         //boostDirection = Vector3.zero;
@@ -298,6 +321,8 @@ public class SpaceShooterController : MonoBehaviour
     {
         float gravityMultiplier = 4f; // Increase for stronger gravity
         velocity += Physics.gravity * gravityMultiplier * Time.deltaTime;
+        if (velocity.y < maxFallSpeed && !overboostMode && !boostMode)
+            velocity.y = maxFallSpeed;
     }
 
 
@@ -538,32 +563,47 @@ public class SpaceShooterController : MonoBehaviour
 
     void AdjustDodgeVelocity()
     {
-        // Horizontal dodge
+        // Horizontal dodge for normal mode and overboost mode
         if (horizontalDodgeInput > 0 && !isDodging && verticalDodgeInput == 0 && dodgeCharges > 0 && boostMode == false)
         {
+            //if no input in overboost mode - just stop the method
+            if (rightInput + leftInput == 0 && overboostMode)
+                return;
+
             isDodging = true;
             dodgeTime = 0f;
-            dodgeCharges--;
-
-            // Start the delay before recharge begins
-            dodgeRechargeDelayTimer = 0f;
-            dodgeRecharging = false;
-
+            for (int i = 0; i < dodgeCooldowns.Count; i++)
+            {
+                if (dodgeCooldowns[i] <= 0f)
+                {
+                    dodgeCooldowns[i] = dodgeRechargeTime;
+                    break;
+                }
+            }
+            dodgeCharges = Mathf.Max(0, dodgeCharges - 1);
             OnDodgeUsed?.Invoke();
 
-            desiredDodgeVelocity = overboostMode
-                ? new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 0, 0).normalized
-                : new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
+
+            if(overboostMode)
+            {
+                desiredDodgeVelocity = new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 0, overboostForward ? 1 : -1).normalized;
+            }
+            else
+            {
+                desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
+            }
 
             Vector3 camRight = Camera.main.transform.right;
             Vector3 camForward = Camera.main.transform.forward;
-            camRight.y = 0;
-            camForward.y = 0;
 
             if (overboostMode)
-                desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
+            {
+                desiredDodgeVelocity = camRight * desiredDodgeVelocity.x  + camForward * desiredDodgeVelocity.z;
+            }
             else
             {
+                camRight.y = 0;
+                camForward.y = 0;
                 if (desiredDodgeVelocity == Vector3.zero)
                     desiredDodgeVelocity = transform.forward;
                 desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
@@ -578,8 +618,6 @@ public class SpaceShooterController : MonoBehaviour
             {
                 if (overboostMode)
                 {
-                    desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, overboostForward ? 1 : -1).normalized;
-                    desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
                     velocity = desiredDodgeVelocity * dodgeMaxSpeed * 1.5f;
                 }
                 else
@@ -597,12 +635,15 @@ public class SpaceShooterController : MonoBehaviour
         {
             isDodging = true;
             dodgeTime = 0f;
-            dodgeCharges--;
-
-            // Start the delay before recharge begins
-            dodgeRechargeDelayTimer = 0f;
-            dodgeRecharging = false;
-
+            for (int i = 0; i < dodgeCooldowns.Count; i++)
+            {
+                if (dodgeCooldowns[i] <= 0f)
+                {
+                    dodgeCooldowns[i] = dodgeRechargeTime;
+                    break;
+                }
+            }
+            dodgeCharges = Mathf.Max(0, dodgeCharges - 1);
             OnDodgeUsed?.Invoke();
 
             desiredDodgeVelocity = new Vector3(rightInput + leftInput, 1f, forwardInput + backwardInput).normalized;
@@ -625,7 +666,7 @@ public class SpaceShooterController : MonoBehaviour
                 velocity = desiredDodgeVelocity * dodgeMaxSpeed * 0.75f;
 
         }
-
+        // Boost mode omnidirectional dodge
         if (!isDodging && dodgeCharges > 0 && boostMode && !overboostMode && horizontalDodgeInput > 0f)
         {
             float horizontal = rightInput + leftInput;
@@ -669,11 +710,15 @@ public class SpaceShooterController : MonoBehaviour
 
             isDodging = true;
             dodgeTime = 0f;
-            dodgeCharges--;
-
-            dodgeRechargeDelayTimer = 0f;
-            dodgeRecharging = false;
-
+            for (int i = 0; i < dodgeCooldowns.Count; i++)
+            {
+                if (dodgeCooldowns[i] <= 0f)
+                {
+                    dodgeCooldowns[i] = dodgeRechargeTime;
+                    break;
+                }
+            }
+            dodgeCharges = Mathf.Max(0, dodgeCharges - 1);
             OnDodgeUsed?.Invoke();
 
             maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
@@ -698,41 +743,40 @@ public class SpaceShooterController : MonoBehaviour
 
     void HandleDodgeRecharge()
     {
-        if (dodgeCharges >= maxDodgeCharges)
-            return;
+        int available = 0;
 
-        if (!dodgeRecharging)
+        for (int i = 0; i < dodgeCooldowns.Count; i++)
         {
-            dodgeRechargeDelayTimer += Time.deltaTime;
-            if (dodgeRechargeDelayTimer >= dodgeRechargeDelay)
+            if (dodgeCooldowns[i] > 0f)
             {
-                dodgeRecharging = true;
-                dodgeRechargeTimer = 0f;
-                OnDodgeActualRechargeStart?.Invoke();
+                dodgeCooldowns[i] -= Time.deltaTime;
+
+                if (dodgeCooldowns[i] <= 0f)
+                {
+                    dodgeCooldowns[i] = 0f;
+                    OnDodgeChargeGain?.Invoke();
+                }
             }
+
+            if (dodgeCooldowns[i] <= 0f)
+                available++;
         }
-        else
-        {
-            dodgeRechargeTimer += Time.deltaTime;
-            if (dodgeRechargeTimer >= dodgeRechargeTime)
-            {
-                dodgeCharges++;
-                dodgeRechargeTimer = 0f;
-                OnDodgeChargeGain?.Invoke();
 
-                // If still not full, stay in recharge state
-                if (dodgeCharges < maxDodgeCharges)
-                {
-                    dodgeRecharging = true;
-                    dodgeRechargeDelayTimer = 0f;
-                }
-                else
-                {
-                    dodgeRecharging = false;
-                }
-            }
+        dodgeCharges = available;
+
+        // Trigger event when all charges are full, only once
+        if (available == maxDodgeCharges && !allDodgesFull)
+        {
+            allDodgesFull = true;
+            OnDodgeActualRechargeStart?.Invoke();
+        }
+        else if (available < maxDodgeCharges)
+        {
+            allDodgesFull = false;
         }
     }
+
+
 
     // Handles a brief stop before overboost starts, as well as overboost cancel
     void HandleOverboostInitiation()
@@ -898,6 +942,56 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
+    public void CalculateAISafeOrbitCustom(float customMinRange, float customMaxRange)
+    {
+        float radius = customMaxRange;
+        if (Physics.CheckSphere(transform.position, 1f, obstacleMask))
+        {
+            // Already inside geometry → don’t reset, just keep last safe radius
+            radius = customMinRange;
+        }
+        else
+        {
+            foreach (var dir in sampleDirections)
+            {
+                if (Physics.SphereCast(transform.position, 1f, dir, out RaycastHit hit, customMaxRange, obstacleMask))
+                {
+                    float dist = hit.distance - safeBuffer;
+                    radius = Mathf.Min(radius, dist);
+                }
+            }
+        }
+
+        // Clamp & smooth
+        radius = Mathf.Max(customMinRange, radius);
+        currentSafeRadius = Mathf.MoveTowards(currentSafeRadius, radius, 0.5f);
+
+        // Define usable min/max ranges for orbit
+        customMinRange = currentSafeRadius - customMinRange;
+        customMaxRange = currentSafeRadius * 0.8f;
+    }
+
+    // Generate evenly spread directions on a sphere (using "Fibonacci sphere")
+    private List<Vector3> GenerateSphereDirections(int samples)
+    {
+        List<Vector3> dirs = new List<Vector3>(samples);
+        float offset = 2f / samples;
+        float increment = Mathf.PI * (3f - Mathf.Sqrt(5f));
+
+        for (int i = 0; i < samples; i++)
+        {
+            float y = ((i * offset) - 1) + (offset / 2);
+            float r = Mathf.Sqrt(1 - y * y);
+            float phi = i * increment;
+
+            float x = Mathf.Cos(phi) * r;
+            float z = Mathf.Sin(phi) * r;
+
+            dirs.Add(new Vector3(x, y, z).normalized);
+        }
+        return dirs;
+    }
+
     void Jump()
     {
         if (OnGround)
@@ -977,6 +1071,19 @@ public class SpaceShooterController : MonoBehaviour
     {
         return leftInput != 0 || rightInput != 0;
     }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = safeRadiusColor;
+        Gizmos.DrawWireSphere(transform.position, currentSafeRadius);
+
+        Gizmos.color = minRangeColor;
+        Gizmos.DrawWireSphere(transform.position, minRange);
+
+        Gizmos.color = maxRangeColor;
+        Gizmos.DrawWireSphere(transform.position, maxRange);
+    }
+
 }
 
 
