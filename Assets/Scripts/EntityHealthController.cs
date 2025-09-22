@@ -59,11 +59,11 @@ public class EntityHealthController : MonoBehaviour
         }
     }
 
+    // Called from separate scripts, ideally in the ai script, the only way to activate HandleHealing()
     public void Heal(int healAmount, bool shouldInvoke)
     {
         if (hasHealed == false && isAlive == true)
         {
-
             if ((healAmount + CurrentHP) >= MaxHP)
             {
                 CurrentHP = MaxHP;
