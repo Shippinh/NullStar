@@ -62,11 +62,6 @@ public class GeneralArenaController : MonoBehaviour
             nextArenaControllerRef.hasArenaCompleted = false;
             gameObject.SetActive(false);
         }
-        else
-        {
-            Debug.Log("Last Arena done");
-            gameObject.SetActive(false);
-        }
     }
 
     private void CheckWave()
