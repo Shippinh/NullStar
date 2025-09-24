@@ -10,7 +10,7 @@ public class GeneralArenaController : MonoBehaviour
     public bool hasArenaCompleted = false; // keeping track of current arena state
     public bool hasArenaStarted = false;
     public bool hasNextArenaStarted = false;
-    [SerializeField, Range(0, 10)] public int currentWaveCount = 0; // keeping track of waves, do things when each wave starts
+    [SerializeField, Range(1, 10)] public int currentWaveCount = 1; // keeping track of waves, do things when each wave starts
     [SerializeField, Range(1, 10)] int totalWaveCount = 5;
 
     void Start()
@@ -29,7 +29,14 @@ public class GeneralArenaController : MonoBehaviour
     public void AddEnemiesToList()
     {
         EnemyController[] enemies = GetComponentsInChildren<EnemyController>(true);
-        arenaEnemiesRef.AddRange(enemies);
+
+        foreach (var enemy in enemies)
+        {
+            if (enemy.countsAsSeparateEnemy)
+            {
+                arenaEnemiesRef.Add(enemy);
+            }
+        }
     }
 
     public void RemoveEnemyFromList(EnemyController enemyToRemove)

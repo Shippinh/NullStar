@@ -1000,6 +1000,11 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
+    public bool GetPlayerOnGround()
+    {
+        return OnGround;
+    }
+
     void OnCollisionEnter(Collision collision) 
     {
         EvaluateCollision(collision);

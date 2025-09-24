@@ -5,27 +5,17 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public string enemyName = "Default Enemy Name";
-    [SerializeField] private EntityHealthController entityHealthControllerRef; // health data reference (stuff like hp, dmg and death handling)
-    [SerializeField] private EntityArenaController entityArenaControllerRef; // arena data reference (stuff like at what wave to appear, etc.)
-    //public GeneralArenaController generalArenaControllerRef; // reference to the general arena, set in the inspector (allows setting up multiple arenas with one time switches that enable or disable next arena)
+    public EntityHealthController entityHealthControllerRef; // health data reference (stuff like hp, dmg and death handling)
+    public EntityArenaController entityArenaControllerRef; // arena data reference (stuff like at what wave to appear, etc.)
+    public bool countsAsSeparateEnemy = true;
     // Use this for initialization
     void Awake()
     {
-        entityHealthControllerRef = GetComponent<EntityHealthController>();
-        entityHealthControllerRef.Died += HandleEnemyDeath;
-
-        entityArenaControllerRef = GetComponent<EntityArenaController>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        Initialize();
     }
 
     public void HandleEnemyDeath()
     {
-        //generalArenaControllerRef.RemoveEnemyFromList(this); // INSTANCING IS PERFECT, LETS FUCKING GOOOOO, NO MINDFUCKERY THIS TIME
         this.gameObject.SetActive(false);
     }
 
@@ -41,5 +31,17 @@ public class EnemyController : MonoBehaviour
         if (entityArenaControllerRef == null)
             entityArenaControllerRef = GetComponent<EntityArenaController>();
         return entityArenaControllerRef;
+    }
+
+    /// <summary>
+    /// Should be called only once
+    /// </summary>
+    protected void Initialize()
+    {
+        entityHealthControllerRef = GetComponent<EntityHealthController>();
+
+        entityHealthControllerRef.Died += HandleEnemyDeath;
+
+        entityArenaControllerRef = GetComponent<EntityArenaController>();
     }
 }

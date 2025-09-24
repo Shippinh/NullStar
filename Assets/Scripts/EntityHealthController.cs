@@ -8,6 +8,7 @@ public class EntityHealthController : MonoBehaviour
     public int MaxHP = 100;
     public int CurrentHP = 1;
 
+    public bool canBeDamaged = true;
     public bool isAlive = true;
     public bool isInvincible = false;
     public float invincibilityDuration = 2f;
@@ -30,32 +31,35 @@ public class EntityHealthController : MonoBehaviour
 
     public void TakeDamage(int takenDamage, bool shouldInvoke)
     {
-        if(isInvincible == false && isAlive == true)
+        if (canBeDamaged)
         {
-            isInvincible = true;
-
-            if (shouldInvoke)
-                BecameInvincible?.Invoke();
-
-            if(takenDamage > MaxHP)
+            if (isInvincible == false && isAlive == true)
             {
-                CurrentHP = 0;
-                return;
-            }
+                isInvincible = true;
 
-            var newHP = CurrentHP - takenDamage;
+                if (shouldInvoke)
+                    BecameInvincible?.Invoke();
 
-            if(newHP <= 0)
-            {
-                CurrentHP = 0;
-            }
-            else
-            {
-                CurrentHP = newHP;
-            }
+                if (takenDamage > MaxHP)
+                {
+                    CurrentHP = 0;
+                    return;
+                }
 
-            if (shouldInvoke)
-                TookHit?.Invoke();
+                var newHP = CurrentHP - takenDamage;
+
+                if (newHP <= 0)
+                {
+                    CurrentHP = 0;
+                }
+                else
+                {
+                    CurrentHP = newHP;
+                }
+
+                if (shouldInvoke)
+                    TookHit?.Invoke();
+            }
         }
     }
 

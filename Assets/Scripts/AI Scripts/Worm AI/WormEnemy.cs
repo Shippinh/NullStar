@@ -1,0 +1,413 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum MovementPattern
+{
+    Normal,
+    SidewaysWiggle,
+    Spiral
+}
+
+[RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
+public class WormEnemy : MonoBehaviour
+{
+    [Header("Target & Movement")]
+    public SpaceShooterController player;
+    public Transform playerCamera;
+
+    public float maxSpeed = 10f;
+    public float maxAcceleration = 30f;
+    public float maxAirAcceleration = 10f;
+    public float jetpackAcceleration = 15f;
+
+    public LayerMask LOSMask;
+
+
+    [Header("Oscillation")]
+    public MovementPattern movementPattern = MovementPattern.Normal;
+    public float oscillationAmplitude = 3f;
+    public float oscillationFrequency = 2f;
+    [SerializeField, Range(0f, 1f)] public float oscillationStrenghtFactor = 1.0f;
+    public bool invertSpiral = false;
+    public bool invertWiggle = false;
+
+
+    [Header("Pivot Timing")]
+    public float pivotChangeInterval = 3f; // every 3 seconds
+    private float nextPivotTime = 0f;
+    public bool invertMovementOnNewPivot = false;
+    public bool randomizeMovementPatternOnNewPivot = false;
+
+    private float oscillationTime = 0f;
+
+    [Header("Avoidance")]
+    public float avoidanceForce = 5f;
+    public float detectionRadius = 5f;
+    public LayerMask obstacleMask;
+
+    [Header("Worm Behavior")]
+    public float pivotDistance = 25f;
+    public float pivotForwardPush = 10f;   // worm goes past player
+    public float pivotHeightOffset = 3f;   // lift pivot slightly above ground
+    public GameObject laserPrefab;
+    public float laserCooldown = 8f;
+
+    private Rigidbody rb;
+    private List<Collider> nearbyObstacles = new List<Collider>();
+    private Vector3 velocity;
+    private Vector3 desiredVelocity;
+    private bool OnGround = true;
+
+    private Vector3 contactNormal = Vector3.up;
+    private Vector3 currentPivot;
+    private int currentDirectionIndex = -1;
+    private List<Vector3> availableDirections;
+    private float nextLaserTime;
+
+    private Vector3 lastPlayerForward = Vector3.forward;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+
+        SphereCollider trigger = GetComponent<SphereCollider>();
+        trigger.isTrigger = true;
+        trigger.radius = detectionRadius;
+
+        velocity = Vector3.zero;
+        UpdateDirections();
+        currentPivot = ChoosePivot();
+    }
+
+    private void LateUpdate()
+    {
+        if (player.GetPlayerOnGround())
+            currentPivot = CheckForceTopPivot();
+        else
+            currentPivot = UpdatePivot();
+    }
+
+    void FixedUpdate()
+    {
+        UpdateDirections();
+
+        if (Time.time >= nextPivotTime)
+        {
+            currentPivot = ChoosePivot();
+
+            // Apply inversion or randomize movement once per interval
+            if (invertMovementOnNewPivot)
+            {
+                invertWiggle = !invertWiggle;
+                invertSpiral = !invertSpiral;
+            }
+
+            if (randomizeMovementPatternOnNewPivot)
+            {
+                movementPattern = (MovementPattern)UnityEngine.Random.Range(
+                    0, Enum.GetValues(typeof(MovementPattern)).Length
+                );
+            }
+
+            nextPivotTime = Time.time + pivotChangeInterval;
+        }
+
+        // Avoidance
+        Vector3 avoidanceVector = Vector3.zero;
+        foreach (var col in nearbyObstacles)
+        {
+            if (!col) continue;
+            Vector3 point = col.ClosestPoint(transform.position);
+            Vector3 away = (transform.position - point);
+            float dist = away.magnitude;
+
+            if (dist > 0f)
+                avoidanceVector += away.normalized * (1f / dist);
+        }
+
+        if (avoidanceVector != Vector3.zero)
+            avoidanceVector = avoidanceVector.normalized * avoidanceForce;
+
+        // Movement
+        Vector3 target = currentPivot != Vector3.zero ? currentPivot : player.transform.position;
+        Vector3 toTarget = (target - transform.position).normalized;
+
+        // Oscillation
+        oscillationTime += Time.fixedDeltaTime;
+        Vector3 offset = Vector3.zero;
+
+        switch (movementPattern)
+        {
+            case MovementPattern.SidewaysWiggle:
+                {
+                    // perpendicular to forward
+                    Vector3 side = Vector3.Cross(toTarget, Vector3.up).normalized;
+                    float wiggle = Mathf.Sin(oscillationTime * oscillationFrequency) * oscillationAmplitude;
+
+                    if (invertWiggle) // apply inversion
+                        wiggle *= -1f;
+
+                    offset = side * wiggle;
+                    break;
+                }
+            case MovementPattern.Spiral:
+                {
+                    // rotate around forward axis
+                    float angle = oscillationTime * oscillationFrequency;
+
+                    if (invertSpiral)
+                        angle *= -1f;
+
+                    Vector3 side = Vector3.Cross(toTarget, Vector3.up).normalized;
+                    Vector3 up = Vector3.Cross(toTarget, side).normalized;
+                    offset = (side * Mathf.Cos(angle) + up * Mathf.Sin(angle)) * oscillationAmplitude;
+                    break;
+                }
+            case MovementPattern.Normal:
+            default:
+                break;
+        }
+
+        // Apply oscillation
+        // Weight oscillation so it's a steering influence, not a full direction replacement
+        Vector3 oscillatedDir = (toTarget + offset * oscillationStrenghtFactor).normalized;
+
+        // Combine with avoidance
+        Vector3 combinedDir = (oscillatedDir + avoidanceVector).normalized;
+
+        desiredVelocity = combinedDir * maxSpeed;
+
+        AdjustVelocity();
+        AdjustAirVelocity();
+        rb.velocity = velocity;
+
+        // Rotation
+        if (Vector3.Distance(transform.position, target) > 2f)
+        {
+            transform.rotation = Quaternion.LookRotation(target - transform.position, Vector3.up);
+        }
+        else
+        {
+            Vector3 playerDir = player.body.velocity.normalized;
+            if (playerDir != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
+
+            if (Time.time > nextLaserTime)
+            {
+                FireLaser();
+                nextLaserTime = Time.time + laserCooldown;
+            }
+        }
+    }
+
+    Vector3 ChoosePivot()
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerForward = GetPlayerForward();
+
+        List<Vector3> validPivots = new List<Vector3>();
+        foreach (var dir in availableDirections)
+        {
+            // Start with pure cardinal pivot
+            Vector3 candidate = playerPos + dir * pivotDistance;
+
+            // Then apply global "forward push"
+            candidate += playerForward * pivotForwardPush;
+
+            // Offset upwards from ground
+            candidate.y += pivotHeightOffset;
+
+            if (HasLineOfSight(candidate))
+                validPivots.Add(candidate);
+        }
+
+        if (validPivots.Count > 0)
+        {
+            int randIndex = UnityEngine.Random.Range(0, validPivots.Count);
+            currentDirectionIndex = randIndex; // just remember the index
+            return validPivots[randIndex];
+        }
+
+        // fallback pivot directly in front of player
+        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+    }
+
+    Vector3 CheckForceTopPivot()
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerForward = GetPlayerForward();
+
+        if (currentDirectionIndex < 0 || currentDirectionIndex >= availableDirections.Count)
+            return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+
+        Vector3 dir = availableDirections[2]; // recalc direction relative to camera
+        Vector3 pivot = playerPos + dir * pivotDistance;
+
+        pivot += playerForward * pivotForwardPush;
+        pivot.y += pivotHeightOffset;
+
+        if (HasLineOfSight(pivot))
+            return pivot;
+
+        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+    }
+
+    Vector3 UpdatePivot()
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerForward = GetPlayerForward();
+
+        if (currentDirectionIndex < 0 || currentDirectionIndex >= availableDirections.Count)
+            return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+
+        Vector3 dir = availableDirections[currentDirectionIndex]; // recalc direction relative to camera
+        Vector3 pivot = playerPos + dir * pivotDistance;
+
+        pivot += playerForward * pivotForwardPush;
+        pivot.y += pivotHeightOffset;
+
+        if (HasLineOfSight(pivot))
+            return pivot;
+
+        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+    }
+
+
+    void UpdateDirections()
+    {
+        availableDirections = new List<Vector3>
+        {
+            //Vector3.forward,
+            //Vector3.back,
+            playerCamera.right,
+            -playerCamera.right,
+            player.transform.up,
+            -player.transform.up
+        };
+    }
+
+    Vector3 GetPlayerForward()
+    {
+        if (player != null && player.body != null)
+        {
+            Vector3 vel = player.body.velocity;
+
+            if (vel.sqrMagnitude > 0.01f)
+            {
+                lastPlayerForward = vel.normalized;
+                return lastPlayerForward;
+            }
+        }
+
+        // Fallbacks if no velocity or player/body is null
+        if (playerCamera != null)
+            return playerCamera.forward;
+
+        return lastPlayerForward != Vector3.zero ? lastPlayerForward : Vector3.forward;
+    }
+
+    bool HasLineOfSight(Vector3 point)
+    {
+        if (point == Vector3.zero) return false;
+
+        Vector3 dir = (player.transform.position - point).normalized;
+        float distance = Vector3.Distance(point, player.transform.position);
+
+        // LayerMask can help avoid hitting the worm's own colliders
+        if (Physics.Raycast(point, dir, out RaycastHit hit, distance, LOSMask))
+        {
+            // Make sure we hit the player's collider (even if it's a child)
+            return hit.collider.GetComponentInParent<SpaceShooterController>() != null;
+        }
+
+        // No obstruction, line of sight is clear
+        return true;
+    }
+
+
+    void FireLaser()
+    {
+        //Instantiate(laserPrefab, transform.position, transform.rotation);
+    }
+
+    Vector3 ProjectOnContactPlane(Vector3 vector)
+    {
+        return vector - contactNormal * Vector3.Dot(vector, contactNormal);
+    }
+
+    void AdjustVelocity()
+    {
+        Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
+        Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
+
+        float currentX = Vector3.Dot(velocity, xAxis);
+        float currentZ = Vector3.Dot(velocity, zAxis);
+
+        float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
+
+        float deltaX = desiredVelocity.x - currentX;
+        float deltaZ = desiredVelocity.z - currentZ;
+
+        velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), acceleration * Time.fixedDeltaTime);
+        velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), acceleration * Time.fixedDeltaTime);
+    }
+
+    void AdjustAirVelocity()
+    {
+        Vector3 yAxis = Vector3.up;
+        float currentY = Vector3.Dot(velocity, yAxis);
+        float targetY = desiredVelocity.y;
+        float deltaY = targetY - currentY;
+
+        float change = Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), jetpackAcceleration * Time.fixedDeltaTime);
+        velocity += yAxis * change;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & obstacleMask) != 0 && !other.isTrigger)
+        {
+            if (!nearbyObstacles.Contains(other))
+                nearbyObstacles.Add(other);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (nearbyObstacles.Contains(other))
+            nearbyObstacles.Remove(other);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        //if (player == null || player.body || playerCamera == null || availableDirections == null) return;
+
+        // Draw detection radius
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        // Draw current pivot
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(currentPivot, 1f);
+
+        // Draw all candidate pivots and line of sight
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerForward = GetPlayerForward();
+
+        foreach (var dir in availableDirections)
+        {
+            Vector3 candidate = playerPos + dir * pivotDistance;
+            candidate += playerForward * pivotForwardPush;
+            candidate.y += pivotHeightOffset;
+
+            bool los = HasLineOfSight(candidate);
+
+            Gizmos.color = los ? Color.green : Color.yellow;
+            Gizmos.DrawWireSphere(candidate, 0.5f);
+            Gizmos.DrawLine(candidate, playerPos);
+        }
+    }
+
+}
