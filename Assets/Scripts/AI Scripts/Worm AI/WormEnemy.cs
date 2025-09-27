@@ -18,10 +18,9 @@ public class WormEnemy : MonoBehaviour
 
     public float maxSpeed = 10f;
     public float maxAcceleration = 30f;
-    public float maxAirAcceleration = 10f;
-    public float jetpackAcceleration = 15f;
 
     public LayerMask LOSMask;
+    Vector3 currentTarget;
 
 
     [Header("Oscillation")]
@@ -57,7 +56,6 @@ public class WormEnemy : MonoBehaviour
     private List<Collider> nearbyObstacles = new List<Collider>();
     private Vector3 velocity;
     private Vector3 desiredVelocity;
-    private bool OnGround = true;
 
     private Vector3 contactNormal = Vector3.up;
     private Vector3 currentPivot;
@@ -92,12 +90,38 @@ public class WormEnemy : MonoBehaviour
     void FixedUpdate()
     {
         UpdateDirections();
+        CalculateDesiredVelocity();
 
+        // Smoothly accelerate toward desiredVelocity
+        AdjustVelocity();
+        AdjustAirVelocity();
+        rb.velocity = velocity;
+
+        // Rotation
+        if (Vector3.Distance(transform.position, currentTarget) > 2f)
+        {
+            transform.rotation = Quaternion.LookRotation(currentTarget - transform.position, Vector3.up);
+        }
+        else
+        {
+            Vector3 playerDir = player.body.velocity.normalized;
+            if (playerDir != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
+
+            if (Time.time > nextLaserTime)
+            {
+                FireLaser();
+                nextLaserTime = Time.time + laserCooldown;
+            }
+        }
+    }
+
+    void CalculateDesiredVelocity()
+    {
         if (Time.time >= nextPivotTime)
         {
             currentPivot = ChoosePivot();
 
-            // Apply inversion or randomize movement once per interval
             if (invertMovementOnNewPivot)
             {
                 invertWiggle = !invertWiggle;
@@ -114,25 +138,9 @@ public class WormEnemy : MonoBehaviour
             nextPivotTime = Time.time + pivotChangeInterval;
         }
 
-        // Avoidance
-        Vector3 avoidanceVector = Vector3.zero;
-        foreach (var col in nearbyObstacles)
-        {
-            if (!col) continue;
-            Vector3 point = col.ClosestPoint(transform.position);
-            Vector3 away = (transform.position - point);
-            float dist = away.magnitude;
-
-            if (dist > 0f)
-                avoidanceVector += away.normalized * (1f / dist);
-        }
-
-        if (avoidanceVector != Vector3.zero)
-            avoidanceVector = avoidanceVector.normalized * avoidanceForce;
-
-        // Movement
-        Vector3 target = currentPivot != Vector3.zero ? currentPivot : player.transform.position;
-        Vector3 toTarget = (target - transform.position).normalized;
+        // Base target direction
+        currentTarget = currentPivot != Vector3.zero ? currentPivot : player.transform.position;
+        Vector3 toTarget = (currentTarget - transform.position).normalized;
 
         // Oscillation
         oscillationTime += Time.fixedDeltaTime;
@@ -142,24 +150,16 @@ public class WormEnemy : MonoBehaviour
         {
             case MovementPattern.SidewaysWiggle:
                 {
-                    // perpendicular to forward
                     Vector3 side = Vector3.Cross(toTarget, Vector3.up).normalized;
                     float wiggle = Mathf.Sin(oscillationTime * oscillationFrequency) * oscillationAmplitude;
-
-                    if (invertWiggle) // apply inversion
-                        wiggle *= -1f;
-
+                    if (invertWiggle) wiggle *= -1f;
                     offset = side * wiggle;
                     break;
                 }
             case MovementPattern.Spiral:
                 {
-                    // rotate around forward axis
                     float angle = oscillationTime * oscillationFrequency;
-
-                    if (invertSpiral)
-                        angle *= -1f;
-
+                    if (invertSpiral) angle *= -1f;
                     Vector3 side = Vector3.Cross(toTarget, Vector3.up).normalized;
                     Vector3 up = Vector3.Cross(toTarget, side).normalized;
                     offset = (side * Mathf.Cos(angle) + up * Mathf.Sin(angle)) * oscillationAmplitude;
@@ -170,37 +170,17 @@ public class WormEnemy : MonoBehaviour
                 break;
         }
 
-        // Apply oscillation
-        // Weight oscillation so it's a steering influence, not a full direction replacement
-        Vector3 oscillatedDir = (toTarget + offset * oscillationStrenghtFactor).normalized;
+        // Primary movement direction
+        Vector3 primaryDir = (toTarget + offset * oscillationStrenghtFactor).normalized * maxSpeed;
 
-        // Combine with avoidance
-        Vector3 combinedDir = (oscillatedDir + avoidanceVector).normalized;
+        // Avoidance as additive steering
+        Vector3 avoidanceVector = CalculateObstacleAvoidance();
+        Vector3 combined = primaryDir + avoidanceVector;
 
-        desiredVelocity = combinedDir * maxSpeed;
-
-        AdjustVelocity();
-        AdjustAirVelocity();
-        rb.velocity = velocity;
-
-        // Rotation
-        if (Vector3.Distance(transform.position, target) > 2f)
-        {
-            transform.rotation = Quaternion.LookRotation(target - transform.position, Vector3.up);
-        }
-        else
-        {
-            Vector3 playerDir = player.body.velocity.normalized;
-            if (playerDir != Vector3.zero)
-                transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
-
-            if (Time.time > nextLaserTime)
-            {
-                FireLaser();
-                nextLaserTime = Time.time + laserCooldown;
-            }
-        }
+        // Clamp final desired velocity
+        desiredVelocity = Vector3.ClampMagnitude(combined, maxSpeed);
     }
+
 
     Vector3 ChoosePivot()
     {
@@ -345,13 +325,11 @@ public class WormEnemy : MonoBehaviour
         float currentX = Vector3.Dot(velocity, xAxis);
         float currentZ = Vector3.Dot(velocity, zAxis);
 
-        float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-
         float deltaX = desiredVelocity.x - currentX;
         float deltaZ = desiredVelocity.z - currentZ;
 
-        velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), acceleration * Time.fixedDeltaTime);
-        velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), acceleration * Time.fixedDeltaTime);
+        velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), maxAcceleration * Time.fixedDeltaTime);
+        velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), maxAcceleration * Time.fixedDeltaTime);
     }
 
     void AdjustAirVelocity()
@@ -361,9 +339,35 @@ public class WormEnemy : MonoBehaviour
         float targetY = desiredVelocity.y;
         float deltaY = targetY - currentY;
 
-        float change = Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), jetpackAcceleration * Time.fixedDeltaTime);
+        float change = Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), maxAcceleration * Time.fixedDeltaTime);
         velocity += yAxis * change;
     }
+
+    Vector3 CalculateObstacleAvoidance()
+    {
+        Vector3 totalAvoidance = Vector3.zero;
+
+        foreach (var col in nearbyObstacles)
+        {
+            if (!col) continue;
+
+            Vector3 closestPoint = col.ClosestPoint(transform.position);
+            Vector3 away = transform.position - closestPoint;
+            float distance = away.magnitude;
+
+            if (distance > 0f)
+            {
+                // Scale avoidance inversely by distance (closer obstacles push stronger)
+                // Using a smooth falloff (distance / detectionRadius)
+                float strength = Mathf.Clamp01((detectionRadius - distance) / detectionRadius);
+                totalAvoidance += away.normalized * avoidanceForce * strength;
+            }
+        }
+
+        return totalAvoidance;
+    }
+
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -392,21 +396,41 @@ public class WormEnemy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(currentPivot, 1f);
 
-        // Draw all candidate pivots and line of sight
-        Vector3 playerPos = player.transform.position;
-        Vector3 playerForward = GetPlayerForward();
-
-        foreach (var dir in availableDirections)
+        if (Application.isPlaying) // only simulate in Play mode
         {
-            Vector3 candidate = playerPos + dir * pivotDistance;
-            candidate += playerForward * pivotForwardPush;
-            candidate.y += pivotHeightOffset;
+            // Draw all candidate pivots and line of sight
+            Vector3 playerPos = player.transform.position;
+            Vector3 playerForward = GetPlayerForward();
 
-            bool los = HasLineOfSight(candidate);
+            foreach (var dir in availableDirections)
+            {
+                Vector3 candidate = playerPos + dir * pivotDistance;
+                candidate += playerForward * pivotForwardPush;
+                candidate.y += pivotHeightOffset;
 
-            Gizmos.color = los ? Color.green : Color.yellow;
-            Gizmos.DrawWireSphere(candidate, 0.5f);
-            Gizmos.DrawLine(candidate, playerPos);
+                bool los = HasLineOfSight(candidate);
+
+                Gizmos.color = los ? Color.green : Color.yellow;
+                Gizmos.DrawWireSphere(candidate, 0.5f);
+                Gizmos.DrawLine(candidate, playerPos);
+            }
+
+            Gizmos.color = Color.yellow;
+            Vector3 simPos = transform.position;
+            Vector3 simVel = desiredVelocity; // use current calculated orbit velocity
+
+            float simStep = 0.2f;   // seconds per prediction step
+            int simSteps = 40;      // number of steps (~8 seconds ahead)
+
+            for (int i = 0; i < simSteps; i++)
+            {
+                Vector3 nextPos = simPos + simVel * simStep;
+
+                Gizmos.DrawLine(simPos, nextPos);
+
+                simPos = nextPos;
+                // (Optional: refine with same logic as CalculateDesiredVelocity if you want adaptive orbiting)
+            }
         }
     }
 

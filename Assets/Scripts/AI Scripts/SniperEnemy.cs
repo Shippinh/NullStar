@@ -19,8 +19,9 @@ public class SniperEnemy : MonoBehaviour
     public float orbitVerticalAcceleration = 3f; // vertical accel during orbit (set 0 to ignore)
     [Tooltip("Fraction of orbitMaxSpeed used for sideways orbit movement")]
     public float orbitSpeedFactor = 0.6f;
-    public float minRange = 1000f;
-    public float maxRange = 1500f;
+    public float minRange = 100f;
+    public float maxRange = 400f;
+    public float baseMinRange, baseMaxRange;
     public float tiltSpeed = 45f; // degrees per second to rotate orbit plane axis
     float distToPlayer;
 
@@ -75,6 +76,9 @@ public class SniperEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
+        baseMinRange = minRange;
+        baseMaxRange = maxRange;
+
         aimLine = GetComponent<LineRenderer>();
 
         SphereCollider trigger = GetComponent<SphereCollider>();
@@ -116,7 +120,7 @@ public class SniperEnemy : MonoBehaviour
     {
         if (!player) return;
 
-        player.CalculateAISafeOrbitCustom(minRange, maxRange);
+        (minRange, maxRange) = player.CalculateDynamicOrbit(baseMinRange, baseMaxRange, baseMaxRange - baseMinRange);
 
         if (canAct)
         {
@@ -178,93 +182,56 @@ public class SniperEnemy : MonoBehaviour
             currentAcceleration = maxAcceleration;
             currentVerticalAcceleration = jetpackAcceleration;
         }
-        else if (distanceToPlayer > minRange && distanceToPlayer <= maxRange) // Orbit mode (inside the sweet spot)
+        else if (distanceToPlayer > minRange && distanceToPlayer <= maxRange) // Orbit mode
         {
             tiltAngle += tiltSpeed * Time.deltaTime;
-
-            // Always rotate around the player's up axis, not world forward
             Vector3 orbitNormal = Quaternion.AngleAxis(tiltAngle, Vector3.forward) * Vector3.up;
-
-            // Tangent direction = perpendicular to player vector in a stable frame
             Vector3 tangent = Vector3.Cross(orbitNormal, directionToPlayer).normalized;
 
-            Vector3 rangeAdjust = Vector3.zero;
-            float rangeSpeedFactor = 0.4f;
-
-            // **MODIFIED:** Instead of targeting maxRange, target the midpoint of the sweet spot
+            // Smooth range correction
             float sweetSpotMidpoint = (minRange + maxRange) / 2f;
-
-            // **MODIFIED:** If the player is closer than the midpoint, move away
-            if (distanceToPlayer < sweetSpotMidpoint)
-            {
-                rangeAdjust = -directionToPlayer.normalized * orbitMaxSpeed * rangeSpeedFactor;
-            }
-            // **MODIFIED:** If the player is farther than the midpoint, move closer
-            else if (distanceToPlayer > sweetSpotMidpoint)
-            {
-                rangeAdjust = directionToPlayer.normalized * orbitMaxSpeed * rangeSpeedFactor;
-            }
+            float offset = distanceToPlayer - sweetSpotMidpoint;
+            Vector3 rangeAdjust = directionToPlayer.normalized * orbitMaxSpeed * orbitSpeedFactor * (offset / (maxRange - minRange));
 
             Vector3 tangentVelocity = tangent * (orbitMaxSpeed * orbitSpeedFactor);
-            Vector3 combinedVelocity = tangentVelocity + rangeAdjust + avoidanceVector;
 
-            desiredVelocity = combinedVelocity.normalized * orbitMaxSpeed;
+            // Combine everything
+            desiredVelocity = tangentVelocity + rangeAdjust + avoidanceVector;
+
+            // Clamp
+            if (desiredVelocity.magnitude > orbitMaxSpeed)
+                desiredVelocity = desiredVelocity.normalized * orbitMaxSpeed;
 
             currentAcceleration = orbitMaxAcceleration;
             currentVerticalAcceleration = orbitVerticalAcceleration;
         }
-
-        /*se if (distanceToPlayer <= maxRange)
-        {
-            tiltAngle += tiltSpeed * Time.deltaTime;
-
-            Vector3 rotationAxis = Vector3.forward;
-            Vector3 orbitNormal = Quaternion.AngleAxis(tiltAngle, rotationAxis) * Vector3.up;
-
-            orbitNormal.Normalize();
-
-            Vector3 tangent = Vector3.Cross(orbitNormal, directionToPlayer).normalized;
-            Vector3 rangeAdjust = Vector3.zero;
-
-            float rangeSpeedFactor = 0.4f;
-            if (distanceToPlayer < minRange)
-                rangeAdjust = -directionToPlayer.normalized * orbitMaxSpeed * rangeSpeedFactor;
-            else if (distanceToPlayer > maxRange * 0.95f)
-                rangeAdjust = directionToPlayer.normalized * orbitMaxSpeed * rangeSpeedFactor;
-
-            Vector3 tangentVelocity = tangent * (orbitMaxSpeed * orbitSpeedFactor);
-            Vector3 combinedVelocity = tangentVelocity + rangeAdjust + avoidanceVector;
-            desiredVelocity = combinedVelocity.normalized * orbitMaxSpeed;
-
-            currentAcceleration = orbitMaxAcceleration;
-            currentVerticalAcceleration = orbitVerticalAcceleration;
-        }*/
     }
+
 
     Vector3 CalculateObstacleAvoidance()
     {
-        Vector3 avoidanceVector = Vector3.zero;
+        Vector3 totalAvoidance = Vector3.zero;
 
         foreach (var col in nearbyObstacles)
         {
             if (!col) continue;
-            Vector3 point = col.ClosestPoint(transform.position);
-            Vector3 away = (transform.position - point);
-            float dist = away.magnitude;
 
-            if (dist > 0f)
+            Vector3 closestPoint = col.ClosestPoint(transform.position);
+            Vector3 away = transform.position - closestPoint;
+            float distance = away.magnitude;
+
+            if (distance > 0f)
             {
-                avoidanceVector += away.normalized * (1f / dist);
+                // Scale avoidance inversely by distance (closer obstacles push stronger)
+                // Using a smooth falloff (distance / detectionRadius)
+                float strength = Mathf.Clamp01((detectionRadius - distance) / detectionRadius);
+                totalAvoidance += away.normalized * avoidanceForce * strength;
             }
         }
 
-        if (avoidanceVector != Vector3.zero)
-        {
-            avoidanceVector = avoidanceVector.normalized * avoidanceForce;
-        }
-
-        return avoidanceVector;
+        return totalAvoidance;
     }
+
 
     Vector3 ProjectOnContactPlane(Vector3 vector)
     {
@@ -332,9 +299,9 @@ public class SniperEnemy : MonoBehaviour
                     Debug.Log("Enemy shooting!");
 
                     isSendingShot = false;
-                    
+
                     Shoot();
-                    
+
                     isShootingOnCD = true;
                     weaponCooldownDurationTimer = 0f;
                 }
@@ -448,15 +415,53 @@ public class SniperEnemy : MonoBehaviour
             nearbyObstacles.Remove(other);
     }
 
-    /*void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        if (!player) return;
 
+        // --- Sweet spot ranges ---
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, minRange);
-
+        Gizmos.DrawWireSphere(player.transform.position, minRange);
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, maxRange);
-    }*/
+        Gizmos.DrawWireSphere(player.transform.position, maxRange);
+
+        // --- Orbit plane circle (midpoint) ---
+        float sweetSpotMidpoint = (minRange + maxRange) / 2f;
+        Vector3 orbitNormal = Quaternion.AngleAxis(tiltAngle, Vector3.forward) * Vector3.up;
+        Vector3 startVector = Vector3.ProjectOnPlane(Vector3.right, orbitNormal).normalized * sweetSpotMidpoint;
+
+        int segments = 64;
+        Vector3 prevPoint = player.transform.position + startVector;
+        Gizmos.color = Color.green;
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = (360f / segments) * i;
+            Quaternion rot = Quaternion.AngleAxis(angle, orbitNormal);
+            Vector3 nextPoint = player.transform.position + rot * startVector;
+            Gizmos.DrawLine(prevPoint, nextPoint);
+            prevPoint = nextPoint;
+        }
+
+        // --- Predicted orbit path (next few seconds) ---
+        if (Application.isPlaying) // only simulate in Play mode
+        {
+            Gizmos.color = Color.yellow;
+            Vector3 simPos = transform.position;
+            Vector3 simVel = desiredVelocity; // use current calculated orbit velocity
+
+            float simStep = 0.2f;   // seconds per prediction step
+            int simSteps = 40;      // number of steps (~8 seconds ahead)
+
+            for (int i = 0; i < simSteps; i++)
+            {
+                Vector3 nextPos = simPos + simVel * simStep;
+
+                Gizmos.DrawLine(simPos, nextPos);
+
+                simPos = nextPos;
+                // (Optional: refine with same logic as CalculateDesiredVelocity if you want adaptive orbiting)
+            }
+        }
+    }
+
 }

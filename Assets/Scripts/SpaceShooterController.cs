@@ -942,34 +942,38 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
-    public void CalculateAISafeOrbitCustom(float customMinRange, float customMaxRange)
+    public (float orbitMin, float orbitMax) CalculateDynamicOrbit(
+    float baseMin,
+    float baseMax,
+    float sweetSpot,
+    float safeBuffer = 1f)
     {
-        float radius = customMaxRange;
-        if (Physics.CheckSphere(transform.position, 1f, obstacleMask))
+        // Start with the maximum possible radius
+        float maxRadius = baseMax;
+
+        // Check each sample direction for obstacles
+        foreach (var dir in sampleDirections)
         {
-            // Already inside geometry → don’t reset, just keep last safe radius
-            radius = customMinRange;
-        }
-        else
-        {
-            foreach (var dir in sampleDirections)
+            if (Physics.SphereCast(transform.position, 1f, dir, out RaycastHit hit, baseMax, obstacleMask))
             {
-                if (Physics.SphereCast(transform.position, 1f, dir, out RaycastHit hit, customMaxRange, obstacleMask))
-                {
-                    float dist = hit.distance - safeBuffer;
-                    radius = Mathf.Min(radius, dist);
-                }
+                float safeDist = hit.distance - safeBuffer;
+                maxRadius = Mathf.Min(maxRadius, safeDist); // reduce max if obstacle is closer
             }
         }
 
-        // Clamp & smooth
-        radius = Mathf.Max(customMinRange, radius);
-        currentSafeRadius = Mathf.MoveTowards(currentSafeRadius, radius, 0.5f);
+        // Ensure max range >= min range + sweetSpot
+        maxRadius = Mathf.Max(maxRadius, sweetSpot);
 
-        // Define usable min/max ranges for orbit
-        customMinRange = currentSafeRadius - customMinRange;
-        customMaxRange = currentSafeRadius * 0.8f;
+        // Compute dynamic min range based on max and sweet spot
+        float minRadius = maxRadius - sweetSpot;
+
+        // Clamp to non-negative values
+        minRadius = Mathf.Max(0f, minRadius);
+        maxRadius = Mathf.Max(minRadius + sweetSpot, maxRadius);
+
+        return (minRadius, maxRadius);
     }
+
 
     // Generate evenly spread directions on a sphere (using "Fibonacci sphere")
     private List<Vector3> GenerateSphereDirections(int samples)
