@@ -168,6 +168,7 @@ public class MineEnemy : MonoBehaviour
 
         foreach (Collider hit in hits)
         {
+            Debug.Log(hit);
             var healthController = hit.GetComponent<EntityHealthController>(); // Replace with your health script
             if (healthController != null)
             {
