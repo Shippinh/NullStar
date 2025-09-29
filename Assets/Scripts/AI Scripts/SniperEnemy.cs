@@ -60,6 +60,7 @@ public class SniperEnemy : MonoBehaviour
 
     [Header("Other")]
     public bool canAct = true;
+    public bool canMove = true;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
     [SerializeField] private Vector3 velocity;
@@ -70,6 +71,9 @@ public class SniperEnemy : MonoBehaviour
     // Current acceleration type in Update, either orbit of follow
     private float currentAcceleration;
     private float currentVerticalAcceleration;
+
+    [Header("Object Pool")]
+    public ObjectPool projectilePool;
 
     void Start()
     {
@@ -153,8 +157,6 @@ public class SniperEnemy : MonoBehaviour
 
         distToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        AdjustVelocity(currentAcceleration);
-        AdjustAirVelocity(currentVerticalAcceleration);
         if (isChargingShot || isSendingShot)
         {
             UpdateAiming();
@@ -165,7 +167,12 @@ public class SniperEnemy : MonoBehaviour
             aimStrength = 0f; // reset after done shooting
         }
 
-        rb.velocity = velocity;
+        if (canMove)
+        {
+            AdjustVelocity(currentAcceleration);
+            AdjustAirVelocity(currentVerticalAcceleration);
+            rb.velocity = velocity;
+        }
     }
 
     // Calculates desiredVelocity and acceleration values based on chase or orbit behavior.
@@ -330,16 +337,17 @@ public class SniperEnemy : MonoBehaviour
     {
         Vector3 origin = transform.position;
 
-        if (Physics.Raycast(origin, aimedDir, out RaycastHit hit, 5000f))
+        GameObject projGO = ObjectPool.Instance.GetPooledObject("Sniper Projectile", origin, Quaternion.LookRotation(aimedDir, Vector3.up));
+        if (projGO)
         {
-            if (hit.collider.CompareTag("Player"))
+            Projectile proj = projGO.GetComponent<Projectile>();
+            if (proj != null)
             {
-                Debug.Log("Sniper hit the player!");
-                // player.TakeDamage(damageAmount);
+                proj.Initialize(origin, origin + aimedDir * 5000f); // Target far away in aimed direction
             }
         }
 
-        // Visualize shot
+        // Optional: Visual line (still keep for aiming feedback)
         if (aimLine)
         {
             aimLine.startColor = Color.red;

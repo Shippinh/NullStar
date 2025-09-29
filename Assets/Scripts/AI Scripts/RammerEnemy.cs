@@ -55,6 +55,7 @@ public class RammerEnemy : MonoBehaviour
     void CalculateDesiredVelocity()
     {
         Vector3 rawToPlayer = player.transform.position - transform.position;
+        float distanceToPlayer = rawToPlayer.magnitude;
 
         // Add chaotic lateral + vertical offsets
         Vector3 sideOffset = Vector3.Cross(Vector3.up, rawToPlayer).normalized;
@@ -63,7 +64,16 @@ public class RammerEnemy : MonoBehaviour
         float sideStrength = Mathf.PerlinNoise(transform.position.x * 0.5f, Time.time * 0.5f) - 0.5f;
         float upStrength = Mathf.PerlinNoise(transform.position.z * 0.5f, Time.time * 0.7f + 42f) - 0.5f;
 
-        Vector3 chaoticOffset = sideOffset * sideStrength * 4f + upOffset * upStrength * 100f;
+        // Scale chaotic vertical offset based on distance
+        float minMultiplier = 1f;   // when close
+        float maxMultiplier = 1000f; // when far
+        float scalerDistance = 100f; // distance considered "close"
+        float farDistance = 250f;    // distance considered "far"
+
+        float distanceScaler = Mathf.Clamp01((distanceToPlayer - scalerDistance) / (farDistance - scalerDistance));
+        float finalUpMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, distanceScaler);
+
+        Vector3 chaoticOffset = sideOffset * sideStrength * 4f + upOffset * upStrength * finalUpMultiplier;
 
         // Always move at maxSpeed toward player
         Vector3 toPlayerDir = (rawToPlayer + chaoticOffset).normalized * maxSpeed;
