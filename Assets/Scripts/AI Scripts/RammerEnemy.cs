@@ -11,6 +11,7 @@ public class RammerEnemy : MonoBehaviour
     public float maxAcceleration = 80f;
     public float maxAirAcceleration = 80f;
     public bool randomizeMaxAirAcceleration = true;
+    public bool canMove = true;
 
     [Header("Avoidance")]
     public float avoidanceForce = 1000f;  
@@ -62,7 +63,7 @@ public class RammerEnemy : MonoBehaviour
         float sideStrength = Mathf.PerlinNoise(transform.position.x * 0.5f, Time.time * 0.5f) - 0.5f;
         float upStrength = Mathf.PerlinNoise(transform.position.z * 0.5f, Time.time * 0.7f + 42f) - 0.5f;
 
-        Vector3 chaoticOffset = sideOffset * sideStrength * 4f + upOffset * upStrength * 1000f;
+        Vector3 chaoticOffset = sideOffset * sideStrength * 4f + upOffset * upStrength * 100f;
 
         // Always move at maxSpeed toward player
         Vector3 toPlayerDir = (rawToPlayer + chaoticOffset).normalized * maxSpeed;
