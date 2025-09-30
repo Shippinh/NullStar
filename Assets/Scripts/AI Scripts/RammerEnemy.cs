@@ -66,7 +66,7 @@ public class RammerEnemy : MonoBehaviour
 
         // Scale chaotic vertical offset based on distance
         float minMultiplier = 1f;   // when close
-        float maxMultiplier = 3000f; // when far
+        float maxMultiplier = 1500f; // when far
         float scalerDistance = 100f; // distance considered "close"
         float farDistance = 500f;    // distance considered "far"
 
