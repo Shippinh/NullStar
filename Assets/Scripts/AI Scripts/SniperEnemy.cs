@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
 public class SniperEnemy : MonoBehaviour
@@ -49,6 +50,10 @@ public class SniperEnemy : MonoBehaviour
     public bool isChargingShot;
     public bool isSendingShot;
     public bool isShootingOnCD;
+
+    float projectileSpeed = 300f;
+
+    public LayerMask losCheck;
 
     [Header("Aiming")]
     public LineRenderer aimLine;
@@ -118,6 +123,8 @@ public class SniperEnemy : MonoBehaviour
                 stopWhenShooting = false;
             }
         }
+
+        projectileSpeed = ObjectPool.Instance.GetPooledObject("Sniper Projectile").GetComponent<SniperProjectile>().speed;
     }
 
     void Update()
@@ -274,15 +281,24 @@ public class SniperEnemy : MonoBehaviour
     // handles all shooting related timers and the brief stop before shooting
     void HandleShooting(float distanceToPlayer)
     {
-        //if in the sweet spot
-        if (distanceToPlayer >= minRange && distanceToPlayer <= maxRange && !isShooting)
+        // --- Check sweet spot and line of sight ---
+        bool inSweetSpot = distanceToPlayer >= minRange && distanceToPlayer <= maxRange;
+        bool hasLOS = HasLineOfSight();
+
+        if (!inSweetSpot || !hasLOS)
+        {
+            if (isShooting) ResetShooting(); // cancel immediately if either condition fails
+            return;
+        }
+
+        // --- Shooting sequence ---
+        if (inSweetSpot && hasLOS && !isShooting)
         {
             isShooting = true;
             isChargingShot = true;
             weaponChargeDurationTimer = 0f;
             Debug.Log("Weapon charge initiated");
         }
-        // also need condition to prevent shooting when the player gets away from the sweet spot
 
         if (isShooting)
         {
@@ -328,10 +344,34 @@ public class SniperEnemy : MonoBehaviour
         }
     }
 
+
     void ResetShooting()
     {
+        // Reset state flags
+        isShooting = false;
+        isChargingShot = false;
+        isSendingShot = false;
+        isShootingOnCD = false;
 
+        // Reset timers
+        weaponChargeDurationTimer = 0f;
+        weaponShootDurationTimer = 0f;
+        weaponCooldownDurationTimer = 0f;
+
+        // Reset aim visuals
+        aimStrength = 0f;
+        if (aimLine)
+        {
+            aimLine.enabled = false;
+            aimLine.startColor = Color.green;
+            aimLine.endColor = Color.green;
+            aimLine.SetPosition(0, transform.position);
+            aimLine.SetPosition(1, transform.position);
+        }
+
+        Debug.Log("Shooting sequence reset.");
     }
+
 
     void Shoot()
     {
@@ -376,7 +416,6 @@ public class SniperEnemy : MonoBehaviour
         Vector3 playerPos = player.transform.position;
         Vector3 playerVel = player.body ? player.body.velocity : Vector3.zero;
 
-        float projectileSpeed = 300f; // tune this
         float distance = Vector3.Distance(transform.position, playerPos);
         float timeToHit = distance / projectileSpeed;
         Vector3 predictedPos = playerPos + playerVel * timeToHit;
@@ -405,8 +444,23 @@ public class SniperEnemy : MonoBehaviour
         );
     }
 
+    bool HasLineOfSight()
+    {
+        if (!player) return false;
 
+        Vector3 origin = transform.position;
+        Vector3 dir = (player.transform.position - origin).normalized;
+        float dist = Vector3.Distance(origin, player.transform.position);
 
+        // If ray hits something in obstacleMask before reaching the player → blocked
+        if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, losCheck, QueryTriggerInteraction.Ignore))
+        {
+           // Debug.Log("False");
+            return false;
+        }
+        //Debug.Log("True");
+        return true;
+    }
 
     void OnTriggerEnter(Collider other)
     {

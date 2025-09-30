@@ -5,63 +5,39 @@ public class Projectile : MonoBehaviour
     public float speed = 400f;
     public float maxLifetime = 2f;
 
-    protected Vector3 targetPosition;
-    public bool hasTarget = false;
+    protected Vector3 direction;
+    private Rigidbody rb;
 
-    private Vector3 lastPosition;
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     void OnEnable()
     {
         Invoke(nameof(Deactivate), maxLifetime);
-        lastPosition = transform.position;
     }
 
-    public void Initialize(Vector3 startPosition, Vector3 hitPosition)
+    public void Initialize(Vector3 startPosition, Vector3 targetPosition)
     {
         transform.position = startPosition;
-        targetPosition = hitPosition;
-        hasTarget = true;
-        lastPosition = startPosition;
+        direction = (targetPosition - startPosition).normalized;
+        rb.velocity = direction * speed; // use Rigidbody to move
     }
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (!hasTarget) return;
-
-        float step = speed * Time.deltaTime;
-        Vector3 nextPos = Vector3.MoveTowards(transform.position, targetPosition, step);
-
-        // --- Raycast to detect hit along movement path ---
-        Vector3 direction = nextPos - transform.position;
-        float distance = direction.magnitude;
-
-        if (Physics.Raycast(transform.position, direction.normalized, out RaycastHit hit, distance))
-        {
-            HandleHit(hit); // virtual method, overridden by subclasses
-            return;
-        }
-
-        // Move projectile
-        transform.position = nextPos;
-
-        // Check if reached target
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-        {
-            Impact();
-        }
-
-        lastPosition = transform.position;
+        HandleHit(other);
     }
 
-    protected virtual void HandleHit(RaycastHit hit)
+    protected virtual void HandleHit(Collider other)
     {
-        // Base projectile does nothing on hit
         Impact();
     }
 
     public void Impact()
     {
-        hasTarget = false;
+        rb.velocity = Vector3.zero;
         Deactivate();
     }
 
@@ -73,5 +49,6 @@ public class Projectile : MonoBehaviour
     void OnDisable()
     {
         CancelInvoke();
+        if (rb != null) rb.velocity = Vector3.zero;
     }
 }

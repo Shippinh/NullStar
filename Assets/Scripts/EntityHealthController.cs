@@ -12,7 +12,7 @@ public class EntityHealthController : MonoBehaviour
     public bool isAlive = true;
     public bool isInvincible = false;
     public float invincibilityDuration = 2f;
-    float currentInvincibilityDuration;
+    public float currentInvincibilityDuration = 0f;
 
     public bool hasHealed = false;
     public float healingCooldown = 60f;
