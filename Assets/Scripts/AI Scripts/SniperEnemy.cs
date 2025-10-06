@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
 public class SniperEnemy : MonoBehaviour
@@ -51,7 +50,7 @@ public class SniperEnemy : MonoBehaviour
     public bool isSendingShot;
     public bool isShootingOnCD;
 
-    float projectileSpeed = 300f;
+    [SerializeField] private float projectileSpeed = 300f;
 
     public LayerMask losCheck;
 
