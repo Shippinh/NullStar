@@ -38,10 +38,12 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     protected void Initialize()
     {
-        entityHealthControllerRef = GetComponent<EntityHealthController>();
+        if (entityHealthControllerRef == null)
+            entityHealthControllerRef = GetComponent<EntityHealthController>();
 
         entityHealthControllerRef.Died += HandleEnemyDeath;
 
-        entityArenaControllerRef = GetComponent<EntityArenaController>();
+        if (entityArenaControllerRef == null)
+            entityArenaControllerRef = GetComponent<EntityArenaController>();
     }
 }

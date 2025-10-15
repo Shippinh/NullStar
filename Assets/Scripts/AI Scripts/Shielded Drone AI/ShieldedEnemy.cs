@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Based on sniper enemy but slightly different
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class SniperEnemy : MonoBehaviour
+public class ShieldedEnemy : MonoBehaviour
 {
     [Header("Target & Movement")]
     public SpaceShooterController player;
@@ -80,6 +81,13 @@ public class SniperEnemy : MonoBehaviour
     public ProjectileEmittersController projectileEmittersControllerRef;
     [SerializeField] private Transform[] gunsPositions;
     private Vector3[] aimedDirs; // store per-gun aimed directions
+    public float emitterLookSmoothTime = 0.2f;
+
+    [Header("Shield Stuff")]
+    public GameObject shieldTiltPivot; // empty pivot that tilts toward player
+    public Transform shieldRing;      // actual ring that spins
+    public float shieldRotationSpeed = 90f; // degrees per second
+    public float shieldTiltSpeed = 5f;          // optional smoothing
 
     void Start()
     {
@@ -156,6 +164,8 @@ public class SniperEnemy : MonoBehaviour
                     desiredVelocity *= (1f - easeFactor); // gradually reduce to zero
                 }
             }
+
+            UpdateRotations();
         }
         else
         {
@@ -179,6 +189,59 @@ public class SniperEnemy : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        AttachShields();
+    }
+
+    private void AttachShields()
+    {
+        shieldTiltPivot.transform.position = transform.position;
+    }
+
+    void UpdateRotations()
+    {
+        UpdateShieldRotation();
+
+        // --- Smoothly rotate emitter toward player ---
+        if (projectileEmittersControllerRef != null && player != null)
+        {
+            Transform emitterTransform = projectileEmittersControllerRef.transform;
+            Vector3 directionToPlayer = (player.transform.position - emitterTransform.position).normalized;
+
+            if (directionToPlayer.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+                float rotationSpeed = 5f;
+                emitterTransform.rotation = Quaternion.Slerp(emitterTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+
+    void UpdateShieldRotation()
+    {
+        if (player != null && shieldTiltPivot != null && shieldRing != null)
+        {
+            // --- Tilt pivot toward player ---
+            Vector3 toPlayer = player.transform.position - shieldTiltPivot.transform.position;
+            Vector3 toPlayerXZ = new Vector3(toPlayer.x, 0f, toPlayer.z);
+            if (toPlayerXZ.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetTilt = Quaternion.LookRotation(toPlayerXZ, Vector3.up);
+                float verticalAngle = Mathf.Atan2(toPlayer.y, toPlayerXZ.magnitude) * Mathf.Rad2Deg;
+                targetTilt *= Quaternion.Euler(-verticalAngle, 0f, 0f);
+
+                // Optional smoothing
+                shieldTiltPivot.transform.rotation = Quaternion.Slerp(shieldTiltPivot.transform.rotation, targetTilt, shieldTiltSpeed * Time.deltaTime);
+            }
+
+            // --- Spin the shield ring locally ---
+            shieldRing.Rotate(Vector3.up, shieldRotationSpeed * Time.deltaTime, Space.Self);
+        }
+    }
+
+
     // Calculates desiredVelocity and acceleration values based on chase or orbit behavior.
     void CalculateDesiredVelocity(float distanceToPlayer)
     {
@@ -187,8 +250,38 @@ public class SniperEnemy : MonoBehaviour
 
         if (distanceToPlayer > maxRange * 1.2f) // Follow mode
         {
-            Vector3 combinedDir = (directionToPlayer.normalized + avoidanceVector).normalized;
-            desiredVelocity = combinedDir * maxSpeed;
+            // Add chaotic lateral + vertical offsets
+            Vector3 sideOffset = Vector3.Cross(Vector3.up, directionToPlayer).normalized;
+            Vector3 upOffset = Vector3.up;
+
+            float sideStrength = Mathf.PerlinNoise(transform.position.x * 0.5f, Time.time * 0.5f) - 0.5f;
+            float upStrength = Mathf.PerlinNoise(transform.position.z * 0.5f, Time.time * 0.7f + 42f) - 0.5f;
+
+            // Scale chaotic vertical offset based on distance
+            float minMultiplier = 1f;   // when close
+            float maxMultiplier = 1500f; // when far
+            float scalerDistance = 100f; // distance considered "close"
+            float farDistance = 500f;    // distance considered "far"
+
+            float distanceScaler = Mathf.Clamp01((distanceToPlayer - scalerDistance) / (farDistance - scalerDistance));
+            float finalUpMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, distanceScaler);
+
+            Vector3 chaoticOffset = sideOffset * sideStrength * 4f + upOffset * upStrength * finalUpMultiplier;
+
+            // Always move at maxSpeed toward player
+            Vector3 toPlayerDir = (directionToPlayer + chaoticOffset).normalized * maxSpeed;
+
+            // Calculate avoidance
+            //avoidanceVector = ProjectOnContactPlane(avoidanceVector); // limits ground avoidance
+
+            // Combine direction + avoidance
+            Vector3 combined = toPlayerDir + avoidanceVector;
+
+            // Optional: clamp final speed to maxSpeed + some margin if needed
+            if (combined.magnitude > maxSpeed * 1.5f)
+                combined = combined.normalized * maxSpeed * 1.5f;
+
+            desiredVelocity = combined;
 
             currentAcceleration = maxAcceleration;
             currentVerticalAcceleration = jetpackAcceleration;
@@ -453,7 +546,7 @@ public class SniperEnemy : MonoBehaviour
         // If ray hits something in obstacleMask before reaching the player → blocked
         if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, losCheck, QueryTriggerInteraction.Ignore))
         {
-           // Debug.Log("False");
+            // Debug.Log("False");
             return false;
         }
         //Debug.Log("True");
