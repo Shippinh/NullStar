@@ -851,7 +851,7 @@ public class SpaceShooterController : MonoBehaviour
             {
                 overboostOverheatDurationCurrent += Time.deltaTime;
 
-                healthController.TakeDamage(1, false);
+                //healthController.TakeDamage(1, false);
 
                 // If we overheat before death - initiate cooling and disable overboost
                 if(overboostOverheatDurationCurrent >= overboostOverheatDuration)

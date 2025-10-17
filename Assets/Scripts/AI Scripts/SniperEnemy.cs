@@ -57,7 +57,7 @@ public class SniperEnemy : MonoBehaviour
     [Header("Aiming")]
     private float[] aimStrengths;
     public float aimTimeToPerfect = 2f; // time in seconds to reach perfect aim
-    public float aimResetThreshold = 0.5f; // sudden direction change threshold
+    [SerializeField, Range(0f, 180f)] public float aimResetThreshold = 30f;
     private Vector3[] previousPredictedDirs;
     private Vector3 aimedDir; // updated every frame in UpdateAiming()
 
@@ -382,10 +382,11 @@ public class SniperEnemy : MonoBehaviour
             float timeToHit = distance / projectileSpeed;
             Vector3 predictedPos = playerPos + playerVel * timeToHit;
 
-            Vector3 predictedDir = (predictedPos - gunPos).normalized;
+            //Vector3 predictedDir = (predictedPos - gunPos).normalized; // linear prediction, should be balanced with lead aim time
+            Vector3 predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed); //perfect aim, 
 
             // Reset aim strength on sudden change
-            if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > 30f) // 30° sudden change threshold
+            if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > aimResetThreshold) // 30° sudden change threshold
             {
                 aimStrengths[i] = 0f;
             }

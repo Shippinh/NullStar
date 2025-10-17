@@ -58,9 +58,9 @@ public class ShieldedEnemy : MonoBehaviour
     [Header("Aiming")]
     private float[] aimStrengths;
     public float aimTimeToPerfect = 2f; // time in seconds to reach perfect aim
-    public float aimResetThreshold = 0.5f; // sudden direction change threshold
+    [SerializeField, Range(0f, 180f)] public float aimResetThreshold = 30f;
     private Vector3[] previousPredictedDirs;
-    private Vector3 aimedDir; // updated every frame in UpdateAiming()
+    public float aimLeadTime = 0.2f; // anticipates motion to compensate for aim lag
 
 
     [Header("Other")]
@@ -468,17 +468,21 @@ public class ShieldedEnemy : MonoBehaviour
             Vector3 gunPos = gun.position;
 
             Vector3 playerPos = player.transform.position;
-            Vector3 playerVel = player.body ? player.body.velocity : Vector3.zero;
+            Vector3 playerVel = player.body.velocity;
 
             // Predict position
             float distance = Vector3.Distance(gunPos, playerPos);
             float timeToHit = distance / projectileSpeed;
-            Vector3 predictedPos = playerPos + playerVel * timeToHit;
 
-            Vector3 predictedDir = (predictedPos - gunPos).normalized;
+            // aimLeadTime = 0.8 good vs multidirectional movement
+            // aimLeadTime = 0.5 good vs constant cardinal direction movement
+            Vector3 predictedPos = playerPos + playerVel * (timeToHit + aimLeadTime);
+
+            Vector3 predictedDir = (predictedPos - gunPos).normalized; //non perfect aim, good for balancing with aimLeadTime
+            //Vector3 predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed); //perfect aim, 
 
             // Reset aim strength on sudden change
-            if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > 30f) // 30° sudden change threshold
+            if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > aimResetThreshold) // 30° sudden change threshold
             {
                 aimStrengths[i] = 0f;
             }

@@ -67,8 +67,8 @@ public class RammerEnemy : MonoBehaviour
         // Scale chaotic vertical offset based on distance
         float minMultiplier = 1f;   // when close
         float maxMultiplier = 1500f; // when far
-        float scalerDistance = 100f; // distance considered "close"
-        float farDistance = 500f;    // distance considered "far"
+        float scalerDistance = 30f; // distance considered "close"
+        float farDistance = 250f;    // distance considered "far"
 
         float distanceScaler = Mathf.Clamp01((distanceToPlayer - scalerDistance) / (farDistance - scalerDistance));
         float finalUpMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, distanceScaler);
