@@ -66,6 +66,7 @@ public class ShieldedEnemy : MonoBehaviour
     [Header("Other")]
     public bool canAct = true;
     public bool canMove = true;
+    public bool gunsDead = false;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
     [SerializeField] private Vector3 velocity;
@@ -79,6 +80,7 @@ public class ShieldedEnemy : MonoBehaviour
 
     [Header("Emitter Stuff")]
     public ProjectileEmittersController projectileEmittersControllerRef;
+    public Transform emitterParent;
     [SerializeField] private Transform[] gunsPositions;
     private Vector3[] aimedDirs; // store per-gun aimed directions
     public float emitterLookSmoothTime = 0.2f;
@@ -103,7 +105,7 @@ public class ShieldedEnemy : MonoBehaviour
 
         velocity = Vector3.zero;
 
-        projectileEmittersControllerRef = GetComponentInChildren<ProjectileEmittersController>();
+        projectileEmittersControllerRef = emitterParent.GetComponent<ProjectileEmittersController>();
         gunsPositions = projectileEmittersControllerRef.GetGunsArray();
 
         //weaponChargeDuration = projectileEmittersControllerRef.rechargeTime; // handled internally, this makes no sense
@@ -192,11 +194,20 @@ public class ShieldedEnemy : MonoBehaviour
     private void LateUpdate()
     {
         AttachShields();
+        AttachEmitter();
+        if(gunsDead == false)
+            if(projectileEmittersControllerRef.ActiveGunCount == 0)
+                gunsDead = true;
     }
 
     private void AttachShields()
     {
         shieldTiltPivot.transform.position = transform.position;
+    }
+
+    private void AttachEmitter()
+    {
+        emitterParent.transform.position = transform.position;
     }
 
     void UpdateRotations()
@@ -248,7 +259,7 @@ public class ShieldedEnemy : MonoBehaviour
         Vector3 directionToPlayer = player.transform.position - transform.position;
         Vector3 avoidanceVector = CalculateObstacleAvoidance();
 
-        if (distanceToPlayer > maxRange * 1.2f) // Follow mode
+        if (distanceToPlayer > maxRange * 1.2f || gunsDead == true) // Follow mode, forced when all guns are dead
         {
             // Add chaotic lateral + vertical offsets
             Vector3 sideOffset = Vector3.Cross(Vector3.up, directionToPlayer).normalized;
@@ -468,7 +479,7 @@ public class ShieldedEnemy : MonoBehaviour
             Vector3 gunPos = gun.position;
 
             Vector3 playerPos = player.transform.position;
-            Vector3 playerVel = player.body.velocity;
+            Vector3 playerVel = player.velocity;
 
             // Predict position
             float distance = Vector3.Distance(gunPos, playerPos);

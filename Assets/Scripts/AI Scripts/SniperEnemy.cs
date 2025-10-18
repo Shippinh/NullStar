@@ -375,15 +375,19 @@ public class SniperEnemy : MonoBehaviour
             Vector3 gunPos = gun.position;
 
             Vector3 playerPos = player.transform.position;
-            Vector3 playerVel = player.body ? player.body.velocity : Vector3.zero;
+            Vector3 playerVel = player.velocity;
 
             // Predict position
             float distance = Vector3.Distance(gunPos, playerPos);
             float timeToHit = distance / projectileSpeed;
             Vector3 predictedPos = playerPos + playerVel * timeToHit;
 
-            //Vector3 predictedDir = (predictedPos - gunPos).normalized; // linear prediction, should be balanced with lead aim time
-            Vector3 predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed); //perfect aim, 
+            Vector3 predictedDir = Vector3.zero;
+
+            if(player.overboostMode)
+                predictedDir = (predictedPos - gunPos).normalized; // linear prediction, should be balanced with lead aim time
+            else
+                predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed); //perfect aim, 
 
             // Reset aim strength on sudden change
             if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > aimResetThreshold) // 30° sudden change threshold
