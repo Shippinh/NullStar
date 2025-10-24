@@ -65,8 +65,15 @@ public class ShieldedEnemy : MonoBehaviour
 
     [Header("Other")]
     public bool canAct = true;
+    private float actSlowdownTimer = 0f;
+    [SerializeField] private float actSlowdownDuration = 1f; // how long it takes to fully stop/start acting again
+    private float actSlowdownFactor = 1f;
+
+
     public bool canMove = true;
+
     public bool gunsDead = false;
+
     [SerializeField] private Rigidbody rb;
     [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
     [SerializeField] private Vector3 velocity;
@@ -147,35 +154,44 @@ public class ShieldedEnemy : MonoBehaviour
     {
         if (!player) return;
 
+        // update dynamic ranges
         (minRange, maxRange) = player.CalculateDynamicOrbit(baseMinRange, baseMaxRange, baseMaxRange - baseMinRange);
 
+        // update slowdown timer (0..1) and compute factor used by rotations and aiming
+        float targetSlowdown = canAct ? 1f : 0f;
+        // Keep your existing MoveTowards usage (it ramps over actSlowdownDuration seconds)
+        actSlowdownTimer = Mathf.MoveTowards(actSlowdownTimer, targetSlowdown, Time.deltaTime / actSlowdownDuration);
+        actSlowdownFactor = Mathf.SmoothStep(0f, 1f, actSlowdownTimer);
+
+        // Only run heavy AI/aim/shooting logic when allowed
         if (canAct)
         {
             CalculateDesiredVelocity(distToPlayer);
 
-            UpdateAiming();
+            UpdateAiming();     // aiming updates when acting
             HandleShooting(distToPlayer);
 
             if (stopWhenShooting)
             {
-                // Gradual slowdown during charge
+                // Gradual slowdown while charging/sending (keeps behavior consistent)
                 if (isChargingShot || isSendingShot)
                 {
                     float t = Mathf.Clamp01(weaponChargeDurationTimer / weaponChargeDuration);
                     float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out
-                    desiredVelocity *= (1f - easeFactor); // gradually reduce to zero
+                    desiredVelocity *= (1f - easeFactor);
                 }
             }
-
-            UpdateRotations();
         }
         else
         {
-            float t = Mathf.Clamp01(weaponChargeDurationTimer / weaponChargeDuration);
-            float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out
-            desiredVelocity *= (1f - easeFactor); // gradually reduce to zero
+            // When not acting, fade desired velocity by slowdown factor so movement eases out
+            desiredVelocity *= actSlowdownFactor;
         }
+
+        // ALWAYS update rotations so they can smoothly decelerate / accelerate
+        UpdateRotations();
     }
+
 
     void FixedUpdate()
     {
@@ -223,11 +239,16 @@ public class ShieldedEnemy : MonoBehaviour
             if (directionToPlayer.sqrMagnitude > 0.001f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-                float rotationSpeed = 5f;
+                // scale rotation speed by slowdown factor so it eases when canAct == false
+                float rotationSpeed = 5f * actSlowdownFactor;
                 emitterTransform.rotation = Quaternion.Slerp(emitterTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
+
+        // Optionally, if the emitter has other per-gun transforms you want to slow,
+        // handle them here or inside UpdateAiming (we handle guns in UpdateAiming below).
     }
+
 
 
     void UpdateShieldRotation()
@@ -243,14 +264,21 @@ public class ShieldedEnemy : MonoBehaviour
                 float verticalAngle = Mathf.Atan2(toPlayer.y, toPlayerXZ.magnitude) * Mathf.Rad2Deg;
                 targetTilt *= Quaternion.Euler(-verticalAngle, 0f, 0f);
 
-                // Optional smoothing
-                shieldTiltPivot.transform.rotation = Quaternion.Slerp(shieldTiltPivot.transform.rotation, targetTilt, shieldTiltSpeed * Time.deltaTime);
+                // apply slowdown factor
+                float effectiveTiltSpeed = shieldTiltSpeed * actSlowdownFactor;
+                shieldTiltPivot.transform.rotation = Quaternion.Slerp(
+                    shieldTiltPivot.transform.rotation,
+                    targetTilt,
+                    effectiveTiltSpeed * Time.deltaTime
+                );
             }
 
-            // --- Spin the shield ring locally ---
-            shieldRing.Rotate(Vector3.up, shieldRotationSpeed * Time.deltaTime, Space.Self);
+            // --- Spin the shield ring locally (scale by slowdown) ---
+            float effectiveSpin = shieldRotationSpeed * actSlowdownFactor;
+            shieldRing.Rotate(Vector3.up, effectiveSpin * Time.deltaTime, Space.Self);
         }
     }
+
 
 
     // Calculates desiredVelocity and acceleration values based on chase or orbit behavior.

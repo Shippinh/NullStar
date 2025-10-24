@@ -64,7 +64,11 @@ public class SniperEnemy : MonoBehaviour
 
     [Header("Other")]
     public bool canAct = true;
+    private float actSlowdownTimer = 0f;
+    [SerializeField] private float actSlowdownDuration = 1f; // how long it takes to fully stop/start acting again
+
     public bool canMove = true;
+
     [SerializeField] private Rigidbody rb;
     [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
     [SerializeField] private Vector3 velocity;
@@ -139,29 +143,28 @@ public class SniperEnemy : MonoBehaviour
 
         (minRange, maxRange) = player.CalculateDynamicOrbit(baseMinRange, baseMaxRange, baseMaxRange - baseMinRange);
 
+        // Smooth act slowdown independent of weapon timers
+        float targetSlowdown = canAct ? 1f : 0f;
+        actSlowdownTimer = Mathf.MoveTowards(actSlowdownTimer, targetSlowdown, Time.deltaTime / actSlowdownDuration);
+        float actSlowdownFactor = Mathf.SmoothStep(0f, 1f, actSlowdownTimer);
+
         if (canAct)
         {
             CalculateDesiredVelocity(distToPlayer);
-
             UpdateAiming();
             HandleShooting(distToPlayer);
 
-            if (stopWhenShooting)
+            if (stopWhenShooting && (isChargingShot || isSendingShot))
             {
-                // Gradual slowdown during charge
-                if (isChargingShot || isSendingShot)
-                {
-                    float t = Mathf.Clamp01(weaponChargeDurationTimer / weaponChargeDuration);
-                    float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out
-                    desiredVelocity *= (1f - easeFactor); // gradually reduce to zero
-                }
+                float t = Mathf.Clamp01(weaponChargeDurationTimer / weaponChargeDuration);
+                float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out
+                desiredVelocity *= (1f - easeFactor); // gradually reduce to zero while charging
             }
         }
         else
         {
-            float t = Mathf.Clamp01(weaponChargeDurationTimer / weaponChargeDuration);
-            float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out
-            desiredVelocity *= (1f - easeFactor); // gradually reduce to zero
+            // Don't update logic, just fade motion via actSlowdownFactor
+            desiredVelocity *= actSlowdownFactor;
         }
     }
 

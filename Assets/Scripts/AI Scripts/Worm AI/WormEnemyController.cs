@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WormEnemyHealthController : EnemyController
+public class WormEnemyController : EnemyController
 {
     [Header("References")]
     public List<EntityHealthController> weakPointHealths = new List<EntityHealthController>();

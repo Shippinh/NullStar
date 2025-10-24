@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
         Initialize();
     }
 
-    public void HandleEnemyDeath()
+    public virtual void HandleEnemyDeath()
     {
         this.gameObject.SetActive(false);
     }
