@@ -181,7 +181,6 @@ public class WormEnemy : MonoBehaviour
         desiredVelocity = Vector3.ClampMagnitude(combined, maxSpeed);
     }
 
-
     Vector3 ChoosePivot()
     {
         Vector3 playerPos = player.transform.position;
@@ -366,8 +365,6 @@ public class WormEnemy : MonoBehaviour
 
         return totalAvoidance;
     }
-
-
 
     void OnTriggerEnter(Collider other)
     {
