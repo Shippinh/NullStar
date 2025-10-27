@@ -39233,6 +39233,14 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0
+  playerCamera: {fileID: 0}
+  pivotDistance: 25
+  pivotForwardPush: 10
+  pivotHeightOffset: 3
+  pivotChangeInterval: 3
+  LOSMask:
+    serializedVersion: 2
+    m_Bits: 0
   currentSpiralStep: 0
 --- !u!54 &906772822
 Rigidbody:
@@ -40260,7 +40268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3006fbb85cbefaa4e94ea55e7da2163f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 691622028}
+  player: {fileID: 691622029}
   pivot: {fileID: 1016902892}
   enemyA: {fileID: 1283344644}
   enemyB: {fileID: 1665514267}
@@ -40278,11 +40286,19 @@ MonoBehaviour:
   - {fileID: 2097884968}
   - {fileID: 594580476}
   pivotMoveSpeed: 10
-  pivotRandomOffset: 3
-  pivotRotationSpeed: 180
+  pivotRandomOffset: 30
+  pivotRotationSpeed: 90
   avoidanceForce: 1000
   detectionRadius: 80
   obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  playerCamera: {fileID: 330585546}
+  pivotDistance: 150
+  pivotForwardPush: 30
+  pivotHeightOffset: 30
+  pivotChangeInterval: 60
+  LOSMask:
     serializedVersion: 2
     m_Bits: 1024
   currentSpiralStep: 0

@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
 public class BarrierRammerEnemyCentralized : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;
+    public SpaceShooterController player;
     public Transform pivot;          // pivot object for corkscrew rotation
     public Transform enemyA;         // always assigned
     public Transform enemyB;         // optional
@@ -38,6 +36,19 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     public float avoidanceForce = 1000f;
     public float detectionRadius = 40f;
     public LayerMask obstacleMask;
+
+    [Header("Attack Pathfinding")]
+    public Transform playerCamera;
+    private Vector3 currentPivot;
+    private int currentDirectionIndex = -1;
+    private List<Vector3> availableDirections;
+    public float pivotDistance = 25f;
+    public float pivotForwardPush = 10f;   // worm goes past player
+    public float pivotHeightOffset = 3f;   // lift pivot slightly above ground
+    private Vector3 lastPlayerForward = Vector3.forward;
+    public float pivotChangeInterval = 3f; // every 3 seconds
+    private float nextPivotTime = 0f;
+    public LayerMask LOSMask;
 
     private Rigidbody rb;
     private List<Collider> nearbyObstacles = new List<Collider>();
@@ -74,20 +85,43 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             isSolo = true;
     }
 
+    private void LateUpdate()
+    {
+        if (player.GetPlayerOnGround())
+            currentPivot = CheckForceTopPivot();
+        else
+            currentPivot = UpdatePivot();
+    }
+
     void FixedUpdate()
     {
         if (enemyA == null) return;
+
+        UpdateDirections();
 
         CalculateDesiredVelocity();
 
         AdjustVelocity();
 
-        if (pivot != null && player != null)
+        if (pivot != null)
         {
-            Vector3 toPlayer = (player.position - pivot.position).normalized;
-            if (toPlayer.sqrMagnitude > 0f)
+            Vector3 lookTarget;
+
+            if (isSolo)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(toPlayer, Vector3.up);
+                // Solo still faces the player directly
+                lookTarget = player != null ? player.transform.position : transform.position + transform.forward;
+            }
+            else
+            {
+                // Paired its current pivot point
+                lookTarget = currentPivot;
+            }
+
+            Vector3 toTarget = (lookTarget - pivot.position).normalized;
+            if (toTarget.sqrMagnitude > 0f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(toTarget, Vector3.up);
                 pivot.rotation = Quaternion.RotateTowards(
                     pivot.rotation,
                     targetRotation,
@@ -95,6 +129,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
                 );
             }
         }
+
 
         rb.velocity = velocity;
 
@@ -128,8 +163,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         if (isSolo)
         {
             Vector3 toPlayer = (player.transform.position - transform.position).normalized;
-            Vector3 avoidanceVector = ProjectOnContactPlane(CalculateObstacleAvoidance());
-            //Vector3 avoidanceVector = CalculateObstacleAvoidance();
+            //Vector3 avoidanceVector = ProjectOnContactPlane(CalculateObstacleAvoidance());
+            Vector3 avoidanceVector = CalculateObstacleAvoidance();
 
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
             float distanceScaler = Mathf.Clamp01(distanceToPlayer / (spiralFadeDistance * 2f)); //smoothly fade spin when getting closer to player
@@ -165,17 +200,21 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         }
         else
         {
-            Vector3 toPlayer = (player.transform.position - transform.position).normalized;
-            //Vector3 avoidanceVector = ProjectOnContactPlane(CalculateObstacleAvoidance());
+            // --- 1. Pick a new pivot periodically ---
+            if (Time.time >= nextPivotTime)
+            {
+                currentPivot = ChoosePivot();
+                nextPivotTime = Time.time + pivotChangeInterval;
+            }
+
+            // --- 2. Calculate movement toward pivot (same as before) ---
+            Vector3 toPivot = (currentPivot - transform.position).normalized;
             Vector3 avoidanceVector = CalculateObstacleAvoidance();
 
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            float distanceToPivot = Vector3.Distance(transform.position, currentPivot);
+            float burstDistance = Mathf.Clamp(distanceToPivot * 0.5f, minBurstDistance, maxBurstDistance);
 
-            // Combine movement
-            Vector3 targetDir = (toPlayer + avoidanceVector.normalized).normalized;
-            float burstDistance = Mathf.Clamp(distanceToPlayer * 0.5f, minBurstDistance, maxBurstDistance);
-
-            Vector3 burstTarget = transform.position + targetDir * burstDistance;
+            Vector3 burstTarget = transform.position + (toPivot + avoidanceVector.normalized).normalized * burstDistance;
             desiredVelocity = (burstTarget - transform.position) / Time.fixedDeltaTime;
 
             if (desiredVelocity.magnitude > maxSpeed)
@@ -258,6 +297,130 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     {
         if (nearbyObstacles.Contains(other))
             nearbyObstacles.Remove(other);
+    }
+
+    Vector3 ChoosePivot()
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerForward = GetPlayerForward();
+
+        List<Vector3> validPivots = new List<Vector3>();
+        foreach (var dir in availableDirections)
+        {
+            // Start with pure cardinal pivot
+            Vector3 candidate = playerPos + dir * pivotDistance;
+
+            // Then apply global "forward push"
+            candidate += playerForward * pivotForwardPush;
+
+            // Offset upwards from ground
+            candidate.y += pivotHeightOffset;
+
+            if (HasLineOfSight(candidate))
+                validPivots.Add(candidate);
+        }
+
+        if (validPivots.Count > 0)
+        {
+            int randIndex = UnityEngine.Random.Range(0, validPivots.Count);
+            currentDirectionIndex = randIndex; // just remember the index
+            return validPivots[randIndex];
+        }
+
+        // fallback pivot directly in front of player
+        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+    }
+
+    Vector3 CheckForceTopPivot()
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerForward = GetPlayerForward();
+
+        if (currentDirectionIndex < 0 || currentDirectionIndex >= availableDirections.Count)
+            return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+
+        Vector3 dir = availableDirections[2]; // recalc direction relative to camera
+        Vector3 pivot = playerPos + dir * pivotDistance;
+
+        pivot += playerForward * pivotForwardPush;
+        pivot.y += pivotHeightOffset;
+
+        if (HasLineOfSight(pivot))
+            return pivot;
+
+        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+    }
+
+    Vector3 UpdatePivot()
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerForward = GetPlayerForward();
+
+        if (currentDirectionIndex < 0 || currentDirectionIndex >= availableDirections.Count)
+            return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+
+        Vector3 dir = availableDirections[currentDirectionIndex]; // recalc direction relative to camera
+        Vector3 pivot = playerPos + dir * pivotDistance;
+
+        pivot += playerForward * pivotForwardPush;
+        pivot.y += pivotHeightOffset;
+
+        if (HasLineOfSight(pivot))
+            return pivot;
+
+        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+    }
+
+
+    void UpdateDirections()
+    {
+        availableDirections = new List<Vector3>
+        {
+            //Vector3.forward,
+            //Vector3.back,
+            playerCamera.right,
+            -playerCamera.right,
+            player.transform.up,
+            -player.transform.up
+        };
+    }
+
+    Vector3 GetPlayerForward()
+    {
+        if (player != null && player.body != null)
+        {
+            Vector3 vel = player.body.velocity;
+
+            if (vel.sqrMagnitude > 0.01f)
+            {
+                lastPlayerForward = vel.normalized;
+                return lastPlayerForward;
+            }
+        }
+
+        // Fallbacks if no velocity or player/body is null
+        if (playerCamera != null)
+            return playerCamera.forward;
+
+        return lastPlayerForward != Vector3.zero ? lastPlayerForward : Vector3.forward;
+    }
+
+    bool HasLineOfSight(Vector3 point)
+    {
+        if (point == Vector3.zero) return false;
+
+        Vector3 dir = (player.transform.position - point).normalized;
+        float distance = Vector3.Distance(point, player.transform.position);
+
+        // LayerMask can help avoid hitting the worm's own colliders
+        if (Physics.Raycast(point, dir, out RaycastHit hit, distance, LOSMask))
+        {
+            // Make sure we hit the player's collider (even if it's a child)
+            return hit.collider.GetComponentInParent<SpaceShooterController>() != null;
+        }
+
+        // No obstruction, line of sight is clear
+        return true;
     }
 
     void OnDrawGizmosSelected()
