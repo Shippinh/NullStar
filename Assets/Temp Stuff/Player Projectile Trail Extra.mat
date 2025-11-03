@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player Projectile Trail Adrenaline
+  m_Name: Player Projectile Trail Extra
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -119,9 +119,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.90355164, g: 1, b: 0.6273585, a: 0.5019608}
-    - _Color: {r: 0.90355164, g: 1, b: 0.6273585, a: 0.5019608}
-    - _EmissionColor: {r: 0, g: 1, b: 0.57465506, a: 1}
+    - _BaseColor: {r: 0.018556833, g: 1, b: 0, a: 0.5019608}
+    - _Color: {r: 0.018556833, g: 1, b: 0, a: 0.5019608}
+    - _EmissionColor: {r: 0.07070708, g: 1, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1315855155982012778
