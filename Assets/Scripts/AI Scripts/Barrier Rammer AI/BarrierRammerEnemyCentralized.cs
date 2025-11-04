@@ -8,8 +8,10 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     public SpaceShooterController player;
     public Transform pivot;          // pivot object for corkscrew rotation
     public Transform enemyA;         // always assigned
+    private Transform originalEnemyARef;
     public Transform enemyB;         // optional
-    [SerializeField] private bool isSolo;
+    private Transform originalEnemyBRef;
+    public bool isSolo;
 
     [Header("Movement Settings")]
     public float maxSpeed = 500f;
@@ -97,6 +99,9 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
     void Start()
     {
+        originalEnemyARef = enemyA;
+        originalEnemyBRef = enemyB;
+
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         rb.drag = 0f;
@@ -140,6 +145,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             currentPivot = CheckForceTopPivot();
         else
             currentPivot = UpdatePivot();
+
+        AttachPivot();
     }
 
     void FixedUpdate()
@@ -154,7 +161,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
             RotateTowardsCurrentPivot();
 
-            if(canAttack)
+            if(canAttack && !isSolo)
                 HandleAttackInitiation();
         }
         else
@@ -219,7 +226,47 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         }
     }
 
+    private void AttachPivot()
+    {
+        pivot.transform.position = transform.position;
+    }
 
+    private void ForceStopAttack()
+    {
+        if (!isAttacking && !burstingToPivot && !aligningToPivot && !aligningToAnchors && !enemiesAligned)
+            return; // nothing to stop
+
+        Debug.Log("Attack forcibly stopped!");
+
+        // reset all attack-related states
+        isAttacking = false;
+        burstingToPivot = false;
+        aligningToPivot = false;
+        aligningToAnchors = false;
+        enemiesAligned = false;
+
+        // clear timers
+        attackTimer = 0f;
+        alignTimer = 0f;
+        leftRightAlignTimer = 0f;
+        burstTimer = 0f;
+
+        // disable barrier visuals
+        if (barrierObj != null)
+            barrierObj.SetActive(false);
+
+        // smoothly reset motion
+       /* desiredVelocity = Vector3.zero;
+        velocity = Vector3.Lerp(velocity, Vector3.zero, 10f * Time.deltaTime);
+
+        // optional: reset pivot rotation toward current direction
+        if (pivot != null)
+        {
+            Vector3 forward = transform.forward;
+            if (forward.sqrMagnitude > 0.001f)
+                pivot.rotation = Quaternion.LookRotation(forward, Vector3.up);
+        }*/
+    }
 
     void HandleAttackAlignment()
     {
@@ -327,7 +374,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
     void SwitchPivotPoints()
     {
-        if (!isSolo && pivotPoints != null && pivotPoints.Length >= 2)
+        if (isSolo == false && pivotPoints != null && pivotPoints.Length >= 2)
         {
             Transform pivotA = pivotPoints[currentPivotIndex];
             Transform pivotB = pivotPoints[(currentPivotIndex + 2) % pivotPoints.Length]; // opposite point for symmetry
@@ -384,39 +431,60 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
     void CalculateDesiredVelocity()
     {
+        // unique noise seed per instance (for distinct motion patterns)
+        float seed = transform.GetInstanceID() * 0.001f;
+
+        // --- Chaotic offset for duo movement ---
+            float sideNoise = Mathf.PerlinNoise(Time.time * 0.3f + seed, transform.position.x * 0.15f) - 0.5f;
+            float upNoise = Mathf.PerlinNoise(Time.time * 0.33f + seed * 3f, transform.position.z * 0.15f + 11f) - 0.5f;
+
+            float minChaos = 150f;
+            float maxChaos = 300f;
+
         if (isSolo)
         {
-            Vector3 toPlayer = (player.transform.position - transform.position).normalized;
-            //Vector3 avoidanceVector = ProjectOnContactPlane(CalculateObstacleAvoidance());
+            Vector3 toPlayer = player.transform.position - transform.position;
+            float distanceToPlayer = toPlayer.magnitude;
+            Vector3 toPlayerDir = toPlayer.normalized;
+
             Vector3 avoidanceVector = CalculateObstacleAvoidance();
 
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-            float distanceScaler = Mathf.Clamp01(distanceToPlayer / (spiralFadeDistance * 2f)); //smooth fade when getting closer to player
-
-            //force precision when close enough
+            // --- Spiral distance scaling ---
+            float distanceScaler = Mathf.Clamp01(distanceToPlayer / (spiralFadeDistance * 2f));
             if (distanceToPlayer < spiralFadeDistance)
-                distanceScaler = 0;
+                distanceScaler = 0f;
 
             float spiralMagnitude = maxSpiralOffset * distanceScaler;
+            float directionSign = isClockwise ? 1f : -1f;
+            float spiralAngle = currentSpiralStep * Mathf.PI / 2f * directionSign;
 
-            float spiralAngle = currentSpiralStep * Mathf.PI / 2f;
-            Vector3 side = Vector3.Cross(Vector3.up, toPlayer).normalized;
+            // --- Base orientation ---
+            Vector3 side = Vector3.Cross(Vector3.up, toPlayerDir).normalized;
             Vector3 up = Vector3.up;
-
-            // Tilt spiral by 45 degrees around toPlayer
-            Quaternion tilt45 = Quaternion.AngleAxis(45f, toPlayer);
+            Quaternion tilt45 = Quaternion.AngleAxis(45f, toPlayerDir);
             side = tilt45 * side;
             up = tilt45 * up;
 
-            // Spiral offset pattern
-            Vector3 spiralOffset = side * Mathf.Cos(spiralAngle) * spiralMagnitude
-                                    + up * Mathf.Sin(spiralAngle) * spiralMagnitude * verticalOffsetMultiplier;
+            float closeDist = 100f;
+            float farDist = 200f;
+            float chaosScaler = Mathf.Clamp01((distanceToPlayer - closeDist) / (farDist - closeDist));
+            float chaosRange = Mathf.Lerp(minChaos, maxChaos, chaosScaler);
 
-            // Combine movement
-            Vector3 targetDir = (toPlayer + avoidanceVector.normalized).normalized;
+            Vector3 chaoticOffset = side * sideNoise * chaosRange
+                                  + up * upNoise * chaosRange * 0.5f;
+
+            // --- Spiral offset pattern ---
+            Vector3 spiralOffset = side * Mathf.Cos(spiralAngle) * spiralMagnitude
+                                 + up * Mathf.Sin(spiralAngle) * spiralMagnitude * verticalOffsetMultiplier;
+
+            // --- Combine spiral + chaos ---
+            Vector3 offsetCombined = spiralOffset + chaoticOffset;
+
+            // --- Burst movement ---
+            Vector3 targetDir = (toPlayerDir + avoidanceVector.normalized).normalized;
             float burstDistance = Mathf.Clamp(distanceToPlayer * 0.5f, minBurstDistance, maxBurstDistance);
 
-            Vector3 burstTarget = transform.position + targetDir * burstDistance + spiralOffset;
+            Vector3 burstTarget = transform.position + targetDir * burstDistance + offsetCombined;
             desiredVelocity = (burstTarget - transform.position) / Time.fixedDeltaTime;
 
             if (desiredVelocity.magnitude > maxSpeed)
@@ -424,27 +492,39 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         }
         else
         {
-            // --- 1. Pick a new pivot periodically ---
+            // --- Pivot selection ---
             if (Time.time >= nextPivotTime)
             {
                 currentPivot = ChoosePivot();
                 nextPivotTime = Time.time + pivotChangeInterval;
             }
 
-            // --- 2. Calculate movement toward pivot (same as before) ---
-            Vector3 toPivot = (currentPivot - transform.position).normalized;
+            // --- Movement toward pivot ---
+            Vector3 toPivot = currentPivot - transform.position;
+            float distanceToPivot = toPivot.magnitude;
+            Vector3 toPivotDir = toPivot.normalized;
+
             Vector3 avoidanceVector = CalculateObstacleAvoidance();
 
-            float distanceToPivot = Vector3.Distance(transform.position, currentPivot);
-            float burstDistance = Mathf.Clamp(distanceToPivot * 0.5f, minBurstDistance, maxBurstDistance);
+            float chaosScaler = Mathf.Clamp01(distanceToPivot / 250f);
+            float chaosRange = Mathf.Lerp(minChaos, maxChaos, chaosScaler);
 
-            Vector3 burstTarget = transform.position + (toPivot + avoidanceVector.normalized).normalized * burstDistance;
+            Vector3 side = Vector3.Cross(Vector3.up, toPivotDir).normalized;
+            Vector3 up = Vector3.up;
+            Vector3 chaoticOffset = side * sideNoise * chaosRange + up * upNoise * chaosRange * 0.5f;
+
+            // --- Burst movement ---
+            float burstDistance = Mathf.Clamp(distanceToPivot * 0.5f, minBurstDistance, maxBurstDistance);
+            Vector3 burstTarget = transform.position + (toPivotDir + avoidanceVector.normalized).normalized * burstDistance + chaoticOffset;
+
             desiredVelocity = (burstTarget - transform.position) / Time.fixedDeltaTime;
 
             if (desiredVelocity.magnitude > maxSpeed)
                 desiredVelocity = desiredVelocity.normalized * maxSpeed;
         }
     }
+
+
 
     void AdjustVelocity()
     {
@@ -681,6 +761,64 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
         // No obstruction, line of sight is clear
         return true;
+    }
+    public void HandlePartnerDeath(bool isA)
+    {
+        // Stop all current attack activity
+        ForceStopAttack();
+
+        // Mark solo
+        isSolo = true;
+
+        // Determine which one died
+        if (isA)
+        {
+            if (enemyB != null)
+            {
+                enemyA = enemyB;
+                enemyB = null;
+            }
+        }
+        else // enemy B died
+        {
+            if (enemyA != null)
+            {
+                enemyB = null;
+            }
+        }
+
+        // --- Reset paired behavior state ---
+        currentPivotIndex = 0;
+        nextPivotTime = 0f;
+        burstingToPivot = false;
+        aligningToPivot = false;
+        aligningToAnchors = false;
+        enemiesAligned = false;
+        isAttacking = false;
+
+        // --- Reinitialize solo movement pattern ---
+        velocity = Vector3.zero;
+        desiredVelocity = Vector3.zero;
+        currentSpiralStep = 0;
+
+        enemyA.transform.localPosition = Vector3.zero;
+        enemyA.transform.localPosition = Vector3.zero;
+
+        // Prevent paired pivot updates from running
+        pivotPoints = null;
+
+        Debug.Log("[BarrierRammerEnemyCentralized] Partner died — switching to SOLO mode.");
+    }
+
+    public void ResetBehaviorState(bool isSoloPtr)
+    {
+        isSolo = isSoloPtr;
+        enemyB = originalEnemyBRef;
+        enemyA = originalEnemyARef;
+        velocity = Vector3.zero;
+        currentSpiralStep = 0;
+        isAttacking = false;
+        enemiesAligned = false;
     }
 
     void OnDrawGizmosSelected()

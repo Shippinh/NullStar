@@ -41188,7 +41188,7 @@ MonoBehaviour:
   pivotDistance: 150
   pivotForwardPush: 30
   pivotHeightOffset: 30
-  pivotChangeInterval: 2.5
+  pivotChangeInterval: 5
   LOSMask:
     serializedVersion: 2
     m_Bits: 1024
