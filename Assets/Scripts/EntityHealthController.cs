@@ -11,6 +11,8 @@ public class EntityHealthController : MonoBehaviour
     public bool canBeDamaged = true;
     public bool isAlive = true;
     public bool isInvincible = false;
+    public bool instaKillable = false;
+
     public float invincibilityDuration = 2f;
     public float currentInvincibilityDuration = 0f;
 
@@ -29,6 +31,11 @@ public class EntityHealthController : MonoBehaviour
         currentHealingCooldown = 0f;
     }
 
+    /// <summary>
+    /// Used to deal damage to the entity
+    /// </summary>
+    /// <param name="takenDamage">The amount of damage</param>
+    /// <param name="shouldInvoke">If this damage instance fires TookHit event</param>
     public void TakeDamage(int takenDamage, bool shouldInvoke)
     {
         if (canBeDamaged)
@@ -126,5 +133,24 @@ public class EntityHealthController : MonoBehaviour
             Died?.Invoke();
             isAlive = false;
         }
+    }
+
+    /// <summary>
+    /// Kills the current entity instantly based on internal variables
+    /// </summary>
+    public void InstantlyDie()
+    {
+        if (isAlive && instaKillable && canBeDamaged)
+        {
+            CurrentHP = 0;
+        }
+    }
+
+    /// <summary>
+    /// Kills the current entity instantly unconditionally
+    /// </summary>
+    public void ForciblyDie()
+    {
+        CurrentHP = 0;
     }
 }

@@ -7,6 +7,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     [Header("References")]
     public SpaceShooterController player;
     public Transform pivot;          // pivot object for corkscrew rotation
+    public Transform childPivot;
     public Transform enemyA;         // always assigned
     private Transform originalEnemyARef;
     public Transform enemyB;         // optional
@@ -67,6 +68,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
     [Header("Attack Sequence Handling")]
     public GameObject barrierObj;
+    public bool barrierIsColliding;
     public Transform barrierLeftAnchor;
     public Transform barrierRightAnchor;
     public float maxAcceleration = 200f;
@@ -79,6 +81,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     [SerializeField] private float attackTimer = 0f;
     public bool isAttacking; // general state, tells if the enemy is within the attack sequence
     public bool randomizeABLeftRightPos; // if true - enemy a and b will assume left and right position randomly
+    public int maxCollisionsBeforePrematureStop = 3; // how many objects it can kill before breaking the attack sequence
+    [SerializeField] private int currentCollisionsBeforePrematureStop = 0;
     private Quaternion alignStartRot;
     private Quaternion anchorStartRot;
     private Vector3 anchorStartAPos;
@@ -94,6 +98,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     private Vector3 desiredVelocity;
     private Vector3 contactNormal = Vector3.up;
     private float nextBurstTime = 0f;
+    private uint destructibleCount = 0;
+    private uint indestructibleCount = 0;
 
     public int currentSpiralStep = 0;
 
@@ -147,6 +153,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             currentPivot = UpdatePivot();
 
         AttachPivot();
+        SynchronizePivots();
     }
 
     void FixedUpdate()
@@ -229,6 +236,12 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     private void AttachPivot()
     {
         pivot.transform.position = transform.position;
+    }
+
+    private void SynchronizePivots()
+    {
+        childPivot.transform.rotation = pivot.transform.rotation;
+        childPivot.transform.position = pivot.transform.position;
     }
 
     private void ForceStopAttack()
@@ -337,6 +350,17 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     {
         if (enemiesAligned)
         {
+            //if avoidance detects indestructible ground or if the barrier directly hits something - stop attacking prematurely
+            if(indestructibleCount > 0 || currentCollisionsBeforePrematureStop >= maxCollisionsBeforePrematureStop)
+            {
+                //barrierIsColliding = false;
+                currentCollisionsBeforePrematureStop = 0;
+                isAttacking = false;
+                enemiesAligned = false;
+                barrierObj.SetActive(false);
+                Debug.Log("Finishing the attack prematurely!");
+            }
+
             attackTimer += Time.deltaTime;
             float t = Mathf.SmoothStep(0f, 1f, attackTimer / attackTime);
 
@@ -629,14 +653,43 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         if (((1 << other.gameObject.layer) & obstacleMask) != 0 && !other.isTrigger)
         {
             if (!nearbyObstacles.Contains(other))
+            {
                 nearbyObstacles.Add(other);
+                if (other.tag == "Indestructible Ground")
+                    indestructibleCount++;
+                else
+                    destructibleCount++;
+            }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         if (nearbyObstacles.Contains(other))
+        {
             nearbyObstacles.Remove(other);
+            if (other.tag == "Indestructible Ground")
+                indestructibleCount--;
+            else
+                destructibleCount--;
+        }
+    }
+
+    // we'll use this later when i decide to add destructible cover / asteroids, etc. We'll limit the hit count and reset after each attack or end the attack prematurely if we the enemy destroys too much
+    private void OnCollisionEnter(Collision collision)
+    {
+        /*if (collision.gameObject.CompareTag("Destructibles"))
+        {
+            Debug.Log("Barrier physical collision");
+            barrierIsColliding = true;
+        }*/
+
+        EntityHealthController hpController = collision.gameObject.GetComponent<EntityHealthController>();
+        if (hpController != null)
+        {
+            currentCollisionsBeforePrematureStop++;
+            hpController.InstantlyDie();
+        }
     }
 
     Vector3 ChoosePivot()
