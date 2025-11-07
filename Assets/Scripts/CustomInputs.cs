@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CustomInputs", menuName = "Game/Input Configuration")]
+[CreateAssetMenu(fileName = "CustomInputs", menuName = "NullStar/Input Configuration")]
 public class CustomInputs : ScriptableObject
 {
     public KeyCode MoveUp = KeyCode.W;

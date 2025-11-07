@@ -12,76 +12,47 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     private Transform originalEnemyARef;
     public Transform enemyB;         // optional
     private Transform originalEnemyBRef;
+    public Transform playerCamera;
+    public GameObject barrierObj;
+    public bool barrierIsColliding;
+    public Transform barrierLeftAnchor;
+    public Transform barrierRightAnchor;
+    public BarrierRammerPreset duoStats;
+    public BarrierRammerPreset soloStats;
+    [SerializeField] private BarrierRammerPreset currentPreset;
     public bool isSolo;
 
     [Header("Movement Settings")]
-    public float maxSpeed = 500f;
-    public float minBurstDistance = 50f;
-    public float maxBurstDistance = 50f;
-    public float burstCooldown = 0.5f;
     public bool randomizeInitialBurstTimer = false;
     public float maxRandomInitialBurstTimer = 0.1f;
-
-    public bool randomizeSpinDirection = true;
+    public float currentBurstCooldown = 0.5f;
     [SerializeField] private bool isClockwise = true;
-
-    [Header("Spiral Settings (Solo)")]
-    public float maxSpiralOffset = 30f;
-    public float verticalOffsetMultiplier = 1f;
-    public float spiralFadeDistance = 150f;
 
     [Header("Pivot Point System (Paired Movement)")]
     public Transform[] pivotPoints;          // assign 4 transforms via inspector
     private Vector3[] initialPivotOffsets;
-    public float pivotMoveSpeed = 10f;       // how quickly enemies move toward their assigned pivot
-    public float pivotRandomOffset = 3f;     // how much to randomize pivot position each burst
     private int currentPivotIndex = 0;       // current pivot index for cycling
-
-    [Header("Pivot Rotation Settings")]
-    public float pivotRotationSpeed = 180f; // degrees per second
-
-    [Header("Avoidance")]
-    public float avoidanceForce = 1000f;
-    public float detectionRadius = 40f;
-    public LayerMask obstacleMask;
 
     [Header("Pre-Attack Burst Settings")]
     public float burstDuration;       // how long the burst lasts
-    public float burstSpeed = 200f;           // how fast the enemy moves during burst
     private bool burstingToPivot = false;     // are we currently bursting?
     private float burstTimer = 0f;
     private Vector3 burstDir;
 
     [Header("Attack Pathfinding")]
-    public Transform playerCamera;
     public bool canAttack = true;
     private Vector3 currentPivot;
     private int currentDirectionIndex = -1;
     private List<Vector3> availableDirections;
-    public float pivotDistance = 25f;
-    public float pivotForwardPush = 10f;   // worm goes past player
-    public float pivotHeightOffset = 3f;   // lift pivot slightly above ground
     private Vector3 lastPlayerForward = Vector3.forward;
-    public float pivotChangeInterval = 3f; // every 3 seconds
     private float nextPivotTime = 0f;
-    public LayerMask LOSMask;
 
     [Header("Attack Sequence Handling")]
-    public GameObject barrierObj;
-    public bool barrierIsColliding;
-    public Transform barrierLeftAnchor;
-    public Transform barrierRightAnchor;
-    public float maxAcceleration = 200f;
-    public float attackRotationBreakoffDistance = 150f; // distance at which the enemy stops rotating towards the player aggressively during the attack
-    public float alignTime = 1f; // time for the enemy controller to get into the currentPivot position (during that we also start rotating the enemy towards the player)
     [SerializeField] private float alignTimer = 0f;
-    public float leftRightAlignTime = 1f; // time for enemy a and enemy b to take left and right positions
     [SerializeField] private float leftRightAlignTimer = 0f;
-    public float attackTime = 3f; // time during which the enemy performs the attack (consequentially - moves)
     [SerializeField] private float attackTimer = 0f;
     public bool isAttacking; // general state, tells if the enemy is within the attack sequence
     public bool randomizeABLeftRightPos; // if true - enemy a and b will assume left and right position randomly
-    public int maxCollisionsBeforePrematureStop = 3; // how many objects it can kill before breaking the attack sequence
     [SerializeField] private int currentCollisionsBeforePrematureStop = 0;
     private Quaternion alignStartRot;
     private Quaternion anchorStartRot;
@@ -105,6 +76,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
     void Start()
     {
+        Reinitialize();
+
         originalEnemyARef = enemyA;
         originalEnemyBRef = enemyB;
 
@@ -114,35 +87,44 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
         velocity = Vector3.zero;
 
-        SphereCollider trigger = GetComponent<SphereCollider>();
-        trigger.isTrigger = true;
-        trigger.radius = detectionRadius;
-
         if (pivotPoints != null && pivotPoints.Length > 0)
         {
             initialPivotOffsets = new Vector3[pivotPoints.Length];
             for (int i = 0; i < pivotPoints.Length; i++)
                 initialPivotOffsets[i] = pivotPoints[i].position - transform.position;
         }
+    }
+
+    private void Reinitialize()
+    {
+        if (enemyA != null && enemyB != null)
+        {
+            currentPreset = duoStats;
+            isSolo = false;
+        }
+        else if (enemyA)
+        {
+            currentPreset = soloStats;
+            isSolo = true;
+        }
+
+        SphereCollider trigger = GetComponent<SphereCollider>();
+        trigger.isTrigger = true;
+        trigger.radius = currentPreset.detectionRadius;
 
         if (randomizeInitialBurstTimer)
-            burstCooldown = Random.Range(burstCooldown - maxRandomInitialBurstTimer, burstCooldown + maxRandomInitialBurstTimer);
+            currentBurstCooldown = Random.Range(currentPreset.burstCooldown - maxRandomInitialBurstTimer, currentPreset.burstCooldown + maxRandomInitialBurstTimer);
 
-        if (randomizeSpinDirection)
+        if (currentPreset.randomizeSpinDirection)
         {
             int val = Random.Range(0, 2); // 50/50 to be clockwise or counter clockwise
-            if(val == 0)
+            if (val == 0)
                 isClockwise = false;
-            if(val == 1)
+            if (val == 1)
                 isClockwise = true;
         }
 
-        burstDuration = burstCooldown;
-
-        if (enemyA != null && enemyB != null)
-            isSolo = false;
-        else if (enemyA)
-            isSolo = true;
+        burstDuration = currentBurstCooldown;
     }
 
     private void LateUpdate()
@@ -195,7 +177,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     {
         float distToPivot = Vector3.Distance(transform.position, currentPivot);
 
-        if (distToPivot >= minBurstDistance && distToPivot <= maxBurstDistance)
+        if (distToPivot >= currentPreset.minBurstDistance && distToPivot <= currentPreset.maxBurstDistance)
         {
             // Begin attack sequence
             isAttacking = true;
@@ -218,7 +200,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         if (!burstingToPivot) return;
 
         burstTimer += Time.deltaTime;
-        transform.position += burstDir * burstSpeed * Time.deltaTime;
+        transform.position += burstDir * currentPreset.burstSpeed * Time.deltaTime;
         // End of burst — transition to alignment
         if (burstTimer >= burstDuration)
         {
@@ -286,7 +268,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         if (aligningToPivot)
         {
             alignTimer += Time.deltaTime;
-            float t = 1f - Mathf.Pow(0.01f, alignTimer / alignTime);
+            float t = 1f - Mathf.Pow(0.01f, alignTimer / currentPreset.alignTime);
 
             if (enemyA != null && barrierLeftAnchor != null)
                 enemyA.position = Vector3.Lerp(anchorStartAPos, barrierLeftAnchor.position, t);
@@ -302,7 +284,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
                 pivot.rotation = Quaternion.Slerp(alignStartRot, targetRot, t);
             }
             // Done aligning
-            if (alignTimer >= alignTime)
+            if (alignTimer >= currentPreset.alignTime)
             {
                 Debug.Log("Done aligning");
                 aligningToPivot = false;
@@ -335,7 +317,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
             pivot.rotation = Quaternion.Slerp(anchorStartRot, targetRot, 10f);
 
-            if (leftRightAlignTimer >= leftRightAlignTime)
+            if (leftRightAlignTimer >= currentPreset.leftRightAlignTime)
             {
                 aligningToAnchors = false;
                 enemiesAligned = true;
@@ -351,7 +333,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         if (enemiesAligned)
         {
             //if avoidance detects indestructible ground or if the barrier directly hits something - stop attacking prematurely
-            if(indestructibleCount > 0 || currentCollisionsBeforePrematureStop >= maxCollisionsBeforePrematureStop)
+            if(indestructibleCount > 0 || currentCollisionsBeforePrematureStop >= currentPreset.maxCollisionsBeforePrematureStop)
             {
                 //barrierIsColliding = false;
                 currentCollisionsBeforePrematureStop = 0;
@@ -362,13 +344,13 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             }
 
             attackTimer += Time.deltaTime;
-            float t = Mathf.SmoothStep(0f, 1f, attackTimer / attackTime);
+            float t = Mathf.SmoothStep(0f, 1f, attackTimer / currentPreset.attackTime);
 
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-            float distanceScaler = Mathf.Clamp01(distanceToPlayer / attackRotationBreakoffDistance); //smooth fade when getting closer to player
+            float distanceScaler = Mathf.Clamp01(distanceToPlayer / currentPreset.attackRotationBreakoffDistance); //smooth fade when getting closer to player
 
             // Move forward relative to the pivot orientation
-            desiredVelocity = pivot.forward * maxSpeed;
+            desiredVelocity = pivot.forward * currentPreset.maxSpeed;
 
             Vector3 playerDir = (player.transform.position - pivot.position).normalized;
             if (playerDir.sqrMagnitude > 0.001f)
@@ -376,7 +358,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
                 Quaternion targetRot = Quaternion.LookRotation(playerDir, Vector3.up);
 
                 // dynamically scale rotation speed by distance
-                float dynamicRotationSpeed = pivotRotationSpeed * distanceScaler;
+                float dynamicRotationSpeed = currentPreset.pivotRotationSpeed * distanceScaler;
 
                 pivot.rotation = Quaternion.RotateTowards(
                     pivot.rotation,
@@ -386,7 +368,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             }
 
             // End the attack after attackTime expires
-            if (attackTimer >= attackTime)
+            if (attackTimer >= currentPreset.attackTime)
             {
                 isAttacking = false;
                 enemiesAligned = false;
@@ -408,7 +390,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
                 enemyA.position = Vector3.Lerp(
                     enemyA.position,
                     pivotA.position,
-                    pivotMoveSpeed * Time.fixedDeltaTime
+                    currentPreset.pivotMoveSpeed * Time.fixedDeltaTime
                 );
             }
 
@@ -417,7 +399,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
                 enemyB.position = Vector3.Lerp(
                     enemyB.position,
                     pivotB.position,
-                    pivotMoveSpeed * Time.fixedDeltaTime
+                    currentPreset.pivotMoveSpeed * Time.fixedDeltaTime
                 );
             }
         }
@@ -447,7 +429,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
                 pivot.rotation = Quaternion.RotateTowards(
                     pivot.rotation,
                     targetRotation,
-                    pivotRotationSpeed * Time.fixedDeltaTime
+                    currentPreset.pivotRotationSpeed * Time.fixedDeltaTime
                 );
             }
         }
@@ -474,11 +456,11 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             Vector3 avoidanceVector = CalculateObstacleAvoidance();
 
             // --- Spiral distance scaling ---
-            float distanceScaler = Mathf.Clamp01(distanceToPlayer / (spiralFadeDistance * 2f));
-            if (distanceToPlayer < spiralFadeDistance)
+            float distanceScaler = Mathf.Clamp01(distanceToPlayer / (currentPreset.spiralFadeDistance * 2f));
+            if (distanceToPlayer < currentPreset.spiralFadeDistance)
                 distanceScaler = 0f;
 
-            float spiralMagnitude = maxSpiralOffset * distanceScaler;
+            float spiralMagnitude = currentPreset.maxSpiralOffset * distanceScaler;
             float directionSign = isClockwise ? 1f : -1f;
             float spiralAngle = currentSpiralStep * Mathf.PI / 2f * directionSign;
 
@@ -499,20 +481,20 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
             // --- Spiral offset pattern ---
             Vector3 spiralOffset = side * Mathf.Cos(spiralAngle) * spiralMagnitude
-                                 + up * Mathf.Sin(spiralAngle) * spiralMagnitude * verticalOffsetMultiplier;
+                                 + up * Mathf.Sin(spiralAngle) * spiralMagnitude * currentPreset.verticalOffsetMultiplier;
 
             // --- Combine spiral + chaos ---
             Vector3 offsetCombined = spiralOffset + chaoticOffset;
 
             // --- Burst movement ---
             Vector3 targetDir = (toPlayerDir + avoidanceVector.normalized).normalized;
-            float burstDistance = Mathf.Clamp(distanceToPlayer * 0.5f, minBurstDistance, maxBurstDistance);
+            float burstDistance = Mathf.Clamp(distanceToPlayer * 0.5f, currentPreset.minBurstDistance, currentPreset.maxBurstDistance);
 
             Vector3 burstTarget = transform.position + targetDir * burstDistance + offsetCombined;
             desiredVelocity = (burstTarget - transform.position) / Time.fixedDeltaTime;
 
-            if (desiredVelocity.magnitude > maxSpeed)
-                desiredVelocity = desiredVelocity.normalized * maxSpeed;
+            if (desiredVelocity.magnitude > currentPreset.maxSpeed)
+                desiredVelocity = desiredVelocity.normalized * currentPreset.maxSpeed;
         }
         else
         {
@@ -520,7 +502,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             if (Time.time >= nextPivotTime)
             {
                 currentPivot = ChoosePivot();
-                nextPivotTime = Time.time + pivotChangeInterval;
+                nextPivotTime = Time.time + currentPreset.pivotChangeInterval;
             }
 
             // --- Movement toward pivot ---
@@ -538,13 +520,13 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             Vector3 chaoticOffset = side * sideNoise * chaosRange + up * upNoise * chaosRange * 0.5f;
 
             // --- Burst movement ---
-            float burstDistance = Mathf.Clamp(distanceToPivot * 0.5f, minBurstDistance, maxBurstDistance);
+            float burstDistance = Mathf.Clamp(distanceToPivot * 0.5f, currentPreset.minBurstDistance, currentPreset.maxBurstDistance);
             Vector3 burstTarget = transform.position + (toPivotDir + avoidanceVector.normalized).normalized * burstDistance + chaoticOffset;
 
             desiredVelocity = (burstTarget - transform.position) / Time.fixedDeltaTime;
 
-            if (desiredVelocity.magnitude > maxSpeed)
-                desiredVelocity = desiredVelocity.normalized * maxSpeed;
+            if (desiredVelocity.magnitude > currentPreset.maxSpeed)
+                desiredVelocity = desiredVelocity.normalized * currentPreset.maxSpeed;
         }
     }
 
@@ -555,7 +537,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         if (Time.time >= nextBurstTime && !isAttacking)
         {
             velocity = desiredVelocity;
-            nextBurstTime = Time.time + burstCooldown;
+            nextBurstTime = Time.time + currentBurstCooldown;
             currentSpiralStep++;
 
             CalculateNextPivotPoint();
@@ -581,7 +563,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
                 float deltaY = desiredY - currentY;
                 float deltaZ = desiredZ - currentZ;
 
-                float accelStep = maxAcceleration * Time.fixedDeltaTime;
+                float accelStep = currentPreset.maxAcceleration * Time.fixedDeltaTime;
 
                 velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), accelStep);
                 velocity += yAxis * Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), accelStep);
@@ -609,9 +591,9 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             {
                 // Random offset per axis
                 Vector3 randomOffset = new Vector3(
-                    Random.Range(-pivotRandomOffset, pivotRandomOffset),
-                    Random.Range(-pivotRandomOffset, pivotRandomOffset),
-                    Random.Range(-pivotRandomOffset, pivotRandomOffset)
+                    Random.Range(-currentPreset.pivotRandomOffset, currentPreset.pivotRandomOffset),
+                    Random.Range(-currentPreset.pivotRandomOffset, currentPreset.pivotRandomOffset),
+                    Random.Range(-currentPreset.pivotRandomOffset, currentPreset.pivotRandomOffset)
                 );
 
                 // Rotate the base offset by the current pivot rotation
@@ -636,8 +618,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
             if (distance > 0f)
             {
-                float strength = Mathf.Clamp01((detectionRadius - distance) / detectionRadius);
-                totalAvoidance += away.normalized * avoidanceForce * strength;
+                float strength = Mathf.Clamp01((currentPreset.detectionRadius - distance) / currentPreset.detectionRadius);
+                totalAvoidance += away.normalized * currentPreset.avoidanceForce * strength;
             }
         }
         return totalAvoidance;
@@ -650,7 +632,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & obstacleMask) != 0 && !other.isTrigger)
+        if (((1 << other.gameObject.layer) & currentPreset.obstacleMask) != 0 && !other.isTrigger)
         {
             if (!nearbyObstacles.Contains(other))
             {
@@ -701,13 +683,13 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         foreach (var dir in availableDirections)
         {
             // Start with pure cardinal pivot
-            Vector3 candidate = playerPos + dir * pivotDistance;
+            Vector3 candidate = playerPos + dir * currentPreset.pivotDistance;
 
             // Then apply global "forward push"
-            candidate += playerForward * pivotForwardPush;
+            candidate += playerForward * currentPreset.pivotForwardPush;
 
             // Offset upwards from ground
-            candidate.y += pivotHeightOffset;
+            candidate.y += currentPreset.pivotHeightOffset;
 
             if (HasLineOfSight(candidate))
                 validPivots.Add(candidate);
@@ -721,7 +703,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         }
 
         // fallback pivot directly in front of player
-        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+        return playerPos + playerForward * (currentPreset.pivotDistance + currentPreset.pivotForwardPush) + Vector3.up * currentPreset.pivotHeightOffset;
     }
 
     Vector3 CheckForceTopPivot()
@@ -730,18 +712,18 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         Vector3 playerForward = GetPlayerForward();
 
         if (currentDirectionIndex < 0 || currentDirectionIndex >= availableDirections.Count)
-            return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+            return playerPos + playerForward * (currentPreset.pivotDistance + currentPreset.pivotForwardPush) + Vector3.up * currentPreset.pivotHeightOffset;
 
         Vector3 dir = availableDirections[3]; // recalc direction relative to camera
-        Vector3 pivot = playerPos + dir * pivotDistance;
+        Vector3 pivot = playerPos + dir * currentPreset.pivotDistance;
 
-        pivot += playerForward * pivotForwardPush;
-        pivot.y += pivotHeightOffset;
+        pivot += playerForward * currentPreset.pivotForwardPush;
+        pivot.y += currentPreset.pivotHeightOffset;
 
         if (HasLineOfSight(pivot))
             return pivot;
 
-        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+        return playerPos + playerForward * (currentPreset.pivotDistance + currentPreset.pivotForwardPush) + Vector3.up * currentPreset.pivotHeightOffset;
     }
 
     Vector3 UpdatePivot()
@@ -750,18 +732,18 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         Vector3 playerForward = GetPlayerForward();
 
         if (currentDirectionIndex < 0 || currentDirectionIndex >= availableDirections.Count)
-            return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+            return playerPos + playerForward * (currentPreset.pivotDistance + currentPreset.pivotForwardPush) + Vector3.up * currentPreset.pivotHeightOffset;
 
         Vector3 dir = availableDirections[currentDirectionIndex]; // recalc direction relative to camera
-        Vector3 pivot = playerPos + dir * pivotDistance;
+        Vector3 pivot = playerPos + dir * currentPreset.pivotDistance;
 
-        pivot += playerForward * pivotForwardPush;
-        pivot.y += pivotHeightOffset;
+        pivot += playerForward * currentPreset.pivotForwardPush;
+        pivot.y += currentPreset.pivotHeightOffset;
 
         if (HasLineOfSight(pivot))
             return pivot;
 
-        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+        return playerPos + playerForward * (currentPreset.pivotDistance + currentPreset.pivotForwardPush) + Vector3.up * currentPreset.pivotHeightOffset;
     }
 
 
@@ -806,7 +788,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         float distance = Vector3.Distance(point, player.transform.position);
 
         // LayerMask can help avoid hitting the worm's own colliders
-        if (Physics.Raycast(point, dir, out RaycastHit hit, distance, LOSMask))
+        if (Physics.Raycast(point, dir, out RaycastHit hit, distance, currentPreset.LOSMask))
         {
             // Make sure we hit the player's collider (even if it's a child)
             return hit.collider.GetComponentInParent<SpaceShooterController>() != null;
@@ -819,9 +801,6 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     {
         // Stop all current attack activity
         ForceStopAttack();
-
-        // Mark solo
-        isSolo = true;
 
         // Determine which one died
         if (isA)
@@ -839,6 +818,9 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
                 enemyB = null;
             }
         }
+
+        // Reinitialize params for solo and duo movements
+        Reinitialize();
 
         // --- Reset paired behavior state ---
         currentPivotIndex = 0;

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aafb41f36469c743ae266544a73641e, type: 3}
+  m_Name: BarrierRammerDuoPreset
+  m_EditorClassIdentifier: 
+  maxSpeed: 500
+  minBurstDistance: 25
+  maxBurstDistance: 100
+  burstCooldown: 0.35
+  randomizeSpinDirection: 1
+  maxSpiralOffset: 30
+  verticalOffsetMultiplier: 1
+  spiralFadeDistance: 150
+  pivotMoveSpeed: 10
+  pivotRandomOffset: 30
+  pivotRotationSpeed: 90
+  avoidanceForce: 1000
+  detectionRadius: 80
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  burstSpeed: 200
+  pivotDistance: 150
+  pivotForwardPush: 30
+  pivotHeightOffset: 30
+  pivotChangeInterval: 5
+  LOSMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  maxAcceleration: 250
+  attackRotationBreakoffDistance: 200
+  alignTime: 0.35
+  leftRightAlignTime: 1.5
+  attackTime: 5
+  maxCollisionsBeforePrematureStop: 3
