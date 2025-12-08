@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class MineEnemy : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class MineEnemy : BasicMineEnemy
 {
-    [Header("Target & Movement")]
-    public SpaceShooterController player;
+
+    [Header("Movement")]
     public float maxSpeed = 200f;
     public float maxAcceleration = 80f;
     public float maxAirAcceleration = 80f;
@@ -20,14 +20,6 @@ public class MineEnemy : MonoBehaviour
     public float detectionRadius = 40f;
     public LayerMask obstacleMask;
 
-    [Header("Explosion Settings")]
-    public float triggerRange = 300f;     // Player must be inside this to activate
-    public float fuseDelay = 2f;          // Time before explosion after triggered
-    public float explosionRadius = 250f;  // Damage radius
-    public LayerMask damageMask;          // Who gets hit
-    public bool dieOnExploding = false;
-    public bool explodeOnDying = false;
-    public EntityHealthController healthControllerRef;
 
     private Rigidbody rb;
     private List<Collider> nearbyObstacles = new List<Collider>();
@@ -35,21 +27,16 @@ public class MineEnemy : MonoBehaviour
     private Vector3 desiredVelocity;
     private Vector3 contactNormal = Vector3.up;
 
-    [SerializeField] private bool isTriggered = false;
-    [SerializeField] private bool hasExploded = false;
-    [SerializeField] private float triggerTimer = 0f; // counts fuse time after triggered
-
-    void Start()
+    override protected void Start()
     {
+        Initialize();
+
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
         SphereCollider trigger = GetComponent<SphereCollider>();
         trigger.isTrigger = true;
         trigger.radius = detectionRadius;
-
-        healthControllerRef = GetComponent<EntityHealthController>();
-        healthControllerRef.Died += DeathEvents;
 
         velocity = Vector3.zero;
 
@@ -59,7 +46,7 @@ public class MineEnemy : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    override protected void FixedUpdate()
     {
         // passive rearm in case the mine doesn't die on explosion
         if(hasExploded)
@@ -119,82 +106,6 @@ public class MineEnemy : MonoBehaviour
             combined = combined.normalized * maxSpeed * 1.5f;
 
         desiredVelocity = combined;
-    }
-
-    void DeathEvents()
-    {
-        // Blows up the mine when the current mine dies
-        if (explodeOnDying)
-        {
-            Debug.Log("Exploded on Death");
-            Explode();
-        }
-    }
-
-    void Rearm()
-    {
-        hasExploded = false;
-        isTriggered = false;
-        triggerTimer = 0f;
-    }
-
-    void FuseAndDetonate()
-    {
-        float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-        // Check if player is within trigger range
-        if (!isTriggered && distToPlayer <= triggerRange)
-        {
-            isTriggered = true;
-            triggerTimer = 0f; // start fuse
-        }
-
-        // Count fuse timer
-        if (isTriggered)
-        {
-            // If the player breaks the range when the mine is triggered - rearm the mine
-            if(distToPlayer > triggerRange)
-            {
-                Debug.Log("The player escaped trigger range, mine - rearmed");
-                Rearm();
-                return;
-            }
-
-            triggerTimer += Time.fixedDeltaTime;
-            if (triggerTimer >= fuseDelay)
-            {
-                Explode();
-            }
-        }
-    }
-
-    void Explode()
-    {
-        if (hasExploded) return;
-        hasExploded = true;
-
-        Debug.Log("Mine Enemy Exploded");
-
-        Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius, damageMask);
-
-        foreach (Collider hit in hits)
-        {
-            Debug.Log(hit);
-            var healthController = hit.GetComponent<EntityHealthController>(); // Replace with your health script
-            if (healthController != null)
-            {
-                healthController.CurrentHP = 0; // Kill instantly
-            }
-        }
-
-        if (dieOnExploding)
-        {
-            var healthController = GetComponent<EntityHealthController>();
-            if (healthController != null)
-            {
-                healthController.CurrentHP = 0;
-            }
-        }
     }
 
     Vector3 CalculateObstacleAvoidance()
