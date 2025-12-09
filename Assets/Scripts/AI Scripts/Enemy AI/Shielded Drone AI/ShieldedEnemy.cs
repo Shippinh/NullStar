@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Based on sniper enemy but slightly different
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class SniperEnemy : MonoBehaviour
+public class ShieldedEnemy : MonoBehaviour
 {
     [Header("Target & Movement")]
     public SpaceShooterController player;
@@ -59,15 +60,19 @@ public class SniperEnemy : MonoBehaviour
     public float aimTimeToPerfect = 2f; // time in seconds to reach perfect aim
     [SerializeField, Range(0f, 180f)] public float aimResetThreshold = 30f;
     private Vector3[] previousPredictedDirs;
-    private Vector3 aimedDir; // updated every frame in UpdateAiming()
+    public float aimLeadTime = 0.2f; // anticipates motion to compensate for aim lag
 
 
     [Header("Other")]
     public bool canAct = true;
     private float actSlowdownTimer = 0f;
     [SerializeField] private float actSlowdownDuration = 1f; // how long it takes to fully stop/start acting again
+    private float actSlowdownFactor = 1f;
+
 
     public bool canMove = true;
+
+    public bool gunsDead = false;
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
@@ -82,8 +87,16 @@ public class SniperEnemy : MonoBehaviour
 
     [Header("Emitter Stuff")]
     public ProjectileEmittersController projectileEmittersControllerRef;
+    public Transform emitterParent;
     [SerializeField] private Transform[] gunsPositions;
     private Vector3[] aimedDirs; // store per-gun aimed directions
+    public float emitterLookSmoothTime = 0.2f;
+
+    [Header("Shield Stuff")]
+    public GameObject shieldTiltPivot; // empty pivot that tilts toward player
+    public Transform shieldRing;      // actual ring that spins
+    public float shieldRotationSpeed = 90f; // degrees per second
+    public float shieldTiltSpeed = 5f;          // optional smoothing
 
     void Start()
     {
@@ -99,11 +112,12 @@ public class SniperEnemy : MonoBehaviour
 
         velocity = Vector3.zero;
 
-        projectileEmittersControllerRef = GetComponentInChildren<ProjectileEmittersController>();
+        projectileEmittersControllerRef = emitterParent.GetComponent<ProjectileEmittersController>();
         gunsPositions = projectileEmittersControllerRef.GetGunsArray();
 
         //weaponChargeDuration = projectileEmittersControllerRef.rechargeTime; // handled internally, this makes no sense
-        weaponShootDuration = projectileEmittersControllerRef.GetSequenceDuration() + 0.1f; // slight offset to properly finish shooting
+        projectileEmittersControllerRef.GetCurrentParameters(out float fireRate, out _, out _, out _, out _);
+        weaponShootDuration = projectileEmittersControllerRef.GetSequenceDuration() + fireRate; // slight offset to properly finish shooting
         weaponCooldownDuration = projectileEmittersControllerRef.rechargeTime;
 
         weaponChargeDurationTimer = 0f;
@@ -141,32 +155,44 @@ public class SniperEnemy : MonoBehaviour
     {
         if (!player) return;
 
+        // update dynamic ranges
         (minRange, maxRange) = player.CalculateDynamicOrbit(baseMinRange, baseMaxRange, baseMaxRange - baseMinRange);
 
-        // Smooth act slowdown independent of weapon timers
+        // update slowdown timer (0..1) and compute factor used by rotations and aiming
         float targetSlowdown = canAct ? 1f : 0f;
+        // Keep your existing MoveTowards usage (it ramps over actSlowdownDuration seconds)
         actSlowdownTimer = Mathf.MoveTowards(actSlowdownTimer, targetSlowdown, Time.deltaTime / actSlowdownDuration);
-        float actSlowdownFactor = Mathf.SmoothStep(0f, 1f, actSlowdownTimer);
+        actSlowdownFactor = Mathf.SmoothStep(0f, 1f, actSlowdownTimer);
 
+        // Only run heavy AI/aim/shooting logic when allowed
         if (canAct)
         {
             CalculateDesiredVelocity(distToPlayer);
-            UpdateAiming();
+
+            UpdateAiming();     // aiming updates when acting
             HandleShooting(distToPlayer);
 
-            if (stopWhenShooting && (isChargingShot || isSendingShot))
+            if (stopWhenShooting)
             {
-                float t = Mathf.Clamp01(weaponChargeDurationTimer / weaponChargeDuration);
-                float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out
-                desiredVelocity *= (1f - easeFactor); // gradually reduce to zero while charging
+                // Gradual slowdown while charging/sending (keeps behavior consistent)
+                if (isChargingShot || isSendingShot)
+                {
+                    float t = Mathf.Clamp01(weaponChargeDurationTimer / weaponChargeDuration);
+                    float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out
+                    desiredVelocity *= (1f - easeFactor);
+                }
             }
         }
         else
         {
-            // Don't update logic, just fade motion via actSlowdownFactor
+            // When not acting, fade desired velocity by slowdown factor so movement eases out
             desiredVelocity *= actSlowdownFactor;
         }
+
+        // ALWAYS update rotations so they can smoothly decelerate / accelerate
+        UpdateRotations();
     }
+
 
     void FixedUpdate()
     {
@@ -182,16 +208,120 @@ public class SniperEnemy : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        AttachShields();
+        AttachEmitter();
+        if(gunsDead == false)
+            if(projectileEmittersControllerRef.ActiveGunCount == 0)
+                gunsDead = true;
+    }
+
+    private void AttachShields()
+    {
+        shieldTiltPivot.transform.position = transform.position;
+    }
+
+    private void AttachEmitter()
+    {
+        emitterParent.transform.position = transform.position;
+    }
+
+    void UpdateRotations()
+    {
+        UpdateShieldRotation();
+
+        // --- Smoothly rotate emitter toward player ---
+        if (projectileEmittersControllerRef != null && player != null)
+        {
+            Transform emitterTransform = projectileEmittersControllerRef.transform;
+            Vector3 directionToPlayer = (player.transform.position - emitterTransform.position).normalized;
+
+            if (directionToPlayer.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+                // scale rotation speed by slowdown factor so it eases when canAct == false
+                float rotationSpeed = 5f * actSlowdownFactor;
+                emitterTransform.rotation = Quaternion.Slerp(emitterTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+        }
+
+        // Optionally, if the emitter has other per-gun transforms you want to slow,
+        // handle them here or inside UpdateAiming (we handle guns in UpdateAiming below).
+    }
+
+
+
+    void UpdateShieldRotation()
+    {
+        if (player != null && shieldTiltPivot != null && shieldRing != null)
+        {
+            // --- Tilt pivot toward player ---
+            Vector3 toPlayer = player.transform.position - shieldTiltPivot.transform.position;
+            Vector3 toPlayerXZ = new Vector3(toPlayer.x, 0f, toPlayer.z);
+            if (toPlayerXZ.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetTilt = Quaternion.LookRotation(toPlayerXZ, Vector3.up);
+                float verticalAngle = Mathf.Atan2(toPlayer.y, toPlayerXZ.magnitude) * Mathf.Rad2Deg;
+                targetTilt *= Quaternion.Euler(-verticalAngle, 0f, 0f);
+
+                // apply slowdown factor
+                float effectiveTiltSpeed = shieldTiltSpeed * actSlowdownFactor;
+                shieldTiltPivot.transform.rotation = Quaternion.Slerp(
+                    shieldTiltPivot.transform.rotation,
+                    targetTilt,
+                    effectiveTiltSpeed * Time.deltaTime
+                );
+            }
+
+            // --- Spin the shield ring locally (scale by slowdown) ---
+            float effectiveSpin = shieldRotationSpeed * actSlowdownFactor;
+            shieldRing.Rotate(Vector3.up, effectiveSpin * Time.deltaTime, Space.Self);
+        }
+    }
+
+
+
     // Calculates desiredVelocity and acceleration values based on chase or orbit behavior.
     void CalculateDesiredVelocity(float distanceToPlayer)
     {
         Vector3 directionToPlayer = player.transform.position - transform.position;
         Vector3 avoidanceVector = CalculateObstacleAvoidance();
 
-        if (distanceToPlayer > maxRange * 1.2f) // Follow mode
+        if (distanceToPlayer > maxRange * 1.2f || gunsDead == true) // Follow mode, forced when all guns are dead
         {
-            Vector3 combinedDir = (directionToPlayer.normalized + avoidanceVector).normalized;
-            desiredVelocity = combinedDir * maxSpeed;
+            // Add chaotic lateral + vertical offsets
+            Vector3 sideOffset = Vector3.Cross(Vector3.up, directionToPlayer).normalized;
+            Vector3 upOffset = Vector3.up;
+
+            float sideStrength = Mathf.PerlinNoise(transform.position.x * 0.5f, Time.time * 0.5f) - 0.5f;
+            float upStrength = Mathf.PerlinNoise(transform.position.z * 0.5f, Time.time * 0.7f + 42f) - 0.5f;
+
+            // Scale chaotic vertical offset based on distance
+            float minMultiplier = 1f;   // when close
+            float maxMultiplier = 1500f; // when far
+            float scalerDistance = 100f; // distance considered "close"
+            float farDistance = 500f;    // distance considered "far"
+
+            float distanceScaler = Mathf.Clamp01((distanceToPlayer - scalerDistance) / (farDistance - scalerDistance));
+            float finalUpMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, distanceScaler);
+
+            Vector3 chaoticOffset = sideOffset * sideStrength * 4f + upOffset * upStrength * finalUpMultiplier;
+
+            // Always move at maxSpeed toward player
+            Vector3 toPlayerDir = (directionToPlayer + chaoticOffset).normalized * maxSpeed;
+
+            // Calculate avoidance
+            //avoidanceVector = ProjectOnContactPlane(avoidanceVector); // limits ground avoidance
+
+            // Combine direction + avoidance
+            Vector3 combined = toPlayerDir + avoidanceVector;
+
+            // Optional: clamp final speed to maxSpeed + some margin if needed
+            if (combined.magnitude > maxSpeed * 1.5f)
+                combined = combined.normalized * maxSpeed * 1.5f;
+
+            desiredVelocity = combined;
 
             currentAcceleration = maxAcceleration;
             currentVerticalAcceleration = jetpackAcceleration;
@@ -288,6 +418,7 @@ public class SniperEnemy : MonoBehaviour
         if (!inSweetSpot || !hasLOS)
         {
             if (isShooting) ResetShooting(); // cancel immediately if either condition fails
+            projectileEmittersControllerRef.ForceStopSequence();
             return;
         }
 
@@ -383,14 +514,13 @@ public class SniperEnemy : MonoBehaviour
             // Predict position
             float distance = Vector3.Distance(gunPos, playerPos);
             float timeToHit = distance / projectileSpeed;
-            Vector3 predictedPos = playerPos + playerVel * timeToHit;
 
-            Vector3 predictedDir = Vector3.zero;
+            // aimLeadTime = 0.8 good vs multidirectional movement
+            // aimLeadTime = 0.5 good vs constant cardinal direction movement
+            Vector3 predictedPos = playerPos + playerVel * (timeToHit + aimLeadTime);
 
-            if(player.overboostMode)
-                predictedDir = (predictedPos - gunPos).normalized; // linear prediction, should be balanced with lead aim time
-            else
-                predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed); //perfect aim, 
+            Vector3 predictedDir = (predictedPos - gunPos).normalized; //non perfect aim, good for balancing with aimLeadTime
+            //Vector3 predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed); //perfect aim, 
 
             // Reset aim strength on sudden change
             if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > aimResetThreshold) // 30° sudden change threshold
@@ -461,7 +591,7 @@ public class SniperEnemy : MonoBehaviour
         // If ray hits something in obstacleMask before reaching the player → blocked
         if (Physics.Raycast(origin, dir, out RaycastHit hit, dist, losCheck, QueryTriggerInteraction.Ignore))
         {
-           // Debug.Log("False");
+            // Debug.Log("False");
             return false;
         }
         //Debug.Log("True");

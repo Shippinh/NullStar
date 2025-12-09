@@ -43,9 +43,9 @@ public class WormEnemyController : EnemyController
     }
 
     // Overrides the basic method to properly revive all sub-entity health controllers
-    public override void HandleEnemyRevival()
+    public override void HandleRevival()
     {
-        base.HandleEnemyRevival();
+        base.HandleRevival();
     }
 
     // Helper to access weak points

@@ -44,7 +44,7 @@ public class ShieldedDroneEnemyController : EnemyController
         enemyName = "Shielded Drone";
     }
 
-    public override void HandleEnemyDeath()
+    public override void HandleDeath()
     {
         // Stop AI behavior
         if (enemyAIRef != null)
@@ -73,9 +73,9 @@ public class ShieldedDroneEnemyController : EnemyController
     }
 
     // Overrides the basic method to properly revive all sub-entity health controllers
-    public override void HandleEnemyRevival()
+    public override void HandleRevival()
     {
-        base.HandleEnemyRevival();
+        base.HandleRevival();
     }
 
     // THIS SHOULD BE REMADE TO USE A PROPER TIMER, WAY TOO UNRELIABLE, god i hate coroutines

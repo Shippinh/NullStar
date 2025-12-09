@@ -172,9 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &11101204
 MonoBehaviour:
@@ -438,9 +438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &12839731
 MonoBehaviour:
@@ -760,13 +760,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 20479591}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &20663815
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,9 +916,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36de6b9570cd9bc4fb32f9698d5c15d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 342495084}
   entityArenaControllerRef: {fileID: 342495083}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
   shieldsParentRef: {fileID: 643766837}
   gunsParentRef: {fileID: 1260837334}
@@ -1062,10 +1059,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -1213,13 +1206,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 33077426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &41719416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,13 +1350,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 41719416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &42578522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,13 +1494,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 42578522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &44594003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,9 +1806,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &45086638
 MonoBehaviour:
@@ -2042,9 +2026,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &48413142
 MonoBehaviour:
@@ -2203,9 +2187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &50079981
 MonoBehaviour:
@@ -2757,13 +2741,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 70460618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!43 &71684364
 Mesh:
   m_ObjectHideFlags: 0
@@ -3069,13 +3050,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 73101200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &75744639
 GameObject:
   m_ObjectHideFlags: 0
@@ -3306,13 +3284,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 81247049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &82695958
 GameObject:
   m_ObjectHideFlags: 0
@@ -3516,9 +3491,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &82695964
 MonoBehaviour:
@@ -3785,9 +3760,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &83038021
 MonoBehaviour:
@@ -4054,9 +4029,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &84392858
 MonoBehaviour:
@@ -4358,9 +4333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &94684511
 MonoBehaviour:
@@ -4839,10 +4814,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -5166,13 +5137,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 116768373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &124509790
 GameObject:
   m_ObjectHideFlags: 0
@@ -5344,13 +5312,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 128262343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &129084234
 GameObject:
   m_ObjectHideFlags: 0
@@ -5491,13 +5456,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 129084234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &131538464
 GameObject:
   m_ObjectHideFlags: 0
@@ -5638,13 +5600,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 131538464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &133455781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,13 +5811,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 137796053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &142521827
 GameObject:
   m_ObjectHideFlags: 0
@@ -6002,9 +5958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Enemy A
   entityHealthControllerRef: {fileID: 142521832}
   entityArenaControllerRef: {fileID: 932661858}
+  enemyName: Enemy A
   countsAsSeparateEnemy: 0
 --- !u!1 &145873842
 GameObject:
@@ -6319,13 +6275,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 146632136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &147687782
 GameObject:
   m_ObjectHideFlags: 0
@@ -6529,9 +6482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &147687788
 MonoBehaviour:
@@ -6766,13 +6719,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 149466424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &153685626
 GameObject:
   m_ObjectHideFlags: 0
@@ -6822,9 +6772,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &153685629
 MonoBehaviour:
@@ -7150,13 +7100,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 158800465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &159868946
 GameObject:
   m_ObjectHideFlags: 0
@@ -7360,9 +7307,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &159868952
 MonoBehaviour:
@@ -7641,13 +7588,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 164811260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &165439222
 GameObject:
   m_ObjectHideFlags: 0
@@ -7976,13 +7920,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 183192065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &183864950
 GameObject:
   m_ObjectHideFlags: 0
@@ -8227,9 +8168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &203840185
 MonoBehaviour:
@@ -8543,9 +8484,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &205784848
 MonoBehaviour:
@@ -8749,13 +8690,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 209203698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &210520392
 GameObject:
   m_ObjectHideFlags: 0
@@ -9289,9 +9227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &216799190
 MonoBehaviour:
@@ -9459,9 +9397,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &224958976
 MonoBehaviour:
@@ -10168,9 +10106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &242981586
 MonoBehaviour:
@@ -10364,10 +10302,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -10578,9 +10512,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &255277826
 MonoBehaviour:
@@ -10847,9 +10781,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &256506997
 MonoBehaviour:
@@ -11116,9 +11050,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &256540378
 MonoBehaviour:
@@ -11427,13 +11361,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 263272862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &266754206
 GameObject:
   m_ObjectHideFlags: 0
@@ -11853,9 +11784,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &273611553
 MonoBehaviour:
@@ -12059,13 +11990,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 274387626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &279600069
 GameObject:
   m_ObjectHideFlags: 0
@@ -12311,13 +12239,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 280344669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &295212174
 GameObject:
   m_ObjectHideFlags: 0
@@ -12458,13 +12383,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 295212174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &298213487
 GameObject:
   m_ObjectHideFlags: 0
@@ -12547,9 +12469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &298213491
 MonoBehaviour:
@@ -12808,13 +12730,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 299309631}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &301855467
 GameObject:
   m_ObjectHideFlags: 0
@@ -13261,13 +13180,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 307422987}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &309164235
 GameObject:
   m_ObjectHideFlags: 0
@@ -13316,9 +13232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &309164238
 MonoBehaviour:
@@ -13555,13 +13471,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 312149743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &315414948
 GameObject:
   m_ObjectHideFlags: 0
@@ -13702,13 +13615,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 315414948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &317886343
 GameObject:
   m_ObjectHideFlags: 0
@@ -13757,9 +13667,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &317886346
 MonoBehaviour:
@@ -14076,9 +13986,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &317934455
 MonoBehaviour:
@@ -14401,9 +14311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &319442756
 MonoBehaviour:
@@ -14670,9 +14580,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &322495164
 MonoBehaviour:
@@ -14876,13 +14786,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 323091707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &324751285
 GameObject:
   m_ObjectHideFlags: 0
@@ -15023,13 +14930,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 324751285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &328078575
 GameObject:
   m_ObjectHideFlags: 0
@@ -15170,13 +15074,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 328078575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &328434085
 GameObject:
   m_ObjectHideFlags: 0
@@ -15380,9 +15281,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &328434091
 MonoBehaviour:
@@ -15586,13 +15487,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 328614951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &329694759
 GameObject:
   m_ObjectHideFlags: 0
@@ -15662,9 +15560,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Gun
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 891411887}
+  enemyName: Gun
   countsAsSeparateEnemy: 0
 --- !u!114 &329694763
 MonoBehaviour:
@@ -16228,9 +16126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &339270372
 MonoBehaviour:
@@ -16470,13 +16368,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 340917613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &342495081
 GameObject:
   m_ObjectHideFlags: 0
@@ -16740,9 +16635,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Gun
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 891411887}
+  enemyName: Gun
   countsAsSeparateEnemy: 0
 --- !u!114 &343885500
 MonoBehaviour:
@@ -17021,9 +16916,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &346095333
 MonoBehaviour:
@@ -17294,13 +17189,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 356954775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &359250344
 GameObject:
   m_ObjectHideFlags: 0
@@ -17697,9 +17589,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &371107396
 MonoBehaviour:
@@ -17903,13 +17795,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 372006467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &374279738
 GameObject:
   m_ObjectHideFlags: 0
@@ -18298,9 +18187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &386429936
 MonoBehaviour:
@@ -18520,9 +18409,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &391973318
 MonoBehaviour:
@@ -18822,9 +18711,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &392794005
 MonoBehaviour:
@@ -19018,10 +18907,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -19169,13 +19054,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 404054511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &404775438
 GameObject:
   m_ObjectHideFlags: 0
@@ -19316,13 +19198,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 404775438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &407436110
 GameObject:
   m_ObjectHideFlags: 0
@@ -19463,13 +19342,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 407436110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &407807632
 GameObject:
   m_ObjectHideFlags: 0
@@ -20011,9 +19887,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &421099518
 MonoBehaviour:
@@ -20606,9 +20482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Gun
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 342495083}
+  enemyName: Gun
   countsAsSeparateEnemy: 0
 --- !u!114 &433163119
 MonoBehaviour:
@@ -20858,9 +20734,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &436819058
 MonoBehaviour:
@@ -21269,9 +21145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &454498298
 MonoBehaviour:
@@ -21569,9 +21445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &455001828
 MonoBehaviour:
@@ -21977,13 +21853,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 462907497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &462918795
 GameObject:
   m_ObjectHideFlags: 0
@@ -22420,9 +22293,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &478185880
 MonoBehaviour:
@@ -22673,13 +22546,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 480865579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &484735883
 GameObject:
   m_ObjectHideFlags: 0
@@ -23367,9 +23237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &488802787
 MonoBehaviour:
@@ -23563,10 +23433,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -23790,13 +23656,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 520085440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &527405127
 GameObject:
   m_ObjectHideFlags: 0
@@ -23968,13 +23831,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 528106375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &528601169
 GameObject:
   m_ObjectHideFlags: 0
@@ -24115,13 +23975,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 528601169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &528705687
 GameObject:
   m_ObjectHideFlags: 0
@@ -24325,9 +24182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &528705693
 MonoBehaviour:
@@ -24439,9 +24296,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &529616188
 MonoBehaviour:
@@ -24678,13 +24535,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 530415428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &531829444
 GameObject:
   m_ObjectHideFlags: 0
@@ -24825,13 +24679,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 531829444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &534348733
 GameObject:
   m_ObjectHideFlags: 0
@@ -25191,9 +25042,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &541286563
 MonoBehaviour:
@@ -25485,9 +25336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &547178334
 MonoBehaviour:
@@ -25859,9 +25710,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &554037336
 MonoBehaviour:
@@ -25973,9 +25824,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &554235415
 MonoBehaviour:
@@ -26459,13 +26310,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 561299038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &562675286
 GameObject:
   m_ObjectHideFlags: 0
@@ -26606,13 +26454,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 562675286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &581141921
 GameObject:
   m_ObjectHideFlags: 0
@@ -26753,13 +26598,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 581141921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &584948512
 GameObject:
   m_ObjectHideFlags: 0
@@ -26900,13 +26742,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 584948512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &587045422
 GameObject:
   m_ObjectHideFlags: 0
@@ -27078,13 +26917,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 587113548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &593087896
 GameObject:
   m_ObjectHideFlags: 0
@@ -27288,9 +27124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &593087902
 MonoBehaviour:
@@ -27588,9 +27424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &595864144
 MonoBehaviour:
@@ -27733,9 +27569,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &598366209
 MonoBehaviour:
@@ -28071,9 +27907,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &612715437
 MonoBehaviour:
@@ -28521,13 +28357,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 618404559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &619769865
 GameObject:
   m_ObjectHideFlags: 0
@@ -28700,13 +28533,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 621782705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &622574032
 GameObject:
   m_ObjectHideFlags: 0
@@ -28910,9 +28740,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &622574038
 MonoBehaviour:
@@ -29024,9 +28854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &624389325
 MonoBehaviour:
@@ -29136,6 +28966,7 @@ GameObject:
   - component: {fileID: 629115013}
   - component: {fileID: 629115012}
   - component: {fileID: 629115015}
+  - component: {fileID: 629115016}
   m_Layer: 3
   m_Name: GIANT ENEMY CUBE
   m_TagString: Untagged
@@ -29253,6 +29084,22 @@ MonoBehaviour:
   hasHealed: 0
   healingCooldown: 60
   currentHealingCooldown: 0
+--- !u!114 &629115016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629115010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
+  entityArenaControllerRef: {fileID: 0}
+  enemyName: GIANT ENEMY CUBE
+  countsAsSeparateEnemy: 1
 --- !u!1 &631830407
 GameObject:
   m_ObjectHideFlags: 0
@@ -29573,13 +29420,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 633073359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &642446553
 GameObject:
   m_ObjectHideFlags: 0
@@ -29751,13 +29595,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 642825454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &643766836
 GameObject:
   m_ObjectHideFlags: 0
@@ -29861,9 +29702,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &646188205
 MonoBehaviour:
@@ -30280,13 +30121,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 649932791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &651772242
 GameObject:
   m_ObjectHideFlags: 0
@@ -30427,13 +30265,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 651772242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &657565284
 GameObject:
   m_ObjectHideFlags: 0
@@ -30637,13 +30472,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 662700851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &666456559
 GameObject:
   m_ObjectHideFlags: 0
@@ -30994,13 +30826,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 672946284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &673371112
 GameObject:
   m_ObjectHideFlags: 0
@@ -31207,13 +31036,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 683540761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &683912557
 GameObject:
   m_ObjectHideFlags: 0
@@ -31354,13 +31180,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 683912557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &686316651
 GameObject:
   m_ObjectHideFlags: 0
@@ -31501,13 +31324,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 686316651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &687242291
 GameObject:
   m_ObjectHideFlags: 0
@@ -31711,9 +31531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &687242297
 MonoBehaviour:
@@ -31980,9 +31800,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &688936277
 MonoBehaviour:
@@ -32656,13 +32476,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 709487166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &710326514
 GameObject:
   m_ObjectHideFlags: 0
@@ -32908,13 +32725,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 714473084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &717348860
 GameObject:
   m_ObjectHideFlags: 0
@@ -33243,13 +33057,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 722250446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &737001084
 GameObject:
   m_ObjectHideFlags: 0
@@ -33299,9 +33110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &737001087
 MonoBehaviour:
@@ -33657,13 +33468,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 737493856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &737638994
 GameObject:
   m_ObjectHideFlags: 0
@@ -33804,13 +33612,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 737638994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &741483714
 GameObject:
   m_ObjectHideFlags: 0
@@ -34056,10 +33861,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -34290,13 +34091,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 758097589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &767223726
 GameObject:
   m_ObjectHideFlags: 0
@@ -34672,13 +34470,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 772968703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &773771536
 GameObject:
   m_ObjectHideFlags: 0
@@ -35419,13 +35214,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 796021798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &799967822
 GameObject:
   m_ObjectHideFlags: 0
@@ -35566,13 +35358,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 799967822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &800206218
 GameObject:
   m_ObjectHideFlags: 0
@@ -35850,13 +35639,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 807570471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &807931990
 GameObject:
   m_ObjectHideFlags: 0
@@ -35997,13 +35783,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 807931990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &808790270
 GameObject:
   m_ObjectHideFlags: 0
@@ -36144,13 +35927,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 808790270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &811992376
 GameObject:
   m_ObjectHideFlags: 0
@@ -36396,13 +36176,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 813632209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &813818883
 GameObject:
   m_ObjectHideFlags: 0
@@ -37206,9 +36983,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &839195777
 MonoBehaviour:
@@ -37320,9 +37097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &843644182
 MonoBehaviour:
@@ -37705,9 +37482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &847457155
 MonoBehaviour:
@@ -38076,13 +37853,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 848912913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &852932907
 GameObject:
   m_ObjectHideFlags: 0
@@ -38286,9 +38060,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &852932913
 MonoBehaviour:
@@ -38492,13 +38266,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 853147207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &858940227
 GameObject:
   m_ObjectHideFlags: 0
@@ -38734,9 +38505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &859483101
 MonoBehaviour:
@@ -39237,9 +39008,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &867791215
 MonoBehaviour:
@@ -39443,13 +39214,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 868444175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &869373896
 GameObject:
   m_ObjectHideFlags: 0
@@ -39653,9 +39421,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &870323036
 MonoBehaviour:
@@ -39898,13 +39666,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 870892960}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &871708493
 GameObject:
   m_ObjectHideFlags: 0
@@ -40058,9 +39823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &873276725
 MonoBehaviour:
@@ -40370,9 +40135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &885778667
 MonoBehaviour:
@@ -40522,7 +40287,7 @@ MonoBehaviour:
     m_Bits: 3072
   weaponChargeDuration: 3
   weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
+  weaponShootDuration: 2
   weaponShootDurationTimer: 0
   weaponCooldownDuration: 3
   weaponCooldownDurationTimer: 0
@@ -40833,9 +40598,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &895001586
 MonoBehaviour:
@@ -41183,13 +40948,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 901317817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &904736160
 GameObject:
   m_ObjectHideFlags: 0
@@ -41437,13 +41199,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 904833634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &906501693
 GameObject:
   m_ObjectHideFlags: 0
@@ -41679,10 +41438,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -41738,9 +41493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &910038179
 MonoBehaviour:
@@ -41977,13 +41732,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 911263490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!4 &913216333 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
@@ -42212,10 +41964,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 1
-  parallelAim: 1
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -42374,9 +42122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &918473624
 MonoBehaviour:
@@ -42600,13 +42348,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 926058542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &932661853
 GameObject:
   m_ObjectHideFlags: 0
@@ -42981,9 +42726,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &934109640
 MonoBehaviour:
@@ -43187,13 +42932,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 936548850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &944311079
 GameObject:
   m_ObjectHideFlags: 0
@@ -43612,13 +43354,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 959647865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &960649138
 GameObject:
   m_ObjectHideFlags: 0
@@ -43759,13 +43498,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 960649138}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &960841330
 GameObject:
   m_ObjectHideFlags: 0
@@ -43969,9 +43705,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &960841336
 MonoBehaviour:
@@ -44188,9 +43924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &964928106
 MonoBehaviour:
@@ -44427,13 +44163,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 967585671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &967774603
 GameObject:
   m_ObjectHideFlags: 0
@@ -44482,9 +44215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &967774606
 MonoBehaviour:
@@ -44721,13 +44454,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 968862508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &969030718
 GameObject:
   m_ObjectHideFlags: 0
@@ -44931,9 +44661,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Gun
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 342495083}
+  enemyName: Gun
   countsAsSeparateEnemy: 0
 --- !u!114 &970579822
 MonoBehaviour:
@@ -45028,9 +44758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &972096263
 MonoBehaviour:
@@ -45471,13 +45201,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 984872073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &985014894
 GameObject:
   m_ObjectHideFlags: 0
@@ -45532,9 +45259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &985014899
 MonoBehaviour:
@@ -45856,9 +45583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &995777571
 MonoBehaviour:
@@ -46164,9 +45891,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1002073610
 MonoBehaviour:
@@ -46370,13 +46097,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1004078165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1006788693
 GameObject:
   m_ObjectHideFlags: 0
@@ -46517,13 +46241,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1006788693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1008270593
 GameObject:
   m_ObjectHideFlags: 0
@@ -47062,13 +46783,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1011904401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1012478338
 GameObject:
   m_ObjectHideFlags: 0
@@ -47277,13 +46995,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1015066629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1016606203
 GameObject:
   m_ObjectHideFlags: 0
@@ -47424,13 +47139,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1016606203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1016902891
 GameObject:
   m_ObjectHideFlags: 0
@@ -47668,9 +47380,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1018487885
 MonoBehaviour:
@@ -47813,9 +47525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1026482208
 MonoBehaviour:
@@ -48244,9 +47956,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1032707916
 MonoBehaviour:
@@ -48555,13 +48267,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1037573785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1044654928
 GameObject:
   m_ObjectHideFlags: 0
@@ -48765,9 +48474,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1044654934
 MonoBehaviour:
@@ -49038,13 +48747,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1046388630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1048105112
 GameObject:
   m_ObjectHideFlags: 0
@@ -49185,13 +48891,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1048105112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1051621486
 GameObject:
   m_ObjectHideFlags: 0
@@ -49395,9 +49098,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1051621492
 MonoBehaviour:
@@ -49691,13 +49394,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058500146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1058834007
 GameObject:
   m_ObjectHideFlags: 0
@@ -49746,9 +49446,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1058834010
 MonoBehaviour:
@@ -49894,9 +49594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &1059469514
 MonoBehaviour:
@@ -50210,9 +49910,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1060124460
 MonoBehaviour:
@@ -50416,13 +50116,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1062595956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1073860102
 GameObject:
   m_ObjectHideFlags: 0
@@ -50563,13 +50260,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1073860102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1076975343
 GameObject:
   m_ObjectHideFlags: 0
@@ -50713,9 +50407,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Enemy B
   entityHealthControllerRef: {fileID: 1076975348}
   entityArenaControllerRef: {fileID: 932661858}
+  enemyName: Enemy B
   countsAsSeparateEnemy: 0
 --- !u!1 &1080494770
 GameObject:
@@ -50857,13 +50551,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1080494770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1082445532
 GameObject:
   m_ObjectHideFlags: 0
@@ -51040,13 +50731,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1086485909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1086891026
 GameObject:
   m_ObjectHideFlags: 0
@@ -51223,13 +50911,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1087311194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1090141527
 GameObject:
   m_ObjectHideFlags: 0
@@ -51679,13 +51364,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1096935392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1106183532
 GameObject:
   m_ObjectHideFlags: 0
@@ -51925,9 +51607,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1106237429
 MonoBehaviour:
@@ -52194,9 +51876,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1119694420
 MonoBehaviour:
@@ -52423,10 +52105,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 1
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 1
-  parallelAim: 1
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 0
   baseRadius: 0
@@ -52679,13 +52357,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1132853992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1132944314
 GameObject:
   m_ObjectHideFlags: 0
@@ -53014,13 +52689,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1135591412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1001 &1135741632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53417,13 +53089,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1137229635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1139771991
 GameObject:
   m_ObjectHideFlags: 0
@@ -53705,13 +53374,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1142645421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1147691261
 GameObject:
   m_ObjectHideFlags: 0
@@ -53888,13 +53554,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1148039159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1150424622
 GameObject:
   m_ObjectHideFlags: 0
@@ -54098,9 +53761,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1150424628
 MonoBehaviour:
@@ -54262,9 +53925,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1156088443
 MonoBehaviour:
@@ -54507,13 +54170,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1156231372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1158325340
 GameObject:
   m_ObjectHideFlags: 0
@@ -54759,13 +54419,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1158842950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1163682337
 GameObject:
   m_ObjectHideFlags: 0
@@ -54906,13 +54563,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1163682337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1164263081
 GameObject:
   m_ObjectHideFlags: 0
@@ -55116,9 +54770,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1164263087
 MonoBehaviour:
@@ -55385,9 +55039,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1167678319
 MonoBehaviour:
@@ -55830,9 +55484,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1190111112
 MonoBehaviour:
@@ -56116,9 +55770,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1193750873
 MonoBehaviour:
@@ -56347,13 +56001,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1195081521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1195101619
 GameObject:
   m_ObjectHideFlags: 0
@@ -56494,13 +56145,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1195101619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1195549225
 GameObject:
   m_ObjectHideFlags: 0
@@ -56641,13 +56289,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1195549225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1204629325
 GameObject:
   m_ObjectHideFlags: 0
@@ -56788,13 +56433,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1204629325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1208962040
 GameObject:
   m_ObjectHideFlags: 0
@@ -56966,13 +56608,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1210036768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1212094870
 GameObject:
   m_ObjectHideFlags: 0
@@ -57103,10 +56742,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -57434,9 +57069,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1217776816
 MonoBehaviour:
@@ -57779,13 +57414,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1230294606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1237118038
 GameObject:
   m_ObjectHideFlags: 0
@@ -57926,13 +57558,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1237118038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1239196016
 GameObject:
   m_ObjectHideFlags: 0
@@ -58107,13 +57736,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1242951920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1243906304
 GameObject:
   m_ObjectHideFlags: 0
@@ -58162,9 +57788,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1243906307
 MonoBehaviour:
@@ -58384,9 +58010,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1250865724
 MonoBehaviour:
@@ -58623,13 +58249,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1253245149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1253274077
 GameObject:
   m_ObjectHideFlags: 0
@@ -58801,13 +58424,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1256035250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1260837333
 GameObject:
   m_ObjectHideFlags: 0
@@ -58944,10 +58564,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 1
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 0
   baseRadius: 0
@@ -59158,9 +58774,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1265437095
 MonoBehaviour:
@@ -59427,9 +59043,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1266898659
 MonoBehaviour:
@@ -60094,9 +59710,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1272314412
 MonoBehaviour:
@@ -60363,9 +59979,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1274020181
 MonoBehaviour:
@@ -60560,9 +60176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1279473025
 MonoBehaviour:
@@ -60729,9 +60345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715bfbefc977de84db8b552cd6a230d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
   weakPointHealths: []
   deadSegments: 0
@@ -60961,9 +60577,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1281468547
 MonoBehaviour:
@@ -61230,9 +60846,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1283262519
 MonoBehaviour:
@@ -61424,9 +61040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Stationary Turret
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Stationary Turret
   countsAsSeparateEnemy: 1
 --- !u!114 &1285792636
 MonoBehaviour:
@@ -61623,13 +61239,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1286998412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1289477239
 GameObject:
   m_ObjectHideFlags: 0
@@ -62040,13 +61653,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1297665239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1298380673
 GameObject:
   m_ObjectHideFlags: 0
@@ -62127,9 +61737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1301902749
 MonoBehaviour:
@@ -62429,9 +62039,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1302999848
 MonoBehaviour:
@@ -62635,13 +62245,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1306778819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1310795982
 GameObject:
   m_ObjectHideFlags: 0
@@ -62690,9 +62297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1310795985
 MonoBehaviour:
@@ -62929,13 +62536,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1313536092}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1318970905
 GameObject:
   m_ObjectHideFlags: 0
@@ -63334,13 +62938,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1325091391}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1325946786
 GameObject:
   m_ObjectHideFlags: 0
@@ -63462,9 +63063,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &1332828089
 MonoBehaviour:
@@ -64023,9 +63624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1335371766
 MonoBehaviour:
@@ -64428,9 +64029,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1350131257
 MonoBehaviour:
@@ -64542,9 +64143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1353209457
 MonoBehaviour:
@@ -64781,13 +64382,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1356552439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1357471622
 GameObject:
   m_ObjectHideFlags: 0
@@ -64973,9 +64571,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1369751636
 MonoBehaviour:
@@ -65450,13 +65048,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1382959896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1388179114
 GameObject:
   m_ObjectHideFlags: 0
@@ -65597,13 +65192,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1388179114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1390049538
 GameObject:
   m_ObjectHideFlags: 0
@@ -65744,13 +65336,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1390049538}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1394062022
 GameObject:
   m_ObjectHideFlags: 0
@@ -65891,13 +65480,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394062022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1405884815
 GameObject:
   m_ObjectHideFlags: 0
@@ -66038,13 +65624,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1405884815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1409380305
 GameObject:
   m_ObjectHideFlags: 0
@@ -66280,10 +65863,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -66549,9 +66128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1417394331
 MonoBehaviour:
@@ -66851,9 +66430,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1420658897
 MonoBehaviour:
@@ -67120,9 +66699,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1421508302
 MonoBehaviour:
@@ -67564,13 +67143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1423498511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!4 &1426986700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
@@ -67879,13 +67455,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1431758473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1433879678
 GameObject:
   m_ObjectHideFlags: 0
@@ -68236,13 +67809,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1434626691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1436721114
 GameObject:
   m_ObjectHideFlags: 0
@@ -68446,9 +68016,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1436721120
 MonoBehaviour:
@@ -68652,13 +68222,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1436754530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1437498808
 GameObject:
   m_ObjectHideFlags: 0
@@ -68862,9 +68429,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1437498814
 MonoBehaviour:
@@ -69293,10 +68860,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -69621,9 +69184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1461772977
 MonoBehaviour:
@@ -69735,9 +69298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1463883025
 MonoBehaviour:
@@ -70115,13 +69678,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1474501801}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1478015294
 GameObject:
   m_ObjectHideFlags: 0
@@ -70262,13 +69822,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1478015294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1482188934
 GameObject:
   m_ObjectHideFlags: 0
@@ -70472,9 +70029,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1482188940
 MonoBehaviour:
@@ -70659,7 +70216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1484176596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70672,9 +70229,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36de6b9570cd9bc4fb32f9698d5c15d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 891411888}
   entityArenaControllerRef: {fileID: 891411887}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
   shieldsParentRef: {fileID: 239482259}
   gunsParentRef: {fileID: 1535449830}
@@ -71011,9 +70568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1486395050
 MonoBehaviour:
@@ -71217,13 +70774,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1487497543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1487946132
 GameObject:
   m_ObjectHideFlags: 0
@@ -71634,13 +71188,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1501536143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1504954682
 GameObject:
   m_ObjectHideFlags: 0
@@ -71781,13 +71332,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1504954682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1508065310
 GameObject:
   m_ObjectHideFlags: 0
@@ -72011,13 +71559,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1518839797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1519034308
 GameObject:
   m_ObjectHideFlags: 0
@@ -72360,9 +71905,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1529895482
 MonoBehaviour:
@@ -72629,9 +72174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1530430363
 MonoBehaviour:
@@ -72975,7 +72520,7 @@ MonoBehaviour:
   limitByCount: 0
   maxSequenceShots: 3
   currentShotCount: 0
-  limitByTime: 0
+  limitByTime: 1
   sequenceDuration: 5
   sequenceTimer: 0
   useRecharge: 0
@@ -73053,10 +72598,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 1
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 0
   baseRadius: 0
@@ -73582,13 +73123,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1543656553}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1544992380
 GameObject:
   m_ObjectHideFlags: 0
@@ -73729,13 +73267,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1544992380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1548968752
 GameObject:
   m_ObjectHideFlags: 0
@@ -73907,13 +73442,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1558427094}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1561717546
 GameObject:
   m_ObjectHideFlags: 0
@@ -74117,9 +73649,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1561717552
 MonoBehaviour:
@@ -74500,9 +74032,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1568428190
 MonoBehaviour:
@@ -74908,13 +74440,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1578649228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1579022176
 GameObject:
   m_ObjectHideFlags: 0
@@ -75055,13 +74584,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1579022176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1583505851
 GameObject:
   m_ObjectHideFlags: 0
@@ -75215,9 +74741,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1583803222
 MonoBehaviour:
@@ -75572,9 +75098,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1588982205
 MonoBehaviour:
@@ -75950,13 +75476,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1596985589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1604691649
 GameObject:
   m_ObjectHideFlags: 0
@@ -76069,9 +75592,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1605367478
 MonoBehaviour:
@@ -76383,13 +75906,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1609225221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1610465079
 GameObject:
   m_ObjectHideFlags: 0
@@ -76593,9 +76113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1610465085
 MonoBehaviour:
@@ -76904,13 +76424,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1614032185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1616486165
 GameObject:
   m_ObjectHideFlags: 0
@@ -76959,9 +76476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1616486168
 MonoBehaviour:
@@ -77198,13 +76715,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1621761236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1622916410
 GameObject:
   m_ObjectHideFlags: 0
@@ -77376,9 +76890,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1624158024
 MonoBehaviour:
@@ -77523,9 +77037,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1625983226
 MonoBehaviour:
@@ -77827,9 +77341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Gun
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 342495083}
+  enemyName: Gun
   countsAsSeparateEnemy: 0
 --- !u!114 &1632009334
 MonoBehaviour:
@@ -78121,13 +77635,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1644232465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1646172337
 GameObject:
   m_ObjectHideFlags: 0
@@ -78226,9 +77737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1646172343
 MonoBehaviour:
@@ -78578,13 +78089,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1658331671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1658675316
 GameObject:
   m_ObjectHideFlags: 0
@@ -79310,13 +78818,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1682972982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1686886641
 GameObject:
   m_ObjectHideFlags: 0
@@ -79562,13 +79067,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1688789712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1691859661
 GameObject:
   m_ObjectHideFlags: 0
@@ -79772,9 +79274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1691859667
 MonoBehaviour:
@@ -80413,9 +79915,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1700640361
 MonoBehaviour:
@@ -80652,13 +80154,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1703785799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1709571865
 GameObject:
   m_ObjectHideFlags: 0
@@ -80799,13 +80298,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1709571865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1711677839
 GameObject:
   m_ObjectHideFlags: 0
@@ -81100,13 +80596,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1718795815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1718967006
 GameObject:
   m_ObjectHideFlags: 0
@@ -81236,9 +80729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1720514504
 MonoBehaviour:
@@ -81529,9 +81022,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1723644876
 MonoBehaviour:
@@ -81774,13 +81267,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1724080841}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1725191256
 GameObject:
   m_ObjectHideFlags: 0
@@ -81921,13 +81411,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1725191256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1725951332
 GameObject:
   m_ObjectHideFlags: 0
@@ -82068,13 +81555,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1725951332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1727740324
 GameObject:
   m_ObjectHideFlags: 0
@@ -82426,13 +81910,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1729226606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1730057355
 GameObject:
   m_ObjectHideFlags: 0
@@ -82749,10 +82230,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -82963,9 +82440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1736507635
 MonoBehaviour:
@@ -83127,9 +82604,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Gun
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 342495083}
+  enemyName: Gun
   countsAsSeparateEnemy: 0
 --- !u!114 &1737094939
 MonoBehaviour:
@@ -83484,9 +82961,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1753073284
 MonoBehaviour:
@@ -83786,9 +83263,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1753283095
 MonoBehaviour:
@@ -84160,9 +83637,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1758297553
 MonoBehaviour:
@@ -84465,9 +83942,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1764148755
 MonoBehaviour:
@@ -84773,9 +84250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1765402182
 MonoBehaviour:
@@ -84973,9 +84450,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5995e80cce00848449de145ac415118b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Barrier Rammer Duo
   entityHealthControllerRef: {fileID: 769692806}
   entityArenaControllerRef: {fileID: 769692805}
+  enemyName: Barrier Rammer Duo
   countsAsSeparateEnemy: 1
   enemyAHealth: {fileID: 1931138151}
   enemyBHealth: {fileID: 0}
@@ -85264,10 +84741,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -85415,13 +84888,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1776025065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1778568398
 GameObject:
   m_ObjectHideFlags: 0
@@ -85577,9 +85047,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1782875402
 MonoBehaviour:
@@ -85879,9 +85349,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1784512442
 MonoBehaviour:
@@ -86148,9 +85618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1784790609
 MonoBehaviour:
@@ -86459,13 +85929,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1805403249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1808175289
 GameObject:
   m_ObjectHideFlags: 0
@@ -86701,10 +86168,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 1
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 0}
-  aimAtPlayer: 0
-  parallelAim: 1
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 0
   baseRadius: 0
@@ -86852,13 +86315,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1810495112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1817256658
 GameObject:
   m_ObjectHideFlags: 0
@@ -87630,9 +87090,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1828235838
 MonoBehaviour:
@@ -88109,9 +87569,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1836028288
 MonoBehaviour:
@@ -88315,13 +87775,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1841447847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1844645796
 GameObject:
   m_ObjectHideFlags: 0
@@ -88704,13 +88161,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1854131734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1855846601
 GameObject:
   m_ObjectHideFlags: 0
@@ -88956,13 +88410,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1858044551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1859432628
 GameObject:
   m_ObjectHideFlags: 0
@@ -89271,9 +88722,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1862984582
 MonoBehaviour:
@@ -89477,13 +88928,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1868374453}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1871093652
 GameObject:
   m_ObjectHideFlags: 0
@@ -89624,13 +89072,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1871093652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1871430286
 GameObject:
   m_ObjectHideFlags: 0
@@ -89854,13 +89299,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1872774277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1892954713
 GameObject:
   m_ObjectHideFlags: 0
@@ -90064,9 +89506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1892954719
 MonoBehaviour:
@@ -90353,13 +89795,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1896544399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1897090865
 GameObject:
   m_ObjectHideFlags: 0
@@ -90563,9 +90002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1897090871
 MonoBehaviour:
@@ -90949,13 +90388,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1902804129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1904587055
 GameObject:
   m_ObjectHideFlags: 0
@@ -91550,13 +90986,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924495916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1924822593
 GameObject:
   m_ObjectHideFlags: 0
@@ -91784,9 +91217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1930082681
 MonoBehaviour:
@@ -91937,9 +91370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Enemy A
   entityHealthControllerRef: {fileID: 1931138151}
   entityArenaControllerRef: {fileID: 769692805}
+  enemyName: Enemy A
   countsAsSeparateEnemy: 0
 --- !u!135 &1931138148
 SphereCollider:
@@ -92084,9 +91517,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1934303406
 MonoBehaviour:
@@ -92477,9 +91910,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &1944224761
 MonoBehaviour:
@@ -92842,13 +92275,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1955071544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1956735577
 GameObject:
   m_ObjectHideFlags: 0
@@ -93264,9 +92694,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1957720725
 MonoBehaviour:
@@ -93533,9 +92963,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &1963064135
 MonoBehaviour:
@@ -93648,9 +93078,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &1963296042
 MonoBehaviour:
@@ -94130,13 +93560,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1983333364}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1985022517
 GameObject:
   m_ObjectHideFlags: 0
@@ -94352,13 +93779,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1986106668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1986870143
 GameObject:
   m_ObjectHideFlags: 0
@@ -94499,13 +93923,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1986870143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1988496052
 GameObject:
   m_ObjectHideFlags: 0
@@ -94993,13 +94414,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1991126567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &1998671214
 GameObject:
   m_ObjectHideFlags: 0
@@ -95309,9 +94727,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2002095001
 MonoBehaviour:
@@ -95515,13 +94933,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2006044360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2006289178
 GameObject:
   m_ObjectHideFlags: 0
@@ -95725,9 +95140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2006289184
 MonoBehaviour:
@@ -96310,9 +95725,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2012317696
 MonoBehaviour:
@@ -96771,13 +96186,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2018796951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2020812942
 GameObject:
   m_ObjectHideFlags: 0
@@ -96878,9 +96290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Gun
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 891411887}
+  enemyName: Gun
   countsAsSeparateEnemy: 0
 --- !u!114 &2030235844
 MonoBehaviour:
@@ -97159,9 +96571,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2037342352
 MonoBehaviour:
@@ -97365,13 +96777,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2037873693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2046944263
 GameObject:
   m_ObjectHideFlags: 0
@@ -97420,9 +96829,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &2046944266
 MonoBehaviour:
@@ -97548,9 +96957,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5995e80cce00848449de145ac415118b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Barrier Rammer Duo
   entityHealthControllerRef: {fileID: 932661859}
   entityArenaControllerRef: {fileID: 932661858}
+  enemyName: Barrier Rammer Duo
   countsAsSeparateEnemy: 1
   enemyAHealth: {fileID: 142521832}
   enemyBHealth: {fileID: 1076975348}
@@ -97886,13 +97295,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2055773644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2056987331
 GameObject:
   m_ObjectHideFlags: 0
@@ -98096,9 +97502,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2056987337
 MonoBehaviour:
@@ -98211,9 +97617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 0
 --- !u!114 &2058292422
 MonoBehaviour:
@@ -98372,9 +97778,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &2063460645
 MonoBehaviour:
@@ -98659,9 +98065,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2064968740
 MonoBehaviour:
@@ -98944,9 +98350,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2066884321
 MonoBehaviour:
@@ -99150,13 +98556,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2069232190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2073216827
 GameObject:
   m_ObjectHideFlags: 0
@@ -99205,9 +98608,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Shield
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Shield
   countsAsSeparateEnemy: 0
 --- !u!114 &2073216830
 MonoBehaviour:
@@ -99444,13 +98847,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2074443902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2076059943
 GameObject:
   m_ObjectHideFlags: 0
@@ -99591,13 +98991,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2076059943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2077312010
 GameObject:
   m_ObjectHideFlags: 0
@@ -99738,13 +99135,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2077312010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2078517511
 GameObject:
   m_ObjectHideFlags: 0
@@ -100379,9 +99773,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2090148980
 MonoBehaviour:
@@ -100598,10 +99992,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -100765,13 +100155,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2093517324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2095109599
 GameObject:
   m_ObjectHideFlags: 0
@@ -101100,10 +100487,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -101180,9 +100563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Gun
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 891411887}
+  enemyName: Gun
   countsAsSeparateEnemy: 0
 --- !u!114 &2104808687
 MonoBehaviour:
@@ -101398,13 +100781,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2108480207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2114118759
 GameObject:
   m_ObjectHideFlags: 0
@@ -101650,13 +101030,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2118708332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2120023094
 GameObject:
   m_ObjectHideFlags: 0
@@ -101965,9 +101342,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2125396492
 MonoBehaviour:
@@ -102360,9 +101737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2127602383
 MonoBehaviour:
@@ -102629,9 +102006,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2128475129
 MonoBehaviour:
@@ -102825,10 +102202,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -102981,10 +102354,6 @@ MonoBehaviour:
   stableGunShotsPerTurn: 3
   stableGunIndex: 0
   stableGunShotCounter: 0
-  player: {fileID: 691622028}
-  aimAtPlayer: 0
-  parallelAim: 0
-  aimOffset: {x: 0, y: 0, z: 0}
   forceDefaults: 0
   resetOnRecharge: 1
   baseRadius: 0
@@ -103148,13 +102517,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2139172495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2142098811
 GameObject:
   m_ObjectHideFlags: 0
@@ -103358,9 +102724,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2142098817
 MonoBehaviour:
@@ -103627,9 +102993,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Default Enemy Name
   entityHealthControllerRef: {fileID: 0}
   entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!114 &2142475946
 MonoBehaviour:
@@ -103833,13 +103199,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2145097934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: Space Pebble
   entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  countsAsSeparateEnemy: 1
 --- !u!1 &2147296232
 GameObject:
   m_ObjectHideFlags: 0

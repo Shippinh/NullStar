@@ -1,13 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 
-public class EnemyController : MonoBehaviour
+public class DestructibleController : MonoBehaviour
 {
-    public string enemyName = "Default Enemy Name";
     public EntityHealthController entityHealthControllerRef; // health data reference (stuff like hp, dmg and death handling)
-    public EntityArenaController entityArenaControllerRef; // arena data reference (stuff like at what wave to appear, etc.)
-    public bool countsAsSeparateEnemy = true;
     // Use this for initialization
     void Awake()
     {
@@ -31,11 +28,13 @@ public class EnemyController : MonoBehaviour
 
     // Then we'll just use HandleEnemyRevival() to grab a pooled object, undo shit, if any was applied, and then just reactivate it.
 
+    // In case an object can't be pooled we can always just override the handler for dying and reviving
+
     // STRICTLY CONTROL POOLING WITH THIS
     /// <summary>
     /// Deactivates the game object when the enemy dies
     /// </summary>
-    public virtual void HandleEnemyDeath()
+    public virtual void HandleDeath()
     {
         this.gameObject.SetActive(false);
     }
@@ -44,39 +43,29 @@ public class EnemyController : MonoBehaviour
     /// <summary>
     /// Reactivates the game object when the enemy gets revived
     /// </summary>
-    public virtual void HandleEnemyRevival()
+    public virtual void HandleRevival()
     {
         this.gameObject.SetActive(true);
     }
 
     // END
 
-    public EntityHealthController GetEnemyHealthController()
+    public EntityHealthController GetHealthController()
     {
         if (entityHealthControllerRef == null)
             entityHealthControllerRef = GetComponent<EntityHealthController>();
         return entityHealthControllerRef;
     }
 
-    public EntityArenaController GetEnemyArenaController()
-    {
-        if (entityArenaControllerRef == null)
-            entityArenaControllerRef = GetComponent<EntityArenaController>();
-        return entityArenaControllerRef;
-    }
-
     /// <summary>
     /// Should be called only once
     /// </summary>
-    protected void Initialize()
+    protected virtual void Initialize()
     {
         if (entityHealthControllerRef == null)
             entityHealthControllerRef = GetComponent<EntityHealthController>();
 
-        entityHealthControllerRef.Died += HandleEnemyDeath;
-        entityHealthControllerRef.Revived += HandleEnemyRevival;
-
-        if (entityArenaControllerRef == null)
-            entityArenaControllerRef = GetComponent<EntityArenaController>();
+        entityHealthControllerRef.Died += HandleDeath;
+        entityHealthControllerRef.Revived += HandleRevival;
     }
 }
