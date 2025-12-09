@@ -135,7 +135,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             currentPivot = UpdatePivot();
 
         AttachPivot();
-        SynchronizePivots();
+        if (childPivot != null)
+            SynchronizePivots();
     }
 
     void FixedUpdate()
@@ -752,7 +753,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         availableDirections = new List<Vector3>
         {
             playerCamera.forward,
-            //-playerCamera.forward,
+            //-playerCamera.forward, // not the back of the player, feels really clunky
             playerCamera.right,
             -playerCamera.right,
             player.transform.up, // top direction
@@ -797,6 +798,11 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         // No obstruction, line of sight is clear
         return true;
     }
+
+    /// <summary>
+    /// Handles the death of the sub enemy, properly replaces references and then reinitializes the whole enemy to use the specific AI pattern
+    /// </summary>
+    /// <param name="isA">Specifies which sub enemy died</param>
     public void HandlePartnerDeath(bool isA)
     {
         // Stop all current attack activity

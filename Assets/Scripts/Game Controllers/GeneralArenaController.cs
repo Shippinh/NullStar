@@ -88,7 +88,7 @@ public class GeneralArenaController : MonoBehaviour
         int deadEnemyCount = 0;
         for (int i = 0; i < enemyCount; i++)
         {
-            if (currentWaveEnemiesRef[i].GetEnemyHealthController().isAlive == false)
+            if (currentWaveEnemiesRef[i].GetEnemyHealthController().IsAlive() == false)
                 deadEnemyCount++;
         }
 

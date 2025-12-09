@@ -38,11 +38,17 @@ public class WormEnemyController : EnemyController
         // If all weak points are dead, trigger worm death
         if (!isDead && deadSegments >= weakPointHealths.Count)
         {
-            entityHealthControllerRef.CurrentHP = 0;
+            entityHealthControllerRef.InstantlyDie();
         }
     }
 
-    // Optional helper to access weak points
+    // Overrides the basic method to properly revive all sub-entity health controllers
+    public override void HandleEnemyRevival()
+    {
+        base.HandleEnemyRevival();
+    }
+
+    // Helper to access weak points
     public List<EntityHealthController> GetWeakPointHealths()
     {
         return weakPointHealths;

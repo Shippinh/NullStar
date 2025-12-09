@@ -6,12 +6,14 @@ using UnityEngine;
 public class EntityHealthController : MonoBehaviour
 {
     public int MaxHP = 100;
-    public int CurrentHP = 1;
+    [SerializeField] private int CurrentHP = 1;
 
-    public bool canBeDamaged = true;
-    public bool isAlive = true;
-    public bool isInvincible = false;
-    public bool instaKillable = false;
+    [SerializeField] private bool isAlive = true;    // VERY IMPORTANT, this defacto tells if the enemy is dead or alive.
+
+    public bool canBeDamaged = true;                // tells if it can take any damage (in general, it won't take any damage, nor it will react to any if this is false)
+    public bool isInvincible = false;               // tells if it can currently take any damage (this controls the on hit invincibility)
+    public bool instaKillable = false;              // tells if it can die in one hit (defines if it can be with the soft instakill method InstantlyDie())
+    public bool godMode = false;                    // tells if it can die. THE WAY ITS INTERACTIONS ARE WORKING SHOULD BE AND WILL BE CHANGED LATER, THIS SHIT BREAKS STUFF
 
     public float invincibilityDuration = 2f;
     public float currentInvincibilityDuration = 0f;
@@ -24,6 +26,7 @@ public class EntityHealthController : MonoBehaviour
     public event Action TookHit;
     public event Action Healed;
     public event Action Died;
+    public event Action Revived;
 
     void Awake()
     {
@@ -130,27 +133,61 @@ public class EntityHealthController : MonoBehaviour
     {
         if(isAlive && CurrentHP <= 0)
         {
+            // if we detect death in god mode - call death event, revive the entity and don't actually treat it as killed
             Died?.Invoke();
+
+            if (godMode)
+            {
+                // Hard revive, calls methods associated with it
+                Revive(true);
+                return;
+            }
+
             isAlive = false;
         }
     }
 
     /// <summary>
-    /// Kills the current entity instantly based on internal variables
+    /// Kills the current entity instantly based on internal variables.
     /// </summary>
     public void InstantlyDie()
     {
         if (isAlive && instaKillable && canBeDamaged)
         {
-            CurrentHP = 0;
+            if(!godMode)
+                CurrentHP = 0;
         }
     }
 
     /// <summary>
-    /// Kills the current entity instantly unconditionally
+    /// Kills the current entity instantly unconditionally. Can't die in god mode. To die in god mode call ForciblyDieOverGodMode().
     /// </summary>
     public void ForciblyDie()
     {
+        if (!godMode)
+            CurrentHP = 0;
+    }
+
+    /// <summary>
+    /// Kills the current entity instantly unconditionally. Can die in god mode. To not die in god mode call ForciblyDie().
+    /// </summary>
+    public void ForciblyDieOverGodMode()
+    {
         CurrentHP = 0;
+    }
+
+    public void Revive(bool shouldInvoke)
+    {
+        CurrentHP = MaxHP;
+        isAlive = true;
+
+        if (shouldInvoke)
+            Revived?.Invoke();
+    }
+
+    // Returns the current living status of the enemy
+    public bool IsAlive()
+    {
+        return isAlive;
     }
 }

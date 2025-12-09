@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Has a special death controller due to the complexity of AI.
 public class BarrierRammerEnemyController : EnemyController
 {
     [Header("References")]
@@ -36,7 +37,7 @@ public class BarrierRammerEnemyController : EnemyController
         // force death so the invisible enemy doesn't try to kill the player with no enemies present
         if (deadCount == 2)
         {
-            entityHealthControllerRef.CurrentHP = 0;
+            entityHealthControllerRef.ForciblyDieOverGodMode();
             return;
         }
     }
@@ -48,7 +49,7 @@ public class BarrierRammerEnemyController : EnemyController
         // force death so the invisible enemy doesn't try to kill the player with no enemies present
         if (deadCount == 2)
         {
-            entityHealthControllerRef.CurrentHP = 0;
+            entityHealthControllerRef.ForciblyDieOverGodMode();
             return;
         }
 
@@ -62,7 +63,7 @@ public class BarrierRammerEnemyController : EnemyController
         // force death so the invisible enemy doesn't try to kill the player with no enemies present
         if (deadCount == 2)
         {
-            entityHealthControllerRef.CurrentHP = 0;
+            entityHealthControllerRef.ForciblyDieOverGodMode();
             return;
         }
 

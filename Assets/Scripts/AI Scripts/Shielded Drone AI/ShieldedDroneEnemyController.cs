@@ -13,6 +13,7 @@ public class ShieldedDroneEnemyController : EnemyController
 
     public ShieldedEnemy enemyAIRef;
 
+    // Game Juice
     [Header("Random Death Timers")]
     [Tooltip("Minimum time between sub-entity deaths.")]
     public float minTimerDuration = 0.2f;
@@ -59,7 +60,7 @@ public class ShieldedDroneEnemyController : EnemyController
         allSubEntities.AddRange(gunHealthControllers);
 
         // Filter out already-dead or inactive entities
-        allSubEntities.RemoveAll(e => e == null || !e.gameObject.activeSelf || e.CurrentHP <= 0);
+        allSubEntities.RemoveAll(e => e == null || !e.gameObject.activeSelf || e.IsAlive() == false);
 
         if (allSubEntities.Count == 0)
         {
@@ -71,6 +72,13 @@ public class ShieldedDroneEnemyController : EnemyController
         StartCoroutine(DeathSequence(allSubEntities));
     }
 
+    // Overrides the basic method to properly revive all sub-entity health controllers
+    public override void HandleEnemyRevival()
+    {
+        base.HandleEnemyRevival();
+    }
+
+    // THIS SHOULD BE REMADE TO USE A PROPER TIMER, WAY TOO UNRELIABLE, god i hate coroutines
     private IEnumerator DeathSequence(List<EntityHealthController> subEntities)
     {
         // Shuffle for random death order
@@ -83,9 +91,9 @@ public class ShieldedDroneEnemyController : EnemyController
         // Kill them one by one
         foreach (var entity in subEntities)
         {
-            if (entity != null && entity.gameObject.activeSelf && entity.CurrentHP > 0)
+            if (entity != null && entity.gameObject.activeSelf)
             {
-                entity.CurrentHP = 0; // Force kill
+                entity.ForciblyDie();
             }
 
             // Randomized timing
