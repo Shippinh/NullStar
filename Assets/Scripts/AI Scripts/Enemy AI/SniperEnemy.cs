@@ -64,7 +64,7 @@ public class SniperEnemy : MonoBehaviour
 
         velocity = Vector3.zero;
 
-        turretRef.InitializeTurret(player, minRange, maxRange);
+        turretRef.InitializeEnemyTurret(player, minRange, maxRange);
     }
 
     void Update()

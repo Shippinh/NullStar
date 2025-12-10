@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TurretBehavior : MonoBehaviour
 {
-    private SpaceShooterController player;
+    [Header("Target")]
+    public SpaceShooterController player;
 
     public enum AimType
     {
@@ -12,7 +13,6 @@ public class TurretBehavior : MonoBehaviour
         InterceptPrediction = 1,    // The most expensive, eventually hits the target if they choose not to change direction
         LinearPrediction = 2,       // The middle ground, hits the target when specific condition applied
     }
-
 
     [Header("Aim Type")]
     public AimType aimType;
@@ -67,6 +67,11 @@ public class TurretBehavior : MonoBehaviour
     public bool playerOverboostSimpleAim = false; // makes the turret use simple aiming when using InterceptPrediction
     [SerializeField] private bool canAct = true;
 
+    private void Start()
+    {
+        Initialize();
+    }
+
     private void Update()
     {
         if (canAct)
@@ -76,12 +81,17 @@ public class TurretBehavior : MonoBehaviour
         }
     }
 
-    public void InitializeTurret(SpaceShooterController targetPtr, float minShootingRangePtr, float maxShootingRangePtr)
+    public void InitializeEnemyTurret(SpaceShooterController targetPtr, float minShootingRangePtr, float maxShootingRangePtr)
     {
         player = targetPtr;
         minShootingRange = minShootingRangePtr;
         maxShootingRange = maxShootingRangePtr;
 
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         projectileEmittersControllerRef = GetComponentInChildren<ProjectileEmittersController>();
         gunsPositions = projectileEmittersControllerRef.GetGunsArray();
 

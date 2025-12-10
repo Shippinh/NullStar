@@ -105,6 +105,6 @@ public class ShieldedDroneEnemyController : EnemyController
         }
 
         // Deactivate the main entity after all deaths
-        entityHealthControllerRef.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }
