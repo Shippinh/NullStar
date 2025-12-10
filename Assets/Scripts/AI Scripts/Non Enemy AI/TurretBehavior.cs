@@ -6,7 +6,18 @@ public class TurretBehavior : MonoBehaviour
 {
     private SpaceShooterController player;
 
-    [Header("Shooting")]
+    public enum AimType
+    {
+        SmoothRotation = 0,         // The least expensive, the dumbest
+        InterceptPrediction = 1,    // The most expensive, eventually hits the target if they choose not to change direction
+        LinearPrediction = 2,       // The middle ground, hits the target when specific condition applied
+    }
+
+
+    [Header("Aim Type")]
+    public AimType aimType;
+
+    [Header("State Timers")]
     public float weaponChargeDuration = 1.5f;                   // This is set by the user
     [SerializeField] private float weaponChargeDurationTimer;
     [SerializeField] private float weaponShootDuration = 0.5f;  // defined by shot count * fire rate or sequenceDuration, depending on the limit. If no limit - just uses the current fire rate value
@@ -14,40 +25,63 @@ public class TurretBehavior : MonoBehaviour
     [SerializeField] private float weaponCooldownDuration = 3f; // uses emitter's recharge duration
     [SerializeField] private float weaponCooldownDurationTimer;
 
+    [Header("Turret Range")]
     public float minShootingRange;
     public float maxShootingRange;
+    public float minShootingRangeIncrement = 0f;
+    public float maxShootingRangeIncrement = 500f;
 
+    [Header("Randomization")]
     public bool slightyRandomizeDurations = true;
     public float randomDurationsRange = 0.1f;
     public bool randomizeInitialWeaponChargeTimers = true;
 
     public bool randomizeStopWhenShooting = false;
-    public bool stopWhenShooting = false;
 
+    [Header("States")]
     public bool isShooting;
     public bool isChargingShot;
     public bool isSendingShot;
     public bool isShootingOnCD;
 
-    [SerializeField] private float projectileSpeed = 300f;
-
+    [Header("Line-of-Sight check")]
     public LayerMask losCheck;
 
     [Header("Aiming")]
-    private float[] aimStrengths;
     public float aimTimeToPerfect = 2f; // time in seconds to reach perfect aim
+    private float[] aimStrengths;
     [SerializeField, Range(0f, 180f)] public float aimResetThreshold = 30f;
     private Vector3[] previousPredictedDirs;
     private Vector3 aimedDir; // updated every frame in UpdateAiming()
+    [SerializeField] private float projectileSpeed = 300f;
+    public float aimSmoothing = 2f;
+    public float aimLeadTime = 0.8f;
 
     [Header("Emitter Stuff")]
     public ProjectileEmittersController projectileEmittersControllerRef;
     [SerializeField] private Transform[] gunsPositions;
     private Vector3[] aimedDirs; // store per-gun aimed directions
 
+    [Header("Extra Options")]
+    public bool stopWhenShooting = false;
+    public bool playerOverboostSimpleAim = false; // makes the turret use simple aiming when using InterceptPrediction
+    [SerializeField] private bool canAct = true;
+
+    private void Update()
+    {
+        if (canAct)
+        {
+            UpdateAiming();
+            HandleShooting();
+        }
+    }
 
     public void InitializeTurret(SpaceShooterController targetPtr, float minShootingRangePtr, float maxShootingRangePtr)
     {
+        player = targetPtr;
+        minShootingRange = minShootingRangePtr;
+        maxShootingRange = maxShootingRangePtr;
+
         projectileEmittersControllerRef = GetComponentInChildren<ProjectileEmittersController>();
         gunsPositions = projectileEmittersControllerRef.GetGunsArray();
 
@@ -86,16 +120,23 @@ public class TurretBehavior : MonoBehaviour
         projectileSpeed = ObjectPool.Instance.GetPooledObject(projectileEmittersControllerRef.projectileTag).GetComponent<SniperProjectile>().speed;
     }
 
+    public void SyncState(bool canActPtr)
+    {
+        canAct = canActPtr;
+    }
+
     public float GetWeaponChargeDurationTimer()
     {
         return weaponChargeDurationTimer;
     }
 
     // handles all shooting related timers and the brief stop before shooting
-    public void HandleShooting(float distanceToPlayer)
+    public void HandleShooting()
     {
         // --- Check sweet spot and line of sight ---
-        bool inSweetSpot = distanceToPlayer >= minShootingRange && distanceToPlayer <= maxShootingRange;
+        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+        bool inSweetSpot = distanceToPlayer >= minShootingRange + minShootingRangeIncrement && distanceToPlayer <= maxShootingRange + maxShootingRangeIncrement;
         bool hasLOS = HasLineOfSight();
 
         if (!inSweetSpot || !hasLOS)
@@ -157,7 +198,6 @@ public class TurretBehavior : MonoBehaviour
         }
     }
 
-
     public void ResetShooting()
     {
         // Reset state flags
@@ -177,6 +217,24 @@ public class TurretBehavior : MonoBehaviour
     {
         if (!player || gunsPositions == null || gunsPositions.Length == 0) return;
 
+        switch(aimType)
+        {
+            case AimType.InterceptPrediction:
+                PreciserAiming();
+                break;
+            case AimType.LinearPrediction:
+                PreciserAiming();
+                break;
+            case AimType.SmoothRotation:
+                SmoothRotationAiming();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void PreciserAiming()
+    {
         if (aimedDirs == null || aimedDirs.Length != gunsPositions.Length)
             aimedDirs = new Vector3[gunsPositions.Length];
 
@@ -197,14 +255,27 @@ public class TurretBehavior : MonoBehaviour
             // Predict position
             float distance = Vector3.Distance(gunPos, playerPos);
             float timeToHit = distance / projectileSpeed;
-            Vector3 predictedPos = playerPos + playerVel * timeToHit;
 
+            Vector3 predictedPos = Vector3.zero;
             Vector3 predictedDir = Vector3.zero;
 
-            if (player.overboostMode)
-                predictedDir = (predictedPos - gunPos).normalized; // linear prediction, should be balanced with lead aim time
+            bool useIntercept =
+            !playerOverboostSimpleAim && aimType == AimType.InterceptPrediction ||
+            (playerOverboostSimpleAim && !player.overboostMode && aimType == AimType.InterceptPrediction);
+
+
+            // aimLeadTime = 0.8 good vs multidirectional movement
+            // aimLeadTime = 0.5 good vs constant cardinal direction movement
+            if (useIntercept)
+            {
+                predictedPos = playerPos + playerVel * timeToHit;
+                predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed);
+            }
             else
-                predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed); //perfect aim 
+            {
+                predictedPos = playerPos + playerVel * (timeToHit + aimLeadTime);
+                predictedDir = (predictedPos - gunPos).normalized;
+            }
 
             // Reset aim strength on sudden change
             if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > aimResetThreshold) // 30° sudden change threshold
@@ -232,6 +303,28 @@ public class TurretBehavior : MonoBehaviour
             Quaternion localTargetRot = Quaternion.Inverse(gun.parent.rotation) * Quaternion.LookRotation(finalDir);
             gun.localRotation = localTargetRot;
         }
+    }
+
+    private void SmoothRotationAiming()
+    {
+        if (!player) return;
+
+        Vector3 playerPos = player.transform.position;
+        Vector3 playerVel = player.body ? player.body.velocity : Vector3.zero;
+
+        float projectileSpeed = 300f;
+        float distance = Vector3.Distance(transform.position, playerPos);
+        float timeToHit = distance / projectileSpeed;
+        Vector3 predictedPos = playerPos + playerVel * timeToHit;
+
+        aimedDir = (predictedPos - transform.position).normalized;
+
+        // Rotate smoothly toward aim
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            Quaternion.LookRotation(aimedDir),
+            Time.deltaTime * aimSmoothing
+        );
     }
 
     Vector3 CalculateInterceptDirection(Vector3 shooterPos, Vector3 targetPos, Vector3 targetVel, float projectileSpeed)

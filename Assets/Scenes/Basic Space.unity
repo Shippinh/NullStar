@@ -12403,7 +12403,7 @@ GameObject:
   - component: {fileID: 298213489}
   - component: {fileID: 298213488}
   m_Layer: 3
-  m_Name: Sniper Enemy
+  m_Name: Sniper Enemy (Hard Coded, broken)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12542,27 +12542,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  weaponChargeDuration: 1.5
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  slightyRandomizeDurations: 1
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 1
-  randomizeStopWhenShooting: 0
-  stopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  projectileSpeed: 300
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 1.5
-  aimResetThreshold: 80
+  turretRef: {fileID: 0}
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -12572,8 +12552,6 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
-  projectileEmittersControllerRef: {fileID: 2134327690}
-  gunsPositions: []
 --- !u!4 &298213494
 Transform:
   m_ObjectHideFlags: 0
@@ -12860,6 +12838,89 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301855467}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &301911604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301911605}
+  - component: {fileID: 301911607}
+  - component: {fileID: 301911606}
+  m_Layer: 0
+  m_Name: Gun Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &301911605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301911604}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1299199177}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &301911606
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301911604}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e3e84b18a84f6574d88cb3cb6c8a0a8c, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &301911607
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301911604}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &302104976
 GameObject:
   m_ObjectHideFlags: 0
@@ -13331,6 +13392,111 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309164235}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &309774171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309774172}
+  - component: {fileID: 309774175}
+  - component: {fileID: 309774174}
+  - component: {fileID: 309774173}
+  m_Layer: 11
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &309774172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309774171}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1973298256}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &309774173
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309774171}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &309774174
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309774171}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &309774175
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309774171}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &312149743
 GameObject:
   m_ObjectHideFlags: 0
@@ -34938,6 +35104,84 @@ AudioDistortionFilter:
   m_GameObject: {fileID: 783362411}
   m_Enabled: 1
   m_DistortionLevel: 0.3
+--- !u!1 &789857973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 789857974}
+  - component: {fileID: 789857975}
+  m_Layer: 3
+  m_Name: Turret
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &789857974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789857973}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1299199177}
+  m_Father: {fileID: 910255070}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &789857975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789857973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e3bf646b0f6eb41887eb5776c8b6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimType: 0
+  weaponChargeDuration: 3
+  weaponChargeDurationTimer: 0
+  weaponShootDuration: 0.5
+  weaponShootDurationTimer: 0
+  weaponCooldownDuration: 3
+  weaponCooldownDurationTimer: 0
+  minShootingRange: 0
+  maxShootingRange: 0
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 300
+  slightyRandomizeDurations: 0
+  randomDurationsRange: 0.1
+  randomizeInitialWeaponChargeTimers: 0
+  randomizeStopWhenShooting: 0
+  isShooting: 0
+  isChargingShot: 0
+  isSendingShot: 0
+  isShootingOnCD: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 1024
+  aimTimeToPerfect: 2
+  aimResetThreshold: 30
+  projectileSpeed: 300
+  aimSmoothing: 2
+  aimLeadTime: 0
+  projectileEmittersControllerRef: {fileID: 1299199178}
+  gunsPositions:
+  - {fileID: 301911605}
+  stopWhenShooting: 1
+  playerOverboostSimpleAim: 0
+  canAct: 1
 --- !u!1 &790042410
 GameObject:
   m_ObjectHideFlags: 0
@@ -39494,27 +39738,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  weaponChargeDuration: 1.5
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  slightyRandomizeDurations: 1
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 1
-  randomizeStopWhenShooting: 0
-  stopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  projectileSpeed: 300
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 1.5
-  aimResetThreshold: 80
+  turretRef: {fileID: 0}
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -39524,8 +39748,6 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
-  projectileEmittersControllerRef: {fileID: 750949549}
-  gunsPositions: []
 --- !u!1 &870892960
 GameObject:
   m_ObjectHideFlags: 0
@@ -41592,6 +41814,188 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 910038176}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &910255063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 910255070}
+  - component: {fileID: 910255069}
+  - component: {fileID: 910255068}
+  - component: {fileID: 910255067}
+  - component: {fileID: 910255066}
+  - component: {fileID: 910255065}
+  - component: {fileID: 910255064}
+  m_Layer: 3
+  m_Name: Sniper Enemy (Turret)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!135 &910255064
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910255063}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 25
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &910255065
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910255063}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 2
+--- !u!114 &910255066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910255063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
+  entityArenaControllerRef: {fileID: 0}
+  enemyName: Default Enemy Name
+  countsAsSeparateEnemy: 1
+--- !u!114 &910255067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910255063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveToAppear: 1
+  showWaveGizmo: 1
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!114 &910255068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910255063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 1
+  CurrentHP: 1
+  isAlive: 1
+  canBeDamaged: 1
+  isInvincible: 0
+  instaKillable: 0
+  godMode: 0
+  invincibilityDuration: 0
+  currentInvincibilityDuration: 0
+  hasHealed: 0
+  healingCooldown: 60
+  currentHealingCooldown: 0
+--- !u!114 &910255069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910255063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bd6d4ca9bfeb5b47b6a64f2f8986b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 691622029}
+  maxSpeed: 200
+  maxAcceleration: 80
+  jetpackAcceleration: 70
+  orbitMaxSpeed: 150
+  orbitMaxAcceleration: 300
+  orbitVerticalAcceleration: 300
+  orbitSpeedFactor: 1
+  minRange: 300
+  maxRange: 600
+  baseMinRange: 0
+  baseMaxRange: 0
+  tiltSpeed: 45
+  avoidanceForce: 1000
+  detectionRadius: 40
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 3072
+  turretRef: {fileID: 789857975}
+  canAct: 1
+  actSlowdownDuration: 1
+  canMove: 1
+  rb: {fileID: 0}
+  nearbyObstacles: []
+  velocity: {x: 0, y: 0, z: 0}
+  desiredVelocity: {x: 0, y: 0, z: 0}
+  contactNormal: {x: 0, y: 1, z: 0}
+  tiltAngle: 0
+--- !u!4 &910255070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910255063}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 566.4, y: 120, z: 385}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1973298256}
+  - {fileID: 789857974}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &911263490
 GameObject:
   m_ObjectHideFlags: 0
@@ -53998,27 +54402,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  weaponChargeDuration: 1.5
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  slightyRandomizeDurations: 1
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 1
-  randomizeStopWhenShooting: 0
-  stopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  projectileSpeed: 300
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 1.5
-  aimResetThreshold: 80
+  turretRef: {fileID: 0}
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -54028,8 +54412,6 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
-  projectileEmittersControllerRef: {fileID: 1212094872}
-  gunsPositions: []
 --- !u!1 &1156231372
 GameObject:
   m_ObjectHideFlags: 0
@@ -61689,6 +62071,143 @@ Transform:
   - {fileID: 555490872}
   m_Father: {fileID: 2083348104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1299199176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299199177}
+  - component: {fileID: 1299199178}
+  m_Layer: 0
+  m_Name: Sniper Emitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299199177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299199176}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 301911605}
+  m_Father: {fileID: 789857974}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299199178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299199176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a63ac11147c85544aa2ef82cca1d4545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guns:
+  - {fileID: 301911605}
+  projectileTag: Sniper Projectile
+  fireTimer: 0
+  limitByCount: 1
+  maxSequenceShots: 3
+  currentShotCount: 0
+  limitByTime: 0
+  sequenceDuration: 5
+  sequenceTimer: 0
+  useRecharge: 1
+  rechargeTime: 5
+  rechargeTimer: 0
+  isRecharging: 0
+  spiralAngle: 0
+  pattern: 0
+  scaleWithEachShot: 0
+  radiusTarget: 2
+  projectileCountTarget: 4
+  spreadTarget: 5
+  maxScaleShots: 3
+  scaleOverTime: 0
+  radiusTargetOverTime: 5
+  projectileCountTargetOverTime: 6
+  spreadTargetOverTime: 15
+  scaleDuration: 2
+  fireRateOsc:
+    enabled: 0
+    amplitude: 0
+    frequency: 1
+    offset: 0
+    baseValue: 0.2
+    waveform: 0
+    useRange: 0
+    minValue: -1
+    maxValue: 1
+  spreadOsc:
+    enabled: 0
+    amplitude: 0
+    frequency: 1
+    offset: 0
+    baseValue: 15
+    waveform: 0
+    useRange: 0
+    minValue: -1
+    maxValue: 1
+  projectileCountOsc:
+    enabled: 0
+    amplitude: 0
+    frequency: 1
+    offset: 0
+    baseValue: 2
+    waveform: 0
+    useRange: 0
+    minValue: -1
+    maxValue: 1
+  spiralSpeedOsc:
+    enabled: 0
+    amplitude: 0
+    frequency: 1
+    offset: 0
+    baseValue: 90
+    waveform: 0
+    useRange: 0
+    minValue: -1
+    maxValue: 1
+  radiusOsc:
+    enabled: 0
+    amplitude: 0
+    frequency: 1
+    offset: 0
+    baseValue: 0
+    waveform: 0
+    useRange: 0
+    minValue: -1
+    maxValue: 1
+  allowSoftStop: 1
+  isShooting: 0
+  requestedStop: 0
+  requestedStart: 0
+  randomGunSequence: 0
+  stableGunSequence: 0
+  stableGunShotsPerTurn: 3
+  stableGunIndex: 0
+  stableGunShotCounter: 0
+  forceDefaults: 0
+  resetOnRecharge: 1
+  baseRadius: 0
+  baseProjectileCount: 0
+  baseSpread: 0
+  baseSpiralSpeed: 0
+  baseFireRateValue: 0
 --- !u!1 &1301902746
 GameObject:
   m_ObjectHideFlags: 0
@@ -80802,27 +81321,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  weaponChargeDuration: 1.5
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  slightyRandomizeDurations: 1
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 1
-  randomizeStopWhenShooting: 0
-  stopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  projectileSpeed: 300
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 1.5
-  aimResetThreshold: 80
+  turretRef: {fileID: 0}
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -80832,8 +81331,6 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
-  projectileEmittersControllerRef: {fileID: 1774867938}
-  gunsPositions: []
 --- !u!1 &1723317283
 GameObject:
   m_ObjectHideFlags: 0
@@ -81095,27 +81592,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  weaponChargeDuration: 1.5
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  slightyRandomizeDurations: 1
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 1
-  randomizeStopWhenShooting: 0
-  stopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  projectileSpeed: 300
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 1.5
-  aimResetThreshold: 80
+  turretRef: {fileID: 0}
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -81125,8 +81602,6 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
-  projectileEmittersControllerRef: {fileID: 1414922188}
-  gunsPositions: []
 --- !u!1 &1724080841
 GameObject:
   m_ObjectHideFlags: 0
@@ -84015,27 +84490,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  weaponChargeDuration: 1.5
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  slightyRandomizeDurations: 1
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 1
-  randomizeStopWhenShooting: 0
-  stopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  projectileSpeed: 300
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 1.5
-  aimResetThreshold: 0.5
+  turretRef: {fileID: 0}
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -84045,8 +84500,6 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
-  projectileEmittersControllerRef: {fileID: 1734851487}
-  gunsPositions: []
 --- !u!1 &1765402176
 GameObject:
   m_ObjectHideFlags: 0
@@ -91290,27 +91743,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  weaponChargeDuration: 1.5
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  slightyRandomizeDurations: 1
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 1
-  randomizeStopWhenShooting: 0
-  stopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  projectileSpeed: 300
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 1.5
-  aimResetThreshold: 80
+  turretRef: {fileID: 0}
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -91320,8 +91753,6 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
-  projectileEmittersControllerRef: {fileID: 247307681}
-  gunsPositions: []
 --- !u!1 &1931138144
 GameObject:
   m_ObjectHideFlags: 0
@@ -93315,6 +93746,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969087522}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1973298255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973298256}
+  m_Layer: 3
+  m_Name: Mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1973298256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973298255}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 309774172}
+  m_Father: {fileID: 910255070}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1976950494
 GameObject:
   m_ObjectHideFlags: 0
@@ -99846,27 +100309,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  weaponChargeDuration: 1.5
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0.5
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  slightyRandomizeDurations: 1
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 1
-  randomizeStopWhenShooting: 0
-  stopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  projectileSpeed: 300
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 1.5
-  aimResetThreshold: 80
+  turretRef: {fileID: 0}
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -99876,8 +100319,6 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
-  projectileEmittersControllerRef: {fileID: 31032784}
-  gunsPositions: []
 --- !u!1 &2090369615
 GameObject:
   m_ObjectHideFlags: 0
@@ -103300,3 +103741,4 @@ SceneRoots:
   - {fileID: 1770443408}
   - {fileID: 1379731872}
   - {fileID: 499208939}
+  - {fileID: 910255070}

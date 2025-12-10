@@ -23,7 +23,6 @@ public class SniperEnemy : MonoBehaviour
     public float maxRange = 400f;
     public float baseMinRange, baseMaxRange;
     public float tiltSpeed = 45f; // degrees per second to rotate orbit plane axis
-    float distToPlayer;
 
     [Header("Avoidance")]
     public float avoidanceForce = 5f;
@@ -72,7 +71,10 @@ public class SniperEnemy : MonoBehaviour
     {
         if (!player) return;
 
+        turretRef.SyncState(canAct);
+
         (minRange, maxRange) = player.CalculateDynamicOrbit(baseMinRange, baseMaxRange, baseMaxRange - baseMinRange);
+        float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         // Smooth act slowdown independent of weapon timers
         float targetSlowdown = canAct ? 1f : 0f;
@@ -82,8 +84,6 @@ public class SniperEnemy : MonoBehaviour
         if (canAct)
         {
             CalculateDesiredVelocity(distToPlayer);
-            turretRef.UpdateAiming();
-            turretRef.HandleShooting(distToPlayer);
 
             if (turretRef.stopWhenShooting && (turretRef.isChargingShot || turretRef.isSendingShot))
             {
@@ -102,8 +102,6 @@ public class SniperEnemy : MonoBehaviour
     void FixedUpdate()
     {
         if (!player) return;
-
-        distToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         if (canMove)
         {
