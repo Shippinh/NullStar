@@ -12,6 +12,7 @@ public class TurretBehavior : MonoBehaviour
         SmoothRotation = 0,         // The least expensive, the dumbest
         InterceptPrediction = 1,    // The most expensive, eventually hits the target if they choose not to change direction
         LinearPrediction = 2,       // The middle ground, hits the target when specific condition applied
+        UpwardConePrediction = 3
     }
 
     [Header("Aim Type")]
@@ -56,6 +57,12 @@ public class TurretBehavior : MonoBehaviour
     [SerializeField] private float projectileSpeed = 300f;
     public float aimSmoothing = 2f;
     public float aimLeadTime = 0.8f;
+
+    [Header("Upward Cone Aiming")]
+    [Range(0f, 89f)] public float coneMinAngle = 10f;   // minimum upward pitch
+    [Range(0f, 89f)] public float coneMaxAngle = 45f;   // maximum upward pitch
+    public float coneBlendStrength = 1f;               // 1 = fully clamp, <1 = blend w/ predicted
+    public bool hasAngle = true; // hard limit shooting
 
     [Header("Emitter Stuff")]
     public ProjectileEmittersController projectileEmittersControllerRef;
@@ -143,15 +150,23 @@ public class TurretBehavior : MonoBehaviour
     // handles all shooting related timers and the brief stop before shooting
     public void HandleShooting()
     {
+        if (!hasAngle)
+        {
+            if (isShooting) ResetShooting();
+            projectileEmittersControllerRef.ForceStopSequence();
+            return;
+        }
+
         // --- Check sweet spot and line of sight ---
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        bool inSweetSpot = distanceToPlayer >= minShootingRange + minShootingRangeIncrement && distanceToPlayer <= maxShootingRange + maxShootingRangeIncrement;
+        bool inSweetSpot = distanceToPlayer >= minShootingRange + minShootingRangeIncrement
+                            && distanceToPlayer <= maxShootingRange + maxShootingRangeIncrement;
         bool hasLOS = HasLineOfSight();
 
         if (!inSweetSpot || !hasLOS)
         {
-            if (isShooting) ResetShooting(); // cancel immediately if either condition fails
+            if (isShooting) ResetShooting(); // cancel immediately if any condition fails
             projectileEmittersControllerRef.ForceStopSequence();
             return;
         }
@@ -187,7 +202,7 @@ public class TurretBehavior : MonoBehaviour
 
                 if (weaponShootDurationTimer >= weaponShootDuration)
                 {
-                    projectileEmittersControllerRef.ForceStopSequence(); // NEW: use the emitter attack sequence
+                    projectileEmittersControllerRef.ForceStopSequence();
                     isSendingShot = false;
                     isShootingOnCD = true;
                     weaponCooldownDurationTimer = 0f;
@@ -208,6 +223,8 @@ public class TurretBehavior : MonoBehaviour
         }
     }
 
+
+
     public void ResetShooting()
     {
         // Reset state flags
@@ -227,21 +244,26 @@ public class TurretBehavior : MonoBehaviour
     {
         if (!player || gunsPositions == null || gunsPositions.Length == 0) return;
 
-        switch(aimType)
+        switch (aimType)
         {
             case AimType.InterceptPrediction:
                 PreciserAiming();
                 break;
+
             case AimType.LinearPrediction:
                 PreciserAiming();
                 break;
+
+            case AimType.UpwardConePrediction:
+                UpwardConeAiming();
+                break;
+
             case AimType.SmoothRotation:
                 SmoothRotationAiming();
                 break;
-            default:
-                break;
         }
     }
+
 
     private void PreciserAiming()
     {
@@ -337,6 +359,100 @@ public class TurretBehavior : MonoBehaviour
         );
     }
 
+    private void UpwardConeAiming()
+    {
+        if (aimedDirs == null || aimedDirs.Length != gunsPositions.Length)
+            aimedDirs = new Vector3[gunsPositions.Length];
+
+        if (aimStrengths == null || aimStrengths.Length != gunsPositions.Length)
+            aimStrengths = new float[gunsPositions.Length];
+
+        if (previousPredictedDirs == null || previousPredictedDirs.Length != gunsPositions.Length)
+            previousPredictedDirs = new Vector3[gunsPositions.Length];
+
+        bool anyGunOutOfCone = false; // flag for canShoot
+
+        for (int i = 0; i < gunsPositions.Length; i++)
+        {
+            Transform gun = gunsPositions[i];
+            Vector3 gunPos = gun.position;
+
+            Vector3 targetPos = player.transform.position;
+            Vector3 toTarget = targetPos - gunPos;
+
+            // Predictive aiming (blend with simple direction)
+            Vector3 predictedDir = toTarget.normalized;
+
+            // Reset aim strength if sudden change
+            if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > aimResetThreshold)
+                aimStrengths[i] = 0f;
+
+            if (aimTimeToPerfect > 0f)
+            {
+                float deltaStrength = Time.deltaTime / aimTimeToPerfect;
+                aimStrengths[i] = Mathf.Clamp01(aimStrengths[i] + deltaStrength);
+            }
+            else
+            {
+                aimStrengths[i] = 1f;
+            }
+
+            // Interpolate for smooth aiming
+            Vector3 blendedDir = Vector3.Slerp(aimedDirs[i], predictedDir, aimStrengths[i]);
+
+            // --- Clamp within cone ---
+            Vector3 coneAxis = gun.parent.up; // cone points upward relative to parent
+            float angleFromAxis = Vector3.Angle(blendedDir, coneAxis);
+
+            if (angleFromAxis < coneMinAngle || angleFromAxis > coneMaxAngle)
+            {
+                anyGunOutOfCone = true; // mark that shooting should be blocked
+                blendedDir = ClampDirectionToCone(blendedDir, coneAxis, coneMinAngle, coneMaxAngle);
+            }
+
+            Vector3 finalDir = blendedDir;
+
+            // Store for next frame
+            aimedDirs[i] = finalDir;
+            previousPredictedDirs[i] = predictedDir;
+
+            // Apply rotation locally
+            Quaternion localTargetRot = Quaternion.Inverse(gun.parent.rotation) * Quaternion.LookRotation(finalDir);
+            gun.localRotation = localTargetRot;
+        }
+
+        // Hard limit shooting if any gun is out of the cone
+        hasAngle = !anyGunOutOfCone;
+    }
+
+
+
+    Vector3 ClampDirectionToCone(Vector3 direction, Vector3 coneAxis, float minAngle, float maxAngle)
+    {
+        float angle = Vector3.Angle(direction, coneAxis);
+
+        // If inside the cone, return as-is
+        if (angle >= minAngle && angle <= maxAngle)
+            return direction.normalized;
+
+        // Clamp to nearest limit
+        float clampedAngle = Mathf.Clamp(angle, minAngle, maxAngle);
+
+        // Compute rotation axis
+        Vector3 rotationAxis = Vector3.Cross(coneAxis, direction);
+        if (rotationAxis.sqrMagnitude < 0.0001f)
+        {
+            // direction is parallel to coneAxis; pick any perpendicular axis
+            rotationAxis = Vector3.Cross(coneAxis, Vector3.right);
+            if (rotationAxis.sqrMagnitude < 0.0001f)
+                rotationAxis = Vector3.Cross(coneAxis, Vector3.forward);
+        }
+        rotationAxis.Normalize();
+
+        // Rotate the cone axis toward the original direction by the clamped angle
+        return Quaternion.AngleAxis(clampedAngle, rotationAxis) * coneAxis;
+    }
+
     Vector3 CalculateInterceptDirection(Vector3 shooterPos, Vector3 targetPos, Vector3 targetVel, float projectileSpeed)
     {
         Vector3 displacement = targetPos - shooterPos;
@@ -363,6 +479,8 @@ public class TurretBehavior : MonoBehaviour
         Vector3 interceptPoint = targetPos + targetVel * t;
         return (interceptPoint - shooterPos).normalized;
     }
+
+
 
     bool HasLineOfSight()
     {
@@ -400,4 +518,57 @@ public class TurretBehavior : MonoBehaviour
             }
         }
     }
+
+    // use this for debug of UpwardConePrediction
+    /*void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+
+        Vector3 origin = transform.position;
+        Vector3 coneAxis = transform.up; // upward direction of the turret
+
+        float minHeight = minShootingRange + minShootingRangeIncrement;
+        float maxHeight = maxShootingRange + maxShootingRangeIncrement;
+
+        // Compute circle radii from cone angles
+        float minRadius = Mathf.Tan(coneMinAngle * Mathf.Deg2Rad) * minHeight;
+        float maxRadius = Mathf.Tan(coneMaxAngle * Mathf.Deg2Rad) * maxHeight;
+
+        // Compute circle centers
+        Vector3 minCenter = origin + coneAxis * minHeight;
+        Vector3 maxCenter = origin + coneAxis * maxHeight;
+
+        // Draw line connecting circle centers
+        Gizmos.DrawLine(minCenter, maxCenter);
+
+        // Draw bottom circle
+        DrawCircleGizmo(minCenter, coneAxis, minRadius);
+
+        // Draw top circle
+        DrawCircleGizmo(maxCenter, coneAxis, maxRadius);
+
+        // Optional: draw a line in the middle to visualize the cone axis
+        Vector3 middlePoint = origin + coneAxis * ((minHeight + maxHeight) * 0.5f);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(origin, middlePoint);
+    }
+
+    // Helper function to draw a circle
+    void DrawCircleGizmo(Vector3 center, Vector3 normal, float radius, int segments = 24)
+    {
+        Vector3 perp = Vector3.Cross(normal, Vector3.right);
+        if (perp.sqrMagnitude < 0.01f)
+            perp = Vector3.Cross(normal, Vector3.forward);
+        perp.Normalize();
+
+        Vector3 lastPoint = center + perp * radius;
+
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = 2f * Mathf.PI * i / segments;
+            Vector3 nextPoint = center + (Quaternion.AngleAxis(angle * Mathf.Rad2Deg, normal) * perp) * radius;
+            Gizmos.DrawLine(lastPoint, nextPoint);
+            lastPoint = nextPoint;
+        }
+    }*/
 }

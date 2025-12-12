@@ -2,16 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MovementPattern
-{
-    Normal,
-    SidewaysWiggle,
-    Spiral
-}
-
+// Describes Movement for the worm head
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
 public class WormEnemy : MonoBehaviour
 {
+    public enum WormMovementPattern
+    {
+        Normal,
+        SidewaysWiggle,
+        Spiral
+    }
+
     [Header("Target & Movement")]
     public SpaceShooterController player;
     public Transform playerCamera;
@@ -24,10 +25,10 @@ public class WormEnemy : MonoBehaviour
 
 
     [Header("Oscillation")]
-    public MovementPattern movementPattern = MovementPattern.Normal;
+    public WormMovementPattern movementPattern = WormMovementPattern.Normal;
     public float oscillationAmplitude = 3f;
     public float oscillationFrequency = 2f;
-    [SerializeField, Range(0f, 1f)] public float oscillationStrenghtFactor = 1.0f;
+    [SerializeField, Range(0f, 1f)] public float oscillationStrengthFactor = 1.0f;
     public bool invertSpiral = false;
     public bool invertWiggle = false;
 
@@ -49,8 +50,6 @@ public class WormEnemy : MonoBehaviour
     public float pivotDistance = 25f;
     public float pivotForwardPush = 10f;   // worm goes past player
     public float pivotHeightOffset = 3f;   // lift pivot slightly above ground
-    public GameObject laserPrefab;
-    public float laserCooldown = 8f;
 
     private Rigidbody rb;
     private List<Collider> nearbyObstacles = new List<Collider>();
@@ -61,7 +60,6 @@ public class WormEnemy : MonoBehaviour
     private Vector3 currentPivot;
     private int currentDirectionIndex = -1;
     private List<Vector3> availableDirections;
-    private float nextLaserTime;
 
     private Vector3 lastPlayerForward = Vector3.forward;
 
@@ -107,12 +105,6 @@ public class WormEnemy : MonoBehaviour
             Vector3 playerDir = player.body.velocity.normalized;
             if (playerDir != Vector3.zero)
                 transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
-
-            if (Time.time > nextLaserTime)
-            {
-                FireLaser();
-                nextLaserTime = Time.time + laserCooldown;
-            }
         }
     }
 
@@ -130,8 +122,8 @@ public class WormEnemy : MonoBehaviour
 
             if (randomizeMovementPatternOnNewPivot)
             {
-                movementPattern = (MovementPattern)UnityEngine.Random.Range(
-                    0, Enum.GetValues(typeof(MovementPattern)).Length
+                movementPattern = (WormMovementPattern)UnityEngine.Random.Range(
+                    0, Enum.GetValues(typeof(WormMovementPattern)).Length
                 );
             }
 
@@ -148,7 +140,7 @@ public class WormEnemy : MonoBehaviour
 
         switch (movementPattern)
         {
-            case MovementPattern.SidewaysWiggle:
+            case WormMovementPattern.SidewaysWiggle:
                 {
                     Vector3 side = Vector3.Cross(toTarget, Vector3.up).normalized;
                     float wiggle = Mathf.Sin(oscillationTime * oscillationFrequency) * oscillationAmplitude;
@@ -156,7 +148,7 @@ public class WormEnemy : MonoBehaviour
                     offset = side * wiggle;
                     break;
                 }
-            case MovementPattern.Spiral:
+            case WormMovementPattern.Spiral:
                 {
                     float angle = oscillationTime * oscillationFrequency;
                     if (invertSpiral) angle *= -1f;
@@ -165,13 +157,13 @@ public class WormEnemy : MonoBehaviour
                     offset = (side * Mathf.Cos(angle) + up * Mathf.Sin(angle)) * oscillationAmplitude;
                     break;
                 }
-            case MovementPattern.Normal:
+            case WormMovementPattern.Normal:
             default:
                 break;
         }
 
         // Primary movement direction
-        Vector3 primaryDir = (toTarget + offset * oscillationStrenghtFactor).normalized * maxSpeed;
+        Vector3 primaryDir = (toTarget + offset * oscillationStrengthFactor).normalized * maxSpeed;
 
         // Avoidance as additive steering
         Vector3 avoidanceVector = CalculateObstacleAvoidance();
@@ -303,12 +295,6 @@ public class WormEnemy : MonoBehaviour
 
         // No obstruction, line of sight is clear
         return true;
-    }
-
-
-    void FireLaser()
-    {
-        //Instantiate(laserPrefab, transform.position, transform.rotation);
     }
 
     Vector3 ProjectOnContactPlane(Vector3 vector)

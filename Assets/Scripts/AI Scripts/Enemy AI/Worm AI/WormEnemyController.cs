@@ -5,6 +5,7 @@ public class WormEnemyController : EnemyController
 {
     [Header("References")]
     public List<EntityHealthController> weakPointHealths = new List<EntityHealthController>();
+    public List<GameObject> segments = new List<GameObject>();
 
     public int deadSegments = 0;
     public bool isDead = false;
@@ -24,6 +25,7 @@ public class WormEnemyController : EnemyController
         // Subscribe to weak point deaths
         foreach (var wp in weakPointHealths)
         {
+            // right now i handle children weak points like the default enemy controller, but i guess i'll have to remake it later so the object doesn't actually disappear, since it's a part of its mesh
             wp.Died += () => OnWeakPointDied(wp);
         }
 
@@ -38,7 +40,7 @@ public class WormEnemyController : EnemyController
         // If all weak points are dead, trigger worm death
         if (!isDead && deadSegments >= weakPointHealths.Count)
         {
-            entityHealthControllerRef.InstantlyDie();
+            entityHealthControllerRef.ForciblyDie();
         }
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Describes movement for segments
 public class WormEnemySegment : MonoBehaviour
 {
     [Header("Follow Settings")]
@@ -30,6 +31,7 @@ public class WormEnemySegment : MonoBehaviour
 
         // --- Update local rotation angle ---
         float rotationDirection = invertLocalRotation ? -1f : 1f;
+        // this potentially causes overflow
         currentZRotation += localZRotationSpeed * rotationDirection * Time.deltaTime;
 
         // --- Rotation Following ---
