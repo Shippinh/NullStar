@@ -43116,7 +43116,7 @@ GameObject:
   - component: {fileID: 863121457}
   - component: {fileID: 863121456}
   - component: {fileID: 863121455}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Worm Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45454,7 +45454,7 @@ MonoBehaviour:
   playerCamera: {fileID: 330585545}
   hitLayers:
     serializedVersion: 2
-    m_Bits: 7168
+    m_Bits: 7176
   fireRate: 0.125
   hitscanRange: 2000
   projectilePool: {fileID: 2147296234}
@@ -57452,8 +57452,8 @@ GameObject:
   - component: {fileID: 1106967849}
   - component: {fileID: 1106967853}
   - component: {fileID: 1106967852}
-  - component: {fileID: 1106967851}
   - component: {fileID: 1106967850}
+  - component: {fileID: 1106967854}
   m_Layer: 3
   m_Name: Segment (1)
   m_TagString: Untagged
@@ -57496,27 +57496,6 @@ MonoBehaviour:
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
---- !u!135 &1106967851
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106967848}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1106967852
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -57567,6 +57546,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106967848}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1106967854
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106967848}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.00000017881393}
 --- !u!1 &1113698849
 GameObject:
   m_ObjectHideFlags: 0
@@ -66911,6 +66911,7 @@ MonoBehaviour:
   enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
   weakPointHealths: []
+  segments: []
   deadSegments: 0
   isDead: 0
 --- !u!4 &1280352730
@@ -79786,8 +79787,8 @@ GameObject:
   - component: {fileID: 1518261123}
   - component: {fileID: 1518261127}
   - component: {fileID: 1518261126}
-  - component: {fileID: 1518261125}
   - component: {fileID: 1518261124}
+  - component: {fileID: 1518261128}
   m_Layer: 3
   m_Name: Segment (2)
   m_TagString: Untagged
@@ -79830,27 +79831,6 @@ MonoBehaviour:
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 0
---- !u!135 &1518261125
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518261122}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1518261126
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -79901,6 +79881,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518261122}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1518261128
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518261122}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.00000011920929}
 --- !u!1 &1518839797
 GameObject:
   m_ObjectHideFlags: 0
@@ -86515,8 +86516,8 @@ GameObject:
   - component: {fileID: 1648340817}
   - component: {fileID: 1648340821}
   - component: {fileID: 1648340820}
-  - component: {fileID: 1648340819}
   - component: {fileID: 1648340818}
+  - component: {fileID: 1648340822}
   m_Layer: 3
   m_Name: Segment (3)
   m_TagString: Untagged
@@ -86559,27 +86560,6 @@ MonoBehaviour:
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
---- !u!135 &1648340819
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648340816}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1648340820
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -86630,6 +86610,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648340816}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1648340822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648340816}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.00000023841858}
 --- !u!1 &1649769515
 GameObject:
   m_ObjectHideFlags: 0
@@ -95385,6 +95386,7 @@ MonoBehaviour:
   enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
   weakPointHealths: []
+  segments: []
   deadSegments: 0
   isDead: 0
 --- !u!4 &1796481809
@@ -101913,8 +101915,8 @@ GameObject:
   - component: {fileID: 1934948208}
   - component: {fileID: 1934948212}
   - component: {fileID: 1934948211}
-  - component: {fileID: 1934948210}
   - component: {fileID: 1934948209}
+  - component: {fileID: 1934948213}
   m_Layer: 3
   m_Name: Segment (5)
   m_TagString: Untagged
@@ -101957,27 +101959,6 @@ MonoBehaviour:
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
---- !u!135 &1934948210
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934948207}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1934948211
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -102028,6 +102009,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934948207}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1934948213
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934948207}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: -0.00000047683716}
 --- !u!1 &1935111977
 GameObject:
   m_ObjectHideFlags: 0
@@ -104453,9 +104455,9 @@ MonoBehaviour:
   invertWiggle: 0
   pivotChangeInterval: 5
   invertMovementOnNewPivot: 0
-  randomizeMovementPatternOnNewPivot: 0
+  randomizeMovementPatternOnNewPivot: 1
   avoidanceForce: 1000
-  detectionRadius: 200
+  detectionRadius: 100
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
@@ -108336,8 +108338,8 @@ GameObject:
   - component: {fileID: 2050651318}
   - component: {fileID: 2050651322}
   - component: {fileID: 2050651321}
-  - component: {fileID: 2050651320}
   - component: {fileID: 2050651319}
+  - component: {fileID: 2050651323}
   m_Layer: 3
   m_Name: Segment (4)
   m_TagString: Untagged
@@ -108380,27 +108382,6 @@ MonoBehaviour:
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 0
---- !u!135 &2050651320
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2050651317}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2050651321
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -108451,6 +108432,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050651317}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &2050651323
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050651317}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.00000023841858}
 --- !u!1 &2053862173
 GameObject:
   m_ObjectHideFlags: 0
