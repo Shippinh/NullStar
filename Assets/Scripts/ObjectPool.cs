@@ -59,7 +59,7 @@ public class ObjectPool : MonoBehaviour
         obj.transform.position = position;
         obj.transform.rotation = rotation;
 
-        poolDictionary[tag].Enqueue(obj);  // Recycle it back into the queue
+        poolDictionary[tag].Enqueue(obj);  // Recycle it back into the queue (SPLIT THIS INTO A DIFFERENT METHOD TO BE CALLED EXTERNALLY WHEN THE OBJECT IS NOT NEEDED ANYMORE)
 
         return obj;
     }

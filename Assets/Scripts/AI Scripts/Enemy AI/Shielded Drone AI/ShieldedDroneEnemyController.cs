@@ -50,8 +50,6 @@ public class ShieldedDroneEnemyController : EnemyController
 
         // if core dies - instantly kill the enemy
         coreHealthController.Died += HandleCoreDeath;
-
-        enemyName = "Shielded Drone";
     }
 
     private void HandleCoreDeath()

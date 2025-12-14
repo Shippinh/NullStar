@@ -66,8 +66,6 @@ public class WormEnemyController : EnemyController
             // right now i handle children weak points like the default enemy controller, but i guess i'll have to remake it later so the object doesn't actually disappear, since it's a part of its mesh
             wp.Died += () => OnWeakPointDied(wp);
         }
-
-        enemyName = "Worm Enemy";
     }
 
     private void OnWeakPointDied(EntityHealthController deadHP)

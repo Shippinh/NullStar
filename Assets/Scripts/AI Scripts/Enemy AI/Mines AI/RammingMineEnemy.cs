@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class MineEnemy : BasicMineEnemy
+public class RammingMineEnemy : BasicMineEnemy
 {
 
     [Header("Movement")]
