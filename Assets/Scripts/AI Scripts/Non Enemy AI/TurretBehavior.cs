@@ -134,7 +134,7 @@ public class TurretBehavior : MonoBehaviour
             }
         }
 
-        projectileSpeed = ObjectPool.Instance.GetPooledObject(projectileEmittersControllerRef.projectileTag).GetComponent<SniperProjectile>().speed;
+        projectileSpeed = ObjectPool.Instance.GetPooledObject(projectileEmittersControllerRef.projectileTag, true, false).GetComponent<SniperProjectile>().speed;
     }
 
     public void SyncState(bool canActPtr)

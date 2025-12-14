@@ -119,7 +119,7 @@ public class LeviathanEnemy : MonoBehaviour
             weaponCooldownDuration = em.rechargeTime;
 
             projectileSpeed = ObjectPool.Instance
-                .GetPooledObject(em.projectileTag)
+                .GetPooledObject(em.projectileTag, true, false)
                 .GetComponent<SniperProjectile>().speed;
         }
 

@@ -1,22 +1,33 @@
 ﻿using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class EnemyController : DestructibleController
+public class EnemyController : DestructibleController, IPoolable
 {
-    public EntityArenaController entityArenaControllerRef; // arena data reference (stuff like at what wave to appear, etc.)
+    public string IPoolableTag {  get; set; }
+
     public string enemyName = "Default Enemy Name";
     public bool countsAsSeparateEnemy = true;
+    private float waveToAppear;
     // Use this for initialization
     void Awake()
     {
         Initialize();
     }
 
-    public EntityArenaController GetEnemyArenaController()
+    public virtual void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
     {
-        if (entityArenaControllerRef == null)
-            entityArenaControllerRef = GetComponent<EntityArenaController>();
-        return entityArenaControllerRef;
+        HandleRevival();
+    }
+
+    public virtual void HandleRepool()
+    {
+        HandleDeath();
+    }
+
+    public float GetWaveToAppear()
+    {
+        return waveToAppear;
     }
 
     /// <summary>
@@ -26,7 +37,9 @@ public class EnemyController : DestructibleController
     {
         base.Initialize();
 
+        /*
         if (entityArenaControllerRef == null)
             entityArenaControllerRef = GetComponent<EntityArenaController>();
+        */
     }
 }

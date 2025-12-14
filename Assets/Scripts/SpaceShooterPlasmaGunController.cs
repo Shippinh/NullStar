@@ -83,17 +83,12 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
             projectileTag = "Normal Projectile";
         }
 
+        if (string.IsNullOrEmpty(projectileTag)) return;
+
         // This is for visuals ONLY
-        GameObject projectile = projectilePool.GetPooledObject(projectileTag);
+        GameObject projectile = projectilePool.GetPooledObject(projectileTag, muzzlePoint.position, Quaternion.LookRotation(targetPoint - muzzlePoint.position), true);
         if (projectile != null)
-        {
-            projectile.transform.position = muzzlePoint.position;
-            projectile.transform.rotation = Quaternion.LookRotation(targetPoint - muzzlePoint.position);
-
             projectile.GetComponent<Projectile>().Initialize(muzzlePoint.position, targetPoint);
-
-            projectile.SetActive(true);
-        }
 
         // Fire tracer effect
         /*GameObject tracer = tracerPool.GetPooledObject();

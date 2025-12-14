@@ -30,18 +30,16 @@ public class DestructibleController : MonoBehaviour
 
     // In case an object can't be pooled we can always just override the handler for dying and reviving
 
-    // STRICTLY CONTROL POOLING WITH THIS
     /// <summary>
-    /// Deactivates the game object when the enemy dies
+    /// Deactivates the game object when the entity health controller naturally dies
     /// </summary>
     public virtual void HandleDeath()
     {
         this.gameObject.SetActive(false);
     }
 
-    // STRICTLY CONTROL POOLING WITH THIS
     /// <summary>
-    /// Reactivates the game object when the enemy gets revived
+    /// Reactivates the game object
     /// </summary>
     public virtual void HandleRevival()
     {
@@ -65,7 +63,7 @@ public class DestructibleController : MonoBehaviour
         if (entityHealthControllerRef == null)
             entityHealthControllerRef = GetComponent<EntityHealthController>();
 
-        entityHealthControllerRef.Died += HandleDeath;
-        entityHealthControllerRef.Revived += HandleRevival;
+        entityHealthControllerRef.Died += HandleDeath;      // when the entity health controller naturally dies deactivate the object
+        entityHealthControllerRef.Revived += HandleRevival; // when the entity health controller naturally revives reactivate the object
     }
 }

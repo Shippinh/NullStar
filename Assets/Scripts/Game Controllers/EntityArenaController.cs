@@ -1,32 +1,58 @@
-using UnityEngine;
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using UnityEngine;
 
-public class EntityArenaController : MonoBehaviour
+public class ArenaEntitySpawn : MonoBehaviour
 {
-    [SerializeField, Range(1, 10)] public int waveToAppear = 1;
-    [SerializeField] private bool showWaveGizmo = true; // toggle gizmo visibility
-    [SerializeField] private Color gizmoColor = Color.yellow; // optional color
+    [Header("Spawner Options")]
+    public string poolableEnemyTag = "NaN";
+    [Range(1, 10)] public int waveToAppear = 1;
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    [Header("Editor Options")]
+    [SerializeField] private bool showWaveGizmo = true;
+    [SerializeField] private Color gizmoColor = Color.yellow;
+    [SerializeField] private float baseArrowLength = 1f;
+    [SerializeField] private float baseArrowHeadSize = 0.25f;
+
+    private void OnDrawGizmosSelected()
     {
         if (!showWaveGizmo) return;
 
-        // Draw a small sphere marker (optional)
+        SceneView sceneView = SceneView.lastActiveSceneView;
+        if (sceneView == null) return;
+
+        // Scale factor based on camera distance
+        float scale = Vector3.Distance(sceneView.camera.transform.position, transform.position);
+
+        // Adjust arrow size according to distance
+        float arrowLength = baseArrowLength * scale * 0.2f;
+        float arrowHeadSize = baseArrowHeadSize * scale * 0.15f;
+
+        // Base gizmo
         Gizmos.color = gizmoColor;
-        Gizmos.DrawSphere(transform.position + Vector3.up * 0.2f, 0.05f);
 
-        // Draw label slightly above the object
+        // Label
         Handles.color = gizmoColor;
-        GUIStyle style = new GUIStyle();
-        style.normal.textColor = gizmoColor;
-        style.fontStyle = FontStyle.Bold;
-        style.alignment = TextAnchor.MiddleCenter;
+        GUIStyle style = new GUIStyle
+        {
+            normal = { textColor = gizmoColor },
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.MiddleCenter
+        };
+        Handles.Label(transform.position + Vector3.up * 1.5f, $"Enemy {poolableEnemyTag}. Wave {waveToAppear}", style);
 
-        Handles.Label(transform.position + Vector3.up * 1.5f, $"Wave {waveToAppear}", style);
+        // Arrow
+        Vector3 start = transform.position;
+        Vector3 end = start + transform.forward * arrowLength;
+        Gizmos.DrawLine(start, end);
+
+        // Arrowhead
+        Vector3 right = Quaternion.LookRotation(transform.forward) * Quaternion.Euler(0, 150, 0) * Vector3.forward;
+        Vector3 left = Quaternion.LookRotation(transform.forward) * Quaternion.Euler(0, -150, 0) * Vector3.forward;
+        Gizmos.DrawLine(end, end + right * arrowHeadSize);
+        Gizmos.DrawLine(end, end + left * arrowHeadSize);
     }
 #endif
 }

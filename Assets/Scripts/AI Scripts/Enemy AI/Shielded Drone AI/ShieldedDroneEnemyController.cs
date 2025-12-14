@@ -48,7 +48,7 @@ public class ShieldedDroneEnemyController : EnemyController
         if (gunHealthControllers != null || gunHealthControllers.Count > 0)
             gunHealthControllers.Remove(entityHealthControllerRef);
 
-        // if core dies - instantly kill the enemy
+        // if core dies - kill everything else
         coreHealthController.Died += HandleCoreDeath;
     }
 
@@ -111,7 +111,7 @@ public class ShieldedDroneEnemyController : EnemyController
             yield return new WaitForSeconds(duration);
         }
 
-        // Deactivate the main entity after all deaths
-        entityHealthControllerRef.gameObject.SetActive(false);
+        // Forcibly kill the main entity, since it's immune to instakills and immune to damage in general
+        entityHealthControllerRef.ForciblyDie();
     }
 }

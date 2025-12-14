@@ -1,56 +1,76 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class GeneralArenaController : MonoBehaviour
+public class ArenaController : MonoBehaviour
 {
-    [SerializeField] private List<EnemyController> arenaEnemiesRef; // keeping track of all arena enemies
-    public GeneralArenaController nextArenaControllerRef; // reference to the next arena
-    public bool hasArenaCompleted = false; // keeping track of current arena state
+    [Header("Arena Settings")]
+    public List<ArenaEntitySpawn> spawnPoints = new List<ArenaEntitySpawn>();
+    public int totalWaveCount = 5;
+
+    [Header("Arena Flow")]
+    public ArenaController nextArenaControllerRef;
+    public bool hasArenaCompleted = false;
     public bool hasArenaStarted = false;
     public bool hasNextArenaStarted = false;
-    [SerializeField, Range(1, 10)] public int currentWaveCount = 1; // keeping track of waves, do things when each wave starts
-    [SerializeField, Range(1, 10)] int totalWaveCount = 5;
+    [SerializeField, Range(1, 10)] public int currentWaveCount = 1;
+
+    private List<EnemyController> currentWaveEnemies = new List<EnemyController>();
 
     void Start()
     {
-        AddEnemiesToList();
+        StartWaveIfNeeded();
     }
 
     void Update()
     {
-        if(hasArenaCompleted == false)
+        if (!hasArenaCompleted)
+            CheckWaveCompletion();
+    }
+
+    private void StartWaveIfNeeded()
+    {
+        if (currentWaveCount == 1 && !hasArenaStarted)
         {
-            CheckWave();
+            hasArenaStarted = true;
+            StartWave();
         }
     }
 
-    public void AddEnemiesToList()
+    private void StartWave()
     {
-        EnemyController[] enemies = GetComponentsInChildren<EnemyController>(true);
+        currentWaveEnemies.Clear();
 
-        foreach (var enemy in enemies)
+        foreach (var sp in spawnPoints)
         {
-            if (enemy.countsAsSeparateEnemy)
+            if (sp.waveToAppear != currentWaveCount) continue;
+            GameObject pooledObj = ObjectPool.Instance.GetPooledObject(sp.poolableEnemyTag, sp.transform.position, sp.transform.rotation, false);
+            if (pooledObj != null)
             {
-                arenaEnemiesRef.Add(enemy);
+                EnemyController enemy = pooledObj.GetComponent<EnemyController>();
+                if (enemy != null)
+                {
+                    currentWaveEnemies.Add(enemy);
+                }
             }
         }
     }
 
-    public void RemoveEnemyFromList(EnemyController enemyToRemove)
+    private void CheckWaveCompletion()
     {
-        arenaEnemiesRef.Remove(enemyToRemove);
-    }
+        if (currentWaveEnemies.Count == 0) return;
 
-    public void StartWave()
-    {
-        List<EnemyController> currentWaveEnemiesRef = GrabCurrentWaveEnemies();
-        foreach (EnemyController enemyRef in currentWaveEnemiesRef)
+        bool allDead = true;
+        foreach (EnemyController enemy in currentWaveEnemies)
         {
-            enemyRef.gameObject.SetActive(true);
+            if (enemy.GetHealthController().IsAlive())
+            {
+                allDead = false;
+                break;
+            }
         }
+
+        if (allDead)
+            AdvanceWave();
     }
 
     private void AdvanceWave()
@@ -61,55 +81,15 @@ public class GeneralArenaController : MonoBehaviour
             StartWave();
         }
         else
+        {
             hasArenaCompleted = true;
 
-        if(hasArenaCompleted == true && hasNextArenaStarted == false && nextArenaControllerRef)
-        {
-            hasNextArenaStarted = true;
-            nextArenaControllerRef.hasArenaCompleted = false;
-            gameObject.SetActive(false);
-        }
-    }
-
-    private void CheckWave()
-    {
-        if (currentWaveCount == 1 && hasArenaStarted == false)
-        {
-            hasArenaStarted = true;
-            StartWave();
-            return;
-        }
-
-        // Grab all the current wave enemy references
-        List<EnemyController> currentWaveEnemiesRef = GrabCurrentWaveEnemies();
-
-        // Count the amount of dead enemies
-        int enemyCount = currentWaveEnemiesRef.Count;
-        int deadEnemyCount = 0;
-        for (int i = 0; i < enemyCount; i++)
-        {
-            if (currentWaveEnemiesRef[i].GetHealthController().IsAlive() == false)
-                deadEnemyCount++;
-        }
-
-        // If dead == total enemies, then advance wave
-        if (deadEnemyCount == enemyCount)
-        {
-            AdvanceWave();
-        }
-    }
-
-    private List<EnemyController> GrabCurrentWaveEnemies()
-    {
-        List<EnemyController> currentWaveEnemiesRef = new List<EnemyController>();
-        foreach (EnemyController enemyRef in arenaEnemiesRef)
-        {
-            //Debug.Log(enemyRef);
-            if (enemyRef.GetEnemyArenaController().waveToAppear == currentWaveCount)
+            if (!hasNextArenaStarted && nextArenaControllerRef)
             {
-                currentWaveEnemiesRef.Add(enemyRef);
+                hasNextArenaStarted = true;
+                nextArenaControllerRef.hasArenaCompleted = false;
+                gameObject.SetActive(false);
             }
         }
-        return currentWaveEnemiesRef;
     }
 }

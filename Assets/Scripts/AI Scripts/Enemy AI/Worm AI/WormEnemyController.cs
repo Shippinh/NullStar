@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.HableCurve;
 
 public class WormEnemyController : EnemyController
 {
@@ -94,14 +92,14 @@ public class WormEnemyController : EnemyController
 
     private IEnumerator DeathSequence()
     {
-        // Shuffle for random death order
-       /* for (int i = 0; i < segmentsVisuals.Count; i++)
-        {
-            int rand = Random.Range(i, segmentsVisuals.Count);
-            (segmentsVisuals[i], segmentsVisuals[rand]) = (segmentsVisuals[rand], segmentsVisuals[i]);
-        }*/
+        // Shuffle segments for random deactivation order
+        /* for (int i = 0; i < segmentsVisuals.Count; i++)
+         {
+             int rand = Random.Range(i, segmentsVisuals.Count);
+             (segmentsVisuals[i], segmentsVisuals[rand]) = (segmentsVisuals[rand], segmentsVisuals[i]);
+         }*/
 
-        // Kill them one by one
+        // Deactivate segments one by one
         foreach (var entity in segmentsVisuals)
         {
             if (entity != null && entity.gameObject.activeSelf)
@@ -121,7 +119,7 @@ public class WormEnemyController : EnemyController
         }
 
 
-        // After all deaths
+        // After all deactivations
 
         // Deactivate logic
         foreach (var entity in segmentsLogic)
@@ -132,7 +130,7 @@ public class WormEnemyController : EnemyController
             }
         }
 
-        // Deactivate the main entity
-        this.gameObject.SetActive(false);
+        // Forcibly kill the main entity, since it's immune to instakills and immune to damage in general
+        entityHealthControllerRef.ForciblyDie();
     }
 }

@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -45,7 +48,8 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject GetPooledObject(string tag, Vector3 position, Quaternion rotation)
+    // Grabs an object from the pool and changes its position and orientation to the new ones
+    public GameObject GetPooledObject(string tag, Vector3 position, Quaternion rotation, bool shouldBeRequeued)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
@@ -54,17 +58,18 @@ public class ObjectPool : MonoBehaviour
         }
 
         GameObject obj = poolDictionary[tag].Dequeue();
+        IPoolable poolable = obj.GetComponent<IPoolable>();
+        poolable?.HandleDepool(tag, position, rotation);
 
-        obj.SetActive(true);
-        obj.transform.position = position;
-        obj.transform.rotation = rotation;
-
-        poolDictionary[tag].Enqueue(obj);  // Recycle it back into the queue (SPLIT THIS INTO A DIFFERENT METHOD TO BE CALLED EXTERNALLY WHEN THE OBJECT IS NOT NEEDED ANYMORE)
+        // This is for objects we might run out, but it's not that critical so we can reuse them
+        if (shouldBeRequeued)
+            poolDictionary[tag].Enqueue(obj);
 
         return obj;
     }
 
-    public GameObject GetPooledObject(string tag)
+    // Grabs an object from the pool without changing its position and orientation, and optionally - without depooling handling
+    public GameObject GetPooledObject(string tag, bool shouldBeRequeued, bool shouldBeDepooled)
     {
         if (!poolDictionary.ContainsKey(tag))
         {
@@ -73,11 +78,24 @@ public class ObjectPool : MonoBehaviour
         }
 
         GameObject obj = poolDictionary[tag].Dequeue();
+        IPoolable poolable = obj.GetComponent<IPoolable>();
 
-        obj.SetActive(true);
+        // This is for objects we grab only when we need their data
+        if(shouldBeDepooled)
+            poolable?.HandleDepool(tag, obj.transform.position, obj.transform.rotation);
 
-        poolDictionary[tag].Enqueue(obj);  // Recycle it back into the queue
+        // This is for objects we might run out, but it's not that critical so we can reuse them
+        if (shouldBeRequeued)
+            poolDictionary[tag].Enqueue(obj);
 
         return obj;
+    }
+
+    // Returns the object to pool
+    public void ReturnToPool(GameObject obj, string tag)
+    {
+        IPoolable poolable = obj.GetComponent<IPoolable>();
+        poolable?.HandleRepool();
+        poolDictionary[tag].Enqueue(obj);
     }
 }
