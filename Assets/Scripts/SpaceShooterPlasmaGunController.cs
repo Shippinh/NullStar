@@ -50,7 +50,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
         if (Physics.Raycast(cameraRay, out cameraHit, hitscanRange, hitLayers))
         {
             targetPoint = cameraHit.point;
-            Debug.Log("Hit an enemy");
+            //Debug.Log("Hit enemy " + cameraHit.collider.gameObject.name);
             HandleImpact(cameraHit);
         }
 

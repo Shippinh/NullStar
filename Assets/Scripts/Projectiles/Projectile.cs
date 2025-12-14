@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual void HandleHit(Collider other)
     {
-        Debug.Log(gameObject.name + " just hit " + other.gameObject.name);
+        //Debug.Log(gameObject.name + " just hit " + other.gameObject.name);
         Impact();
     }
 

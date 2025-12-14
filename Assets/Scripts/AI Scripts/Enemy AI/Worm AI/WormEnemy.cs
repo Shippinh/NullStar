@@ -23,6 +23,8 @@ public class WormEnemy : MonoBehaviour
     public LayerMask LOSMask;
     Vector3 currentTarget;
 
+    public bool canMove = true;
+
 
     [Header("Oscillation")]
     public WormMovementPattern movementPattern = WormMovementPattern.Normal;
@@ -87,24 +89,28 @@ public class WormEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateDirections();
-        CalculateDesiredVelocity();
-
         // Smoothly accelerate toward desiredVelocity
-        AdjustVelocity();
-        AdjustAirVelocity();
-        rb.velocity = velocity;
+        if (canMove)
+        {
+            UpdateDirections();
+            CalculateDesiredVelocity();
 
-        // Rotation
-        if (Vector3.Distance(transform.position, currentTarget) > 2f)
-        {
-            transform.rotation = Quaternion.LookRotation(currentTarget - transform.position, Vector3.up);
-        }
-        else
-        {
-            Vector3 playerDir = player.body.velocity.normalized;
-            if (playerDir != Vector3.zero)
-                transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
+            AdjustVelocity();
+            AdjustAirVelocity();
+            rb.velocity = velocity;
+
+
+            // Rotation
+            if (Vector3.Distance(transform.position, currentTarget) > 2f)
+            {
+                transform.rotation = Quaternion.LookRotation(currentTarget - transform.position, Vector3.up);
+            }
+            else
+            {
+                Vector3 playerDir = player.body.velocity.normalized;
+                if (playerDir != Vector3.zero)
+                    transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
+            }
         }
     }
 

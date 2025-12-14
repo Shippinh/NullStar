@@ -58,14 +58,11 @@ public class ShieldedEnemy : MonoBehaviour
 
     [Header("Emitter Stuff")]
     public ProjectileEmittersController projectileEmittersControllerRef;
-    //public Transform emitterParent;
-    [SerializeField] private Transform[] gunsPositions;
-    private Vector3[] aimedDirs; // store per-gun aimed directions
-    public float emitterLookSmoothTime = 0.2f;
 
     [Header("Shield Stuff")]
     public GameObject shieldTiltPivot; // empty pivot that tilts toward player
     public Transform shieldRing;      // actual ring that spins
+    public Transform hitboxTransformRef;
     public float shieldRotationSpeed = 90f; // degrees per second
     public float shieldTiltSpeed = 5f;          // optional smoothing
 
@@ -146,6 +143,7 @@ public class ShieldedEnemy : MonoBehaviour
     {
         AttachShields();
         AttachTurret();
+        AttachHitbox();
         if(gunsDead == false)
             if(projectileEmittersControllerRef.ActiveGunCount == 0)
                 gunsDead = true;
@@ -159,6 +157,12 @@ public class ShieldedEnemy : MonoBehaviour
     private void AttachTurret()
     {
         turretRef.transform.position = transform.position;
+    }
+
+    private void AttachHitbox()
+    {
+        hitboxTransformRef.transform.position = transform.position;
+        hitboxTransformRef.transform.rotation = transform.rotation;
     }
 
     void UpdateRotations()

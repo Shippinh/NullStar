@@ -8,6 +8,7 @@ public class ShieldedDroneEnemyController : EnemyController
     public Transform shieldsParentRef;
     public Transform gunsParentRef;
 
+    public EntityHealthController coreHealthController;
     public List<EntityHealthController> shieldHealthControllers = new();
     public List<EntityHealthController> gunHealthControllers = new();
 
@@ -34,24 +35,31 @@ public class ShieldedDroneEnemyController : EnemyController
         countsAsSeparateEnemy = true;
 
         // Collect all sub-entity health controllers
-        shieldHealthControllers.AddRange(GetComponentsInChildren<EntityHealthController>(true));
-        gunHealthControllers.AddRange(GetComponentsInChildren<EntityHealthController>(true));
+        if(shieldHealthControllers == null || shieldHealthControllers.Count == 0)
+            shieldHealthControllers.AddRange(shieldsParentRef.GetComponentsInChildren<EntityHealthController>(true));
+
+        if (gunHealthControllers == null || gunHealthControllers.Count == 0)
+            gunHealthControllers.AddRange(gunsParentRef.GetComponentsInChildren<EntityHealthController>(true));
 
         // Remove self if included
-        shieldHealthControllers.Remove(entityHealthControllerRef);
-        gunHealthControllers.Remove(entityHealthControllerRef);
+        if (shieldHealthControllers != null || shieldHealthControllers.Count > 0)
+            shieldHealthControllers.Remove(entityHealthControllerRef);
+
+        if (gunHealthControllers != null || gunHealthControllers.Count > 0)
+            gunHealthControllers.Remove(entityHealthControllerRef);
+
+        // if core dies - instantly kill the enemy
+        coreHealthController.Died += HandleCoreDeath;
 
         enemyName = "Shielded Drone";
     }
 
-    public override void HandleDeath()
+    private void HandleCoreDeath()
     {
         // Stop AI behavior
         if (enemyAIRef != null)
         {
             enemyAIRef.canAct = false;
-            if (enemyAIRef.projectileEmittersControllerRef != null)
-                enemyAIRef.projectileEmittersControllerRef.RequestSoftStop();
         }
 
         // Combine all sub-controllers
@@ -64,11 +72,12 @@ public class ShieldedDroneEnemyController : EnemyController
 
         if (allSubEntities.Count == 0)
         {
-            // Everything's already dead, just disable the core
+            // Everything's already dead, just disable the main object
             entityHealthControllerRef.gameObject.SetActive(false);
             return;
         }
 
+        // otherwise - start death sequence
         StartCoroutine(DeathSequence(allSubEntities));
     }
 
@@ -105,6 +114,6 @@ public class ShieldedDroneEnemyController : EnemyController
         }
 
         // Deactivate the main entity after all deaths
-        this.gameObject.SetActive(false);
+        entityHealthControllerRef.gameObject.SetActive(false);
     }
 }

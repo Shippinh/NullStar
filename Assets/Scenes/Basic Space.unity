@@ -951,6 +951,7 @@ MonoBehaviour:
   countsAsSeparateEnemy: 1
   shieldsParentRef: {fileID: 643766837}
   gunsParentRef: {fileID: 1260837334}
+  coreHealthController: {fileID: 0}
   shieldHealthControllers: []
   gunHealthControllers: []
   enemyAIRef: {fileID: 342495087}
@@ -2673,9 +2674,9 @@ GameObject:
   - component: {fileID: 70061804}
   - component: {fileID: 70061803}
   - component: {fileID: 70061802}
-  - component: {fileID: 70061801}
+  - component: {fileID: 70061806}
   m_Layer: 12
-  m_Name: Cube (7)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2696,22 +2697,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
---- !u!114 &70061801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70061799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &70061802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2725,7 +2710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -2807,6 +2792,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70061799}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &70061806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70061799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &70460618
 GameObject:
   m_ObjectHideFlags: 0
@@ -6571,6 +6569,7 @@ MonoBehaviour:
   LOSMask:
     serializedVersion: 2
     m_Bits: 1024
+  canMove: 0
   movementPattern: 2
   oscillationAmplitude: 2
   oscillationFrequency: 2
@@ -8813,6 +8812,57 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &184619431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 184619432}
+  - component: {fileID: 184619433}
+  m_Layer: 3
+  m_Name: Segment 1 Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &184619432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184619431}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1106967849}
+  m_Father: {fileID: 539660840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &184619433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184619431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSegment: {fileID: 1195685362}
+  followDistance: 90
+  moveSpeed: 300
+  rotationSpeed: 30
+  localZRotationSpeed: 50
+  invertLocalRotation: 1
 --- !u!1 &203840182
 GameObject:
   m_ObjectHideFlags: 0
@@ -12317,9 +12367,9 @@ GameObject:
   - component: {fileID: 272359242}
   - component: {fileID: 272359241}
   - component: {fileID: 272359240}
-  - component: {fileID: 272359239}
+  - component: {fileID: 272359244}
   m_Layer: 12
-  m_Name: Cube (15)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12340,22 +12390,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 105, z: 0}
---- !u!114 &272359239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272359237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &272359240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12369,7 +12403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -12451,6 +12485,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272359237}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &272359244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272359237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &273611547
 GameObject:
   m_ObjectHideFlags: 0
@@ -14543,6 +14590,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &313106235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 313106236}
+  - component: {fileID: 313106237}
+  m_Layer: 3
+  m_Name: Segment 2 Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &313106236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313106235}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -135}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1518261123}
+  m_Father: {fileID: 539660840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &313106237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313106235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSegment: {fileID: 184619432}
+  followDistance: 90
+  moveSpeed: 300
+  rotationSpeed: 30
+  localZRotationSpeed: 50
+  invertLocalRotation: 0
 --- !u!1 &315414948
 GameObject:
   m_ObjectHideFlags: 0
@@ -17484,9 +17582,9 @@ GameObject:
   - component: {fileID: 342400794}
   - component: {fileID: 342400793}
   - component: {fileID: 342400792}
-  - component: {fileID: 342400791}
+  - component: {fileID: 342400796}
   m_Layer: 12
-  m_Name: Cube (6)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17507,22 +17605,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
---- !u!114 &342400791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342400789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &342400792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17536,7 +17618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -17618,6 +17700,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342400789}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &342400796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342400789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &342495081
 GameObject:
   m_ObjectHideFlags: 0
@@ -17784,10 +17879,9 @@ MonoBehaviour:
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
   projectileEmittersControllerRef: {fileID: 1260837335}
-  gunsPositions: []
-  emitterLookSmoothTime: 0.2
   shieldTiltPivot: {fileID: 858940227}
   shieldRing: {fileID: 643766837}
+  hitboxTransformRef: {fileID: 0}
   shieldRotationSpeed: 90
   shieldTiltSpeed: 4
 --- !u!1 &343885496
@@ -18499,9 +18593,9 @@ GameObject:
   - component: {fileID: 362603881}
   - component: {fileID: 362603880}
   - component: {fileID: 362603879}
-  - component: {fileID: 362603878}
+  - component: {fileID: 362603883}
   m_Layer: 12
-  m_Name: Cube (2)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18522,22 +18616,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &362603878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 362603876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &362603879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18551,7 +18629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -18633,6 +18711,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362603876}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &362603883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362603876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &363835668
 GameObject:
   m_ObjectHideFlags: 0
@@ -19249,9 +19340,9 @@ GameObject:
   - component: {fileID: 377657764}
   - component: {fileID: 377657763}
   - component: {fileID: 377657762}
-  - component: {fileID: 377657761}
+  - component: {fileID: 377657766}
   m_Layer: 12
-  m_Name: Cube (23)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19272,22 +19363,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
---- !u!114 &377657761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377657759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &377657762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19301,7 +19376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -19383,6 +19458,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377657759}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &377657766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377657759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &381538583
 GameObject:
   m_ObjectHideFlags: 0
@@ -22640,9 +22728,9 @@ GameObject:
   - component: {fileID: 439952954}
   - component: {fileID: 439952953}
   - component: {fileID: 439952952}
-  - component: {fileID: 439952951}
+  - component: {fileID: 439952956}
   m_Layer: 12
-  m_Name: Cube (11)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22663,22 +22751,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
---- !u!114 &439952951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439952949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &439952952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22692,7 +22764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -22774,6 +22846,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439952949}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &439952956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439952949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &440912161
 GameObject:
   m_ObjectHideFlags: 0
@@ -24102,9 +24187,9 @@ GameObject:
   - component: {fileID: 475416738}
   - component: {fileID: 475416737}
   - component: {fileID: 475416736}
-  - component: {fileID: 475416735}
+  - component: {fileID: 475416740}
   m_Layer: 12
-  m_Name: Cube (3)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24125,22 +24210,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &475416735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475416733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &475416736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24154,7 +24223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -24236,6 +24305,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475416733}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &475416740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475416733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &475672701
 GameObject:
   m_ObjectHideFlags: 0
@@ -24376,7 +24458,6 @@ GameObject:
   - component: {fileID: 477776154}
   - component: {fileID: 477776159}
   - component: {fileID: 477776158}
-  - component: {fileID: 477776157}
   - component: {fileID: 477776160}
   m_Layer: 11
   m_Name: Worm Head
@@ -24394,33 +24475,12 @@ Transform:
   m_GameObject: {fileID: 477776153}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -45}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 8, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 539660840}
+  m_Father: {fileID: 1195685362}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &477776157
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477776153}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &477776158
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -24471,24 +24531,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477776153}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &477776160
-MonoBehaviour:
+--- !u!65 &477776160
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477776153}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSegment: {fileID: 1979327528}
-  followDistance: 90
-  moveSpeed: 300
-  rotationSpeed: 30
-  localZRotationSpeed: 50
-  invertLocalRotation: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.00000023841858}
 --- !u!1 &478185877
 GameObject:
   m_ObjectHideFlags: 0
@@ -27209,13 +27272,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 477776154}
-  - {fileID: 1106967849}
-  - {fileID: 1518261123}
-  - {fileID: 1648340817}
-  - {fileID: 2050651318}
-  - {fileID: 1934948208}
-  - {fileID: 863121454}
+  - {fileID: 1195685362}
+  - {fileID: 184619432}
+  - {fileID: 313106236}
+  - {fileID: 1187874028}
+  - {fileID: 669875355}
+  - {fileID: 1297780069}
+  - {fileID: 992867243}
   m_Father: {fileID: 1796481809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &541286558
@@ -31070,9 +31133,9 @@ GameObject:
   - component: {fileID: 614940578}
   - component: {fileID: 614940577}
   - component: {fileID: 614940576}
-  - component: {fileID: 614940575}
+  - component: {fileID: 614940580}
   m_Layer: 12
-  m_Name: Cube (1)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31093,22 +31156,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &614940575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 614940573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &614940576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31122,7 +31169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -31204,6 +31251,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614940573}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &614940580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614940573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &617225524
 GameObject:
   m_ObjectHideFlags: 0
@@ -32592,9 +32652,7 @@ GameObject:
   - component: {fileID: 633472395}
   - component: {fileID: 633472397}
   - component: {fileID: 633472396}
-  - component: {fileID: 633472400}
-  - component: {fileID: 633472399}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: Shielded Drone Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32643,10 +32701,9 @@ MonoBehaviour:
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
   projectileEmittersControllerRef: {fileID: 1431453536}
-  gunsPositions: []
-  emitterLookSmoothTime: 0.2
   shieldTiltPivot: {fileID: 1113698849}
   shieldRing: {fileID: 1867889670}
+  hitboxTransformRef: {fileID: 1483736934}
   shieldRotationSpeed: 90
   shieldTiltSpeed: 4
 --- !u!135 &633472396
@@ -32662,13 +32719,13 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 25
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &633472397
 Rigidbody:
@@ -32692,7 +32749,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -32709,49 +32766,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1679434406}
-  m_Father: {fileID: 2137921771}
+  m_Children: []
+  m_Father: {fileID: 1206330882}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &633472399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633472394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waveToAppear: 1
-  showWaveGizmo: 1
-  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
---- !u!114 &633472400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 633472394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 15
-  CurrentHP: 15
-  isAlive: 1
-  canBeDamaged: 1
-  isInvincible: 0
-  instaKillable: 0
-  godMode: 0
-  invincibilityDuration: 0
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
 --- !u!1 &642446553
 GameObject:
   m_ObjectHideFlags: 0
@@ -33746,8 +33763,8 @@ GameObject:
   - component: {fileID: 655147715}
   - component: {fileID: 655147714}
   - component: {fileID: 655147713}
-  - component: {fileID: 655147712}
   - component: {fileID: 655147711}
+  - component: {fileID: 655147716}
   m_Layer: 12
   m_Name: Gun (1)
   m_TagString: Untagged
@@ -33791,22 +33808,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &655147712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655147709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 633472399}
-  enemyName: Gun
-  countsAsSeparateEnemy: 0
 --- !u!114 &655147713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33881,6 +33882,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655147709}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &655147716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655147709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &657565284
 GameObject:
   m_ObjectHideFlags: 0
@@ -34332,6 +34346,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666456559}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &669875354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 669875355}
+  - component: {fileID: 669875356}
+  m_Layer: 3
+  m_Name: Segment 4 Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &669875355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669875354}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -225}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2050651318}
+  m_Father: {fileID: 539660840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &669875356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669875354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSegment: {fileID: 1187874028}
+  followDistance: 90
+  moveSpeed: 300
+  rotationSpeed: 30
+  localZRotationSpeed: 50
+  invertLocalRotation: 0
 --- !u!1 &671065341
 GameObject:
   m_ObjectHideFlags: 0
@@ -43114,8 +43179,7 @@ GameObject:
   - component: {fileID: 863121454}
   - component: {fileID: 863121458}
   - component: {fileID: 863121457}
-  - component: {fileID: 863121456}
-  - component: {fileID: 863121455}
+  - component: {fileID: 863121459}
   m_Layer: 12
   m_Name: Worm Tail
   m_TagString: Untagged
@@ -43132,51 +43196,12 @@ Transform:
   m_GameObject: {fileID: 863121453}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -315}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 8, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 539660840}
+  m_Father: {fileID: 992867243}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &863121455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863121453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSegment: {fileID: 1934948208}
-  followDistance: 90
-  moveSpeed: 300
-  rotationSpeed: 30
-  localZRotationSpeed: 0
-  invertLocalRotation: 0
---- !u!135 &863121456
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863121453}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &863121457
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -43227,6 +43252,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863121453}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &863121459
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863121453}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.00000047683716}
 --- !u!1 &866913289
 GameObject:
   m_ObjectHideFlags: 0
@@ -44939,10 +44985,9 @@ MonoBehaviour:
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
   projectileEmittersControllerRef: {fileID: 1535449829}
-  gunsPositions: []
-  emitterLookSmoothTime: 0.2
   shieldTiltPivot: {fileID: 1186486594}
   shieldRing: {fileID: 239482259}
+  hitboxTransformRef: {fileID: 0}
   shieldRotationSpeed: 90
   shieldTiltSpeed: 4
 --- !u!135 &891411884
@@ -46110,9 +46155,9 @@ GameObject:
   - component: {fileID: 909433912}
   - component: {fileID: 909433911}
   - component: {fileID: 909433910}
-  - component: {fileID: 909433909}
+  - component: {fileID: 909433914}
   m_Layer: 12
-  m_Name: Cube (8)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46133,22 +46178,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
---- !u!114 &909433909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909433907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &909433910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46162,7 +46191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -46244,6 +46273,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909433907}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &909433914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909433907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &910038176
 GameObject:
   m_ObjectHideFlags: 0
@@ -50577,9 +50619,9 @@ GameObject:
   - component: {fileID: 986988458}
   - component: {fileID: 986988457}
   - component: {fileID: 986988456}
-  - component: {fileID: 986988455}
+  - component: {fileID: 986988460}
   m_Layer: 12
-  m_Name: Cube (5)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50600,22 +50642,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
---- !u!114 &986988455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986988453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &986988456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50629,7 +50655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -50711,6 +50737,70 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986988453}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &986988460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986988453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
+--- !u!1 &992867242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 992867243}
+  - component: {fileID: 992867244}
+  m_Layer: 3
+  m_Name: Tail Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &992867243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992867242}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 863121454}
+  m_Father: {fileID: 539660840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &992867244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992867242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSegment: {fileID: 1297780069}
+  followDistance: 90
+  moveSpeed: 300
+  rotationSpeed: 30
+  localZRotationSpeed: 0
+  invertLocalRotation: 0
 --- !u!1 &995777565
 GameObject:
   m_ObjectHideFlags: 0
@@ -53760,9 +53850,9 @@ GameObject:
   - component: {fileID: 1040544968}
   - component: {fileID: 1040544967}
   - component: {fileID: 1040544966}
-  - component: {fileID: 1040544965}
+  - component: {fileID: 1040544970}
   m_Layer: 12
-  m_Name: Cube (21)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53783,22 +53873,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 165, z: 0}
---- !u!114 &1040544965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040544963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1040544966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53812,7 +53886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -53894,6 +53968,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040544963}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1040544970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040544963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1044654928
 GameObject:
   m_ObjectHideFlags: 0
@@ -55898,9 +55985,9 @@ GameObject:
   - component: {fileID: 1075661495}
   - component: {fileID: 1075661494}
   - component: {fileID: 1075661493}
-  - component: {fileID: 1075661492}
+  - component: {fileID: 1075661497}
   m_Layer: 12
-  m_Name: Cube (18)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55921,22 +56008,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 75, z: 0}
---- !u!114 &1075661492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075661490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1075661493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55950,7 +56021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -56032,6 +56103,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1075661490}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1075661497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075661490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1076975343
 GameObject:
   m_ObjectHideFlags: 0
@@ -57452,10 +57536,9 @@ GameObject:
   - component: {fileID: 1106967849}
   - component: {fileID: 1106967853}
   - component: {fileID: 1106967852}
-  - component: {fileID: 1106967850}
   - component: {fileID: 1106967854}
   m_Layer: 3
-  m_Name: Segment (1)
+  m_Name: Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57470,32 +57553,14 @@ Transform:
   m_GameObject: {fileID: 1106967848}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -90}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 8, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 66431527}
   - {fileID: 1178622544}
-  m_Father: {fileID: 539660840}
+  m_Father: {fileID: 184619432}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1106967850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106967848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSegment: {fileID: 477776154}
-  followDistance: 90
-  moveSpeed: 300
-  rotationSpeed: 30
-  localZRotationSpeed: 50
-  invertLocalRotation: 1
 --- !u!23 &1106967852
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -57576,7 +57641,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1113698850}
-  m_Layer: 12
+  m_Layer: 3
   m_Name: Shields
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61056,9 +61121,9 @@ GameObject:
   - component: {fileID: 1171856889}
   - component: {fileID: 1171856888}
   - component: {fileID: 1171856887}
-  - component: {fileID: 1171856886}
+  - component: {fileID: 1171856891}
   m_Layer: 12
-  m_Name: Cube (22)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61079,22 +61144,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
---- !u!114 &1171856886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171856884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1171856887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61108,7 +61157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -61190,6 +61239,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171856884}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1171856891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171856884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1178622543
 GameObject:
   m_ObjectHideFlags: 0
@@ -61550,6 +61612,57 @@ Transform:
   - {fileID: 239482259}
   m_Father: {fileID: 1484176597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1187874027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1187874028}
+  - component: {fileID: 1187874029}
+  m_Layer: 3
+  m_Name: Segment 3 Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1187874028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187874027}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -180}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1648340817}
+  m_Father: {fileID: 539660840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1187874029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187874027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSegment: {fileID: 313106236}
+  followDistance: 90
+  moveSpeed: 300
+  rotationSpeed: 30
+  localZRotationSpeed: 50
+  invertLocalRotation: 1
 --- !u!1 &1190111109
 GameObject:
   m_ObjectHideFlags: 0
@@ -62407,6 +62520,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &1195685361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1195685362}
+  - component: {fileID: 1195685363}
+  m_Layer: 3
+  m_Name: Head Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1195685362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195685361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 477776154}
+  m_Father: {fileID: 539660840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1195685363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195685361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSegment: {fileID: 1979327528}
+  followDistance: 90
+  moveSpeed: 300
+  rotationSpeed: 30
+  localZRotationSpeed: 50
+  invertLocalRotation: 0
 --- !u!1 &1204629325
 GameObject:
   m_ObjectHideFlags: 0
@@ -62561,7 +62725,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1206330882}
   - component: {fileID: 1206330881}
-  m_Layer: 0
+  - component: {fileID: 1206330883}
+  - component: {fileID: 1206330884}
+  m_Layer: 14
   m_Name: Shielded Drone Enemy (Turret)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62580,12 +62746,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36de6b9570cd9bc4fb32f9698d5c15d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 633472400}
-  entityArenaControllerRef: {fileID: 633472399}
+  entityHealthControllerRef: {fileID: 1206330884}
+  entityArenaControllerRef: {fileID: 1206330883}
   enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
-  shieldsParentRef: {fileID: 1867889670}
-  gunsParentRef: {fileID: 1431453537}
+  shieldsParentRef: {fileID: 1113698850}
+  gunsParentRef: {fileID: 1385560842}
+  coreHealthController: {fileID: 1483736938}
   shieldHealthControllers: []
   gunHealthControllers: []
   enemyAIRef: {fileID: 633472395}
@@ -62606,11 +62773,51 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2137921771}
   - {fileID: 1385560842}
   - {fileID: 1113698850}
+  - {fileID: 633472398}
+  - {fileID: 1483736934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1206330883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206330880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveToAppear: 1
+  showWaveGizmo: 1
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!114 &1206330884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206330880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 100
+  CurrentHP: 1
+  isAlive: 1
+  canBeDamaged: 0
+  isInvincible: 0
+  instaKillable: 0
+  godMode: 0
+  invincibilityDuration: 2
+  currentInvincibilityDuration: 0
+  hasHealed: 0
+  healingCooldown: 60
+  currentHealingCooldown: 0
 --- !u!1 &1207333855
 GameObject:
   m_ObjectHideFlags: 0
@@ -63271,9 +63478,9 @@ GameObject:
   - component: {fileID: 1217481315}
   - component: {fileID: 1217481314}
   - component: {fileID: 1217481313}
-  - component: {fileID: 1217481312}
+  - component: {fileID: 1217481317}
   m_Layer: 12
-  m_Name: Cube (4)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63294,22 +63501,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
---- !u!114 &1217481312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1217481310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1217481313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63323,7 +63514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -63405,6 +63596,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217481310}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1217481317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217481310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1217776813
 GameObject:
   m_ObjectHideFlags: 0
@@ -66910,10 +67114,17 @@ MonoBehaviour:
   entityArenaControllerRef: {fileID: 0}
   enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
+  segmentsParentRef: {fileID: 0}
+  segmentsLogic: []
+  segmentsVisuals: []
   weakPointHealths: []
-  segments: []
-  deadSegments: 0
+  deadWeakPoints: 0
   isDead: 0
+  minTimerDuration: 0.2
+  randomizeTimeBetweenDeaths: 0
+  lowerTimerDuration: 0.4
+  maxTimerDuration: 1.5
+  longDeathChance: 0.15
 --- !u!4 &1280352730
 Transform:
   m_ObjectHideFlags: 0
@@ -68217,6 +68428,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &1297780068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1297780069}
+  - component: {fileID: 1297780070}
+  m_Layer: 3
+  m_Name: Segment 5 Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1297780069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297780068}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -270}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1934948208}
+  m_Father: {fileID: 539660840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1297780070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297780068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSegment: {fileID: 669875355}
+  followDistance: 90
+  moveSpeed: 300
+  rotationSpeed: 30
+  localZRotationSpeed: 50
+  invertLocalRotation: 1
 --- !u!1 &1298380673
 GameObject:
   m_ObjectHideFlags: 0
@@ -68546,9 +68808,9 @@ GameObject:
   - component: {fileID: 1302775892}
   - component: {fileID: 1302775891}
   - component: {fileID: 1302775890}
-  - component: {fileID: 1302775889}
+  - component: {fileID: 1302775894}
   m_Layer: 12
-  m_Name: Cube (19)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68569,22 +68831,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 75, z: 0}
---- !u!114 &1302775889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302775887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1302775890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68598,7 +68844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -68680,6 +68926,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302775887}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1302775894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302775887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1302999842
 GameObject:
   m_ObjectHideFlags: 0
@@ -68962,9 +69221,9 @@ GameObject:
   - component: {fileID: 1303085438}
   - component: {fileID: 1303085437}
   - component: {fileID: 1303085436}
-  - component: {fileID: 1303085435}
+  - component: {fileID: 1303085440}
   m_Layer: 12
-  m_Name: Cube (16)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68985,22 +69244,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
---- !u!114 &1303085435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303085433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1303085436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69014,7 +69257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -69096,6 +69339,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303085433}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1303085440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303085433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1306778819
 GameObject:
   m_ObjectHideFlags: 0
@@ -70860,9 +71116,9 @@ GameObject:
   - component: {fileID: 1340796497}
   - component: {fileID: 1340796496}
   - component: {fileID: 1340796495}
-  - component: {fileID: 1340796494}
+  - component: {fileID: 1340796499}
   m_Layer: 12
-  m_Name: Cube (20)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70883,22 +71139,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 165, z: 0}
---- !u!114 &1340796494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340796492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1340796495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70912,7 +71152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -70994,6 +71234,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340796492}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1340796499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340796492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1343945822
 GameObject:
   m_ObjectHideFlags: 0
@@ -72429,7 +72682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1385560842}
   - component: {fileID: 1385560843}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72464,7 +72717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e3bf646b0f6eb41887eb5776c8b6d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 691622029}
   aimType: 0
   weaponChargeDuration: 3
   weaponChargeDurationTimer: 0
@@ -73277,9 +73530,9 @@ GameObject:
   - component: {fileID: 1412831750}
   - component: {fileID: 1412831749}
   - component: {fileID: 1412831748}
-  - component: {fileID: 1412831747}
+  - component: {fileID: 1412831752}
   m_Layer: 12
-  m_Name: Cube (12)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73300,22 +73553,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
---- !u!114 &1412831747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412831745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1412831748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73329,7 +73566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -73411,6 +73648,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412831745}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1412831752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412831745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1414922186
 GameObject:
   m_ObjectHideFlags: 0
@@ -74726,9 +74976,9 @@ GameObject:
   - component: {fileID: 1423422175}
   - component: {fileID: 1423422174}
   - component: {fileID: 1423422173}
-  - component: {fileID: 1423422172}
+  - component: {fileID: 1423422177}
   m_Layer: 12
-  m_Name: Cube (14)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74749,22 +74999,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 105, z: 0}
---- !u!114 &1423422172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423422170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1423422173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74778,7 +75012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -74860,6 +75094,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423422170}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1423422177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423422170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1423498511
 GameObject:
   m_ObjectHideFlags: 0
@@ -75185,9 +75432,9 @@ GameObject:
   - component: {fileID: 1428921635}
   - component: {fileID: 1428921634}
   - component: {fileID: 1428921633}
-  - component: {fileID: 1428921632}
+  - component: {fileID: 1428921637}
   m_Layer: 12
-  m_Name: Cube (17)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75208,22 +75455,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
---- !u!114 &1428921632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428921630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1428921633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75237,7 +75468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -75319,6 +75550,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428921630}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1428921637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428921630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1431453535
 GameObject:
   m_ObjectHideFlags: 0
@@ -75329,7 +75573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1431453537}
   - component: {fileID: 1431453536}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Shielded Drone Emitter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78347,6 +78591,150 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483030833}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1483736933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1483736934}
+  - component: {fileID: 1483736937}
+  - component: {fileID: 1483736936}
+  - component: {fileID: 1483736935}
+  - component: {fileID: 1483736938}
+  - component: {fileID: 1483736939}
+  m_Layer: 12
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1483736934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483736933}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1206330882}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1483736935
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483736933}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1483736936
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483736933}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1483736937
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483736933}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1483736938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483736933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 15
+  CurrentHP: 15
+  isAlive: 1
+  canBeDamaged: 1
+  isInvincible: 0
+  instaKillable: 1
+  godMode: 0
+  invincibilityDuration: 0
+  currentInvincibilityDuration: 0
+  hasHealed: 0
+  healingCooldown: 60
+  currentHealingCooldown: 0
+--- !u!114 &1483736939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483736933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1484176595
 GameObject:
   m_ObjectHideFlags: 0
@@ -78382,6 +78770,7 @@ MonoBehaviour:
   countsAsSeparateEnemy: 1
   shieldsParentRef: {fileID: 239482259}
   gunsParentRef: {fileID: 1535449830}
+  coreHealthController: {fileID: 0}
   shieldHealthControllers: []
   gunHealthControllers: []
   enemyAIRef: {fileID: 891411883}
@@ -79149,8 +79538,8 @@ GameObject:
   - component: {fileID: 1495611589}
   - component: {fileID: 1495611588}
   - component: {fileID: 1495611587}
-  - component: {fileID: 1495611586}
   - component: {fileID: 1495611585}
+  - component: {fileID: 1495611590}
   m_Layer: 12
   m_Name: Gun (2)
   m_TagString: Untagged
@@ -79194,22 +79583,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0.0000038146973, y: -0.00000047683716, z: 0}
---- !u!114 &1495611586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495611583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 633472399}
-  enemyName: Gun
-  countsAsSeparateEnemy: 0
 --- !u!114 &1495611587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79284,6 +79657,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495611583}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1495611590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495611583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1501409271
 GameObject:
   m_ObjectHideFlags: 0
@@ -79787,10 +80173,9 @@ GameObject:
   - component: {fileID: 1518261123}
   - component: {fileID: 1518261127}
   - component: {fileID: 1518261126}
-  - component: {fileID: 1518261124}
   - component: {fileID: 1518261128}
   m_Layer: 3
-  m_Name: Segment (2)
+  m_Name: Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79805,32 +80190,14 @@ Transform:
   m_GameObject: {fileID: 1518261122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -135}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 8, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 941085487}
   - {fileID: 1207333856}
-  m_Father: {fileID: 539660840}
+  m_Father: {fileID: 313106236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1518261124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518261122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSegment: {fileID: 1106967849}
-  followDistance: 90
-  moveSpeed: 300
-  rotationSpeed: 30
-  localZRotationSpeed: 50
-  invertLocalRotation: 0
 --- !u!23 &1518261126
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85918,9 +86285,9 @@ GameObject:
   - component: {fileID: 1636565924}
   - component: {fileID: 1636565923}
   - component: {fileID: 1636565922}
-  - component: {fileID: 1636565921}
+  - component: {fileID: 1636565926}
   m_Layer: 12
-  m_Name: Cube (13)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85941,22 +86308,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
---- !u!114 &1636565921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636565919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1636565922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85970,7 +86321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -86052,6 +86403,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636565919}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1636565926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636565919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1637338406
 GameObject:
   m_ObjectHideFlags: 0
@@ -86516,10 +86880,9 @@ GameObject:
   - component: {fileID: 1648340817}
   - component: {fileID: 1648340821}
   - component: {fileID: 1648340820}
-  - component: {fileID: 1648340818}
   - component: {fileID: 1648340822}
   m_Layer: 3
-  m_Name: Segment (3)
+  m_Name: Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86534,32 +86897,14 @@ Transform:
   m_GameObject: {fileID: 1648340816}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -180}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 8, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1814045736}
   - {fileID: 1379547168}
-  m_Father: {fileID: 539660840}
+  m_Father: {fileID: 1187874028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1648340818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648340816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSegment: {fileID: 1518261123}
-  followDistance: 90
-  moveSpeed: 300
-  rotationSpeed: 30
-  localZRotationSpeed: 50
-  invertLocalRotation: 1
 --- !u!23 &1648340820
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -87497,111 +87842,6 @@ Transform:
   - {fileID: 737638995}
   m_Father: {fileID: 1086891027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1679434405
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1679434406}
-  - component: {fileID: 1679434409}
-  - component: {fileID: 1679434408}
-  - component: {fileID: 1679434407}
-  m_Layer: 11
-  m_Name: Sphere
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1679434406
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679434405}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 633472398}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1679434407
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679434405}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1679434408
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679434405}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 315eba6b106fc3f44a2ebaf3ef37d919, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1679434409
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679434405}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1682972982
 GameObject:
   m_ObjectHideFlags: 0
@@ -89176,8 +89416,8 @@ GameObject:
   - component: {fileID: 1707803378}
   - component: {fileID: 1707803377}
   - component: {fileID: 1707803376}
-  - component: {fileID: 1707803375}
   - component: {fileID: 1707803374}
+  - component: {fileID: 1707803379}
   m_Layer: 12
   m_Name: Gun (3)
   m_TagString: Untagged
@@ -89221,22 +89461,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: -0.00000047683716, z: 0}
---- !u!114 &1707803375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707803372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 633472399}
-  enemyName: Gun
-  countsAsSeparateEnemy: 0
 --- !u!114 &1707803376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89311,6 +89535,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707803372}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1707803379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1707803372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1709571865
 GameObject:
   m_ObjectHideFlags: 0
@@ -92776,8 +93013,8 @@ GameObject:
   - component: {fileID: 1756601549}
   - component: {fileID: 1756601548}
   - component: {fileID: 1756601547}
-  - component: {fileID: 1756601546}
   - component: {fileID: 1756601545}
+  - component: {fileID: 1756601550}
   m_Layer: 12
   m_Name: Gun
   m_TagString: Untagged
@@ -92821,22 +93058,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0.0000038146973, y: 0, z: 0}
---- !u!114 &1756601546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756601543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 633472399}
-  enemyName: Gun
-  countsAsSeparateEnemy: 0
 --- !u!114 &1756601547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92911,6 +93132,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756601543}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1756601550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756601543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1758297547
 GameObject:
   m_ObjectHideFlags: 0
@@ -95385,10 +95619,17 @@ MonoBehaviour:
   entityArenaControllerRef: {fileID: 0}
   enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
+  segmentsParentRef: {fileID: 539660840}
+  segmentsLogic: []
+  segmentsVisuals: []
   weakPointHealths: []
-  segments: []
-  deadSegments: 0
+  deadWeakPoints: 0
   isDead: 0
+  minTimerDuration: 0.25
+  randomizeTimeBetweenDeaths: 0
+  lowerTimerDuration: 0.1
+  maxTimerDuration: 0.4
+  longDeathChance: 0.05
 --- !u!4 &1796481809
 Transform:
   m_ObjectHideFlags: 0
@@ -98728,7 +98969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867889670}
-  m_Layer: 12
+  m_Layer: 3
   m_Name: Shields Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100802,9 +101043,9 @@ GameObject:
   - component: {fileID: 1921020897}
   - component: {fileID: 1921020896}
   - component: {fileID: 1921020895}
-  - component: {fileID: 1921020894}
+  - component: {fileID: 1921020899}
   m_Layer: 12
-  m_Name: Cube (9)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100825,22 +101066,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
---- !u!114 &1921020894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1921020892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1921020895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100854,7 +101079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -100936,6 +101161,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921020892}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1921020899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921020892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1923476268
 GameObject:
   m_ObjectHideFlags: 0
@@ -101915,10 +102153,9 @@ GameObject:
   - component: {fileID: 1934948208}
   - component: {fileID: 1934948212}
   - component: {fileID: 1934948211}
-  - component: {fileID: 1934948209}
   - component: {fileID: 1934948213}
   m_Layer: 3
-  m_Name: Segment (5)
+  m_Name: Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101933,32 +102170,14 @@ Transform:
   m_GameObject: {fileID: 1934948207}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -270}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 8, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 281689803}
   - {fileID: 1972477262}
-  m_Father: {fileID: 539660840}
+  m_Father: {fileID: 1297780069}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1934948209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934948207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSegment: {fileID: 2050651318}
-  followDistance: 90
-  moveSpeed: 300
-  rotationSpeed: 30
-  localZRotationSpeed: 50
-  invertLocalRotation: 1
 --- !u!23 &1934948211
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -102076,9 +102295,9 @@ GameObject:
   - component: {fileID: 1938888399}
   - component: {fileID: 1938888398}
   - component: {fileID: 1938888397}
-  - component: {fileID: 1938888396}
+  - component: {fileID: 1938888401}
   m_Layer: 12
-  m_Name: Cube (10)
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102099,22 +102318,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
---- !u!114 &1938888396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938888394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1938888397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102128,7 +102331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -102210,6 +102413,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938888394}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1938888401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938888394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1939514914
 GameObject:
   m_ObjectHideFlags: 0
@@ -103504,9 +103720,9 @@ GameObject:
   - component: {fileID: 1961331760}
   - component: {fileID: 1961331759}
   - component: {fileID: 1961331758}
-  - component: {fileID: 1961331757}
+  - component: {fileID: 1961331762}
   m_Layer: 12
-  m_Name: Cube
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103527,22 +103743,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1867889670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1961331757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961331755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
-  entityArenaControllerRef: {fileID: 0}
-  enemyName: Shield
-  countsAsSeparateEnemy: 0
 --- !u!114 &1961331758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103556,7 +103756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
-  CurrentHP: 1
+  CurrentHP: 2
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -103638,6 +103838,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961331755}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1961331762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961331755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityHealthControllerRef: {fileID: 0}
 --- !u!1 &1963064129
 GameObject:
   m_ObjectHideFlags: 0
@@ -104401,10 +104614,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1979327528}
-  - component: {fileID: 1979327533}
-  - component: {fileID: 1979327532}
-  - component: {fileID: 1979327530}
   - component: {fileID: 1979327529}
+  - component: {fileID: 1979327530}
   - component: {fileID: 1979327534}
   m_Layer: 3
   m_Name: Actual Worm Head
@@ -104423,7 +104634,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 8, z: 30}
+  m_LocalScale: {x: 1, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1796481809}
@@ -104447,6 +104658,7 @@ MonoBehaviour:
   LOSMask:
     serializedVersion: 2
     m_Bits: 1024
+  canMove: 1
   movementPattern: 2
   oscillationAmplitude: 1
   oscillationFrequency: 2
@@ -104491,56 +104703,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!23 &1979327532
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1979327527}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 315eba6b106fc3f44a2ebaf3ef37d919, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1979327533
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1979327527}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!135 &1979327534
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -104554,7 +104716,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -108338,10 +108500,9 @@ GameObject:
   - component: {fileID: 2050651318}
   - component: {fileID: 2050651322}
   - component: {fileID: 2050651321}
-  - component: {fileID: 2050651319}
   - component: {fileID: 2050651323}
   m_Layer: 3
-  m_Name: Segment (4)
+  m_Name: Segment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108356,32 +108517,14 @@ Transform:
   m_GameObject: {fileID: 2050651317}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -225}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 8, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1803237781}
   - {fileID: 819047259}
-  m_Father: {fileID: 539660840}
+  m_Father: {fileID: 669875355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2050651319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2050651317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetSegment: {fileID: 1648340817}
-  followDistance: 90
-  moveSpeed: 300
-  rotationSpeed: 30
-  localZRotationSpeed: 50
-  invertLocalRotation: 0
 --- !u!23 &2050651321
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -113965,38 +114108,6 @@ Transform:
   m_Children:
   - {fileID: 1274834614}
   m_Father: {fileID: 2063733071}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2137921770
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2137921771}
-  m_Layer: 0
-  m_Name: Mesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2137921771
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137921770}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 633472398}
-  m_Father: {fileID: 1206330882}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2139172495
 GameObject:

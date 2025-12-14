@@ -61,8 +61,8 @@ public class TurretBehavior : MonoBehaviour
     [Header("Upward Cone Aiming")]
     [Range(0f, 89f)] public float coneMinAngle = 10f;   // minimum upward pitch
     [Range(0f, 89f)] public float coneMaxAngle = 45f;   // maximum upward pitch
-    public float coneBlendStrength = 1f;               // 1 = fully clamp, <1 = blend w/ predicted
-    public bool hasAngle = true; // hard limit shooting
+    public float coneBlendStrength = 1f;                // 1 = fully clamp, <1 = blend w/ predicted
+    public bool hasAngle = true;                        // hard limit shooting when doesn't have angle
 
     [Header("Emitter Stuff")]
     public ProjectileEmittersController projectileEmittersControllerRef;
