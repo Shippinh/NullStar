@@ -21505,7 +21505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &771960071
 Transform:
   m_ObjectHideFlags: 0
@@ -48329,13 +48329,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc34a1ad01be95c41978692e38918b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arenaEnemiesRef: []
+  spawnPoints: []
+  totalWaveCount: 5
   nextArenaControllerRef: {fileID: 0}
   hasArenaCompleted: 1
   hasArenaStarted: 0
   hasNextArenaStarted: 0
   currentWaveCount: 1
-  totalWaveCount: 5
 --- !u!1 &1676150289
 GameObject:
   m_ObjectHideFlags: 0
@@ -49068,7 +49068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1700386354
 Transform:
   m_ObjectHideFlags: 0
@@ -61269,13 +61269,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc34a1ad01be95c41978692e38918b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arenaEnemiesRef: []
+  spawnPoints: []
+  totalWaveCount: 5
   nextArenaControllerRef: {fileID: 1670600507}
   hasArenaCompleted: 0
   hasArenaStarted: 0
   hasNextArenaStarted: 0
   currentWaveCount: 1
-  totalWaveCount: 5
 --- !u!1 &2097884967
 GameObject:
   m_ObjectHideFlags: 0

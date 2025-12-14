@@ -10,6 +10,8 @@ public class WormEnemyController : EnemyController
     [SerializeField] private List<Transform> segmentsVisuals = new List<Transform>();
     public List<EntityHealthController> weakPointHealths = new List<EntityHealthController>();
 
+    public WormEnemy enemyAIRef;
+
     public int deadWeakPoints = 0;
     public bool isDead = false;
 
