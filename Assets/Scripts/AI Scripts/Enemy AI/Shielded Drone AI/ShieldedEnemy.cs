@@ -68,6 +68,9 @@ public class ShieldedEnemy : MonoBehaviour
 
     void Start()
     {
+        if (!player)
+            player = FindObjectOfType<SpaceShooterController>();
+
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 

@@ -36,7 +36,7 @@ MonoBehaviour:
   LOSMask:
     serializedVersion: 2
     m_Bits: 1024
-  maxAcceleration: 250
+  maxAcceleration: 200
   attackRotationBreakoffDistance: 200
   alignTime: 0.35
   leftRightAlignTime: 1.5

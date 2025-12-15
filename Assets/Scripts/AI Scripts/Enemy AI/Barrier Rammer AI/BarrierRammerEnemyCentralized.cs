@@ -12,7 +12,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     private Transform originalEnemyARef;
     public Transform enemyB;         // optional
     private Transform originalEnemyBRef;
-    public Transform playerCamera;
+    public Camera playerCamera;
     public GameObject barrierObj;
     public bool barrierIsColliding;
     public Transform barrierLeftAnchor;
@@ -76,6 +76,11 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
     void Start()
     {
+        if (!player)
+            player = FindObjectOfType<SpaceShooterController>();
+
+        playerCamera = Camera.main;
+
         Reinitialize();
 
         originalEnemyARef = enemyA;
@@ -752,10 +757,10 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     {
         availableDirections = new List<Vector3>
         {
-            playerCamera.forward,
+            playerCamera.transform.forward,
             //-playerCamera.forward, // not the back of the player, feels really clunky
-            playerCamera.right,
-            -playerCamera.right,
+            playerCamera.transform.right,
+            -playerCamera.transform.right,
             player.transform.up, // top direction
             -player.transform.up
         };
@@ -776,7 +781,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
         // Fallbacks if no velocity or player/body is null
         if (playerCamera != null)
-            return playerCamera.forward;
+            return playerCamera.transform.forward;
 
         return lastPlayerForward != Vector3.zero ? lastPlayerForward : Vector3.forward;
     }

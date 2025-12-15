@@ -5,7 +5,7 @@ using UnityEngine;
 public class TurretBehavior : MonoBehaviour
 {
     [Header("Target")]
-    public SpaceShooterController player;
+    [SerializeField] public SpaceShooterController player;
 
     public enum AimType
     {
@@ -82,10 +82,8 @@ public class TurretBehavior : MonoBehaviour
     private void Update()
     {
         if (canAct)
-        {
             UpdateAiming();
-            HandleShooting();
-        }
+        HandleShooting();
     }
 
     public void InitializeEnemyTurret(SpaceShooterController targetPtr, float minShootingRangePtr, float maxShootingRangePtr)
@@ -99,6 +97,8 @@ public class TurretBehavior : MonoBehaviour
 
     private void Initialize()
     {
+        player = FindObjectOfType<SpaceShooterController>();
+
         projectileEmittersControllerRef = GetComponentInChildren<ProjectileEmittersController>();
         gunsPositions = projectileEmittersControllerRef.GetGunsArray();
 
@@ -164,7 +164,7 @@ public class TurretBehavior : MonoBehaviour
                             && distanceToPlayer <= maxShootingRange + maxShootingRangeIncrement;
         bool hasLOS = HasLineOfSight();
 
-        if (!inSweetSpot || !hasLOS)
+        if (!inSweetSpot || !hasLOS || !canAct)
         {
             if (isShooting) ResetShooting(); // cancel immediately if any condition fails
             projectileEmittersControllerRef.ForceStopSequence();
@@ -187,7 +187,7 @@ public class TurretBehavior : MonoBehaviour
                 weaponChargeDurationTimer += Time.deltaTime;
                 if (weaponChargeDurationTimer >= weaponChargeDuration)
                 {
-                    Debug.Log("Charge complete");
+                    Debug.Log("Turret is shooting");
                     isChargingShot = false;
                     isSendingShot = true;
                     weaponShootDurationTimer = 0f;

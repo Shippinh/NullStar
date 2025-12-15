@@ -17,6 +17,11 @@ public class EnemyController : DestructibleController, IPoolable
 
     public virtual void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
     {
+        IPoolableTag = poolableTag;
+
+        transform.position = position;
+        transform.rotation = rotation;
+
         HandleRevival();
     }
 

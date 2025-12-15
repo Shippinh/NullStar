@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArenaController : MonoBehaviour
@@ -18,6 +19,7 @@ public class ArenaController : MonoBehaviour
 
     void Start()
     {
+        spawnPoints.AddRange(GetComponentsInChildren<ArenaEntitySpawn>(false));
         StartWaveIfNeeded();
     }
 
@@ -44,6 +46,7 @@ public class ArenaController : MonoBehaviour
         {
             if (sp.waveToAppear != currentWaveCount) continue;
             GameObject pooledObj = ObjectPool.Instance.GetPooledObject(sp.poolableEnemyTag, sp.transform.position, sp.transform.rotation, false);
+            Debug.Log("Depooled " + pooledObj.name + " enemy");
             if (pooledObj != null)
             {
                 EnemyController enemy = pooledObj.GetComponent<EnemyController>();
@@ -57,9 +60,15 @@ public class ArenaController : MonoBehaviour
 
     private void CheckWaveCompletion()
     {
-        if (currentWaveEnemies.Count == 0) return;
-
         bool allDead = true;
+
+        if (currentWaveEnemies.Count == 0)
+        {
+            Debug.Log("Arena '" + gameObject.name + "' wave " + currentWaveCount.ToString() + " completed prematurely, no enemy spawns detected");
+            AdvanceWave();
+            return;
+        }
+
         foreach (EnemyController enemy in currentWaveEnemies)
         {
             if (enemy.GetHealthController().IsAlive())
@@ -70,7 +79,10 @@ public class ArenaController : MonoBehaviour
         }
 
         if (allDead)
+        {
+            Debug.Log("Arena '" + gameObject.name + "' wave " + currentWaveCount.ToString() + " completed naturally");
             AdvanceWave();
+        }
     }
 
     private void AdvanceWave()
@@ -86,6 +98,7 @@ public class ArenaController : MonoBehaviour
 
             if (!hasNextArenaStarted && nextArenaControllerRef)
             {
+                Debug.Log("Arena '" + gameObject.name + "' completed");
                 hasNextArenaStarted = true;
                 nextArenaControllerRef.hasArenaCompleted = false;
                 gameObject.SetActive(false);

@@ -38,7 +38,8 @@ public class WormEnemyController : EnemyController
     {
         Initialize();
 
-        countsAsSeparateEnemy = true;
+        if (!enemyAIRef)
+            enemyAIRef = GetComponentInChildren<WormEnemy>();
 
         if ((segmentsLogic == null || segmentsLogic.Count == 0) || (segmentsVisuals == null || segmentsVisuals.Count == 0))
         {

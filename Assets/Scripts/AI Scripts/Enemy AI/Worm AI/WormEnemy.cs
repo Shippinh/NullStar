@@ -15,7 +15,7 @@ public class WormEnemy : MonoBehaviour
 
     [Header("Target & Movement")]
     public SpaceShooterController player;
-    public Transform playerCamera;
+    public Camera playerCamera;
 
     public float maxSpeed = 10f;
     public float maxAcceleration = 30f;
@@ -67,6 +67,11 @@ public class WormEnemy : MonoBehaviour
 
     void Start()
     {
+        if (!player)
+            player = FindObjectOfType<SpaceShooterController>();
+
+        playerCamera = Camera.main;
+
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
@@ -258,8 +263,8 @@ public class WormEnemy : MonoBehaviour
         {
             //Vector3.forward,
             //Vector3.back,
-            playerCamera.right,
-            -playerCamera.right,
+            playerCamera.transform.right,
+            -playerCamera.transform.right,
             player.transform.up,
             -player.transform.up
         };
@@ -280,7 +285,7 @@ public class WormEnemy : MonoBehaviour
 
         // Fallbacks if no velocity or player/body is null
         if (playerCamera != null)
-            return playerCamera.forward;
+            return playerCamera.transform.forward;
 
         return lastPlayerForward != Vector3.zero ? lastPlayerForward : Vector3.forward;
     }

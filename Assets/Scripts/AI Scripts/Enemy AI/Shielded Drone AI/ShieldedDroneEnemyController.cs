@@ -34,6 +34,9 @@ public class ShieldedDroneEnemyController : EnemyController
         Initialize();
         countsAsSeparateEnemy = true;
 
+        if(!enemyAIRef)
+            enemyAIRef = GetComponentInChildren<ShieldedEnemy>();
+
         // Collect all sub-entity health controllers
         if(shieldHealthControllers == null || shieldHealthControllers.Count == 0)
             shieldHealthControllers.AddRange(shieldsParentRef.GetComponentsInChildren<EntityHealthController>(true));
@@ -77,6 +80,11 @@ public class ShieldedDroneEnemyController : EnemyController
 
         // otherwise - start death sequence
         StartCoroutine(DeathSequence(allSubEntities));
+    }
+
+    public override void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
+    {
+        base.HandleDepool(poolableTag, position, rotation);
     }
 
     // Overrides the basic method to properly revive all sub-entity health controllers

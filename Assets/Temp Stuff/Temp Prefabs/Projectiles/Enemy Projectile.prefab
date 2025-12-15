@@ -4949,7 +4949,7 @@ SphereCollider:
     m_Bits: 1088
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 15295
+    m_Bits: 31679
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

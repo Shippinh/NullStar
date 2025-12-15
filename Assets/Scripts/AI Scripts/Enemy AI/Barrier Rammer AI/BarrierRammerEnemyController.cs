@@ -17,8 +17,8 @@ public class BarrierRammerEnemyController : EnemyController
         countsAsSeparateEnemy = true;
         enemyName = "Barrier Rammer";
 
-        if(enemyAIRef == null)
-            enemyAIRef = GetComponent<BarrierRammerEnemyCentralized>();
+        if(!enemyAIRef)
+            enemyAIRef = GetComponentInChildren<BarrierRammerEnemyCentralized>();
 
         if (enemyAHealth != null)
             enemyAHealth.Died += OnEnemyADied;

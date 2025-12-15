@@ -35,6 +35,9 @@ public class BasicMineEnemy : MonoBehaviour
 
     protected void Initialize()
     {
+        if (!player)
+            player = FindObjectOfType<SpaceShooterController>();
+
         healthControllerRef = GetComponent<EntityHealthController>();
         if (healthControllerRef != null)
             healthControllerRef.Died += DeathEvents;

@@ -52,6 +52,9 @@ public class SniperEnemy : MonoBehaviour
 
     void Start()
     {
+        if(!player)
+            player = FindObjectOfType<SpaceShooterController>();
+
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
