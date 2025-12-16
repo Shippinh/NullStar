@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 766797745891395363}
   - component: {fileID: 6859985179846718496}
   - component: {fileID: 5371080958144277377}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: Ramming Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,6 +60,8 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
+  reinitializeOnEnable: 1
+  reinitializeCanMove: 1
 --- !u!114 &6099619615539982189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +162,7 @@ GameObject:
   - component: {fileID: 5936862267866808317}
   - component: {fileID: 7863065580875168594}
   m_Layer: 11
-  m_Name: Mesh
+  m_Name: Mesh and Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6735381522923424525}
   m_Layer: 3
-  m_Name: Mesh
+  m_Name: Mesh Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 2577918429472079699}
   - component: {fileID: 6453383009823562384}
   - component: {fileID: 8870890144738698369}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: Sniper Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,6 +187,9 @@ MonoBehaviour:
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
+  reinitializeOnEnable: 1
+  reinitializeCanAct: 1
+  reinitializeCanMove: 1
   rb: {fileID: 0}
   nearbyObstacles: []
   velocity: {x: 0, y: 0, z: 0}
@@ -290,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2224183562618925850}
   - component: {fileID: 8780728268576030519}
-  m_Layer: 3
+  m_Layer: 14
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +379,7 @@ GameObject:
   - component: {fileID: 8001564511962229102}
   - component: {fileID: 1087823077828521215}
   m_Layer: 11
-  m_Name: Sphere
+  m_Name: Mesh and Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

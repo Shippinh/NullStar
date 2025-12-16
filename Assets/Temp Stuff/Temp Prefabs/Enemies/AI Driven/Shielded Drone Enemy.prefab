@@ -644,6 +644,9 @@ MonoBehaviour:
   canAct: 1
   actSlowdownDuration: 2
   canMove: 1
+  reinitializeOnEnable: 1
+  reinitializeCanAct: 1
+  reinitializeCanMove: 1
   gunsDead: 0
   rb: {fileID: 0}
   nearbyObstacles: []
@@ -4285,7 +4288,7 @@ GameObject:
   - component: {fileID: 5725642634977740971}
   - component: {fileID: 1457293498573110476}
   - component: {fileID: 2338772988820144721}
-  - component: {fileID: 487889707899982034}
+  - component: {fileID: 3493155471131403453}
   m_Layer: 12
   m_Name: Hitbox
   m_TagString: Untagged
@@ -4403,7 +4406,7 @@ MonoBehaviour:
   hasHealed: 0
   healingCooldown: 60
   currentHealingCooldown: 0
---- !u!114 &487889707899982034
+--- !u!114 &3493155471131403453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4412,10 +4415,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8369897992275292116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b205d69a3af7b04b9a3126ba0a59bda, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+  enemyName: Drone Core
+  countsAsSeparateEnemy: 0
 --- !u!1 &8643617984270638278
 GameObject:
   m_ObjectHideFlags: 0

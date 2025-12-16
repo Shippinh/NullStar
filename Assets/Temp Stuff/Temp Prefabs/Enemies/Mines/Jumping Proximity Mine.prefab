@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5328618054577819483}
   - component: {fileID: 625205844310363963}
   - component: {fileID: 8382186812807838072}
-  m_Layer: 11
-  m_Name: Sphere
+  m_Layer: 13
+  m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,13 +119,13 @@ GameObject:
   - component: {fileID: 8985949393875120132}
   - component: {fileID: 1087612876044844125}
   - component: {fileID: 2390835602033205345}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Jumping Proximity Mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2178880763239036900
 Transform:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5570950812861804722}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
-  enemyName: Default Enemy Name
+  enemyName: Jumping Proximity Mine
   countsAsSeparateEnemy: 1
 --- !u!54 &1087612876044844125
 Rigidbody:
