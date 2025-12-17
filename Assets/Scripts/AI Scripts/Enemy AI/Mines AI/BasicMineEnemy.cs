@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
 public class BasicMineEnemy : MonoBehaviour
 {
     [Header("States")]
@@ -13,6 +12,9 @@ public class BasicMineEnemy : MonoBehaviour
 
     [Header("Target")]
     public SpaceShooterController player;
+
+    [Header("Other")]
+    public bool reinitializeOnEnable = true;
 
     [Header("Explosion Settings")]
     public float triggerRange = 300f;     // Player must be inside this to activate
@@ -28,9 +30,18 @@ public class BasicMineEnemy : MonoBehaviour
 
     public EntityHealthController healthControllerRef;
 
-    virtual protected void Start()
+    virtual protected void Awake()
     {
         Initialize();
+    }
+
+    // Soft AI reinitialization
+    virtual protected void OnEnable()
+    {
+        if (reinitializeOnEnable)
+        {
+            Rearm();
+        }
     }
 
     protected void Initialize()
@@ -73,9 +84,9 @@ public class BasicMineEnemy : MonoBehaviour
     {
         float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-        // Check if player is within trigger range
+        // If the mine can be fused
         if (canBeFused)
-            Trigger(distToPlayer);
+            Trigger(distToPlayer); // Check if player is within trigger range
 
         // Count fuse timer
         if (isTriggered)

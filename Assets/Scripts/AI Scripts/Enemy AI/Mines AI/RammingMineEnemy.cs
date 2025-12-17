@@ -13,6 +13,7 @@ public class RammingMineEnemy : BasicMineEnemy
     public float maxAirAcceleration = 80f;
     public bool randomizeMaxAirAcceleration = true;
     public bool canMove = true;
+    public bool reinitializeCanMove = false; // Should canMove be set to true when reinitialized ? 
     public float motionlessDrag = 0.5f;
 
     [Header("Avoidance")]
@@ -27,7 +28,7 @@ public class RammingMineEnemy : BasicMineEnemy
     private Vector3 desiredVelocity;
     private Vector3 contactNormal = Vector3.up;
 
-    override protected void Start()
+    override protected void Awake()
     {
         Initialize();
 
@@ -43,6 +44,19 @@ public class RammingMineEnemy : BasicMineEnemy
         if (randomizeMaxAirAcceleration)
         {
             maxAirAcceleration = Random.Range(maxAirAcceleration, maxAirAcceleration + 50f);
+        }
+    }
+
+    override protected void OnEnable()
+    {
+        if (reinitializeOnEnable)
+        {
+            rb.velocity = Vector3.zero;
+
+            if (reinitializeCanMove)
+                canMove = true;
+
+            Rearm();
         }
     }
 

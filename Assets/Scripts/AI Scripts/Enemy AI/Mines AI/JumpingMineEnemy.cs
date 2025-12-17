@@ -14,7 +14,7 @@ public class JumpingMineEnemy : BasicMineEnemy
 
     private Rigidbody rb;
 
-    override protected void Start()
+    override protected void Awake()
     {
         Initialize();
 
@@ -27,6 +27,16 @@ public class JumpingMineEnemy : BasicMineEnemy
         trigger.radius = triggerRange;
 
         rb.drag = explosionRadius / triggerRange * fuseDelay + 0.75f;
+    }
+
+    override protected void OnEnable()
+    {
+        if (reinitializeOnEnable)
+        {
+            rb.velocity = Vector3.zero;
+
+            Rearm();
+        }
     }
 
     override protected void FixedUpdate()

@@ -62,6 +62,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     [SerializeField] private bool aligningToAnchors = false;
     [SerializeField] private bool enemiesAligned = false;
 
+    [Header("Other")]
+    public bool reinitializeOnEnable = true;
 
     private Rigidbody rb;
     private List<Collider> nearbyObstacles = new List<Collider>();
@@ -74,14 +76,12 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
     public int currentSpiralStep = 0;
 
-    void Start()
+    void Awake()
     {
         if (!player)
             player = FindObjectOfType<SpaceShooterController>();
 
         playerCamera = Camera.main;
-
-        Reinitialize();
 
         originalEnemyARef = enemyA;
         originalEnemyBRef = enemyB;
@@ -98,7 +98,28 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             for (int i = 0; i < pivotPoints.Length; i++)
                 initialPivotOffsets[i] = pivotPoints[i].position - transform.position;
         }
+
+        Reinitialize();
     }
+
+    // Soft AI reinitialization
+    private void OnEnable()
+    {
+        if (!reinitializeOnEnable)
+            return;
+
+        // --- Core motion reset ---
+        velocity = Vector3.zero;
+        desiredVelocity = Vector3.zero;
+
+        ForceStopAttack();
+        ResetBehaviorState();
+
+        // --- Re-pick preset & collider settings ---
+        Reinitialize();
+    }
+
+
 
     private void Reinitialize()
     {
@@ -851,17 +872,15 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         enemyA.transform.localPosition = Vector3.zero;
 
         // Prevent paired pivot updates from running
-        pivotPoints = null;
+        //pivotPoints = null;
 
-        Debug.Log("[BarrierRammerEnemyCentralized] Partner died — switching to SOLO mode.");
+        //Debug.Log("[BarrierRammerEnemyCentralized] Partner died — switching to SOLO mode.");
     }
 
-    public void ResetBehaviorState(bool isSoloPtr)
+    public void ResetBehaviorState()
     {
-        isSolo = isSoloPtr;
-        enemyB = originalEnemyBRef;
         enemyA = originalEnemyARef;
-        velocity = Vector3.zero;
+        enemyB = originalEnemyBRef;
         currentSpiralStep = 0;
         isAttacking = false;
         enemiesAligned = false;

@@ -13,7 +13,9 @@ public class WormEnemyController : EnemyController
     public WormEnemy enemyAIRef;
 
     public int deadWeakPoints = 0;
-    public bool isDead = false;
+
+    private bool firstInitialization = true;
+    private float distanceBetweenSegments = 0; // This is internal, used for depooling for unusual orientations
 
     // Game Juice
     [Header("Random Death Timers")]
@@ -54,18 +56,25 @@ public class WormEnemyController : EnemyController
         }
 
         // Grab all child weak points (including inactive)
-        if(weakPointHealths == null || weakPointHealths.Count == 0)
+        if (weakPointHealths == null || weakPointHealths.Count == 0)
             weakPointHealths.AddRange(GetComponentsInChildren<EntityHealthController>(true));
 
         // Remove the base health reference if included
-        if(weakPointHealths != null || weakPointHealths.Count > 0)
+        if (weakPointHealths != null || weakPointHealths.Count > 0)
             weakPointHealths.Remove(entityHealthControllerRef);
 
-        // Subscribe to weak point deaths
-        foreach (var wp in weakPointHealths)
+        if (firstInitialization)
         {
-            // right now i handle children weak points like the default enemy controller, but i guess i'll have to remake it later so the object doesn't actually disappear, since it's a part of its mesh
-            wp.Died += () => OnWeakPointDied(wp);
+            firstInitialization = false;
+
+            distanceBetweenSegments = Vector3.Distance(transform.position, segmentsLogic[0].position);
+
+            // Subscribe to weak point deaths
+            foreach (var wp in weakPointHealths)
+            {
+                // right now i handle children weak points like the default enemy controller, but i guess i'll have to remake it later so the object doesn't actually disappear, since it's a part of its mesh
+                wp.Died += () => OnWeakPointDied(wp);
+            }
         }
     }
 
@@ -75,7 +84,7 @@ public class WormEnemyController : EnemyController
         //Debug.Log($"Weak point {deadHP.name} died ({deadWeakPoints}/{weakPointHealths.Count})");
 
         // If all weak points are dead, trigger worm death
-        if (!isDead && deadWeakPoints >= weakPointHealths.Count)
+        if (deadWeakPoints >= weakPointHealths.Count)
         {
             StartCoroutine(DeathSequence());
         }
@@ -84,7 +93,43 @@ public class WormEnemyController : EnemyController
     // Overrides the basic method to properly revive all sub-entity health controllers
     public override void HandleRevival()
     {
+        // In case we allow an enemy to be reenqueued immediately we do this so it doesn't break completely
+        StopAllCoroutines();
+
+        foreach (EntityHealthController entity in weakPointHealths)
+        {
+            entity.Revive(true);
+        }
+
+        foreach (var entity in segmentsVisuals)
+        {
+            entity.gameObject.SetActive(true);
+        }
+
+            // Deactivate logic
+        foreach (var entity in segmentsLogic)
+        {
+            entity.gameObject.SetActive(true);
+        }
+
+        deadWeakPoints = 0;
+
         base.HandleRevival();
+    }
+
+    // Worm enemy is trickier, because we need to reset all segments instead of a single mesh
+    public override void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
+    {
+        IPoolableTag = poolableTag;
+
+        // The AI head position, we use this as base to iterate from
+        transform.position = position;
+        transform.rotation = rotation;
+
+        ResetSegments();
+
+        // Revive (prepare entity health controller) - "true" will call HandleRevival() after Revive() is done
+        entityHealthControllerRef.Revive(true);
     }
 
     // Helper to access weak points
@@ -135,5 +180,36 @@ public class WormEnemyController : EnemyController
 
         // Forcibly kill the main entity, since it's immune to instakills and immune to damage in general
         entityHealthControllerRef.ForciblyDie();
+    }
+
+    private void ResetSegments()
+    {
+        Transform previous = transform;
+
+        Vector3 backward = -transform.forward;
+
+        for (int i = 0; i < segmentsLogic.Count; i++)
+        {
+            Transform segment = segmentsLogic[i];
+
+            // Position segment behind the previous transform
+            segment.position = previous.position + backward * distanceBetweenSegments;
+
+            // Match rotation exactly
+            segment.rotation = transform.rotation;
+
+            // Safety: ensure active
+            segment.gameObject.SetActive(true);
+
+            previous = segment;
+        }
+
+        // Reset visuals to match logic
+        for (int i = 0; i < segmentsVisuals.Count; i++)
+        {
+            segmentsVisuals[i].localPosition = Vector3.zero;
+            segmentsVisuals[i].localRotation = Quaternion.identity;
+            segmentsVisuals[i].gameObject.SetActive(true);
+        }
     }
 }

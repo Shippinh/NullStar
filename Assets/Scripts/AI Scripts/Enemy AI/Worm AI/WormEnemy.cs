@@ -53,6 +53,9 @@ public class WormEnemy : MonoBehaviour
     public float pivotForwardPush = 10f;   // worm goes past player
     public float pivotHeightOffset = 3f;   // lift pivot slightly above ground
 
+    [Header("Other")]
+    public bool reinitializeOnEnable = true;
+
     private Rigidbody rb;
     private List<Collider> nearbyObstacles = new List<Collider>();
     private Vector3 velocity;
@@ -82,6 +85,16 @@ public class WormEnemy : MonoBehaviour
         velocity = Vector3.zero;
         UpdateDirections();
         currentPivot = ChoosePivot();
+    }
+
+    // Soft AI reinitialization
+    private void OnEnable()
+    {
+        if (reinitializeOnEnable)
+        {
+            velocity = Vector3.zero;
+            desiredVelocity = Vector3.zero;
+        }
     }
 
     private void LateUpdate()

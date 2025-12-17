@@ -44,13 +44,6 @@ public class ShieldedDroneEnemyController : EnemyController
         if (gunHealthControllers == null || gunHealthControllers.Count == 0)
             gunHealthControllers.AddRange(gunsParentRef.GetComponentsInChildren<EntityHealthController>(true));
 
-        // Remove self if included
-        if (shieldHealthControllers != null || shieldHealthControllers.Count > 0)
-            shieldHealthControllers.Remove(entityHealthControllerRef);
-
-        if (gunHealthControllers != null || gunHealthControllers.Count > 0)
-            gunHealthControllers.Remove(entityHealthControllerRef);
-
         // if core dies - kill everything else
         coreHealthController.Died += HandleCoreDeath;
     }
@@ -58,10 +51,7 @@ public class ShieldedDroneEnemyController : EnemyController
     private void HandleCoreDeath()
     {
         // Stop AI behavior
-        if (enemyAIRef != null)
-        {
-            enemyAIRef.canAct = false;
-        }
+        enemyAIRef.canAct = false;
 
         // Combine all sub-controllers
         List<EntityHealthController> allSubEntities = new();
@@ -85,11 +75,24 @@ public class ShieldedDroneEnemyController : EnemyController
     public override void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
     {
         base.HandleDepool(poolableTag, position, rotation);
+        coreHealthController.Revive(true);
     }
 
     // Overrides the basic method to properly revive all sub-entity health controllers
     public override void HandleRevival()
     {
+        // In case we allow an enemy to be reenqueued immediately we do this so it doesn't break completely
+        StopAllCoroutines();
+
+        List<EntityHealthController> allSubEntities = new();
+        allSubEntities.AddRange(shieldHealthControllers);
+        allSubEntities.AddRange(gunHealthControllers);
+
+        foreach (EntityHealthController entity in allSubEntities)
+        {
+            entity.Revive(true);
+        }
+
         base.HandleRevival();
     }
 

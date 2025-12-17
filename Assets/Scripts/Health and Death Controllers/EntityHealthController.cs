@@ -148,7 +148,7 @@ public class EntityHealthController : MonoBehaviour
     }
 
     /// <summary>
-    /// Kills the current entity instantly based on internal variables.
+    /// Kills the entity instantly based on internal variables.
     /// </summary>
     public void InstantlyDie()
     {
@@ -160,7 +160,7 @@ public class EntityHealthController : MonoBehaviour
     }
 
     /// <summary>
-    /// Kills the current entity instantly unconditionally. Can't die in god mode. To die in god mode call ForciblyDieOverGodMode().
+    /// Kills the entity instantly and unconditionally. Can't die in god mode. To die in god mode call ForciblyDieOverGodMode().
     /// </summary>
     public void ForciblyDie()
     {
@@ -169,7 +169,7 @@ public class EntityHealthController : MonoBehaviour
     }
 
     /// <summary>
-    /// Kills the current entity instantly unconditionally. Can die in god mode. To not die in god mode call ForciblyDie().
+    /// Kills the entity instantly and unconditionally. Can die in god mode. To not die in god mode call ForciblyDie().
     /// </summary>
     public void ForciblyDieOverGodMode()
     {

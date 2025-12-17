@@ -18,6 +18,10 @@ public class RammerEnemy : MonoBehaviour
     public float detectionRadius = 40f;
     public LayerMask obstacleMask;
 
+    [Header("Other")]
+    public bool reinitializeOnEnable = true;
+    public bool reinitializeCanMove = false; // Should canMove be set to true when reinitialized ? 
+
     private Rigidbody rb;
     private List<Collider> nearbyObstacles = new List<Collider>();
     private Vector3 velocity;
@@ -42,6 +46,19 @@ public class RammerEnemy : MonoBehaviour
         if(randomizeMaxAirAcceleration)
         {
             maxAirAcceleration = Random.Range(maxAirAcceleration, maxAirAcceleration + 50f);
+        }
+    }
+
+    // Soft AI reinitialization
+    private void OnEnable()
+    {
+        if (reinitializeOnEnable)
+        {
+            velocity = Vector3.zero;
+            desiredVelocity = Vector3.zero;
+
+            if (reinitializeCanMove)
+                canMove = true;
         }
     }
 

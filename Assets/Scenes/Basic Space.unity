@@ -840,7 +840,7 @@ Transform:
   m_GameObject: {fileID: 67448222}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 750, y: 0, z: 0}
+  m_LocalPosition: {x: 500, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2924,6 +2924,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 904736161}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &137519865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 137519866}
+  m_Layer: 0
+  m_Name: Barrier Rammer Solo Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &137519866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137519865}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1676, y: 233.99998, z: 558}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 597621451}
+  m_Father: {fileID: 234138650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &137796053
 GameObject:
   m_ObjectHideFlags: 0
@@ -4531,7 +4563,7 @@ Transform:
   m_GameObject: {fileID: 214715067}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalPosition: {x: 500, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5121,12 +5153,6 @@ MonoBehaviour:
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
---- !u!1 &232941558 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 609646008402813722, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
-    type: 3}
-  m_PrefabInstance: {fileID: 8628892012044007173}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &234138649
 GameObject:
   m_ObjectHideFlags: 0
@@ -5159,6 +5185,8 @@ Transform:
   - {fileID: 413563191}
   - {fileID: 1579309329}
   - {fileID: 364419743}
+  - {fileID: 941157100}
+  - {fileID: 137519866}
   m_Father: {fileID: 339981557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &236972415
@@ -7271,7 +7299,7 @@ Transform:
   m_GameObject: {fileID: 327870488}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalPosition: {x: 250, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8462,7 +8490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &364419743
 Transform:
   m_ObjectHideFlags: 0
@@ -11542,6 +11570,7 @@ MonoBehaviour:
   aligningToPivot: 0
   aligningToAnchors: 0
   enemiesAligned: 0
+  reinitializeOnEnable: 1
   currentSpiralStep: 0
 --- !u!54 &486054569
 Rigidbody:
@@ -13876,6 +13905,56 @@ MonoBehaviour:
   baseSpread: 0
   baseSpiralSpeed: 0
   baseFireRateValue: 0
+--- !u!1 &597621450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 597621451}
+  - component: {fileID: 597621452}
+  m_Layer: 0
+  m_Name: Barrier Rammer Solo SP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &597621451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597621450}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 137519866}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &597621452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597621450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Barrier Rammer Solo
+  waveToAppear: 3
+  showWaveGizmo: 1
+  gizmoColor: {r: 0, g: 1, b: 0.26967716, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &598141689
 GameObject:
   m_ObjectHideFlags: 0
@@ -14899,6 +14978,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1001 &640637161
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1344888554}
+    m_Modifications:
+    - target: {fileID: 4937089234977214735, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_Name
+      value: Standalone Turret Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2e043a27e69007544835f02a446498ca, type: 3}
+--- !u!4 &640637162 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 640637161}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &642446553
 GameObject:
   m_ObjectHideFlags: 0
@@ -21397,7 +21550,7 @@ MonoBehaviour:
   playerCamera: {fileID: 330585545}
   hitLayers:
     serializedVersion: 2
-    m_Bits: 7176
+    m_Bits: 15368
   fireRate: 0.125
   hitscanRange: 2000
   projectilePool: {fileID: 2147296234}
@@ -22409,33 +22562,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8628892012044007173}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &918473632
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232941558}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
 --- !u!1 &922100368
 GameObject:
   m_ObjectHideFlags: 0
@@ -22451,7 +22577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &922100369
 Transform:
   m_ObjectHideFlags: 0
@@ -22809,6 +22935,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &941157099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 941157100}
+  m_Layer: 0
+  m_Name: Barrier Rammer Duo Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &941157100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941157099}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 459, y: 233.99998, z: 558}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2026124857}
+  m_Father: {fileID: 234138650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &954023509
 GameObject:
   m_ObjectHideFlags: 0
@@ -22925,7 +23083,7 @@ Transform:
   m_GameObject: {fileID: 956050538}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalPosition: {x: 750, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27676,7 +27834,7 @@ Transform:
   m_GameObject: {fileID: 1136523481}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 750, y: 0, z: 0}
+  m_LocalPosition: {x: 200, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28820,6 +28978,7 @@ Transform:
   - {fileID: 1977542522}
   - {fileID: 432248105}
   - {fileID: 956569506}
+  - {fileID: 1344888554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1179123105
@@ -33017,6 +33176,38 @@ Transform:
   - {fileID: 516766787}
   m_Father: {fileID: 339981557}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1344888553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1344888554}
+  m_Layer: 0
+  m_Name: Turrets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1344888554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344888553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 640637162}
+  m_Father: {fileID: 1177980151}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1356552439
 GameObject:
   m_ObjectHideFlags: 0
@@ -33272,7 +33463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1376875054
 Transform:
   m_ObjectHideFlags: 0
@@ -35267,6 +35458,7 @@ MonoBehaviour:
   aligningToPivot: 0
   aligningToAnchors: 0
   enemiesAligned: 0
+  reinitializeOnEnable: 1
   currentSpiralStep: 0
 --- !u!4 &1453733849
 Transform:
@@ -39423,39 +39615,6 @@ AudioDistortionFilter:
   m_GameObject: {fileID: 1663382698}
   m_Enabled: 1
   m_DistortionLevel: 0.5
---- !u!1 &1664970635 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7382585870670320903, guid: c589fa316f419a24a8710b4ba1dbfb4e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1493067896549569288}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1664970640
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664970635}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
 --- !u!1 &1665051587
 GameObject:
   m_ObjectHideFlags: 0
@@ -42551,7 +42710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1777130861
 Transform:
   m_ObjectHideFlags: 0
@@ -44241,37 +44400,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
---- !u!1 &1870202033
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1870202034}
-  m_Layer: 0
-  m_Name: Example object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1870202034
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870202033}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1152.8875, y: 113.01904, z: 442.35828}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1871093652
 GameObject:
   m_ObjectHideFlags: 0
@@ -47751,6 +47879,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1592044616}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2026124856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2026124857}
+  - component: {fileID: 2026124858}
+  m_Layer: 0
+  m_Name: Barrier Rammer Duo SP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2026124857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026124856}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 941157100}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2026124858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026124856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Barrier Rammer Duo
+  waveToAppear: 3
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.2095865, g: 1, b: 0, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &2028668974
 GameObject:
   m_ObjectHideFlags: 0
@@ -50941,16 +51119,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 691622029}
-    - target: {fileID: 6388628914639522136, guid: c589fa316f419a24a8710b4ba1dbfb4e,
-        type: 3}
-      propertyPath: m_Name
-      value: Hitbox
-      objectReference: {fileID: 0}
-    - target: {fileID: 6388628914639522136, guid: c589fa316f419a24a8710b4ba1dbfb4e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 7382585870670320903, guid: c589fa316f419a24a8710b4ba1dbfb4e,
         type: 3}
       propertyPath: m_Name
@@ -50958,17 +51126,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7382585870670320903, guid: c589fa316f419a24a8710b4ba1dbfb4e,
         type: 3}
-      propertyPath: m_Layer
-      value: 14
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7382585870670320903, guid: c589fa316f419a24a8710b4ba1dbfb4e,
-        type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 1664970640}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c589fa316f419a24a8710b4ba1dbfb4e, type: 3}
 --- !u!1001 &4606271702618078163
 PrefabInstance:
@@ -51189,11 +51353,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 125580270}
     m_Modifications:
-    - target: {fileID: 1087612876044844125, guid: 039691dc511b0214e8c5c7e769b828c1,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2178880763239036900, guid: 039691dc511b0214e8c5c7e769b828c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -51244,16 +51403,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2881730258954100497, guid: 039691dc511b0214e8c5c7e769b828c1,
-        type: 3}
-      propertyPath: m_Name
-      value: Hitbox
-      objectReference: {fileID: 0}
-    - target: {fileID: 2881730258954100497, guid: 039691dc511b0214e8c5c7e769b828c1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4523828737885811086, guid: 039691dc511b0214e8c5c7e769b828c1,
         type: 3}
       propertyPath: player
@@ -51266,8 +51415,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5570950812861804722, guid: 039691dc511b0214e8c5c7e769b828c1,
         type: 3}
-      propertyPath: m_Layer
-      value: 14
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51282,11 +51431,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 125580270}
     m_Modifications:
-    - target: {fileID: 678040971075546160, guid: a0458eb190753c140a230984ccaba83e,
-        type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 817507242241292872, guid: a0458eb190753c140a230984ccaba83e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -51342,16 +51486,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 691622029}
-    - target: {fileID: 4046056956531765125, guid: a0458eb190753c140a230984ccaba83e,
-        type: 3}
-      propertyPath: m_Name
-      value: Hitbox
-      objectReference: {fileID: 0}
-    - target: {fileID: 4046056956531765125, guid: a0458eb190753c140a230984ccaba83e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4115985361053931243, guid: a0458eb190753c140a230984ccaba83e,
         type: 3}
       propertyPath: m_Name
@@ -51359,8 +51493,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4115985361053931243, guid: a0458eb190753c140a230984ccaba83e,
         type: 3}
-      propertyPath: m_Layer
-      value: 14
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -51677,42 +51811,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 609646008402813722, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
         type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 609646008402813722, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
-        type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4184424767531033703, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4338864900867577676, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 691622029}
-    - target: {fileID: 6920089805928584969, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
-        type: 3}
-      propertyPath: m_Name
-      value: Hitbox
-      objectReference: {fileID: 0}
-    - target: {fileID: 6920089805928584969, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 609646008402813722, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
-        type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 918473632}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f7f51c86a0d5af47879bb0f0cad1457, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -51730,4 +51840,3 @@ SceneRoots:
   - {fileID: 1379731872}
   - {fileID: 451543453}
   - {fileID: 1177980151}
-  - {fileID: 1870202034}

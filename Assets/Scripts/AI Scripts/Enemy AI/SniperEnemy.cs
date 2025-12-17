@@ -36,8 +36,10 @@ public class SniperEnemy : MonoBehaviour
     public bool canAct = true;
     private float actSlowdownTimer = 0f;
     [SerializeField] private float actSlowdownDuration = 1f; // how long it takes to fully stop/start acting again
-
     public bool canMove = true;
+    public bool reinitializeOnEnable = true;
+    public bool reinitializeCanAct = false; // Should canAct be set to true when reinitialized ?
+    public bool reinitializeCanMove = false; // Should canMove be set to true when reinitialized ? 
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
@@ -68,6 +70,31 @@ public class SniperEnemy : MonoBehaviour
         velocity = Vector3.zero;
 
         turretRef.InitializeEnemyTurret(player, minRange, maxRange);
+    }
+
+
+    // Soft AI reinitialization
+    private void OnEnable()
+    {
+        if (reinitializeOnEnable)
+        {
+            velocity = Vector3.zero;
+            desiredVelocity = Vector3.zero;
+
+            currentAcceleration = 0f;
+            currentVerticalAcceleration = 0f;
+
+            actSlowdownTimer = 0f;
+            tiltAngle = 0f;
+
+            // This will reinitialize the turret variables, might change some things because there are randomization options.
+            turretRef.InitializeEnemyTurret(player, minRange, maxRange);
+
+            if (reinitializeCanAct)
+                canAct = true;
+            if (reinitializeCanMove)
+                canMove = true;
+        }
     }
 
     void Update()

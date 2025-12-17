@@ -125,7 +125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &817507242241292872
 Transform:
   m_ObjectHideFlags: 0
@@ -158,6 +158,7 @@ MonoBehaviour:
   hasExploded: 0
   triggerTimer: 0
   player: {fileID: 0}
+  reinitializeOnEnable: 1
   triggerRange: 150
   fuseDelay: 1.5
   explosionRadius: 100
@@ -174,6 +175,7 @@ MonoBehaviour:
   maxAirAcceleration: 80
   randomizeMaxAirAcceleration: 0
   canMove: 1
+  reinitializeCanMove: 0
   motionlessDrag: 0.5
   avoidanceForce: 1000
   detectionRadius: 40

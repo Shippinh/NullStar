@@ -97,7 +97,8 @@ public class TurretBehavior : MonoBehaviour
 
     private void Initialize()
     {
-        player = FindObjectOfType<SpaceShooterController>();
+        if(!player)
+            player = FindObjectOfType<SpaceShooterController>();
 
         projectileEmittersControllerRef = GetComponentInChildren<ProjectileEmittersController>();
         gunsPositions = projectileEmittersControllerRef.GetGunsArray();

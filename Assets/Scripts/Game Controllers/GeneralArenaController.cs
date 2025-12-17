@@ -101,6 +101,7 @@ public class ArenaController : MonoBehaviour
                 Debug.Log("Arena '" + gameObject.name + "' completed");
                 hasNextArenaStarted = true;
                 nextArenaControllerRef.hasArenaCompleted = false;
+                nextArenaControllerRef.gameObject.SetActive(true);
                 gameObject.SetActive(false);
             }
         }

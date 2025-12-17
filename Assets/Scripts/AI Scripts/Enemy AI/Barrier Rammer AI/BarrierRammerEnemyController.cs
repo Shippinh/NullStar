@@ -38,6 +38,21 @@ public class BarrierRammerEnemyController : EnemyController
         }
     }
 
+    public override void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
+    {
+        base.HandleDepool(poolableTag, position, rotation);
+    }
+
+    public override void HandleRevival()
+    {
+        if (enemyAHealth != null)
+            enemyAHealth.Revive(true);
+        if (enemyBHealth != null)
+            enemyBHealth.Revive(true);
+
+        base.HandleRevival();
+    }
+
     private void OnEnemyADied()
     {
         deadCount++;

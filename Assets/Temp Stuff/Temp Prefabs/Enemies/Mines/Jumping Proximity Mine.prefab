@@ -125,7 +125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2178880763239036900
 Transform:
   m_ObjectHideFlags: 0
@@ -158,6 +158,7 @@ MonoBehaviour:
   hasExploded: 0
   triggerTimer: 0
   player: {fileID: 0}
+  reinitializeOnEnable: 1
   triggerRange: 300
   fuseDelay: 1.5
   explosionRadius: 100
