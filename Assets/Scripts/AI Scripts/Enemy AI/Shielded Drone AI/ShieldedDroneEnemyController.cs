@@ -12,7 +12,7 @@ public class ShieldedDroneEnemyController : EnemyController
     public List<EntityHealthController> shieldHealthControllers = new();
     public List<EntityHealthController> gunHealthControllers = new();
 
-    public ShieldedEnemy enemyAIRef;
+    public ShieldedDroneEnemy enemyAIRef;
 
     // Game Juice
     [Header("Random Death Timers")]
@@ -35,7 +35,7 @@ public class ShieldedDroneEnemyController : EnemyController
         countsAsSeparateEnemy = true;
 
         if(!enemyAIRef)
-            enemyAIRef = GetComponentInChildren<ShieldedEnemy>();
+            enemyAIRef = GetComponentInChildren<ShieldedDroneEnemy>();
 
         // Collect all sub-entity health controllers
         if(shieldHealthControllers == null || shieldHealthControllers.Count == 0)

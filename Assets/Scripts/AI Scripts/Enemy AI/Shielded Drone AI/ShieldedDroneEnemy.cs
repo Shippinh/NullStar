@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Based on sniper enemy but slightly different
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class ShieldedEnemy : MonoBehaviour
+public class ShieldedDroneEnemy : MonoBehaviour
 {
     [Header("Target & Movement")]
     public SpaceShooterController player;
@@ -387,6 +387,22 @@ public class ShieldedEnemy : MonoBehaviour
     {
         if (nearbyObstacles.Contains(other))
             nearbyObstacles.Remove(other);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!gunsDead)
+            return;
+
+        Debug.Log(collision.gameObject.name);
+
+        EntityHealthController hpController = collision.gameObject.GetComponent<EntityHealthController>();
+        if (hpController != null)
+        {
+            // kill the hit collider
+            hpController.InstantlyDie();
+            //GetComponent<EnemyController>().entityHealthControllerRef.InstantlyDie(); // kill this enemy as well
+        }
     }
 
     void OnDrawGizmos()

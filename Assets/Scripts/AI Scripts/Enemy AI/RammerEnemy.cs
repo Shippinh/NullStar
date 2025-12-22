@@ -184,6 +184,20 @@ public class RammerEnemy : MonoBehaviour
             nearbyObstacles.Remove(other);
     }
 
+    // On actual physical collision
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+
+        EntityHealthController hpController = collision.gameObject.GetComponent<EntityHealthController>();
+        if (hpController != null)
+        {
+            // kill the hit collider
+            hpController.InstantlyDie();
+            GetComponent<EnemyController>().entityHealthControllerRef.InstantlyDie(); // kill this enemy as well
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
