@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5328618054577819483}
   - component: {fileID: 625205844310363963}
   - component: {fileID: 8382186812807838072}
+  - component: {fileID: 528775735472296681}
   m_Layer: 13
   m_Name: Hitbox
   m_TagString: Untagged
@@ -105,6 +106,30 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &528775735472296681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2881730258954100497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 1
+  CurrentHP: 1
+  isAlive: 1
+  canBeDamaged: 1
+  isInvincible: 0
+  instaKillable: 1
+  godMode: 0
+  invincibilityDuration: 0
+  currentInvincibilityDuration: 0
+  hasHealed: 0
+  healingCooldown: 60
+  currentHealingCooldown: 0
 --- !u!1 &5570950812861804722
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +140,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2178880763239036900}
   - component: {fileID: 4523828737885811086}
-  - component: {fileID: 3108173828107359607}
   - component: {fileID: 8985949393875120132}
   - component: {fileID: 1087612876044844125}
   - component: {fileID: 2390835602033205345}
@@ -169,36 +193,12 @@ MonoBehaviour:
   damageMask:
     serializedVersion: 2
     m_Bits: 12360
-  healthControllerRef: {fileID: 0}
+  enemyControllerRef: {fileID: 0}
   jumpHeight: 300
   jumpDuration: 3
   losMask:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &3108173828107359607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5570950812861804722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 1
-  isInvincible: 0
-  instaKillable: 1
-  godMode: 0
-  invincibilityDuration: 0
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
 --- !u!114 &8985949393875120132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
+  entityHealthControllerRef: {fileID: 528775735472296681}
   enemyName: Jumping Proximity Mine
   countsAsSeparateEnemy: 1
 --- !u!54 &1087612876044844125

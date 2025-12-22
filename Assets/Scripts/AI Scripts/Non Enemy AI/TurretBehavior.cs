@@ -501,6 +501,7 @@ public class TurretBehavior : MonoBehaviour
         return true;
     }
 
+    /*
     void OnDrawGizmos()
     {
         // --- Aim direction gizmos ---
@@ -518,7 +519,7 @@ public class TurretBehavior : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     // use this for debug of UpwardConePrediction
     /*void OnDrawGizmosSelected()

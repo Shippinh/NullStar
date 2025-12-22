@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 107702432175919999}
   - component: {fileID: 4338864900867577676}
-  - component: {fileID: 7783309117725960691}
   - component: {fileID: 3086963101179846580}
   - component: {fileID: 1699936959950316136}
   - component: {fileID: 4184424767531033703}
@@ -64,31 +63,7 @@ MonoBehaviour:
   damageMask:
     serializedVersion: 2
     m_Bits: 64
-  healthControllerRef: {fileID: 0}
---- !u!114 &7783309117725960691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 609646008402813722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 1
-  isInvincible: 0
-  instaKillable: 1
-  godMode: 0
-  invincibilityDuration: 0
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
+  enemyControllerRef: {fileID: 0}
 --- !u!114 &3086963101179846580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
+  entityHealthControllerRef: {fileID: 3260127686460061642}
   enemyName: Stationary Proximity Mine
   countsAsSeparateEnemy: 1
 --- !u!54 &1699936959950316136
@@ -164,6 +139,7 @@ GameObject:
   - component: {fileID: 2116718253194215475}
   - component: {fileID: 8813041126396742491}
   - component: {fileID: 2086498389981924110}
+  - component: {fileID: 3260127686460061642}
   m_Layer: 11
   m_Name: Hitbox
   m_TagString: Untagged
@@ -257,3 +233,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3260127686460061642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6920089805928584969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 1
+  CurrentHP: 1
+  isAlive: 1
+  canBeDamaged: 1
+  isInvincible: 0
+  instaKillable: 1
+  godMode: 0
+  invincibilityDuration: 0
+  currentInvincibilityDuration: 0
+  hasHealed: 0
+  healingCooldown: 60
+  currentHealingCooldown: 0

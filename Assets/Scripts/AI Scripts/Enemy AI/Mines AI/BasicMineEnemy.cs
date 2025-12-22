@@ -28,7 +28,7 @@ public class BasicMineEnemy : MonoBehaviour
 
     public LayerMask damageMask;          // Who gets hit
 
-    public EntityHealthController healthControllerRef;
+    public EnemyController enemyControllerRef;
 
     virtual protected void Awake()
     {
@@ -49,9 +49,9 @@ public class BasicMineEnemy : MonoBehaviour
         if (!player)
             player = FindObjectOfType<SpaceShooterController>();
 
-        healthControllerRef = GetComponent<EntityHealthController>();
-        if (healthControllerRef != null)
-            healthControllerRef.Died += DeathEvents;
+        enemyControllerRef = GetComponent<EnemyController>();
+        if (enemyControllerRef != null)
+            enemyControllerRef.entityHealthControllerRef.Died += DeathEvents;
     }
 
     virtual protected void FixedUpdate()
@@ -143,10 +143,9 @@ public class BasicMineEnemy : MonoBehaviour
 
         if (dieOnExploding)
         {
-            var healthController = GetComponent<EntityHealthController>();
-            if (healthController != null)
+            if (enemyControllerRef != null)
             {
-                healthController.ForciblyDie();
+                enemyControllerRef.entityHealthControllerRef.ForciblyDie();
             }
         }
     }

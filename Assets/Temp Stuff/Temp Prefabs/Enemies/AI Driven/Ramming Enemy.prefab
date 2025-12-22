@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 119819053985461766}
   - component: {fileID: 2720686171955202450}
-  - component: {fileID: 6099619615539982189}
   - component: {fileID: 766797745891395363}
   - component: {fileID: 6859985179846718496}
   - component: {fileID: 5371080958144277377}
@@ -29,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4300115145832643847}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -62,30 +61,6 @@ MonoBehaviour:
     m_Bits: 3072
   reinitializeOnEnable: 1
   reinitializeCanMove: 1
---- !u!114 &6099619615539982189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4300115145832643847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 1
-  isInvincible: 0
-  instaKillable: 1
-  godMode: 0
-  invincibilityDuration: 0
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
 --- !u!114 &766797745891395363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 0}
+  entityHealthControllerRef: {fileID: 6662441613116310777}
   enemyName: Default Enemy Name
   countsAsSeparateEnemy: 1
 --- !u!54 &6859985179846718496
@@ -161,6 +136,7 @@ GameObject:
   - component: {fileID: 6725427470485233538}
   - component: {fileID: 5936862267866808317}
   - component: {fileID: 7863065580875168594}
+  - component: {fileID: 6662441613116310777}
   m_Layer: 11
   m_Name: Mesh and Hitbox
   m_TagString: Untagged
@@ -254,3 +230,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6662441613116310777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6484262195363316023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 1
+  CurrentHP: 1
+  isAlive: 1
+  canBeDamaged: 1
+  isInvincible: 0
+  instaKillable: 1
+  godMode: 0
+  invincibilityDuration: 0
+  currentInvincibilityDuration: 0
+  hasHealed: 0
+  healingCooldown: 60
+  currentHealingCooldown: 0
