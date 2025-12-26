@@ -45,7 +45,7 @@ public class RammerEnemy : MonoBehaviour
 
         if(randomizeMaxAirAcceleration)
         {
-            maxAirAcceleration = Random.Range(maxAirAcceleration, maxAirAcceleration + 50f);
+            maxAirAcceleration = Random.Range(maxAirAcceleration - 25f, maxAirAcceleration + 50f);
         }
     }
 
@@ -81,19 +81,19 @@ public class RammerEnemy : MonoBehaviour
         Vector3 sideOffset = Vector3.Cross(Vector3.up, rawToPlayer).normalized;
         Vector3 upOffset = Vector3.up;
 
-        float sideStrength = Mathf.PerlinNoise(transform.position.x * 0.5f, Time.time * 0.5f) - 0.5f;
+        float sideStrength = Mathf.PerlinNoise(transform.position.x * 0.5f, Time.time * 0.7f + 42f) - 0.5f;
         float upStrength = Mathf.PerlinNoise(transform.position.z * 0.5f, Time.time * 0.7f + 42f) - 0.5f;
 
         // Scale chaotic vertical offset based on distance
         float minMultiplier = 1f;   // when close
-        float maxMultiplier = 1500f; // when far
+        float maxMultiplier = 1000f; // when far
         float scalerDistance = 30f; // distance considered "close"
-        float farDistance = 250f;    // distance considered "far"
+        float farDistance = 500f;    // distance considered "far"
 
         float distanceScaler = Mathf.Clamp01((distanceToPlayer - scalerDistance) / (farDistance - scalerDistance));
         float finalUpMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, distanceScaler);
 
-        Vector3 chaoticOffset = sideOffset * sideStrength * 4f + upOffset * upStrength * finalUpMultiplier;
+        Vector3 chaoticOffset = sideOffset * sideStrength * finalUpMultiplier/16 + upOffset * upStrength * finalUpMultiplier;
 
         // Always move at maxSpeed toward player
         Vector3 toPlayerDir = (rawToPlayer + chaoticOffset).normalized * maxSpeed;
@@ -188,6 +188,12 @@ public class RammerEnemy : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.name);
+
+        if(collision.gameObject.tag == "Player")
+        {
+            player.healthController.InstantlyDie();
+            return;
+        }
 
         EntityHealthController hpController = collision.gameObject.GetComponent<EntityHealthController>();
         if (hpController != null)

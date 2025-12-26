@@ -129,6 +129,7 @@ public class EntityHealthController : MonoBehaviour
         }
     }
 
+
     private void DetectDeath()
     {
         if(isAlive && CurrentHP <= 0)
@@ -145,6 +146,12 @@ public class EntityHealthController : MonoBehaviour
 
             isAlive = false;
         }
+    }
+
+    public void SetMaxHP(int newHP)
+    {
+        MaxHP = newHP;
+        CurrentHP = newHP;
     }
 
     /// <summary>

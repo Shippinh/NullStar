@@ -1681,7 +1681,7 @@ GameObject:
   - component: {fileID: 547121675388577014}
   - component: {fileID: 1620553845512054945}
   - component: {fileID: 6066309777564292797}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Actual Worm Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1698,7 +1698,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 309327135358395741}
@@ -1737,9 +1737,10 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  pivotDistance: 250
-  pivotForwardPush: 250
+  pivotDistance: 400
+  pivotForwardPush: 50
   pivotHeightOffset: 50
+  reinitializeOnEnable: 1
 --- !u!54 &1620553845512054945
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1800,7 +1801,7 @@ GameObject:
   - component: {fileID: 1010371788246639903}
   - component: {fileID: 5882871460210586592}
   - component: {fileID: 4574280952108104231}
-  m_Layer: 12
+  m_Layer: 11
   m_Name: Worm Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5226,7 +5227,7 @@ MonoBehaviour:
   weakPointHealths: []
   enemyAIRef: {fileID: 547121675388577014}
   deadWeakPoints: 0
-  isDead: 0
+  segmentMaxHP: 2
   minTimerDuration: 0.25
   randomizeTimeBetweenDeaths: 0
   lowerTimerDuration: 0.1

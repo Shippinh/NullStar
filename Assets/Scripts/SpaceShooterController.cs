@@ -9,6 +9,7 @@ public class SpaceShooterController : MonoBehaviour
     public CustomInputs inputConfig;
     public EntityHealthController healthController;
     public Rigidbody body;
+    public Transform hitboxRef;
 
     // Movement
     [field: Header("Basic Movement")]
@@ -197,6 +198,7 @@ public class SpaceShooterController : MonoBehaviour
 
     void Update()
     {
+        AttachHitbox();
         AdjustMaxOverboostSpeed();
         HandleInput();
         CalculateDesiredVelocity();
@@ -253,6 +255,11 @@ public class SpaceShooterController : MonoBehaviour
         ClearState();
 
         DecayMaxSpeedToDefault();
+    }
+
+    void AttachHitbox()
+    {
+        hitboxRef.position = transform.position;
     }
 
     void AdjustMaxOverboostSpeed()
@@ -476,11 +483,13 @@ public class SpaceShooterController : MonoBehaviour
         // Set vertical speed
         if (overboostMode)
         {
-            verticalSpeed = maxOverboostVerticalSpeed;
+            verticalSpeed = maxOverboostSpeed;
+            //verticalSpeed = maxOverboostVerticalSpeed;
         }
         else if (boostMode)
         {
-            verticalSpeed = maxOverboostVerticalSpeed;
+            verticalSpeed = maxOverboostSpeed;
+            //verticalSpeed = maxOverboostVerticalSpeed;
         }
         else
         {

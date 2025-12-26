@@ -165,9 +165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxSpeed: 200
-  maxAcceleration: 80
-  jetpackAcceleration: 70
+  maxSpeed: 400
+  maxAcceleration: 150
+  jetpackAcceleration: 140
   orbitMaxSpeed: 150
   orbitMaxAcceleration: 300
   orbitVerticalAcceleration: 300
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  aimType: 0
+  aimType: 1
   weaponChargeDuration: 3
   weaponChargeDurationTimer: 0
   weaponShootDuration: 0.5
@@ -338,7 +338,7 @@ MonoBehaviour:
   projectileEmittersControllerRef: {fileID: 4495533077167532914}
   gunsPositions:
   - {fileID: 3661319191209262647}
-  stopWhenShooting: 1
+  stopWhenShooting: 0
   playerOverboostSimpleAim: 0
   canAct: 1
 --- !u!1 &6923262292816490582

@@ -687,8 +687,14 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     // we'll use this later when i decide to add destructible cover / asteroids, etc. We'll limit the hit count and reset after each attack or end the attack prematurely if we the enemy destroys too much
     private void OnCollisionEnter(Collision collision)
     {
+        // This will need some rework 
         Debug.Log(collision.gameObject.name);
-        
+
+        if (collision.gameObject.tag == "Player")
+        {
+            player.healthController.InstantlyDie();
+            return;
+        }
 
         EntityHealthController hpController = collision.gameObject.GetComponent<EntityHealthController>();
         if (hpController != null)

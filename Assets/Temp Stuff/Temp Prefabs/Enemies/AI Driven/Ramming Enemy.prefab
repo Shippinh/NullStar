@@ -49,13 +49,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxSpeed: 300
-  maxAcceleration: 80
-  maxAirAcceleration: 100
+  maxSpeed: 400
+  maxAcceleration: 150
+  maxAirAcceleration: 180
   randomizeMaxAirAcceleration: 1
   canMove: 1
-  avoidanceForce: 1000
-  detectionRadius: 40
+  avoidanceForce: 2000
+  detectionRadius: 70
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072

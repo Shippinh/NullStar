@@ -12,7 +12,10 @@ public class WormEnemyController : EnemyController
 
     public WormEnemy enemyAIRef;
 
+    [Header("Internal Variables")]
+
     public int deadWeakPoints = 0;
+    public int segmentMaxHP = 3;
 
     private bool firstInitialization = true;
     private float distanceBetweenSegments = 0; // This is internal, used for depooling for unusual orientations
@@ -72,6 +75,7 @@ public class WormEnemyController : EnemyController
             // Subscribe to weak point deaths
             foreach (var wp in weakPointHealths)
             {
+                wp.SetMaxHP(segmentMaxHP);
                 // right now i handle children weak points like the default enemy controller, but i guess i'll have to remake it later so the object doesn't actually disappear, since it's a part of its mesh
                 wp.Died += () => OnWeakPointDied(wp);
             }

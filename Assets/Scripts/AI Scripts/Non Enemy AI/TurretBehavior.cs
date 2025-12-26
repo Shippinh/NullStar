@@ -378,11 +378,11 @@ public class TurretBehavior : MonoBehaviour
             Transform gun = gunsPositions[i];
             Vector3 gunPos = gun.position;
 
-            Vector3 targetPos = player.transform.position;
-            Vector3 toTarget = targetPos - gunPos;
+            float distance = Vector3.Distance(gunPos, player.transform.position);
+            float timeToHit = distance / projectileSpeed;
 
-            // Predictive aiming (blend with simple direction)
-            Vector3 predictedDir = toTarget.normalized;
+            Vector3 predictedPos = player.transform.position + player.velocity * (timeToHit + aimLeadTime);
+            Vector3 predictedDir = (predictedPos - gunPos).normalized;
 
             // Reset aim strength if sudden change
             if (Vector3.Angle(previousPredictedDirs[i], predictedDir) > aimResetThreshold)

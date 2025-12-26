@@ -4384,7 +4384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  aimType: 0
+  aimType: 2
   weaponChargeDuration: 3
   weaponChargeDurationTimer: 0
   weaponShootDuration: 2

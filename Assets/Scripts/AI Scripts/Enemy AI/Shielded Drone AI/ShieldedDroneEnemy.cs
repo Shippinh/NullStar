@@ -394,6 +394,12 @@ public class ShieldedDroneEnemy : MonoBehaviour
         if (!gunsDead)
             return;
 
+        if (collision.gameObject.tag == "Player")
+        {
+            player.healthController.InstantlyDie();
+            return;
+        }
+
         Debug.Log(collision.gameObject.name);
 
         EntityHealthController hpController = collision.gameObject.GetComponent<EntityHealthController>();
