@@ -155,6 +155,57 @@ Transform:
   - {fileID: 76075178}
   m_Father: {fileID: 124509791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &13987695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13987696}
+  - component: {fileID: 13987697}
+  m_Layer: 0
+  m_Name: Rammer SP (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &13987696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13987695}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1172, y: 150, z: 574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &13987697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13987695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &18782610
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,6 +577,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &40581671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 40581672}
+  - component: {fileID: 40581673}
+  m_Layer: 0
+  m_Name: Rammer SP (49)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &40581672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40581671}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1799, y: 0, z: -511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &40581673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40581671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &41719416
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -910,6 +1013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -960,6 +1064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -1010,6 +1115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -1060,6 +1166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Stationary Proximity Mine
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.504043, g: 0, b: 0.20952368, a: 1}
   baseArrowLength: 0.5
@@ -1607,6 +1714,109 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &75793381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 75793382}
+  m_Layer: 0
+  m_Name: Rammer Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &75793382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75793381}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 658.7, y: 64.41905, z: 340.49826}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 200153474}
+  - {fileID: 1682446892}
+  - {fileID: 911735862}
+  - {fileID: 500324088}
+  - {fileID: 473857782}
+  - {fileID: 1709634922}
+  - {fileID: 13987696}
+  - {fileID: 2074037844}
+  - {fileID: 1435866759}
+  - {fileID: 1194613825}
+  - {fileID: 592121665}
+  - {fileID: 156565010}
+  - {fileID: 1568274770}
+  - {fileID: 926573606}
+  - {fileID: 1805137343}
+  - {fileID: 1498526987}
+  - {fileID: 729295410}
+  - {fileID: 1072456283}
+  - {fileID: 1987608687}
+  - {fileID: 1762883846}
+  - {fileID: 1614710746}
+  - {fileID: 1389584843}
+  - {fileID: 154323146}
+  - {fileID: 752139790}
+  - {fileID: 901837803}
+  - {fileID: 40581672}
+  - {fileID: 121917695}
+  - {fileID: 1912413706}
+  - {fileID: 83262806}
+  - {fileID: 1265223794}
+  - {fileID: 2071046104}
+  - {fileID: 1456760160}
+  - {fileID: 1173439526}
+  - {fileID: 1382828161}
+  - {fileID: 1795739667}
+  - {fileID: 1963775820}
+  - {fileID: 2121084133}
+  - {fileID: 1507594300}
+  - {fileID: 339827580}
+  - {fileID: 1679683309}
+  - {fileID: 1197218134}
+  - {fileID: 433750338}
+  - {fileID: 1883245970}
+  - {fileID: 1087141344}
+  - {fileID: 1128510333}
+  - {fileID: 1018870058}
+  - {fileID: 1880626332}
+  - {fileID: 1138231946}
+  - {fileID: 429704010}
+  - {fileID: 1636154733}
+  - {fileID: 1264522653}
+  - {fileID: 570391608}
+  - {fileID: 905556759}
+  - {fileID: 1585353179}
+  - {fileID: 2008264484}
+  - {fileID: 1460167510}
+  - {fileID: 2026005975}
+  - {fileID: 1023581388}
+  - {fileID: 745639243}
+  - {fileID: 491148408}
+  - {fileID: 534465479}
+  - {fileID: 479313530}
+  - {fileID: 363107402}
+  - {fileID: 751164250}
+  - {fileID: 783662979}
+  - {fileID: 1763447825}
+  - {fileID: 2135478795}
+  - {fileID: 1374319375}
+  - {fileID: 795672698}
+  - {fileID: 2082298857}
+  - {fileID: 749754271}
+  - {fileID: 1472542598}
+  m_Father: {fileID: 221999381}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &76075177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,10 +1863,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
+--- !u!1 &78867103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 78867104}
+  - component: {fileID: 78867105}
+  - component: {fileID: 78867106}
+  m_Layer: 0
+  m_Name: Start Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &78867104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78867103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 228.2, y: 42.6, z: 922.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1217334868}
+  m_Father: {fileID: 2097749746}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &78867105
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78867103}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 40, y: 40, z: 40}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &78867106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78867103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d698896298d2bf4ca6c2d264a54f416, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arena: {fileID: 2097749747}
 --- !u!1 &81247049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,6 +2080,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &83262805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83262806}
+  - component: {fileID: 83262807}
+  m_Layer: 0
+  m_Name: Rammer SP (52)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &83262806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83262805}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1669.0964, y: 0, z: -585.99963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &83262807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83262805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &84063359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1847,6 +2177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -1897,6 +2228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Barrier Rammer Solo
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0, g: 1, b: 0.26967716, a: 1}
   baseArrowLength: 0.5
@@ -2337,6 +2669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -2387,6 +2720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -2675,6 +3009,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &121917694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121917695}
+  - component: {fileID: 121917696}
+  m_Layer: 0
+  m_Name: Rammer SP (50)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &121917695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121917694}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1948.9995, y: 0, z: -770.8076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &121917696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121917694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &123914018
 GameObject:
   m_ObjectHideFlags: 0
@@ -3497,6 +3882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Standalone Turret
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.39196604, b: 0, a: 1}
   baseArrowLength: 0.5
@@ -3820,6 +4206,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &154323145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 154323146}
+  - component: {fileID: 154323147}
+  m_Layer: 0
+  m_Name: Rammer SP (34)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &154323146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154323145}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 967.0967, y: 464, z: 628.9042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &154323147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154323145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &155084069
 GameObject:
   m_ObjectHideFlags: 0
@@ -3866,6 +4303,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &156565009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156565010}
+  - component: {fileID: 156565011}
+  m_Layer: 0
+  m_Name: Rammer SP (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &156565010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156565009}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1117.0962, y: 150, z: 369.0962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &156565011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156565009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -4242,6 +4731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -4656,6 +5146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -4850,6 +5341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -4900,6 +5392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -5040,6 +5533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -5090,6 +5584,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &200153473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200153474}
+  - component: {fileID: 200153475}
+  m_Layer: 0
+  m_Name: Rammer SP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200153474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200153473}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1172, y: 0, z: 574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &200153475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200153473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -5183,7 +5729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
-  waveToAppear: 2
+  waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -5378,6 +5925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -5428,6 +5976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -5478,6 +6027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Stationary Volatile Mine
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.42857128, g: 0.1888717, b: 0.28928632, a: 1}
   baseArrowLength: 0.5
@@ -5858,6 +6408,38 @@ Transform:
   - {fileID: 1370333118}
   m_Father: {fileID: 1379731872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &221999380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 221999381}
+  m_Layer: 0
+  m_Name: Wave 6 (Extra)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &221999381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221999380}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 75793382}
+  m_Father: {fileID: 339981557}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &228820930
 GameObject:
   m_ObjectHideFlags: 0
@@ -5904,6 +6486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -6094,6 +6677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -6183,6 +6767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -6232,7 +6817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
-  waveToAppear: 2
+  waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -6358,6 +6944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -6408,6 +6995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -6618,6 +7206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -7020,6 +7609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -8622,6 +9212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Stationary Volatile Mine
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.42857128, g: 0.1888717, b: 0.28928632, a: 1}
   baseArrowLength: 0.5
@@ -8974,7 +9565,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000000
+  far clip plane: 50000
   field of view: 105
   orthographic: 0
   orthographic size: 5
@@ -9002,7 +9593,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 635, y: 0.65, z: 0}
+  m_LocalPosition: {x: 175.3, y: 106.65, z: 943.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9094,6 +9685,57 @@ MonoBehaviour:
   currentOverheatShakeMagnitude: 0
   minShakeMagnitude: 0.0005
   maxShakeMagnitude: 0.25
+--- !u!1 &339827579
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339827580}
+  - component: {fileID: 339827581}
+  m_Layer: 0
+  m_Name: Rammer SP (62)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &339827580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339827579}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1948.9995, y: 314, z: -770.8076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &339827581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339827579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &339981556
 GameObject:
   m_ObjectHideFlags: 0
@@ -9128,6 +9770,7 @@ Transform:
   - {fileID: 234138650}
   - {fileID: 124509791}
   - {fileID: 1343945823}
+  - {fileID: 221999381}
   m_Father: {fileID: 2097749746}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &340917613
@@ -9320,6 +9963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Barrier Rammer Duo
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.2095865, g: 1, b: 0, a: 1}
   baseArrowLength: 0.5
@@ -9406,6 +10050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -9487,6 +10132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Barrier Rammer Solo
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0, g: 1, b: 0.26967716, a: 1}
   baseArrowLength: 0.5
@@ -9681,6 +10327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -9754,6 +10401,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &363107401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 363107402}
+  - component: {fileID: 363107403}
+  m_Layer: 0
+  m_Name: Rammer SP (38)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &363107402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363107401}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -520, y: 579, z: 583.90356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &363107403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363107401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &363835668
 GameObject:
   m_ObjectHideFlags: 0
@@ -9783,7 +10481,7 @@ Transform:
   m_GameObject: {fileID: 363835668}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41, y: 1248, z: 10000}
+  m_LocalPosition: {x: -41, y: 1248, z: 8000}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10103,6 +10801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -10219,6 +10918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -10269,6 +10969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -11341,7 +12042,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
-  waveToAppear: 2
+  waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -11702,6 +12404,57 @@ Transform:
   - {fileID: 8197987269842403357}
   m_Father: {fileID: 98565956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &429704009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429704010}
+  - component: {fileID: 429704011}
+  m_Layer: 0
+  m_Name: Rammer SP (12)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &429704010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429704009}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -649.9038, y: 265, z: 508.90366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &429704011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429704009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &430597114
 GameObject:
   m_ObjectHideFlags: 0
@@ -11748,6 +12501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -11798,6 +12552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -11909,6 +12664,57 @@ Transform:
   - {fileID: 1417588536}
   m_Father: {fileID: 1177980151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &433750337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 433750338}
+  - component: {fileID: 433750339}
+  m_Layer: 0
+  m_Name: Rammer SP (65)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &433750338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433750337}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1819.096, y: 314, z: -845.8076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &433750339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433750337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &440912161
 GameObject:
   m_ObjectHideFlags: 0
@@ -12007,6 +12813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -12057,6 +12864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -12107,6 +12915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Barrier Rammer Duo
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.2095865, g: 1, b: 0, a: 1}
   baseArrowLength: 0.5
@@ -12645,6 +13454,57 @@ AudioReverbFilter:
   m_LFReference: 250
   m_ReflectionsDelay: 0
   m_ReverbPreset: 9
+--- !u!1 &473857781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 473857782}
+  - component: {fileID: 473857783}
+  m_Layer: 0
+  m_Name: Rammer SP (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &473857782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473857781}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 967.0967, y: 0, z: 628.9042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &473857783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 473857781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &475672701
 GameObject:
   m_ObjectHideFlags: 0
@@ -12774,6 +13634,57 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &479313529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479313530}
+  - component: {fileID: 479313531}
+  m_Layer: 0
+  m_Name: Rammer SP (37)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &479313530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479313529}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -779.80756, y: 579, z: 433.90384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &479313531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479313529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &479604975
 GameObject:
   m_ObjectHideFlags: 0
@@ -12820,6 +13731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -12870,6 +13782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -13468,6 +14381,57 @@ Transform:
   - {fileID: 1919848004}
   m_Father: {fileID: 1379731872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &491148407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 491148408}
+  - component: {fileID: 491148409}
+  m_Layer: 0
+  m_Name: Rammer SP (23)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &491148408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491148407}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -444.99994, y: 415, z: 454}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &491148409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491148407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &495234412
 GameObject:
   m_ObjectHideFlags: 0
@@ -13514,6 +14478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -13688,6 +14653,57 @@ Transform:
   - {fileID: 1730057356}
   m_Father: {fileID: 1478434963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &500324087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500324088}
+  - component: {fileID: 500324089}
+  m_Layer: 0
+  m_Name: Rammer SP (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &500324088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500324087}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1042.0961, y: 0, z: 499.00037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &500324089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500324087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &516766786
 GameObject:
   m_ObjectHideFlags: 0
@@ -13953,6 +14969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -14003,6 +15020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -14618,6 +15636,57 @@ Transform:
   - {fileID: 1318970906}
   m_Father: {fileID: 675718028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &534465478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 534465479}
+  - component: {fileID: 534465480}
+  m_Layer: 0
+  m_Name: Rammer SP (36)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &534465479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534465478}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -649.9038, y: 579, z: 508.90366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &534465480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534465478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &537048389
 GameObject:
   m_ObjectHideFlags: 0
@@ -14957,6 +16026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -15007,6 +16077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -15439,6 +16510,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &570391607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570391608}
+  - component: {fileID: 570391609}
+  m_Layer: 0
+  m_Name: Rammer SP (15)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &570391608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570391607}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -574.9041, y: 265, z: 378.99982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &570391609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570391607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &581141921
 GameObject:
   m_ObjectHideFlags: 0
@@ -15629,6 +16751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -16104,6 +17227,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &592121664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 592121665}
+  - component: {fileID: 592121666}
+  m_Layer: 0
+  m_Name: Rammer SP (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &592121665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592121664}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 967.0967, y: 150, z: 628.9042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &592121666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592121664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -16154,6 +17329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Barrier Rammer Solo
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0, g: 1, b: 0.26967716, a: 1}
   baseArrowLength: 0.5
@@ -16235,6 +17411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -16285,6 +17462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Shielded Drone
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.015686275, b: 0.05490196, a: 1}
   baseArrowLength: 0.5
@@ -16371,6 +17549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -16912,6 +18091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -16962,6 +18142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Jumping Proximity Mine
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0, b: 0.4148097, a: 1}
   baseArrowLength: 0.5
@@ -17377,6 +18558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -17821,6 +19003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Stationary Volatile Mine
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.42857128, g: 0.1888717, b: 0.28928632, a: 1}
   baseArrowLength: 0.5
@@ -17871,6 +19054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -18065,6 +19249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -18115,6 +19300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -18341,6 +19527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -18601,6 +19788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -18781,6 +19969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -19318,6 +20507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -19387,10 +20577,10 @@ MonoBehaviour:
   overboostMode: 0
   overboostOverheatMode: 0
   overboostInitiated: 0
-  overboostActivationDelay: 1
+  overboostActivationDelay: 0.5
   overboostChargeTimer: 0
   maxOverboostInitiationSpeed: 5
-  maxExtraOverboostSpeed: 150
+  maxExtraOverboostSpeed: 200
   defaultMaxExtraOverboostSpeed: 0
   currentExtraOverboostSpeed: 0
   extraOverboostSpeedRate: 8
@@ -19419,16 +20609,20 @@ MonoBehaviour:
   dodgeMaxOverboostSpeedCap: 0
   maxDodgeCharges: 6
   dodgeCharges: 0
-  dodgeRechargeTime: 5
+  dodgeRechargeTime: 6.5
   dodgeCooldowns: []
   allDodgesFull: 1
+  timeSinceLastDodge: 0
+  timeToImproveDodgeRechargeRate: 2.5
+  dodgeRechargeRate: 4
+  dodgeTimeLimit: 0.1
   isDodging: 0
   rageCharged: 0
   rageActive: 0
   rageDuration: 7.5
   rageDurationCurrent: 0
   rageChargeTimer: 0
-  rageRechargeTimer: 3
+  rageRechargeTimer: 4
   adrenalineCharged: 0
   adrenalineActive: 0
   adrenalineDuration: 7.5
@@ -19847,6 +21041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Worm
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.49892196, g: 0.31671154, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -19897,6 +21092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Shielded Drone
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.015686275, b: 0.05490196, a: 1}
   baseArrowLength: 0.5
@@ -20091,6 +21287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Ramming Proximity Mine
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.4029649, b: 0.6511441, a: 1}
   baseArrowLength: 0.5
@@ -20285,6 +21482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -20516,6 +21714,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &729295409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 729295410}
+  - component: {fileID: 729295411}
+  m_Layer: 0
+  m_Name: Rammer SP (28)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &729295410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729295409}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 967.0967, y: 314, z: 628.9042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &729295411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729295409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &737493856
 GameObject:
   m_ObjectHideFlags: 0
@@ -20887,6 +22136,108 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741483714}
   m_Mesh: {fileID: 289301614986012343, guid: 504feec51d1e6974aa2769daec10d02d, type: 3}
+--- !u!1 &745639242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 745639243}
+  - component: {fileID: 745639244}
+  m_Layer: 0
+  m_Name: Rammer SP (22)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &745639243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745639242}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -704.80786, y: 415, z: 304.00034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &745639244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745639242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &749754270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 749754271}
+  - component: {fileID: 749754272}
+  m_Layer: 0
+  m_Name: Rammer SP (46)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &749754271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749754270}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -704.80786, y: 729, z: 304.00034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &749754272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749754270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &750446059
 GameObject:
   m_ObjectHideFlags: 0
@@ -20919,6 +22270,108 @@ Transform:
   - {fileID: 1939514915}
   m_Father: {fileID: 541286566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &751164249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 751164250}
+  - component: {fileID: 751164251}
+  m_Layer: 0
+  m_Name: Rammer SP (39)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &751164250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751164249}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -574.9041, y: 579, z: 378.99982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &751164251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751164249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &752139789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 752139790}
+  - component: {fileID: 752139791}
+  m_Layer: 0
+  m_Name: Rammer SP (35)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &752139790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752139789}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1117.0962, y: 464, z: 369.0962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &752139791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752139789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &758097589
 GameObject:
   m_ObjectHideFlags: 0
@@ -21109,6 +22562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -21159,6 +22613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -21209,6 +22664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Jumping Proximity Mine
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0, b: 0.4148097, a: 1}
   baseArrowLength: 0.5
@@ -21291,6 +22747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Ramming Proximity Mine
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.4029649, b: 0.6511441, a: 1}
   baseArrowLength: 0.5
@@ -21940,6 +23397,57 @@ AudioDistortionFilter:
   m_GameObject: {fileID: 783362411}
   m_Enabled: 1
   m_DistortionLevel: 0.3
+--- !u!1 &783662978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 783662979}
+  - component: {fileID: 783662980}
+  m_Layer: 0
+  m_Name: Rammer SP (40)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &783662979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783662978}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -704.80786, y: 579, z: 304.00034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &783662980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783662978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &783849533
 GameObject:
   m_ObjectHideFlags: 0
@@ -21986,6 +23494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -22021,6 +23530,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1212644280}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &795672697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795672698}
+  - component: {fileID: 795672699}
+  m_Layer: 0
+  m_Name: Rammer SP (44)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &795672698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795672697}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -520, y: 729, z: 583.90356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &795672699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795672697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &796021798
 GameObject:
   m_ObjectHideFlags: 0
@@ -22211,6 +23771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -22261,6 +23822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -23168,6 +24730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -23218,6 +24781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -23428,6 +24992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -23478,6 +25043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -23568,6 +25134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -23618,6 +25185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -23668,6 +25236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -24300,6 +25869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -24638,6 +26208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -24688,6 +26259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -25054,7 +26626,7 @@ MonoBehaviour:
   hitLayers:
     serializedVersion: 2
     m_Bits: 15368
-  fireRate: 0.125
+  fireRate: 0.0625
   hitscanRange: 2000
   projectilePool: {fileID: 2147296234}
   tracerPool: {fileID: 0}
@@ -25203,6 +26775,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &901837802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 901837803}
+  - component: {fileID: 901837804}
+  m_Layer: 0
+  m_Name: Rammer SP (48)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &901837803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901837802}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1873.9998, y: 0, z: -640.9038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &901837804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901837802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &904736160
 GameObject:
   m_ObjectHideFlags: 0
@@ -25454,6 +27077,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &905556758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 905556759}
+  - component: {fileID: 905556760}
+  m_Layer: 0
+  m_Name: Rammer SP (16)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &905556759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905556758}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -704.80786, y: 265, z: 304.00034}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &905556760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905556758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &906501693
 GameObject:
   m_ObjectHideFlags: 0
@@ -25846,6 +27520,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &911735861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911735862}
+  - component: {fileID: 911735863}
+  m_Layer: 0
+  m_Name: Rammer SP (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &911735862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911735861}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1246.9998, y: 0, z: 444.0962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &911735863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911735861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &912520038
 GameObject:
   m_ObjectHideFlags: 0
@@ -26244,6 +27969,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &926573605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 926573606}
+  - component: {fileID: 926573607}
+  m_Layer: 0
+  m_Name: Rammer SP (25)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &926573606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926573605}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1097.0002, y: 314, z: 703.9038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &926573607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926573605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &927478886
 GameObject:
   m_ObjectHideFlags: 0
@@ -26290,6 +28066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -26340,6 +28117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Worm
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.49892196, g: 0.31671154, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -26390,6 +28168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -26616,6 +28395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Standalone Turret
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.39196604, b: 0, a: 1}
   baseArrowLength: 0.5
@@ -26666,6 +28446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Worm
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.49892196, g: 0.31671154, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -26806,6 +28587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Stationary Volatile Mine
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.42857128, g: 0.1888717, b: 0.28928632, a: 1}
   baseArrowLength: 0.5
@@ -27118,6 +28900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Stationary Proximity Mine
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.504043, g: 0, b: 0.20952368, a: 1}
   baseArrowLength: 0.5
@@ -27600,6 +29383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -27853,7 +29637,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
-  waveToAppear: 2
+  waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -27904,6 +29689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Shielded Drone
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.015686275, b: 0.05490196, a: 1}
   baseArrowLength: 0.5
@@ -28139,6 +29925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -28189,6 +29976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -28277,7 +30065,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
-  waveToAppear: 2
+  waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -28699,6 +30488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -29249,6 +31039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -29299,6 +31090,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1018870057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1018870058}
+  - component: {fileID: 1018870059}
+  m_Layer: 0
+  m_Name: Rammer SP (69)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1018870058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018870057}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1744.0958, y: 464, z: -715.90344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1018870059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018870057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -29349,6 +31192,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1023581387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023581388}
+  - component: {fileID: 1023581389}
+  m_Layer: 0
+  m_Name: Rammer SP (21)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023581388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023581387}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -574.9041, y: 415, z: 378.99982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &1023581389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023581387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -29559,6 +31454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Worm
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.49892196, g: 0.31671154, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -29753,6 +31649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Ramming Proximity Mine
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.4029649, b: 0.6511441, a: 1}
   baseArrowLength: 0.5
@@ -29803,6 +31700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -30509,6 +32407,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &1072456282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1072456283}
+  - component: {fileID: 1072456284}
+  m_Layer: 0
+  m_Name: Rammer SP (29)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1072456283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072456282}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1117.0962, y: 314, z: 369.0962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1072456284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072456282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1073860102
 GameObject:
   m_ObjectHideFlags: 0
@@ -30879,6 +32828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -31063,6 +33013,57 @@ Transform:
   - {fileID: 1622916411}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1087141343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1087141344}
+  - component: {fileID: 1087141345}
+  m_Layer: 0
+  m_Name: Rammer SP (67)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1087141344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087141343}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1799, y: 464, z: -511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1087141345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087141343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1087311194
 GameObject:
   m_ObjectHideFlags: 0
@@ -31601,6 +33602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -31687,6 +33689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -31722,6 +33725,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1956735578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1128510332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128510333}
+  - component: {fileID: 1128510334}
+  m_Layer: 0
+  m_Name: Rammer SP (68)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1128510333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128510332}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1948.9995, y: 464, z: -770.8076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1128510334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128510332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1132853992
 GameObject:
   m_ObjectHideFlags: 0
@@ -31943,7 +33997,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
-  waveToAppear: 2
+  waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -31994,6 +34049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -32153,17 +34209,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
         type: 3}
@@ -32307,6 +34363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Stationary Proximity Mine
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.504043, g: 0, b: 0.20952368, a: 1}
   baseArrowLength: 0.5
@@ -32389,6 +34446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Standalone Turret
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.39196604, b: 0, a: 1}
   baseArrowLength: 0.5
@@ -32562,13 +34620,64 @@ Transform:
   m_GameObject: {fileID: 1137867573}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1176, y: 64.41905, z: 340.49826}
+  m_LocalPosition: {x: 622, y: 64.41905, z: 340.49826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1377369476}
   m_Father: {fileID: 1519034309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1138231945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1138231946}
+  - component: {fileID: 1138231947}
+  m_Layer: 0
+  m_Name: Rammer SP (71)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1138231946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138231945}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1819.096, y: 464, z: -845.8076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1138231947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1138231945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1139771991
 GameObject:
   m_ObjectHideFlags: 0
@@ -32831,6 +34940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -33025,6 +35135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -33507,6 +35618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -33545,6 +35657,57 @@ Transform:
   - {fileID: 148692019}
   m_Father: {fileID: 440912165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1173439525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1173439526}
+  - component: {fileID: 1173439527}
+  m_Layer: 0
+  m_Name: Rammer SP (56)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1173439526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173439525}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1948.9995, y: 150, z: -770.8076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1173439527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173439525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1177980150
 GameObject:
   m_ObjectHideFlags: 0
@@ -33790,6 +35953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -33840,6 +36004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Shielded Drone
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.015686275, b: 0.05490196, a: 1}
   baseArrowLength: 0.5
@@ -34137,6 +36302,57 @@ Transform:
   - {fileID: 384083001}
   m_Father: {fileID: 1379731872}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1194613824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1194613825}
+  - component: {fileID: 1194613826}
+  m_Layer: 0
+  m_Name: Rammer SP (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1194613825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194613824}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1042.0961, y: 150, z: 499.00037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1194613826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194613824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1195081521
 GameObject:
   m_ObjectHideFlags: 0
@@ -34615,6 +36831,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1197218133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197218134}
+  - component: {fileID: 1197218135}
+  m_Layer: 0
+  m_Name: Rammer SP (64)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1197218134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197218133}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1669.0964, y: 314, z: -585.99963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1197218135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197218133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -34809,6 +37077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -35260,6 +37529,111 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1217334867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1217334868}
+  - component: {fileID: 1217334871}
+  - component: {fileID: 1217334870}
+  - component: {fileID: 1217334869}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1217334868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217334867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 78867104}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1217334869
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217334867}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1217334870
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217334867}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: aa26274eb5ffaa44d8886a2099143c74, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1217334871
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217334867}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1220290009
 GameObject:
   m_ObjectHideFlags: 0
@@ -35306,6 +37680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -36368,6 +38743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -36418,6 +38794,109 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1264522652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1264522653}
+  - component: {fileID: 1264522654}
+  m_Layer: 0
+  m_Name: Rammer SP (14)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1264522653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264522652}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -520, y: 265, z: 583.90356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &1264522654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264522652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1265223793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1265223794}
+  - component: {fileID: 1265223795}
+  m_Layer: 0
+  m_Name: Rammer SP (53)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1265223794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265223793}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1819.096, y: 0, z: -845.8076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1265223795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265223793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -36866,6 +39345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -36916,6 +39396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -37474,6 +39955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -38212,6 +40694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -38469,6 +40952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -38519,6 +41003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -38777,6 +41262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -38891,6 +41377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -38941,6 +41428,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1374319374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1374319375}
+  - component: {fileID: 1374319376}
+  m_Layer: 0
+  m_Name: Rammer SP (43)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1374319375
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374319374}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -779.80756, y: 729, z: 433.90384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &1374319376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374319374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -39024,6 +41563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Worm
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.49892196, g: 0.31671154, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -39066,6 +41606,57 @@ Transform:
   - {fileID: 2095868526}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1382828160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1382828161}
+  - component: {fileID: 1382828162}
+  m_Layer: 0
+  m_Name: Rammer SP (57)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1382828161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382828160}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1744.0958, y: 150, z: -715.90344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1382828162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382828160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1382959896
 GameObject:
   m_ObjectHideFlags: 0
@@ -39256,6 +41847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Worm
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.49892196, g: 0.31671154, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -39404,6 +41996,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &1389584842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1389584843}
+  - component: {fileID: 1389584844}
+  m_Layer: 0
+  m_Name: Rammer SP (33)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1389584843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389584842}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1042.0961, y: 464, z: 499.00037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1389584844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389584842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1390049538
 GameObject:
   m_ObjectHideFlags: 0
@@ -39594,6 +42237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -39788,6 +42432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -39838,6 +42483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -40137,6 +42783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -40187,6 +42834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -40237,6 +42885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Worm
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.49892196, g: 0.31671154, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -40287,6 +42936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Barrier Rammer Solo
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0, g: 1, b: 0.26967716, a: 1}
   baseArrowLength: 0.5
@@ -40337,6 +42987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -40352,17 +43003,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 500
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 500
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 500
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 504feec51d1e6974aa2769daec10d02d,
         type: 3}
@@ -40664,6 +43315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -40998,6 +43650,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &1435866758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1435866759}
+  - component: {fileID: 1435866760}
+  m_Layer: 0
+  m_Name: Rammer SP (8)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1435866759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435866758}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1246.9998, y: 150, z: 444.0962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1435866760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435866758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1436754530
 GameObject:
   m_ObjectHideFlags: 0
@@ -41410,6 +44113,108 @@ MonoBehaviour:
   baseSpread: 0
   baseSpiralSpeed: 0
   baseFireRateValue: 0
+--- !u!1 &1456760159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1456760160}
+  - component: {fileID: 1456760161}
+  m_Layer: 0
+  m_Name: Rammer SP (55)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1456760160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456760159}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1799, y: 150, z: -511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1456760161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456760159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1460167509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1460167510}
+  - component: {fileID: 1460167511}
+  m_Layer: 0
+  m_Name: Rammer SP (19)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1460167510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460167509}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -779.80756, y: 415, z: 433.90384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &1460167511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460167509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1468636074
 GameObject:
   m_ObjectHideFlags: 0
@@ -41446,6 +44251,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1472542597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1472542598}
+  - component: {fileID: 1472542599}
+  m_Layer: 0
+  m_Name: Rammer SP (47)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1472542598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472542597}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -444.99994, y: 729, z: 454}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &1472542599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472542597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1474501801
 GameObject:
   m_ObjectHideFlags: 0
@@ -41985,6 +44841,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490746901}
   m_CullTransparentMesh: 1
+--- !u!1 &1498526986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1498526987}
+  - component: {fileID: 1498526988}
+  m_Layer: 0
+  m_Name: Rammer SP (27)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1498526987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498526986}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1042.0961, y: 314, z: 499.00037}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1498526988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498526986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1501409271
 GameObject:
   m_ObjectHideFlags: 0
@@ -42441,6 +45348,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1507594299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1507594300}
+  - component: {fileID: 1507594301}
+  m_Layer: 0
+  m_Name: Rammer SP (61)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1507594300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507594299}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1799, y: 314, z: -511}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1507594301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507594299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -42574,6 +45533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Shielded Drone
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.015686275, b: 0.05490196, a: 1}
   baseArrowLength: 0.5
@@ -42624,6 +45584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -42857,6 +45818,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -42907,6 +45869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -43779,6 +46742,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1568274769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1568274770}
+  - component: {fileID: 1568274771}
+  m_Layer: 0
+  m_Name: Rammer SP (24)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1568274770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568274769}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1172, y: 314, z: 574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1568274771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568274769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -43860,6 +46875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -44305,6 +47321,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1585353178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1585353179}
+  - component: {fileID: 1585353180}
+  m_Layer: 0
+  m_Name: Rammer SP (17)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1585353179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585353178}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -444.99994, y: 265, z: 454}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &1585353180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585353178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -44533,6 +47601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -44972,6 +48041,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &1614710745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614710746}
+  - component: {fileID: 1614710747}
+  m_Layer: 0
+  m_Name: Rammer SP (32)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1614710746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614710745}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1246.9998, y: 464, z: 444.0962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1614710747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614710745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1621761236
 GameObject:
   m_ObjectHideFlags: 0
@@ -45346,6 +48466,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630873030}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1636154732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636154733}
+  - component: {fileID: 1636154734}
+  m_Layer: 0
+  m_Name: Rammer SP (13)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1636154733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636154732}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -779.80756, y: 265, z: 433.90384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &1636154734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636154732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1641833623
 GameObject:
   m_ObjectHideFlags: 0
@@ -45392,6 +48563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -45592,6 +48764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -45822,6 +48995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -46011,6 +49185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Barrier Rammer Duo
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.2095865, g: 1, b: 0, a: 1}
   baseArrowLength: 0.5
@@ -46061,6 +49236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -46110,13 +49286,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc34a1ad01be95c41978692e38918b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMode: 0
   spawnPoints: []
   totalWaveCount: 5
+  baseDelay: 0.05
+  randomExtraDelay: 0.02
   nextArenaControllerRef: {fileID: 0}
-  hasArenaCompleted: 1
-  hasArenaStarted: 0
-  hasNextArenaStarted: 0
-  currentWaveCount: 1
+  perfectTime: 180
+  currentTime: 0
+  completeIfPerfectTime: 0
+  currentWave: 1
+  aliveEnemies: 0
+  extraWavePossible: 1
+  extraWaveSpawned: 0
+  State: 0
 --- !u!1 &1676150289
 GameObject:
   m_ObjectHideFlags: 0
@@ -46384,8 +49567,111 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Shielded Drone
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.015686275, b: 0.05490196, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1679683308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1679683309}
+  - component: {fileID: 1679683310}
+  m_Layer: 0
+  m_Name: Rammer SP (63)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1679683309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679683308}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1744.0958, y: 314, z: -715.90344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1679683310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679683308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1682446891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1682446892}
+  - component: {fileID: 1682446893}
+  m_Layer: 0
+  m_Name: Rammer SP (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1682446892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682446891}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1097.0002, y: 0, z: 703.9038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1682446893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682446891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
 --- !u!1 &1682972982
@@ -46772,7 +50058,7 @@ Transform:
   m_GameObject: {fileID: 1691204104}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 635, y: 0, z: 0}
+  m_LocalPosition: {x: 175.3, y: 106, z: 943.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46826,6 +50112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -47403,6 +50690,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Ramming Proximity Mine
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.4029649, b: 0.6511441, a: 1}
   baseArrowLength: 0.5
@@ -47695,6 +50983,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &1709634921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1709634922}
+  - component: {fileID: 1709634923}
+  m_Layer: 0
+  m_Name: Rammer SP (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1709634922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709634921}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1117.0962, y: 0, z: 369.0962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1709634923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709634921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1714786729
 GameObject:
   m_ObjectHideFlags: 0
@@ -49077,6 +52416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -49117,6 +52457,108 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1762883845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1762883846}
+  - component: {fileID: 1762883847}
+  m_Layer: 0
+  m_Name: Rammer SP (31)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1762883846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762883845}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1097.0002, y: 464, z: 703.9038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1762883847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762883845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1763447824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763447825}
+  - component: {fileID: 1763447826}
+  m_Layer: 0
+  m_Name: Rammer SP (41)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1763447825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763447824}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -445, y: 579, z: 454}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &1763447826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763447824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1766903706
 GameObject:
   m_ObjectHideFlags: 0
@@ -49163,6 +52605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -49539,6 +52982,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1795739666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795739667}
+  - component: {fileID: 1795739668}
+  m_Layer: 0
+  m_Name: Rammer SP (58)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1795739667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795739666}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1669.0964, y: 150, z: -585.99963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1795739668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795739666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -49589,6 +53084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -49644,9 +53140,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
-  waveToAppear: 2
+  waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1805137342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1805137343}
+  - component: {fileID: 1805137344}
+  m_Layer: 0
+  m_Name: Rammer SP (26)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1805137343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805137342}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1246.9998, y: 314, z: 444.0962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1805137344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805137342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
 --- !u!1 &1805403249
@@ -49839,6 +53387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -49889,6 +53438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Shielded Drone
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.015686275, b: 0.05490196, a: 1}
   baseArrowLength: 0.5
@@ -50083,6 +53633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -50596,6 +54147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -50646,6 +54198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -50872,6 +54425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -51066,6 +54620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -51293,6 +54848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -51775,8 +55331,111 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Jumping Proximity Mine
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0, b: 0.4148097, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1880626331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1880626332}
+  - component: {fileID: 1880626333}
+  m_Layer: 0
+  m_Name: Rammer SP (70)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1880626332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880626331}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1669.0964, y: 464, z: -585.99963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1880626333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880626331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &1883245969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1883245970}
+  - component: {fileID: 1883245971}
+  m_Layer: 0
+  m_Name: Rammer SP (66)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1883245970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883245969}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1873.9998, y: 464, z: -640.9038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1883245971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883245969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
 --- !u!1 &1896544399
@@ -52332,6 +55991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Standalone Turret
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.39196604, b: 0, a: 1}
   baseArrowLength: 0.5
@@ -52473,6 +56133,57 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1 &1912413705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912413706}
+  - component: {fileID: 1912413707}
+  m_Layer: 0
+  m_Name: Rammer SP (51)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1912413706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912413705}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1744.0958, y: 0, z: -715.90344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1912413707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912413705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1919848003
 GameObject:
   m_ObjectHideFlags: 0
@@ -53197,6 +56908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 4
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -53557,6 +57269,57 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957708080}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1963775819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963775820}
+  - component: {fileID: 1963775821}
+  m_Layer: 0
+  m_Name: Rammer SP (59)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1963775820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963775819}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1819.096, y: 150, z: -845.8076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1963775821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963775819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1965339935
 GameObject:
   m_ObjectHideFlags: 0
@@ -53603,6 +57366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -54224,6 +57988,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &1987608686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1987608687}
+  - component: {fileID: 1987608688}
+  m_Layer: 0
+  m_Name: Rammer SP (30)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1987608687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987608686}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1172, y: 464, z: 574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &1987608688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1987608686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &1988496052
 GameObject:
   m_ObjectHideFlags: 0
@@ -54649,6 +58464,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &2008264483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008264484}
+  - component: {fileID: 2008264485}
+  m_Layer: 0
+  m_Name: Rammer SP (18)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2008264484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008264483}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -649.9038, y: 415, z: 508.90366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &2008264485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008264483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &2008962909
 GameObject:
   m_ObjectHideFlags: 0
@@ -54800,6 +58666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -54991,6 +58858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 2
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -55299,6 +59167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -55380,6 +59249,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &2026005974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2026005975}
+  - component: {fileID: 2026005976}
+  m_Layer: 0
+  m_Name: Rammer SP (20)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2026005975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026005974}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -520, y: 415, z: 583.90356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &2026005976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026005974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -55430,6 +59351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Barrier Rammer Duo
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.2095865, g: 1, b: 0, a: 1}
   baseArrowLength: 0.5
@@ -55480,6 +59402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -55530,6 +59453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -55724,6 +59648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -55774,6 +59699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -56272,6 +60198,108 @@ Transform:
   - {fileID: 696136189}
   m_Father: {fileID: 1343945823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2071046103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2071046104}
+  - component: {fileID: 2071046105}
+  m_Layer: 0
+  m_Name: Rammer SP (54)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2071046104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071046103}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1873.9998, y: 150, z: -640.9038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &2071046105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071046103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &2074037843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2074037844}
+  - component: {fileID: 2074037845}
+  m_Layer: 0
+  m_Name: Rammer SP (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2074037844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074037843}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1097.0002, y: 150, z: 703.9038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &2074037845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074037843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &2074443902
 GameObject:
   m_ObjectHideFlags: 0
@@ -56606,6 +60634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Jumping Proximity Mine
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0, b: 0.4148097, a: 1}
   baseArrowLength: 0.5
@@ -56754,6 +60783,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1 &2082298856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2082298857}
+  - component: {fileID: 2082298858}
+  m_Layer: 0
+  m_Name: Rammer SP (45)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2082298857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082298856}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -574.9041, y: 729, z: 378.99982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &2082298858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082298856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &2085350379
 GameObject:
   m_ObjectHideFlags: 0
@@ -56799,7 +60879,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolableEnemyTag: Sniper
-  waveToAppear: 2
+  waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   baseArrowLength: 0.5
@@ -56955,6 +61036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Shielded Drone
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 1, g: 0.015686275, b: 0.05490196, a: 1}
   baseArrowLength: 0.5
@@ -57502,6 +61584,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 339981557}
+  - {fileID: 78867104}
   m_Father: {fileID: 1376875054}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2097749747
@@ -57516,13 +61599,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc34a1ad01be95c41978692e38918b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMode: 1
   spawnPoints: []
   totalWaveCount: 5
-  nextArenaControllerRef: {fileID: 0}
-  hasArenaCompleted: 0
-  hasArenaStarted: 0
-  hasNextArenaStarted: 0
-  currentWaveCount: 1
+  baseDelay: 0.05
+  randomExtraDelay: 0.02
+  nextArenaControllerRef: {fileID: 1670600507}
+  perfectTime: 180
+  currentTime: 0
+  completeIfPerfectTime: 0
+  currentWave: 1
+  aliveEnemies: 0
+  extraWavePossible: 1
+  extraWaveSpawned: 0
+  State: 0
 --- !u!1 &2098523537
 GameObject:
   m_ObjectHideFlags: 0
@@ -57706,6 +61796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -57756,6 +61847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -57989,6 +62081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 3
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -58183,6 +62276,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
+--- !u!1 &2121084132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2121084133}
+  - component: {fileID: 2121084134}
+  m_Layer: 0
+  m_Name: Rammer SP (60)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2121084133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121084132}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.86602557, z: -0, w: -0.4999997}
+  m_LocalPosition: {x: 1873.9998, y: 314, z: -640.9038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
+--- !u!114 &2121084134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121084132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -58233,6 +62378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Rammer
   waveToAppear: 5
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
@@ -58283,6 +62429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolableEnemyTag: Stationary Proximity Mine
   waveToAppear: 1
+  additionalEnemy: 0
   showWaveGizmo: 1
   gizmoColor: {r: 0.504043, g: 0, b: 0.20952368, a: 1}
   baseArrowLength: 0.5
@@ -58455,6 +62602,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1939514915}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2135478794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135478795}
+  - component: {fileID: 2135478796}
+  m_Layer: 0
+  m_Name: Rammer SP (42)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2135478795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135478794}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.96592575, z: -0, w: 0.25881943}
+  m_LocalPosition: {x: -649.9038, y: 729, z: 508.90366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 75793382}
+  m_LocalEulerAnglesHint: {x: 0, y: 150, z: 0}
+--- !u!114 &2135478796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135478794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolableEnemyTag: Rammer
+  waveToAppear: 6
+  additionalEnemy: 0
+  showWaveGizmo: 1
+  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
+  baseArrowLength: 0.5
+  baseArrowHeadSize: 0.15
 --- !u!1 &2136880145
 GameObject:
   m_ObjectHideFlags: 0

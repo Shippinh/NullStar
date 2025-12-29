@@ -8,6 +8,7 @@ public class ArenaEntitySpawn : MonoBehaviour
     [Header("Spawner Options")]
     public string poolableEnemyTag = "NaN";
     [Range(1, 10)] public int waveToAppear = 1;
+    public bool additionalEnemy = false;
 
 #if UNITY_EDITOR
     [Header("Editor Options")]

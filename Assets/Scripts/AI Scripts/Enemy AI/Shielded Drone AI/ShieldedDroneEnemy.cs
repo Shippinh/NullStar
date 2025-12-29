@@ -400,7 +400,7 @@ public class ShieldedDroneEnemy : MonoBehaviour
             return;
         }
 
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
 
         EntityHealthController hpController = collision.gameObject.GetComponent<EntityHealthController>();
         if (hpController != null)

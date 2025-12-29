@@ -110,7 +110,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
             impact.SetActive(true);
         }*/
 
-        // this what was used before - on hit we would've hit the topmost health controller (or the health controller on rigidbody, i don't really remember)
+        // this is what was used before - on hit we would've hit the topmost health controller (or the health controller on rigidbody, i don't really remember)
         // that combined with rigidbody nature of destructible things just made everything really complicated
         // However this could be used for the instakills as we could reference the enemy controller easily this way
         // Transform hitTransform = hit.transform;

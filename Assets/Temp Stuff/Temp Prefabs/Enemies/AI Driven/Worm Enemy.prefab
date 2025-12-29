@@ -5227,7 +5227,7 @@ MonoBehaviour:
   weakPointHealths: []
   enemyAIRef: {fileID: 547121675388577014}
   deadWeakPoints: 0
-  segmentMaxHP: 2
+  segmentMaxHP: 3
   minTimerDuration: 0.25
   randomizeTimeBetweenDeaths: 0
   lowerTimerDuration: 0.1

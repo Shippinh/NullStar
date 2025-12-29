@@ -57,7 +57,7 @@ MonoBehaviour:
   fuseDelay: 2
   explosionRadius: 250
   dieOnExploding: 1
-  explodeOnDying: 0
+  explodeOnDying: 1
   oneTimeFuse: 1
   canBeFused: 1
   damageMask:

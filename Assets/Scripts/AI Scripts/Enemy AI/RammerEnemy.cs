@@ -187,7 +187,7 @@ public class RammerEnemy : MonoBehaviour
     // On actual physical collision
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
 
         if(collision.gameObject.tag == "Player")
         {

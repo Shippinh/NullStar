@@ -145,16 +145,16 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     void HandlePlasmaShootingSound()
     {
-        float desiredPitch = 1f;
+        float desiredPitch = 1.2f;
 
         if(playerController.rageActive)
         {
-            desiredPitch = 1.2f;
+            desiredPitch = 1.5f;
         }
 
         if(playerController.adrenalineActive)
         {
-            desiredPitch = 1.5f;
+            desiredPitch = 1.75f;
         }
 
         if(playerController.rageActive && playerController.adrenalineActive)
@@ -218,7 +218,7 @@ public class SpaceShooterSoundController : MonoBehaviour
     void HandleOverboostStop()
     {
         Debug.Log("Overboost concluded");
-        overboostAccelerationFade.SetVolumeOverTime(0f, overboostAccelerationFadeDuration);
+        overboostAccelerationFade.SetVolumeOverTime(0f, playerController.overboostActivationDelay);
         
         hardBurnFade.SetVolumeOverTime(0f, hardBurnFadeOutDuration);
         hardBurnFade.SetPitchOverTime(1f, hardBurnFadeOutDuration);

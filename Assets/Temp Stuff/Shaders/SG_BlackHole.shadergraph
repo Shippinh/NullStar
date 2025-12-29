@@ -1342,6 +1342,7 @@
     "m_OutputNode": {
         "m_Id": ""
     },
+    "m_SubDatas": [],
     "m_ActiveTargets": [
         {
             "m_Id": "966b6e7c657541b5b6480354951c75a5"
@@ -1423,8 +1424,8 @@
     "m_ObjectId": "03c16bcf08a14cca8dcb92cc1a8316a0",
     "m_Title": "Remap so it goes 0-1 from the edge of the sphere to the edge of the black hole",
     "m_Position": {
-        "x": -3065.333251953125,
-        "y": -18.666778564453126
+        "x": -3065.714599609375,
+        "y": -19.428714752197267
     }
 }
 
@@ -1891,8 +1892,8 @@
     "m_ObjectId": "13d1b770d97f4ae0a4b352807ce0b5b8",
     "m_Title": "Screen Space vector towards center",
     "m_Position": {
-        "x": -2630.666748046875,
-        "y": -1335.9998779296875
+        "x": -2631.42919921875,
+        "y": -1336.5714111328125
     }
 }
 
@@ -1964,8 +1965,8 @@
     "m_ObjectId": "148aa021d4464e5cb4d98a3a8c411fd6",
     "m_Title": "Black Hole color",
     "m_Position": {
-        "x": -432.6663513183594,
-        "y": 1143.3331298828125
+        "x": -433.142578125,
+        "y": 1142.85693359375
     }
 }
 
@@ -1988,8 +1989,8 @@
     "m_ObjectId": "1551c12aaa9741eb8263460eddefb96e",
     "m_Title": "Fresnel glow on edges on black hole",
     "m_Position": {
-        "x": -1004.666748046875,
-        "y": 1496.6669921875
+        "x": -1029.1435546875,
+        "y": 1496.0
     }
 }
 
@@ -3055,7 +3056,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -3893,7 +3894,7 @@
     "hlslDeclarationOverride": 1,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -3946,8 +3947,8 @@
     "m_ObjectId": "4634d75a37a5490dabc9486b11f34cb4",
     "m_Title": "Minimize distortion at grazing angles",
     "m_Position": {
-        "x": -2614.666748046875,
-        "y": 538.66650390625
+        "x": -2680.571533203125,
+        "y": 538.28564453125
     }
 }
 
@@ -4673,8 +4674,8 @@
     "m_ObjectId": "57a0e9198e56475ea3c0646e9c6fd0f0",
     "m_Title": "Blackhole Mask",
     "m_Position": {
-        "x": -2290.0,
-        "y": 1307.0
+        "x": -2291.42919921875,
+        "y": 1306.85693359375
     }
 }
 
@@ -4862,8 +4863,8 @@
     "m_ObjectId": "5d383aa41fd843bda458d99fe8eb0bb2",
     "m_Title": "Increase distortion towards black hole",
     "m_Position": {
-        "x": -4240.00048828125,
-        "y": 261.3332824707031
+        "x": -4240.57177734375,
+        "y": 260.5712890625
     }
 }
 
@@ -5498,8 +5499,8 @@
     "m_ObjectId": "72250e6a87f744838fc6fad39e957451",
     "m_Title": "Distorted screen grab",
     "m_Position": {
-        "x": -1063.3333740234375,
-        "y": -818.0000610351563
+        "x": -1169.71435546875,
+        "y": -1065.1429443359375
     }
 }
 
@@ -9373,8 +9374,8 @@
     "m_ObjectId": "e5e6c1fe1b874eb097f8ddd0cc4a177b",
     "m_Title": "Radius of sphere in screen space, or at least a close enough approximation",
     "m_Position": {
-        "x": -2939.333251953125,
-        "y": -892.0001831054688
+        "x": -2940.0,
+        "y": -923.4285888671875
     }
 }
 

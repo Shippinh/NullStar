@@ -70,6 +70,10 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField] float dodgeRechargeTime = 1.5f;
     [SerializeField] private List<float> dodgeCooldowns;
     [SerializeField] private bool allDodgesFull = true;
+    [SerializeField] private float timeSinceLastDodge = 0f;
+    [SerializeField] float timeToImproveDodgeRechargeRate = 3f;
+    [SerializeField] float dodgeRechargeRate = 3f;
+    [SerializeField] float dodgeTimeLimit = 0.15f;
     float dodgeTime;
     public bool isDodging = false;
 
@@ -332,7 +336,6 @@ public class SpaceShooterController : MonoBehaviour
             velocity.y = maxFallSpeed;
     }
 
-
     void ClearState() 
     {
         groundContactCount = 0;
@@ -528,7 +531,6 @@ public class SpaceShooterController : MonoBehaviour
 
     }
 
-
     void AdjustVelocity()
     {
         Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
@@ -545,6 +547,7 @@ public class SpaceShooterController : MonoBehaviour
         velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), acceleration * Time.deltaTime);
         velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), acceleration * Time.deltaTime);
     }
+    
     void AdjustBoostAirVelocity()
     {
         float currentY = velocity.y;
@@ -569,7 +572,6 @@ public class SpaceShooterController : MonoBehaviour
         velocity += yAxis * change;
     }
 
-
     void AdjustDodgeVelocity()
     {
         // Horizontal dodge for normal mode and overboost mode
@@ -580,6 +582,7 @@ public class SpaceShooterController : MonoBehaviour
                 return;
 
             isDodging = true;
+            timeSinceLastDodge = 0f;
             dodgeTime = 0f;
             for (int i = 0; i < dodgeCooldowns.Count; i++)
             {
@@ -643,6 +646,7 @@ public class SpaceShooterController : MonoBehaviour
         if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && overboostMode == false && boostMode == false)
         {
             isDodging = true;
+            timeSinceLastDodge = 0f;
             dodgeTime = 0f;
             for (int i = 0; i < dodgeCooldowns.Count; i++)
             {
@@ -678,6 +682,8 @@ public class SpaceShooterController : MonoBehaviour
         // Boost mode omnidirectional dodge
         if (!isDodging && dodgeCharges > 0 && boostMode && !overboostMode && horizontalDodgeInput > 0f)
         {
+            timeSinceLastDodge = 0f;
+
             float horizontal = rightInput + leftInput;
             float vertical = forwardInput + backwardInput;
 
@@ -741,7 +747,7 @@ public class SpaceShooterController : MonoBehaviour
         if (isDodging)
         {
             dodgeTime += Time.fixedDeltaTime;
-            if (dodgeTime >= 0.2f)
+            if (dodgeTime >= dodgeTimeLimit)
             {
                 isDodging = false;
                 dodgeTime = 0f;
@@ -752,13 +758,17 @@ public class SpaceShooterController : MonoBehaviour
 
     void HandleDodgeRecharge()
     {
+        timeSinceLastDodge = Mathf.Min(timeSinceLastDodge + Time.deltaTime, timeToImproveDodgeRechargeRate);
+
+        float rechargeDelta = Time.deltaTime * ((timeSinceLastDodge >= timeToImproveDodgeRechargeRate) ? dodgeRechargeRate : 1f);
+
         int available = 0;
 
         for (int i = 0; i < dodgeCooldowns.Count; i++)
         {
             if (dodgeCooldowns[i] > 0f)
             {
-                dodgeCooldowns[i] -= Time.deltaTime;
+                dodgeCooldowns[i] -= rechargeDelta;
 
                 if (dodgeCooldowns[i] <= 0f)
                 {

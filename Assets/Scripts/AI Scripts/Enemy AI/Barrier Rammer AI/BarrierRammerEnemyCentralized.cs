@@ -688,7 +688,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // This will need some rework 
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
 
         if (collision.gameObject.tag == "Player")
         {
