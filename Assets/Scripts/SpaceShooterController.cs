@@ -109,6 +109,7 @@ public class SpaceShooterController : MonoBehaviour
     public bool rageInput;
     public bool adrenalineInput;
     public InputToggle overboostToggle;
+    public Vector3 lastExclusiveDirectionalInput = Vector3.forward;
 
     // State Flags
     [field: Header("Other")]
@@ -367,9 +368,14 @@ public class SpaceShooterController : MonoBehaviour
         {
             float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier; // left or right on demand
             float verticalInput = 1; //constant jump
-            float forwardBackwardInput = overboostForward ? 1 : -1; // either constant forward or constant backward
+            float forwardBackwardInput = (forwardInput + backwardInput) * overboostTurnMultiplier; // forward or backward on demand
 
-            moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
+            if (lastExclusiveDirectionalInput.x != 0)
+                horizontalInput = lastExclusiveDirectionalInput.x;
+            else if (lastExclusiveDirectionalInput.z != 0)
+                forwardBackwardInput = lastExclusiveDirectionalInput.z;
+
+            moveDirection = new Vector3(horizontalInput, 0, forwardBackwardInput).normalized + new Vector3(0, verticalInput, 0); // overboostLockedDirection is calculated on input level
         }
 
         if (boostMode && boostInitiated)
@@ -578,8 +584,12 @@ public class SpaceShooterController : MonoBehaviour
         if (horizontalDodgeInput > 0 && !isDodging && verticalDodgeInput == 0 && dodgeCharges > 0 && boostMode == false)
         {
             //if no input in overboost mode - just stop the method
-            if (rightInput + leftInput == 0 && overboostMode)
+            if (rightInput + leftInput == 0 && lastExclusiveDirectionalInput.z != 0 && overboostMode)
                 return;
+
+            if (forwardInput + backwardInput == 0 && lastExclusiveDirectionalInput.x != 0 && overboostMode)
+                return;
+
 
             isDodging = true;
             timeSinceLastDodge = 0f;
@@ -598,7 +608,10 @@ public class SpaceShooterController : MonoBehaviour
 
             if(overboostMode)
             {
-                desiredDodgeVelocity = new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 0, overboostForward ? 1 : -1).normalized;
+                if (lastExclusiveDirectionalInput.x != 0)
+                    desiredDodgeVelocity = new Vector3(lastExclusiveDirectionalInput.x, 0, (forwardInput + backwardInput) * overboostTurnMultiplier).normalized;
+                else if (lastExclusiveDirectionalInput.z != 0)
+                    desiredDodgeVelocity = new Vector3((rightInput + leftInput) * overboostTurnMultiplier, 0, lastExclusiveDirectionalInput.z).normalized;
             }
             else
             {
@@ -816,7 +829,10 @@ public class SpaceShooterController : MonoBehaviour
             if(overboostChargeTimer >= overboostActivationDelay)
             {
                 maxOverboostSpeed = defaultMaxOverboostSpeed;
-                body.velocity = overboostForward ? Camera.main.transform.forward * dodgeMaxSpeed : -Camera.main.transform.forward * dodgeMaxSpeed;
+                if (lastExclusiveDirectionalInput.x != 0)
+                    body.velocity = (Camera.main.transform.right * lastExclusiveDirectionalInput.x) * dodgeMaxSpeed;
+                else if (lastExclusiveDirectionalInput.z != 0)
+                    body.velocity = (Camera.main.transform.forward * lastExclusiveDirectionalInput.z) * dodgeMaxSpeed;
                 overboostInitiated = true;
                 body.useGravity = true;
                 overboostChargeTimer = 0f;
@@ -1079,14 +1095,20 @@ public class SpaceShooterController : MonoBehaviour
             }
         }
 
-        if(overboostInitiated == false)
-        {
+
+        if (overboostInitiated == false)
+        {/*
             overboostForward = true;
             // Determine in which direction to overboost
             if (forwardInput == 1 && (backwardInput == 0 || backwardInput == -1))
                 overboostForward = true;
             else if (forwardInput == 0 && backwardInput == -1)
-                overboostForward = false;
+                overboostForward = false;*/
+
+            if (Input.GetKey(inputConfig.MoveLeft)) lastExclusiveDirectionalInput = new Vector3(-1, 0, 0);
+            if (Input.GetKey(inputConfig.MoveRight)) lastExclusiveDirectionalInput = new Vector3(1, 0, 0);
+            if (Input.GetKey(inputConfig.MoveUp)) lastExclusiveDirectionalInput = new Vector3(0, 0, 1);
+            if (Input.GetKey(inputConfig.MoveDown)) lastExclusiveDirectionalInput = new Vector3(0, 0, -1);
         }
     }
 
