@@ -178,7 +178,7 @@ public class TurretBehavior : MonoBehaviour
             isShooting = true;
             isChargingShot = true;
             weaponChargeDurationTimer = 0f;
-            Debug.Log("Weapon charge initiated");
+            //Debug.Log("Weapon charge initiated");
         }
 
         if (isShooting)
@@ -188,7 +188,7 @@ public class TurretBehavior : MonoBehaviour
                 weaponChargeDurationTimer += Time.deltaTime;
                 if (weaponChargeDurationTimer >= weaponChargeDuration)
                 {
-                    Debug.Log("Turret is shooting");
+                    //Debug.Log("Turret is shooting");
                     isChargingShot = false;
                     isSendingShot = true;
                     weaponShootDurationTimer = 0f;
@@ -215,7 +215,7 @@ public class TurretBehavior : MonoBehaviour
                 weaponCooldownDurationTimer += Time.deltaTime;
                 if (weaponCooldownDurationTimer >= weaponCooldownDuration)
                 {
-                    Debug.Log("Enemy weapon reloaded");
+                    //Debug.Log("Enemy weapon reloaded");
                     isShootingOnCD = false;
                     isShooting = false;
                     weaponChargeDurationTimer = 0f;
@@ -238,7 +238,7 @@ public class TurretBehavior : MonoBehaviour
         weaponChargeDurationTimer = 0f;
         weaponShootDurationTimer = 0f;
         weaponCooldownDurationTimer = 0f;
-        Debug.Log("Shooting sequence reset.");
+       // Debug.Log("Shooting sequence reset.");
     }
 
     public void UpdateAiming()

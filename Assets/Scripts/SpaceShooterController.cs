@@ -1186,5 +1186,3 @@ public class InputToggle
         currentToggleState = value;
     }
 }
-
-

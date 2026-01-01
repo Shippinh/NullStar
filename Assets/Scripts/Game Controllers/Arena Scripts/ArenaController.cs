@@ -16,7 +16,8 @@ public enum ArenaState
     SpawningWave,       // Actively spawning enemies
     WaitingForWaveClear,// Waiting for all enemies to die
     Completed,          // Arena done
-    Disabled            // Passed to next arena
+    Disabled,           // Passed to next arena
+    None                // No behavior tied this state at all
 }
 
 
@@ -58,7 +59,6 @@ public class ArenaController : MonoBehaviour
         = new Dictionary<EntityHealthController, Action>();
 
     private bool initialized = false;
-
 
     private void Start()
     {
