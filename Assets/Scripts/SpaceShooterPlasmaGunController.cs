@@ -24,7 +24,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
     public ObjectPool tracerPool;
     public ObjectPool impactEffectPool;
     
-    void Update()
+    void LateUpdate()
     {
         UpdatePowerUps();
         if (Input.GetKey(inputConfig.Shoot) && Time.time >= nextFireTime)

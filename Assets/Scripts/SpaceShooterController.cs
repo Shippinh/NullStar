@@ -1,6 +1,9 @@
 using System;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Splines;
+using Unity.Mathematics;
+
 //omni.OS
 public class SpaceShooterController : MonoBehaviour
 {
@@ -10,6 +13,12 @@ public class SpaceShooterController : MonoBehaviour
     public EntityHealthController healthController;
     public Rigidbody body;
     public Transform hitboxRef;
+    public CameraController cameraControllerRef;
+
+    [Header("Spline Settings")]
+    public SplineContainer splineContainer; // assign in inspector
+    [Range(0f, 1f)] public float splineT = 0f;
+    public bool loopSpline = true;
 
     // Movement
     [field: Header("Basic Movement")]
@@ -172,6 +181,9 @@ public class SpaceShooterController : MonoBehaviour
     {
         Application.targetFrameRate = 120; // stupid hack to prevent high fps issues with inputs
         QualitySettings.vSyncCount = 0;
+
+        if(!cameraControllerRef)
+            cameraControllerRef = FindObjectOfType<CameraController>();
 
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
@@ -361,92 +373,148 @@ public class SpaceShooterController : MonoBehaviour
 
     void CalculateDesiredVelocity()
     {
-        // Step 1: Create input direction
         Vector3 moveDirection = Vector3.zero;
+        Vector3 worldDirection = Vector3.zero;
+        float horizontalSpeed;
+        float verticalSpeed;
+        float verticalComponent;
 
-        if (overboostMode && overboostInitiated)
+        if (overboostMode)
         {
-            float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier; // left or right on demand
-            float verticalInput = 1; //constant jump
-            float forwardBackwardInput = (forwardInput + backwardInput) * overboostTurnMultiplier; // forward or backward on demand
+            // Pre apply vertical speed
+            verticalSpeed = maxOverboostSpeed;
+            //verticalSpeed = maxOverboostVerticalSpeed;
 
-            if (lastExclusiveDirectionalInput.x != 0)
-                horizontalInput = lastExclusiveDirectionalInput.x;
-            else if (lastExclusiveDirectionalInput.z != 0)
-                forwardBackwardInput = lastExclusiveDirectionalInput.z;
+            // If we already overboosting
+            if (overboostInitiated)
+            {
+                // Remember the input
+                float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier; // left or right on demand
+                float verticalInput = 1; //constant jump
+                float forwardBackwardInput = (forwardInput + backwardInput) * overboostTurnMultiplier; // forward or backward on demand
 
-            moveDirection = new Vector3(horizontalInput, 0, forwardBackwardInput).normalized + new Vector3(0, verticalInput, 0); // overboostLockedDirection is calculated on input level
+                // Determine lock direction and adjustement direction
+                // lastExclusiveDirectionalInput is calculated on input level for extra precision
+                if (lastExclusiveDirectionalInput.x != 0)
+                    horizontalInput = lastExclusiveDirectionalInput.x;
+                else if (lastExclusiveDirectionalInput.z != 0)
+                    forwardBackwardInput = lastExclusiveDirectionalInput.z;
+
+                moveDirection = new Vector3(horizontalInput, 0, forwardBackwardInput).normalized + new Vector3(0, verticalInput, 0);
+
+                // Adjust world direction according to camera
+                worldDirection =
+                Camera.main.transform.right * moveDirection.x +
+                Camera.main.transform.forward * moveDirection.z;
+
+                worldDirection.Normalize(); // Let camera pitch determine final direction (includes vertical movement)
+
+                // Set speed
+                horizontalSpeed = maxOverboostSpeed;
+                // Set y component
+                verticalComponent = worldDirection.y;
+
+                // Remember the desiredVelocity
+                desiredVelocity = new Vector3(
+                    worldDirection.x * horizontalSpeed,
+                    verticalComponent * verticalSpeed,
+                    worldDirection.z * horizontalSpeed);
+            }
+            // If we preparing to overboost
+            else
+            {
+                horizontalSpeed = maxOverboostInitiationSpeed;
+            }
         }
-
-        if (boostMode && boostInitiated)
+        else if (boostMode)
         {
-            float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier;
-            float verticalInput = (forwardInput + backwardInput) * overboostTurnMultiplier;
-            float forwardBackwardInput = 0;
+            verticalSpeed = maxOverboostSpeed;
+            //verticalSpeed = maxOverboostVerticalSpeed;
 
-            moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
+            if (boostInitiated)
+            {
+                // Remember the input
+                float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier;
+                float verticalInput = (forwardInput + backwardInput) * overboostTurnMultiplier;
+                float forwardBackwardInput = 0;
+
+                moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
+
+                // Sample spline
+                splineContainer.Spline.Evaluate(splineT, out float3 splinePos, out float3 splineTangent, out float3 splineUp);
+                //float3 to vector3 because functions don't like float3
+                Vector3 splinePosV = splinePos;
+                Vector3 splineTangentV = splineTangent;
+                splineTangentV.Normalize();
+                Vector3 splineUpV = splineUp;
+
+                // Forward along spline tangent
+                Vector3 forwardDir = splineTangentV.normalized;
+
+                // Up direction
+                Vector3 upDir = splineUpV.normalized;
+
+                // Right direction
+                Vector3 rightDir = Vector3.Cross(upDir, forwardDir);
+                if (rightDir.sqrMagnitude < 0.001f)
+                    rightDir = transform.right;
+                rightDir.Normalize();
+
+
+                // Advance spline (non-physics)
+                // This can be done anywhere in the script, but done here, because of how it's tightly connected to the actual movement logic
+                float splineLength = splineContainer.Spline.CalculateLength(transform.localToWorldMatrix);
+                float splineSpeed = boostStaticSpeed;
+
+                splineT += splineSpeed * Time.deltaTime / splineLength;
+                
+                if (loopSpline) splineT %= 1f;
+                else splineT = Mathf.Clamp01(splineT);
+
+                Vector3 splineNextPos = splineContainer.Spline.EvaluatePosition(splineT);
+
+                // Compute input offset in spline plane
+                horizontalSpeed = maxOverboostSpeed;
+                verticalComponent = moveDirection.y;
+
+                // Determine if the player is looking backward
+                // Dot product: forward along spline vs. player’s forward (or camera forward)
+                float camDot = Vector3.Dot(Camera.main.transform.forward, forwardDir);
+                bool invertHorizontal = camDot < 0f;
+
+                float adjustedHorizontal = invertHorizontal ? -moveDirection.x : moveDirection.x;
+
+                // Compute input offset, flipping left/right if looking backward
+                Vector3 inputOffset = rightDir * adjustedHorizontal * maxOverboostSpeed
+                                    + upDir * verticalComponent * verticalSpeed;
+
+                // Set Rigidbody lateral velocity
+                desiredVelocity = inputOffset;
+
+                // Apply spline forward while preserving offsets
+                Vector3 currentOffset = transform.position - splinePosV; // offset from spline
+                Vector3 targetPos = splineNextPos + currentOffset;       // keep lateral/vertical offsets
+                transform.position = targetPos;
+
+                // Align rotation to spline
+                Quaternion splineRotation = Quaternion.LookRotation(forwardDir, splineUpV);
+                transform.rotation = splineRotation;
+                //cameraControllerRef.SetSplineRotation(splineRotation);
+            }
+            else
+            {
+                horizontalSpeed = maxOverboostInitiationSpeed;
+            }
         }
-
-        if ((overboostMode && overboostInitiated) == false && (boostMode && boostInitiated) == false)
+        else if(!boostInitiated && !overboostInitiated)
         {
+            // Remember the input
             float horizontalInput = rightInput + leftInput;
             float verticalInput = jumpInput ? 1 : 0;
             float forwardBackwardInput = forwardInput + backwardInput;
 
             moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
-        }
 
-        Vector3 worldDirection = Vector3.zero;
-
-        if (overboostMode && overboostInitiated)
-        {
-            // Step 2A: Overboost - full 3D movement direction based on camera
-            worldDirection =
-                Camera.main.transform.right * moveDirection.x +
-                Camera.main.transform.forward * moveDirection.z;
-
-            worldDirection.Normalize(); // Let camera pitch determine final direction (includes vertical movement)
-        }
-
-        if (boostMode && boostInitiated)
-        {
-            // Step 2B: Boost - constant forward movement + relative input handling
-
-            // 1. Compute relative axes to boostDirection
-            Vector3 forwardDir = boostForward ? boostDirection : -boostDirection;
-            forwardDir.Normalize();
-
-            Vector3 upDir = Vector3.up;
-            Vector3 rightDir = Vector3.Cross(upDir, forwardDir);
-
-            // Fallback if forwardDir is vertical and causes rightDir to collapse
-            if (rightDir.sqrMagnitude < 0.001f)
-            {
-                // Use character's local right vector to define horizontal plane
-                rightDir = transform.right;
-            }
-
-            rightDir.Normalize();
-
-
-            // 2. Invert horizontal if camera is facing away from boost direction
-            float camDot = Vector3.Dot(Camera.main.transform.forward, forwardDir);
-            bool invertHorizontal = camDot < 0f;
-
-            float adjustedHorizontal = invertHorizontal ? -moveDirection.x : moveDirection.x;
-
-            // 3. Combine input with movement basis
-            Vector3 inputOffset =
-                rightDir * adjustedHorizontal +
-                upDir * moveDirection.y;
-
-            // 4. Final world direction: forward boost + input offsets
-            worldDirection = forwardDir + inputOffset;
-            worldDirection.Normalize();
-        }
-
-        if ((overboostMode && overboostInitiated) == false && (boostMode && boostInitiated) == false)
-        {
             // Step 2C: Normal mode - movement restricted to horizontal plane, with separate Y input
             Vector3 camRight = Camera.main.transform.right;
             Vector3 camForward = Camera.main.transform.forward;
@@ -455,86 +523,16 @@ public class SpaceShooterController : MonoBehaviour
 
             worldDirection = camRight * moveDirection.x + camForward * moveDirection.z;
             worldDirection.Normalize(); // Horizontal movement only
-        }
 
-        // Step 3: Apply speed based on mode
-        float horizontalSpeed;
-        float verticalSpeed;
-
-        // Set horizontal speed
-        if (overboostMode)
-        {
-            if (!overboostInitiated)
-            {
-                horizontalSpeed = maxOverboostInitiationSpeed;
-            }
-            else
-            {
-                horizontalSpeed = maxOverboostSpeed;
-            }
-        }
-        else if (boostMode)
-        {
-            if (!boostInitiated)
-            {
-                horizontalSpeed = maxOverboostInitiationSpeed;
-            }
-            else
-            {
-                horizontalSpeed = maxOverboostSpeed;
-            }
-        }
-        else
-        {
             horizontalSpeed = maxSpeed;
-        }
-
-        // Set vertical speed
-        if (overboostMode)
-        {
-            verticalSpeed = maxOverboostSpeed;
-            //verticalSpeed = maxOverboostVerticalSpeed;
-        }
-        else if (boostMode)
-        {
-            verticalSpeed = maxOverboostSpeed;
-            //verticalSpeed = maxOverboostVerticalSpeed;
-        }
-        else
-        {
             verticalSpeed = maxVerticalSpeed;
-        }
-
-        // Compute desired velocity
-        float verticalComponent;
-        if (overboostMode || boostMode)
-        {
-            verticalComponent = worldDirection.y;
-        }
-        else
-        {
             verticalComponent = moveDirection.y;
-        }
 
-        if (boostMode == false)
-        {
             desiredVelocity = new Vector3(
                 worldDirection.x * horizontalSpeed,
                 verticalComponent * verticalSpeed,
-                worldDirection.z * horizontalSpeed
-
-            );
+                worldDirection.z * horizontalSpeed);
         }
-        else
-        {
-            desiredVelocity = new Vector3(
-                worldDirection.x * horizontalSpeed,
-                verticalComponent * horizontalSpeed,
-                worldDirection.z * horizontalSpeed
-
-            );
-        }
-
     }
 
     void AdjustVelocity()
@@ -695,49 +693,38 @@ public class SpaceShooterController : MonoBehaviour
         // Boost mode omnidirectional dodge
         if (!isDodging && dodgeCharges > 0 && boostMode && !overboostMode && horizontalDodgeInput > 0f)
         {
-            timeSinceLastDodge = 0f;
-
             float horizontal = rightInput + leftInput;
             float vertical = forwardInput + backwardInput;
 
-            bool hasDirectionalInput = horizontal != 0f || vertical != 0f;
-
-            if (!hasDirectionalInput)
+            if (horizontal == 0f && vertical == 0f)
                 return;
 
-            Vector3 inputDirection = new Vector3(horizontal, vertical, 0f);
+            // --- Sample spline to get orientation ---
+            splineContainer.Spline.Evaluate(splineT, out float3 splinePos, out float3 splineTangent, out float3 splineUp);
+            Vector3 splineTangentV = splineTangent;
+            splineTangentV.Normalize();
 
-            inputDirection.Normalize();
+            Vector3 forwardDir = splineTangentV;
+            Vector3 upDir = splineUp;
+            Vector3 rightDir = Vector3.Cross(upDir, forwardDir);
+            if (rightDir.sqrMagnitude < 0.001f) rightDir = transform.right;
+            rightDir.Normalize();
 
-            // Fallback for zero boostDirection
-            Vector3 forwardDir = boostDirection.sqrMagnitude < 0.001f
-                ? transform.forward
-                : boostDirection.normalized;
+            // --- Compute dodge direction in spline plane only ---
+            Vector3 inputDirection = new Vector3(horizontal, vertical, 0f).normalized;
 
-            Vector3 rightDir = Vector3.Cross(Vector3.up, forwardDir).normalized;
-            Vector3 upDir = Vector3.up;
-
-            Vector3 camForward = Camera.main.transform.forward;
-            camForward.y = 0f;
-            camForward.Normalize();
-
-            bool invert = Vector3.Dot(camForward, forwardDir) < 0f;
-            if (invert)
-                inputDirection.x *= -1f;
-
-            Vector3 dodgeDirection =
-                rightDir * inputDirection.x +
-                upDir * inputDirection.y +
-                forwardDir * inputDirection.z;
-
+            // Project input onto spline plane (ignore forward along spline)
+            Vector3 dodgeDirection = rightDir * inputDirection.x + upDir * inputDirection.y;
             dodgeDirection.Normalize();
 
-            float baseBoostSpeed = boostStaticSpeed;
-            Vector3 forwardVelocity = forwardDir * baseBoostSpeed;
-            Vector3 finalVelocity = forwardVelocity + dodgeDirection * dodgeMaxSpeed;
+            // --- Forward along spline is ignored for dodge ---
+            Vector3 finalVelocity = dodgeDirection * dodgeMaxSpeed; // NO spline-forward component
 
+            // --- Apply dodge ---
             isDodging = true;
             dodgeTime = 0f;
+            timeSinceLastDodge = 0f;
+
             for (int i = 0; i < dodgeCooldowns.Count; i++)
             {
                 if (dodgeCooldowns[i] <= 0f)
@@ -755,6 +742,7 @@ public class SpaceShooterController : MonoBehaviour
             desiredDodgeVelocity = dodgeDirection;
             velocity = finalVelocity;
         }
+
 
 
         if (isDodging)
