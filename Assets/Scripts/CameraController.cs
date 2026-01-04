@@ -168,19 +168,14 @@ public class CameraController : MonoBehaviour
         transform.position = currentCameraPosition + new Vector3(shakeX, shakeY, 0f);
     }
 
-    private void ResetOverheatShake()
-    {
-
-    }
-
     private void TriggerShake()
     {
         shakeTime = shakeDuration; // Reset shake time
     }
 
-    private (float x, float y) GetMouseInput()
+    private void ResetOverheatShake()
     {
-        return (Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+
     }
 
     private void TiltCameraBasedOnInput()
@@ -265,12 +260,17 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private (float x, float y) GetMouseInput()
+    {
+        return (Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+    }
+
     private void RotateCameraMouse(float x, float y)
     {
         yaw += x;
         pitch -= y;
 
-        pitch = Mathf.Clamp(pitch, minRotationY, maxRotationY);
+        pitch = Mathf.Clamp(pitch, minRotationY, maxRotationY); 
 
         // Apply camera rotation
         transform.eulerAngles = new Vector3(pitch, yaw, 0f) * cameraRotationSpeed;

@@ -13,7 +13,7 @@ public class SpaceShooterController : MonoBehaviour
     public EntityHealthController healthController;
     public Rigidbody body;
     public Transform hitboxRef;
-    public CameraController cameraControllerRef;
+    public CameraControllerNew cameraControllerRef;
 
     [Header("Spline Settings")]
     public SplineContainer splineContainer; // assign in inspector
@@ -183,7 +183,7 @@ public class SpaceShooterController : MonoBehaviour
         QualitySettings.vSyncCount = 0;
 
         if(!cameraControllerRef)
-            cameraControllerRef = FindObjectOfType<CameraController>();
+            cameraControllerRef = FindObjectOfType<CameraControllerNew>();
 
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
@@ -404,8 +404,8 @@ public class SpaceShooterController : MonoBehaviour
 
                 // Adjust world direction according to camera
                 worldDirection =
-                Camera.main.transform.right * moveDirection.x +
-                Camera.main.transform.forward * moveDirection.z;
+                cameraControllerRef.mainCameraRef.transform.right * moveDirection.x +
+                cameraControllerRef.mainCameraRef.transform.forward * moveDirection.z;
 
                 worldDirection.Normalize(); // Let camera pitch determine final direction (includes vertical movement)
 
@@ -479,7 +479,7 @@ public class SpaceShooterController : MonoBehaviour
 
                 // Determine if the player is looking backward
                 // Dot product: forward along spline vs. player’s forward (or camera forward)
-                float camDot = Vector3.Dot(Camera.main.transform.forward, forwardDir);
+                float camDot = Vector3.Dot(cameraControllerRef.mainCameraRef.transform.forward, forwardDir);
                 bool invertHorizontal = camDot < 0f;
 
                 float adjustedHorizontal = invertHorizontal ? -moveDirection.x : moveDirection.x;
@@ -516,8 +516,8 @@ public class SpaceShooterController : MonoBehaviour
             moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
 
             // Step 2C: Normal mode - movement restricted to horizontal plane, with separate Y input
-            Vector3 camRight = Camera.main.transform.right;
-            Vector3 camForward = Camera.main.transform.forward;
+            Vector3 camRight = cameraControllerRef.mainCameraRef.transform.right;
+            Vector3 camForward = cameraControllerRef.mainCameraRef.transform.forward;
             camForward.y = 0; // Flatten forward to horizontal
             camForward.Normalize();
 
@@ -616,8 +616,8 @@ public class SpaceShooterController : MonoBehaviour
                 desiredDodgeVelocity = new Vector3(rightInput + leftInput, 0, forwardInput + backwardInput).normalized;
             }
 
-            Vector3 camRight = Camera.main.transform.right;
-            Vector3 camForward = Camera.main.transform.forward;
+            Vector3 camRight = cameraControllerRef.mainCameraRef.transform.right;
+            Vector3 camForward = cameraControllerRef.mainCameraRef.transform.forward;
 
             if (overboostMode)
             {
@@ -672,8 +672,8 @@ public class SpaceShooterController : MonoBehaviour
 
             desiredDodgeVelocity = new Vector3(rightInput + leftInput, 1f, forwardInput + backwardInput).normalized;
 
-            Vector3 camRight = Camera.main.transform.right;
-            Vector3 camForward = Camera.main.transform.forward;
+            Vector3 camRight = cameraControllerRef.mainCameraRef.transform.right;
+            Vector3 camForward = cameraControllerRef.mainCameraRef.transform.forward;
             camRight.y = 0f;
             camForward.y = 0f;
 
@@ -709,6 +709,10 @@ public class SpaceShooterController : MonoBehaviour
             Vector3 rightDir = Vector3.Cross(upDir, forwardDir);
             if (rightDir.sqrMagnitude < 0.001f) rightDir = transform.right;
             rightDir.Normalize();
+
+            float camDot = Vector3.Dot(cameraControllerRef.mainCameraRef.transform.forward, forwardDir);
+            bool invertHorizontal = camDot < 0f;
+            horizontal = invertHorizontal ? -horizontal : horizontal;
 
             // --- Compute dodge direction in spline plane only ---
             Vector3 inputDirection = new Vector3(horizontal, vertical, 0f).normalized;
@@ -818,9 +822,9 @@ public class SpaceShooterController : MonoBehaviour
             {
                 maxOverboostSpeed = defaultMaxOverboostSpeed;
                 if (lastExclusiveDirectionalInput.x != 0)
-                    body.velocity = (Camera.main.transform.right * lastExclusiveDirectionalInput.x) * dodgeMaxSpeed;
+                    body.velocity = (cameraControllerRef.mainCameraRef.transform.right * lastExclusiveDirectionalInput.x) * dodgeMaxSpeed;
                 else if (lastExclusiveDirectionalInput.z != 0)
-                    body.velocity = (Camera.main.transform.forward * lastExclusiveDirectionalInput.z) * dodgeMaxSpeed;
+                    body.velocity = (cameraControllerRef.mainCameraRef.transform.forward * lastExclusiveDirectionalInput.z) * dodgeMaxSpeed;
                 overboostInitiated = true;
                 body.useGravity = true;
                 overboostChargeTimer = 0f;
