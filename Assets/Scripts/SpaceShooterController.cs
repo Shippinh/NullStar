@@ -19,6 +19,8 @@ public class SpaceShooterController : MonoBehaviour
     public SplineContainer splineContainer; // assign in inspector
     [Range(0f, 1f)] public float splineT = 0f;
     public bool loopSpline = true;
+    public float maxSidewaysOffset = 200f;
+    public float maxUpwardOffset = 200f;
 
     // Movement
     [field: Header("Basic Movement")]
@@ -218,7 +220,6 @@ public class SpaceShooterController : MonoBehaviour
         AttachHitbox();
         AdjustMaxOverboostSpeed();
         HandleInput();
-        CalculateDesiredVelocity();
         if (!boostMode && !boostInitiated)
         {
             HandleOverboostInitiation();
@@ -231,6 +232,7 @@ public class SpaceShooterController : MonoBehaviour
 
     void FixedUpdate()
     {
+        CalculateDesiredVelocity();
         UpdateState();
 
         AdjustVelocity();
@@ -491,15 +493,32 @@ public class SpaceShooterController : MonoBehaviour
                 // Set Rigidbody lateral velocity
                 desiredVelocity = inputOffset;
 
-                // Apply spline forward while preserving offsets
-                Vector3 currentOffset = transform.position - splinePosV; // offset from spline
-                Vector3 targetPos = splineNextPos + currentOffset;       // keep lateral/vertical offsets
+                // Current offset from spline
+                Vector3 rawOffset = transform.position - splinePosV;
+
+                // Project offset onto plane perpendicular to spline tangent
+                Vector3 currentOffset = Vector3.ProjectOnPlane(rawOffset, forwardDir);
+
+                // Decompose offset into spline-local axes
+                float rightOffset = Vector3.Dot(currentOffset, rightDir);
+                float upOffset = Vector3.Dot(currentOffset, upDir);
+
+                // Clamp each axis individually
+                rightOffset = Mathf.Clamp(rightOffset, -maxSidewaysOffset, maxSidewaysOffset);
+                upOffset = Mathf.Clamp(upOffset, -maxUpwardOffset, maxUpwardOffset);
+
+                // Rebuild the offset vector in world space
+                currentOffset = rightDir * rightOffset + upDir * upOffset;
+
+                Debug.Log(currentOffset);
+
+                // Apply offset to new spline position
+                Vector3 targetPos = splineNextPos + currentOffset;
                 transform.position = targetPos;
 
                 // Align rotation to spline
                 Quaternion splineRotation = Quaternion.LookRotation(forwardDir, splineUpV);
                 transform.rotation = splineRotation;
-                //cameraControllerRef.SetSplineRotation(splineRotation);
             }
             else
             {
