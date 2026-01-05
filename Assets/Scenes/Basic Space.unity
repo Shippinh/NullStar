@@ -2105,7 +2105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &78867104
 Transform:
   m_ObjectHideFlags: 0
@@ -21392,10 +21392,10 @@ MonoBehaviour:
   overboostOverheatDurationCurrent: 0
   overboostOverheatDurationRestoreRate: 1
   overboostForward: 1
-  boostMode: 1
-  boostInitiated: 1
+  boostMode: 0
+  boostInitiated: 0
   boostActivationDelay: 0
-  boostStaticSpeed: 450
+  boostStaticSpeed: 150
   boostForward: 1
   boostDirection: {x: 0, y: 0, z: 5}
   boostChargeTimer: 0
@@ -21482,7 +21482,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!114 &691622032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38288,6 +38288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1070041031}
   - component: {fileID: 1070041032}
+  - component: {fileID: 1070041033}
   m_Layer: 16
   m_Name: Trigger
   m_TagString: Untagged
@@ -38331,6 +38332,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10000, y: 3000, z: 10000}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1070041033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070041030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437448e5171d6474990e386ac5206b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerColliderRef: {fileID: 0}
+  playerHealthControllerRef: {fileID: 0}
+  timeToDie: 12
+  deathTimer: 0
 --- !u!1 &1072456282
 GameObject:
   m_ObjectHideFlags: 0
@@ -52358,7 +52375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1520505425
 Transform:
   m_ObjectHideFlags: 0
@@ -72139,6 +72156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1899162215}
   - component: {fileID: 1899162216}
+  - component: {fileID: 1899162217}
   m_Layer: 16
   m_Name: Trigger
   m_TagString: Untagged
@@ -72182,6 +72200,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10000, y: 3000, z: 10000}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1899162217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899162214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437448e5171d6474990e386ac5206b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerColliderRef: {fileID: 0}
+  playerHealthControllerRef: {fileID: 0}
+  timeToDie: 12
+  deathTimer: 0
 --- !u!1 &1902300742
 GameObject:
   m_ObjectHideFlags: 0
