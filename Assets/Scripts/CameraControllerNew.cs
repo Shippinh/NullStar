@@ -127,6 +127,12 @@ public class CameraControllerNew : MonoBehaviour
     [Range(0f, 5f)] public float fieldOfViewChangeRate = 0.95f;
     [Range(0f, 25f)] public float fieldOfViewResetRate = 5f;
 
+    [field: Header("Externals")]
+    public bool LookingSideways { get; protected set; }
+    [Range(0f, 1f)] public float sidewaysLookCriteria = 0.3f;
+    public bool LookingForward { get; protected set; }
+    [Range(0f, 1f)] public float forwardLookCriteria = 1f;
+
     [Header("Internals")]
     public float inputX;
     public float inputY;
@@ -183,6 +189,7 @@ public class CameraControllerNew : MonoBehaviour
     void Update()
     {
         HandleMouseInput();
+        UpdateCamDot();
     }
 
     private void FixedUpdate()
@@ -196,11 +203,7 @@ public class CameraControllerNew : MonoBehaviour
 
     void LateUpdate()
     {
-        /*if (canRotate)
-         {
-             RotatePlayerHandsSmoothly();
-             AttachHandsToCamera();
-         }*/
+        
 
         ApplyRotation(); // Has to be called here to not cause any jitter
 
@@ -415,5 +418,12 @@ public class CameraControllerNew : MonoBehaviour
 
         leftHandRef.position = Vector3.Lerp(leftHandRef.position, leftTarget, lerpFactor);
         rightHandRef.position = Vector3.Lerp(rightHandRef.position, rightTarget, lerpFactor);
+    }
+
+    private void UpdateCamDot()
+    {
+        float camDot = Vector3.Dot(mainCameraRef.transform.forward, playerRef.transform.forward);
+        LookingForward = camDot < 0f;
+        LookingSideways = camDot < 0.3f && camDot > -0.3f;
     }
 }

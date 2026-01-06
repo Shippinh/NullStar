@@ -9,9 +9,9 @@ public class SpaceShooterSoundController : MonoBehaviour
     public AudioSource blowerSoundLoop;
     public AudioSource airIntakeSoundLoop;
     [Header("Movement Pitch Settings")]
-    [Range(0.5f, 3f)] public float basePitch = 1f;
-    [Range(0.5f, 3f)] public float targetPitch = 1.5f;
-    [Range(0f, 3f)] public float pitchChangeDuration = 0.5f;
+    [Range(0.5f, 3f)] public float baseMovementPitch = 1f;
+    [Range(0.5f, 3f)] public float targetMovementPitch = 1.5f;
+    [Range(0f, 3f)] public float movementPitchChangeDuration = 0.5f;
 
     public AudioSource hardBurnSoundLoop;
     [Range(0f, 1f)] public float hardBurnFadeOutDuration;
@@ -117,49 +117,61 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     void MovementBasedPitch()
     {
+        float extraMovementPitch = 0f;
+        float finalMovementPitch = baseMovementPitch;
+
+        if (playerController.boostInitiated) // boost
+        {
+            extraMovementPitch += 0.5f; // Taking in account constant forward movement during boost mode
+
+            if (!playerController.cameraControllerRef.LookingSideways)
+                if (playerController.AnySidewaysMovementInput()) extraMovementPitch += 0.5f;
+
+            if (playerController.AnyForwardMovementInput()) extraMovementPitch += 0.5f;
+
+            if (extraMovementPitch >= 1.5f)
+                extraMovementPitch = 1.25f;
+        }
+        else if (playerController.overboostInitiated) // overboost
+        {
+            Vector3 inputDir = playerController.lastExclusiveDirectionalInput;
+
+            if ((inputDir == Vector3.left || inputDir == Vector3.right) && playerController.AnyForwardMovementInput()) extraMovementPitch += 0.5f;
+            if ((inputDir == Vector3.back || inputDir == Vector3.forward) && playerController.AnySidewaysMovementInput()) extraMovementPitch += 0.5f;
+        }
+        else // normal
+        {
+            if (playerController.jumpInput) extraMovementPitch += 0.5f;
+
+            if (playerController.AnyMovementInput()) finalMovementPitch = targetMovementPitch;
+        }
+
+        finalMovementPitch += extraMovementPitch;
+
+        Debug.Log(finalMovementPitch);
+
         float delta = Time.deltaTime;
-        float pitchDelta = (targetPitch - basePitch) / pitchChangeDuration;
+        float pitchDelta = (targetMovementPitch - baseMovementPitch) / movementPitchChangeDuration;
 
-        // Get stackable pitch multiplier
-        float extraPitch = 0f;
-
-        if (!playerController.overboostInitiated)
-        {
-            if (playerController.jumpInput) extraPitch += 0.5f;
-        }
-
-        if (playerController.AnySidewaysMovementInput()) extraPitch += 0.25f;
-
-        float desiredPitch = basePitch + extraPitch;
-
-        // Movement input detected
-        if ((playerController.AnyMovementInput() || playerController.jumpInput) && !playerController.overboostInitiated)
-        {
-            desiredPitch = targetPitch + extraPitch;
-        }
-
-        // Smoothly transition blower and air intake pitch
-        blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, desiredPitch, pitchDelta * delta);
-        airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, desiredPitch, pitchDelta * delta);
+        blowerSoundLoop.pitch = Mathf.MoveTowards(blowerSoundLoop.pitch, finalMovementPitch, pitchDelta * delta);
+        airIntakeSoundLoop.pitch = Mathf.MoveTowards(airIntakeSoundLoop.pitch, finalMovementPitch, pitchDelta * delta);
     }
 
     void HandlePlasmaShootingSound()
     {
         float desiredPitch = 1.2f;
 
-        if(playerController.rageActive)
+        if (playerController.rageActive && playerController.adrenalineActive)
         {
-            desiredPitch = 1.5f;
+            desiredPitch = 1.9f;
         }
-
-        if(playerController.adrenalineActive)
+        else if (playerController.adrenalineActive)
         {
             desiredPitch = 1.75f;
         }
-
-        if(playerController.rageActive && playerController.adrenalineActive)
+        else if (playerController.rageActive)
         {
-            desiredPitch = 1.9f;
+            desiredPitch = 1.5f;
         }
 
         desiredPitch = desiredPitch + Random.Range(plasmaPitchExtraMagnitude, -plasmaPitchExtraMagnitude);

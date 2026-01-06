@@ -481,10 +481,11 @@ public class SpaceShooterController : MonoBehaviour
 
                 // Determine if the player is looking backward
                 // Dot product: forward along spline vs. player’s forward (or camera forward)
-                float camDot = Vector3.Dot(cameraControllerRef.mainCameraRef.transform.forward, forwardDir);
-                bool invertHorizontal = camDot < 0f;
+                bool invertHorizontal = cameraControllerRef.LookingForward;
+                bool lookingSideways = cameraControllerRef.LookingSideways;
 
                 float adjustedHorizontal = invertHorizontal ? -moveDirection.x : moveDirection.x;
+                adjustedHorizontal = lookingSideways ? 0 : adjustedHorizontal;
 
                 // Compute input offset, flipping left/right if looking backward
                 Vector3 inputOffset = rightDir * adjustedHorizontal * maxOverboostSpeed
@@ -510,7 +511,7 @@ public class SpaceShooterController : MonoBehaviour
                 // Rebuild the offset vector in world space
                 currentOffset = rightDir * rightOffset + upDir * upOffset;
 
-                Debug.Log(currentOffset);
+                //Debug.Log(currentOffset);
 
                 // Apply offset to new spline position
                 Vector3 targetPos = splineNextPos + currentOffset;
@@ -729,8 +730,9 @@ public class SpaceShooterController : MonoBehaviour
             if (rightDir.sqrMagnitude < 0.001f) rightDir = transform.right;
             rightDir.Normalize();
 
-            float camDot = Vector3.Dot(cameraControllerRef.mainCameraRef.transform.forward, forwardDir);
-            bool invertHorizontal = camDot < 0f;
+            bool invertHorizontal = cameraControllerRef.LookingForward;
+            bool lookingSideways = cameraControllerRef.LookingSideways;
+
             horizontal = invertHorizontal ? -horizontal : horizontal;
 
             // --- Compute dodge direction in spline plane only ---
@@ -1131,6 +1133,11 @@ public class SpaceShooterController : MonoBehaviour
     public bool AnySidewaysMovementInput()
     {
         return leftInput != 0 || rightInput != 0;
+    }
+
+    public bool AnyForwardMovementInput()
+    {
+        return forwardInput != 0 || backwardInput != 0;
     }
 
     void OnDrawGizmosSelected()
