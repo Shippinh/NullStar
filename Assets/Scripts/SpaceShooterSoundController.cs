@@ -148,7 +148,7 @@ public class SpaceShooterSoundController : MonoBehaviour
 
         finalMovementPitch += extraMovementPitch;
 
-        Debug.Log(finalMovementPitch);
+        //Debug.Log(finalMovementPitch);
 
         float delta = Time.deltaTime;
         float pitchDelta = (targetMovementPitch - baseMovementPitch) / movementPitchChangeDuration;

@@ -14,13 +14,7 @@ public class SpaceShooterController : MonoBehaviour
     public Rigidbody body;
     public Transform hitboxRef;
     public CameraControllerNew cameraControllerRef;
-
-    [Header("Spline Settings")]
-    public SplineContainer splineContainer; // assign in inspector
-    [Range(0f, 1f)] public float splineT = 0f;
-    public bool loopSpline = true;
-    public float maxSidewaysOffset = 200f;
-    public float maxUpwardOffset = 200f;
+    public RailController railControllerRef;
 
     // Movement
     [field: Header("Basic Movement")]
@@ -62,12 +56,6 @@ public class SpaceShooterController : MonoBehaviour
     [field: Header("Boost Movement")]
     public bool boostMode = false;
     public bool boostInitiated = false;
-    public float boostActivationDelay = 5f;
-    public float boostStaticSpeed = 50f;
-    public bool boostForward = true; 
-    public Vector3 boostDirection;
-    public float boostChargeTimer = 0f;
-
 
     // Dodge System
     [field: Header("Dodge Movement")]
@@ -126,6 +114,7 @@ public class SpaceShooterController : MonoBehaviour
     [field: Header("Other")]
     public bool isCooled = true;
     public bool playerHasControl = true;
+    public float OverboostVelocityDeathLimit {  get; protected set; }
 
     // AI Dynamic Orbit Calculation
     [Header("AI Dynamic Orbit Calculation")]
@@ -210,6 +199,10 @@ public class SpaceShooterController : MonoBehaviour
         overboostOverheatDurationCurrent = 0f;
 
         sampleDirections = GenerateSphereDirections(42); // ~42 evenly distributed directions
+
+        OverboostVelocityDeathLimit = maxOverboostSpeed * 0.65f; // hardcoded = bad, remake this
+
+        railControllerRef = GetComponent<RailController>();
 
         // DEBUG
         //boostDirection = Vector3.zero;
@@ -442,38 +435,8 @@ public class SpaceShooterController : MonoBehaviour
 
                 moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
 
-                // Sample spline
-                splineContainer.Spline.Evaluate(splineT, out float3 splinePos, out float3 splineTangent, out float3 splineUp);
-                //float3 to vector3 because functions don't like float3
-                Vector3 splinePosV = splinePos;
-                Vector3 splineTangentV = splineTangent;
-                splineTangentV.Normalize();
-                Vector3 splineUpV = splineUp;
-
-                // Forward along spline tangent
-                Vector3 forwardDir = splineTangentV.normalized;
-
-                // Up direction
-                Vector3 upDir = splineUpV.normalized;
-
-                // Right direction
-                Vector3 rightDir = Vector3.Cross(upDir, forwardDir);
-                if (rightDir.sqrMagnitude < 0.001f)
-                    rightDir = transform.right;
-                rightDir.Normalize();
-
-
-                // Advance spline (non-physics)
-                // This can be done anywhere in the script, but done here, because of how it's tightly connected to the actual movement logic
-                float splineLength = splineContainer.Spline.CalculateLength(transform.localToWorldMatrix);
-                float splineSpeed = boostStaticSpeed;
-
-                splineT += splineSpeed * Time.deltaTime / splineLength;
-                
-                if (loopSpline) splineT %= 1f;
-                else splineT = Mathf.Clamp01(splineT);
-
-                Vector3 splineNextPos = splineContainer.Spline.EvaluatePosition(splineT);
+                // Evaluate next spline position
+                Vector3 splineNextPos = railControllerRef.GetNextSplinePosition(); //splineContainer.Spline.EvaluatePosition(splineT);
 
                 // Compute input offset in spline plane
                 horizontalSpeed = maxOverboostSpeed;
@@ -488,28 +451,28 @@ public class SpaceShooterController : MonoBehaviour
                 adjustedHorizontal = lookingSideways ? 0 : adjustedHorizontal;
 
                 // Compute input offset, flipping left/right if looking backward
-                Vector3 inputOffset = rightDir * adjustedHorizontal * maxOverboostSpeed
-                                    + upDir * verticalComponent * verticalSpeed;
+                Vector3 inputOffset = railControllerRef.SplineRight * adjustedHorizontal * maxOverboostSpeed
+                                    + railControllerRef.SplineUp * verticalComponent * verticalSpeed;
 
                 // Set Rigidbody lateral velocity
                 desiredVelocity = inputOffset;
 
                 // Current offset from spline
-                Vector3 rawOffset = transform.position - splinePosV;
+                Vector3 rawOffset = transform.position - railControllerRef.SplinePosition;
 
                 // Project offset onto plane perpendicular to spline tangent
-                Vector3 currentOffset = Vector3.ProjectOnPlane(rawOffset, forwardDir);
+                Vector3 currentOffset = Vector3.ProjectOnPlane(rawOffset, railControllerRef.SplineForward);
 
                 // Decompose offset into spline-local axes
-                float rightOffset = Vector3.Dot(currentOffset, rightDir);
-                float upOffset = Vector3.Dot(currentOffset, upDir);
+                float rightOffset = Vector3.Dot(currentOffset, railControllerRef.SplineRight);
+                float upOffset = Vector3.Dot(currentOffset, railControllerRef.SplineUp);
 
                 // Clamp each axis individually
-                rightOffset = Mathf.Clamp(rightOffset, -maxSidewaysOffset, maxSidewaysOffset);
-                upOffset = Mathf.Clamp(upOffset, -maxUpwardOffset, maxUpwardOffset);
+                rightOffset = Mathf.Clamp(rightOffset, railControllerRef.maxSidewaysOffset * -1, railControllerRef.maxSidewaysOffset);
+                upOffset = Mathf.Clamp(upOffset, railControllerRef.maxUpwardOffset * -1, railControllerRef.maxUpwardOffset);
 
                 // Rebuild the offset vector in world space
-                currentOffset = rightDir * rightOffset + upDir * upOffset;
+                currentOffset = railControllerRef.SplineRight * rightOffset + railControllerRef.SplineUp * upOffset;
 
                 //Debug.Log(currentOffset);
 
@@ -518,8 +481,7 @@ public class SpaceShooterController : MonoBehaviour
                 transform.position = targetPos;
 
                 // Align rotation to spline
-                Quaternion splineRotation = Quaternion.LookRotation(forwardDir, splineUpV);
-                transform.rotation = splineRotation;
+                transform.rotation = railControllerRef.SplineRotation;
             }
             else
             {
@@ -716,19 +678,18 @@ public class SpaceShooterController : MonoBehaviour
             float horizontal = rightInput + leftInput;
             float vertical = forwardInput + backwardInput;
 
+            if (cameraControllerRef.LookingSideways)
+            {
+                horizontal = 0f;
+
+                if (vertical == 0f)
+                    return;
+            }
+
             if (horizontal == 0f && vertical == 0f)
                 return;
 
             // --- Sample spline to get orientation ---
-            splineContainer.Spline.Evaluate(splineT, out float3 splinePos, out float3 splineTangent, out float3 splineUp);
-            Vector3 splineTangentV = splineTangent;
-            splineTangentV.Normalize();
-
-            Vector3 forwardDir = splineTangentV;
-            Vector3 upDir = splineUp;
-            Vector3 rightDir = Vector3.Cross(upDir, forwardDir);
-            if (rightDir.sqrMagnitude < 0.001f) rightDir = transform.right;
-            rightDir.Normalize();
 
             bool invertHorizontal = cameraControllerRef.LookingForward;
             bool lookingSideways = cameraControllerRef.LookingSideways;
@@ -739,7 +700,7 @@ public class SpaceShooterController : MonoBehaviour
             Vector3 inputDirection = new Vector3(horizontal, vertical, 0f).normalized;
 
             // Project input onto spline plane (ignore forward along spline)
-            Vector3 dodgeDirection = rightDir * inputDirection.x + upDir * inputDirection.y;
+            Vector3 dodgeDirection = railControllerRef.SplineRight * inputDirection.x + railControllerRef.SplineUp * inputDirection.y;
             dodgeDirection.Normalize();
 
             // --- Forward along spline is ignored for dodge ---
