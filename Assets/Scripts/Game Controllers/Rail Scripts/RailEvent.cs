@@ -1,29 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public enum RailEventType
 {
-    None
+    None = 0,
+    ChangePlayerSpeed = 1,
+    EnableObject = 2
 }
 
-public class RailEvent : MonoBehaviour
+[System.Serializable]
+public class RailEvent
 {
-    [Range(0f, 1f)] public float eventExecutionTime = 0f;
-    public RailEventType eventType;
+    // INNATE FIELDS
+    [Range(0f, 1f)] public float eventTimelinePosition = 0f;
+
+    public RailEventType type;
+
     public bool canShootAgain = false;
     public bool canShoot = true;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // GENERIC FIELDS
+    public int intPtr;
+    public float floatPtr;
+    public bool boolPtr;
+    public Object objectParam;
 }

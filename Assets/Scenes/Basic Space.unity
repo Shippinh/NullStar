@@ -17517,6 +17517,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1309605316}
+  - {fileID: 900380387}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581141921
@@ -21784,9 +21785,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRef: {fileID: 691622029}
-  eventControllerRef: {fileID: 0}
-  eventList: []
-  eventExecutionQueue: []
   splineContainer: {fileID: 1309605317}
   loopSpline: 1
   splineT: 0
@@ -32686,6 +32684,68 @@ MonoBehaviour:
   projectilePool: {fileID: 2147296234}
   tracerPool: {fileID: 0}
   impactEffectPool: {fileID: 0}
+--- !u!1 &900380386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900380387}
+  - component: {fileID: 900380388}
+  m_Layer: 0
+  m_Name: Event Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &900380387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900380386}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 578732855}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900380388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900380386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168141143b4b5e54cbdb72b23c2b427e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  railControllerRef: {fileID: 691622034}
+  eventList:
+  - eventTimelinePosition: 0
+    type: 1
+    canShootAgain: 0
+    canShoot: 0
+    intPtr: 500
+    floatPtr: 10
+    boolPtr: 0
+    objectParam: {fileID: 0}
+  - eventTimelinePosition: 0
+    type: 2
+    canShootAgain: 0
+    canShoot: 0
+    intPtr: 0
+    floatPtr: 0
+    boolPtr: 0
+    objectParam: {fileID: 1666232655}
 --- !u!1 &901317817
 GameObject:
   m_ObjectHideFlags: 0
@@ -61431,12 +61491,12 @@ GameObject:
   - component: {fileID: 1666232661}
   - component: {fileID: 1666232660}
   m_Layer: 10
-  m_Name: Cube
+  m_Name: Barricade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1666232656
 Transform:
   m_ObjectHideFlags: 0

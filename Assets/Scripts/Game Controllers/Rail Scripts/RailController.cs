@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
+
 
 public class RailController : MonoBehaviour
 {
     [Header("References")]
     public SpaceShooterController playerRef;
-    public RailEventController eventControllerRef;
-
-    [Header("Events")]
-    public List<RailEvent> eventList;
-    public List<RailEvent> eventExecutionQueue;
 
     [Header("Spline Settings")]
     public SplineContainer splineContainer; // assign in inspector
@@ -24,7 +19,7 @@ public class RailController : MonoBehaviour
     public float maxUpwardOffset = 200f;
 
     public float defaultSplineSpeed = 250f;
-    public float currentSplineSpeed;
+    public FloatRef currentSplineSpeed;
 
     [Header("Speed Fade")]
     public RailSpeedController boostModeSpeedFade;
@@ -39,16 +34,20 @@ public class RailController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        currentSplineSpeed = defaultSplineSpeed;
-
         if (!playerRef)
             playerRef = GetComponent<SpaceShooterController>();
+
+        currentSplineSpeed.value = defaultSplineSpeed;
+
+        boostModeSpeedFade = new RailSpeedController(currentSplineSpeed, defaultSplineSpeed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateRail(currentSplineSpeed);
+        boostModeSpeedFade.Update();
+
+        UpdateRail(currentSplineSpeed.value);
     }
 
     public void UpdateRail(float speed)
@@ -88,38 +87,40 @@ public class RailController : MonoBehaviour
         return splineContainer.Spline.EvaluatePosition(splineT);
     }
 
+    // dumb stupid hack because i don't want to remake RailSpeedController
+    [Serializable]
+    public class FloatRef
+    {
+        public float value;
+    }
+
     public class RailSpeedController
     {
-        float currentSpeed;
+        FloatRef currentSpeedRef;
+
         float speedTarget;
         float speedSpeed;   // rate of change per second
         bool speedRunning;
 
         float defaultSpeed;
 
-        public RailSpeedController(float defaultSpeed)
+        public RailSpeedController(FloatRef currentSpeedPtr, float defaultSpeedPtr)
         {
-            this.defaultSpeed = defaultSpeed;
-            this.currentSpeed = defaultSpeed;
-            this.speedTarget = defaultSpeed;
-        }
-
-        public float CurrentSpeed
-        {
-            get { return currentSpeed; }
+            currentSpeedRef = currentSpeedPtr;
+            defaultSpeed = defaultSpeedPtr;
         }
 
         public void SetSpeedOverTime(float target, float duration)
         {
             if (duration <= 0f)
             {
-                currentSpeed = target;
+                currentSpeedRef.value = target;
                 speedRunning = false;
                 return;
             }
 
             speedTarget = target;
-            speedSpeed = (target - currentSpeed) / duration;
+            speedSpeed = (target - currentSpeedRef.value) / duration;
             speedRunning = true;
         }
 
@@ -134,17 +135,18 @@ public class RailController : MonoBehaviour
                 return;
 
             float delta = speedSpeed * Time.deltaTime;
-            float remaining = speedTarget - currentSpeed;
+            float remaining = speedTarget - currentSpeedRef.value;
 
             if (Mathf.Abs(delta) >= Mathf.Abs(remaining))
             {
-                currentSpeed = speedTarget;
+                currentSpeedRef.value = speedTarget;
                 speedRunning = false;
             }
             else
             {
-                currentSpeed += delta;
+                currentSpeedRef.value += delta;
             }
         }
     }
 }
+
