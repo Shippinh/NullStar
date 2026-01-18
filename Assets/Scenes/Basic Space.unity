@@ -21786,12 +21786,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRef: {fileID: 691622029}
   splineContainer: {fileID: 1309605317}
-  loopSpline: 1
+  loopSpline: 0
   splineT: 0
   maxSidewaysOffset: 200
   maxUpwardOffset: 200
-  defaultSplineSpeed: 450
-  currentSplineSpeed: 0
+  defaultSplineSpeed: 150
+  currentSplineSpeed:
+    value: 0
 --- !u!1 &694664779
 GameObject:
   m_ObjectHideFlags: 0
@@ -32730,18 +32731,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   railControllerRef: {fileID: 691622034}
   eventList:
-  - eventTimelinePosition: 0
+  - eventTimelinePosition: 0.002
     type: 1
     canShootAgain: 0
-    canShoot: 0
-    intPtr: 500
+    canShoot: 1
+    intPtr: 450
     floatPtr: 10
     boolPtr: 0
     objectParam: {fileID: 0}
-  - eventTimelinePosition: 0
+  - eventTimelinePosition: 0.004
     type: 2
     canShootAgain: 0
-    canShoot: 0
+    canShoot: 1
     intPtr: 0
     floatPtr: 0
     boolPtr: 0

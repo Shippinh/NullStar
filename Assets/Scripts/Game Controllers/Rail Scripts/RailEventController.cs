@@ -84,7 +84,6 @@ public class RailEventController : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    const float markerSize = 0.2f;
     const float labelSpacingPx = 16f;
     const float verticalOffsetPerEvent = 0.25f; // offset for multiple events
 
@@ -103,8 +102,7 @@ public class RailEventController : MonoBehaviour
             float t = group.Key;
             var eventsAtT = group.Value;
 
-            Vector3 baseWorldPos = spline.EvaluatePosition(t);
-            baseWorldPos = l2w.MultiplyPoint(baseWorldPos);
+            Vector3 baseWorldPos = railControllerRef.splineContainer.transform.TransformPoint(spline.EvaluatePosition(t));
 
             for (int i = 0; i < eventsAtT.Count; i++)
             {
@@ -113,8 +111,8 @@ public class RailEventController : MonoBehaviour
                 // Offset slightly along local up vector so cubes don't overlap
                 eventPos += Vector3.up * verticalOffsetPerEvent * i;
 
-                DrawMarker(eventPos - Vector3.up * 47.5f, t);
-                DrawLabels(eventPos - Vector3.up * 42.5f, eventsAtT[i].type.ToString(), i);
+                DrawMarker(eventPos, t);
+                DrawLabels(eventPos + Vector3.up * 5f, eventsAtT[i].type.ToString(), i);
             }
         }
     }
