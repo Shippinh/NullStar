@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Splines;
 using Unity.Mathematics;
+using UnityEditor.Splines;
+using UnityEngine;
+using UnityEngine.LowLevel;
+using UnityEngine.Splines;
 
 //omni.OS
 public class SpaceShooterController : MonoBehaviour
@@ -15,6 +17,7 @@ public class SpaceShooterController : MonoBehaviour
     public Transform hitboxRef;
     public CameraControllerNew cameraControllerRef;
     public RailController railControllerRef;
+    public Transform playerRoot;
 
     // Movement
     [field: Header("Basic Movement")]
@@ -160,7 +163,10 @@ public class SpaceShooterController : MonoBehaviour
     float minGroundDotProduct;
 
     // Internal State Vectors
-    [SerializeField] public Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
+    public Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
+    // Stored offset in spline-local space
+    public Vector2 splineOffset;
+
 
 
     void OnValidate() 
@@ -228,10 +234,14 @@ public class SpaceShooterController : MonoBehaviour
         CalculateDesiredVelocity();
         UpdateState();
 
-        AdjustVelocity();
         if (boostMode)
         {
+            AdjustBoostVelocity();
             AdjustBoostAirVelocity();
+        }
+        else
+        {
+            AdjustVelocity();
         }
         AdjustDodgeVelocity();
 
@@ -451,37 +461,88 @@ public class SpaceShooterController : MonoBehaviour
                 adjustedHorizontal = lookingSideways ? 0 : adjustedHorizontal;
 
                 // Compute input offset, flipping left/right if looking backward
-                Vector3 inputOffset = railControllerRef.SplineRight * adjustedHorizontal * maxOverboostSpeed
-                                    + railControllerRef.SplineUp * verticalComponent * verticalSpeed;
+                //Vector3 inputOffset = railControllerRef.SplineRight * adjustedHorizontal * maxOverboostSpeed
+                //                    + railControllerRef.SplineUp * verticalComponent * verticalSpeed;
 
                 // Set Rigidbody lateral velocity
-                desiredVelocity = inputOffset;
+                //desiredVelocity = inputOffset;
 
                 // Current offset from spline
-                Vector3 rawOffset = transform.position - railControllerRef.SplinePosition;
+                //Vector3 rawOffset = transform.position - railControllerRef.SplinePosition;
 
                 // Project offset onto plane perpendicular to spline tangent
-                Vector3 currentOffset = Vector3.ProjectOnPlane(rawOffset, railControllerRef.SplineForward);
+                //Vector3 currentOffset = Vector3.ProjectOnPlane(rawOffset, railControllerRef.SplineForward);
+
+                // Take current rigidbody velocity
+                Vector3 velocity = body.velocity;
+
+                // Remove spline-forward component (SplineAnimate owns this)
+                Vector3 lateralVelocity =
+                    Vector3.ProjectOnPlane(velocity, railControllerRef.SplineForward);
+
+                // Convert lateral velocity into spline-local axes
+                float rightDelta =
+                    Vector3.Dot(lateralVelocity, railControllerRef.SplineRight) * Time.fixedDeltaTime;
+
+                float upDelta =
+                    Vector3.Dot(lateralVelocity, railControllerRef.SplineUp) * Time.fixedDeltaTime;
+
+                // Accumulate offset (physics-based)
+                splineOffset.x += rightDelta;
+                splineOffset.y += upDelta;
 
                 // Decompose offset into spline-local axes
-                float rightOffset = Vector3.Dot(currentOffset, railControllerRef.SplineRight);
-                float upOffset = Vector3.Dot(currentOffset, railControllerRef.SplineUp);
+                //zfloat rightOffset = Vector3.Dot(currentOffset, railControllerRef.SplineRight);
+                //float upOffset = Vector3.Dot(currentOffset, railControllerRef.SplineUp);
 
                 // Clamp each axis individually
-                rightOffset = Mathf.Clamp(rightOffset, railControllerRef.maxSidewaysOffset * -1, railControllerRef.maxSidewaysOffset);
-                upOffset = Mathf.Clamp(upOffset, railControllerRef.maxUpwardOffset * -1, railControllerRef.maxUpwardOffset);
+                //rightOffset = Mathf.Clamp(rightOffset, railControllerRef.maxSidewaysOffset * -1, railControllerRef.maxSidewaysOffset);
+                //upOffset = Mathf.Clamp(upOffset, railControllerRef.maxUpwardOffset * -1, railControllerRef.maxUpwardOffset);
 
                 // Rebuild the offset vector in world space
-                currentOffset = railControllerRef.SplineRight * rightOffset + railControllerRef.SplineUp * upOffset;
+                //currentOffset = railControllerRef.SplineRight * rightOffset + railControllerRef.SplineUp * upOffset;
 
+                splineOffset.x = Mathf.Clamp(
+                    splineOffset.x,
+                    -railControllerRef.maxSidewaysOffset,
+                     railControllerRef.maxSidewaysOffset
+                );
+
+                splineOffset.y = Mathf.Clamp(
+                    splineOffset.y,
+                    -railControllerRef.maxUpwardOffset,
+                     railControllerRef.maxUpwardOffset
+                );
+
+                transform.localPosition = new Vector3(
+                    splineOffset.x,
+                    splineOffset.y,
+                    0f
+                );
+
+                // Physics velocity only in offset plane
+                desiredVelocity =
+                    railControllerRef.SplineRight * adjustedHorizontal * horizontalSpeed +
+                    railControllerRef.SplineUp * verticalComponent * verticalSpeed;
+
+                // Kill any accidental forward drift
+                desiredVelocity =
+                    Vector3.ProjectOnPlane(desiredVelocity, railControllerRef.SplineForward);
+
+                Quaternion planeRotation = Quaternion.LookRotation(
+                    railControllerRef.SplineForward,
+                    railControllerRef.SplineUp
+                );
+
+                playerRoot.rotation = planeRotation;
                 //Debug.Log(currentOffset);
 
                 // Apply offset to new spline position
-                Vector3 targetPos = splineNextPos + currentOffset;
-                transform.position = targetPos;
+                //Vector3 targetPos = splineNextPos + currentOffset;
+                //transform.position = targetPos;
 
                 // Align rotation to spline
-                transform.rotation = railControllerRef.SplineRotation;
+                //transform.rotation = railControllerRef.SplineRotation;
             }
             else
             {
@@ -544,6 +605,37 @@ public class SpaceShooterController : MonoBehaviour
 
         velocity.y += Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), acceleration * Time.deltaTime);
     }
+
+    void AdjustBoostVelocity()
+    {
+        // Spline plane axes
+        Vector3 rightAxis = railControllerRef.SplineRight;
+        Vector3 upAxis = railControllerRef.SplineUp;
+
+        // Current velocity components in spline space
+        float currentRight = Vector3.Dot(velocity, rightAxis);
+        float currentUp = Vector3.Dot(velocity, upAxis);
+
+        // Desired components in spline space
+        float targetRight = Vector3.Dot(desiredVelocity, rightAxis);
+        float targetUp = Vector3.Dot(desiredVelocity, upAxis);
+
+        float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
+
+        float deltaRight = targetRight - currentRight;
+        float deltaUp = targetUp - currentUp;
+
+        // Accelerate toward desired velocity, spline-local only
+        velocity += rightAxis * Mathf.Sign(deltaRight) *
+            Mathf.Min(Mathf.Abs(deltaRight), acceleration * Time.deltaTime);
+
+        velocity += upAxis * Mathf.Sign(deltaUp) *
+            Mathf.Min(Mathf.Abs(deltaUp), acceleration * Time.deltaTime);
+
+        // Safety: strip any accidental spline-forward drift
+        velocity = Vector3.ProjectOnPlane(velocity, railControllerRef.SplineForward);
+    }
+
 
     void AdjustAirVelocity()
     {
@@ -701,7 +793,7 @@ public class SpaceShooterController : MonoBehaviour
 
             // Project input onto spline plane (ignore forward along spline)
             Vector3 dodgeDirection = railControllerRef.SplineRight * inputDirection.x + railControllerRef.SplineUp * inputDirection.y;
-            dodgeDirection.Normalize();
+            //dodgeDirection.Normalize();
 
             // --- Forward along spline is ignored for dodge ---
             Vector3 finalVelocity = dodgeDirection * dodgeMaxSpeed; // NO spline-forward component
@@ -726,7 +818,19 @@ public class SpaceShooterController : MonoBehaviour
             maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
 
             desiredDodgeVelocity = dodgeDirection;
-            velocity = finalVelocity;
+
+            // Project onto the spline plane (right/up), removing forward component
+            Vector3 lateralVelocity = Vector3.ProjectOnPlane(finalVelocity, railControllerRef.SplineForward);
+
+            // Extra safety: zero out any forward projection
+            lateralVelocity -= railControllerRef.SplineForward * Vector3.Dot(lateralVelocity, railControllerRef.SplineForward);
+
+            // **Set** velocity along spline plane axes instead of adding
+            // Preserve any forward velocity along spline if needed
+            float forwardSpeed = Vector3.Dot(velocity, railControllerRef.SplineForward);
+            velocity = lateralVelocity + railControllerRef.SplineForward * forwardSpeed;
+
+            //velocity = finalVelocity;
         }
 
 
@@ -1111,6 +1215,32 @@ public class SpaceShooterController : MonoBehaviour
 
         Gizmos.color = maxRangeColor;
         Gizmos.DrawWireSphere(transform.position, maxRange);
+    }
+
+    void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        Vector3 center = railControllerRef.SplinePosition;
+
+        Vector3 right = railControllerRef.SplineRight * railControllerRef.maxSidewaysOffset;
+        Vector3 up = railControllerRef.SplineUp * railControllerRef.maxUpwardOffset;
+
+        Vector3 p1 = center + right + up;
+        Vector3 p2 = center + right - up;
+        Vector3 p3 = center - right - up;
+        Vector3 p4 = center - right + up;
+
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawLine(p1, p2);
+        Gizmos.DrawLine(p2, p3);
+        Gizmos.DrawLine(p3, p4);
+        Gizmos.DrawLine(p4, p1);
+
+        // Optional: show plane normal
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(center, railControllerRef.SplineForward * 2f);
     }
 
 }

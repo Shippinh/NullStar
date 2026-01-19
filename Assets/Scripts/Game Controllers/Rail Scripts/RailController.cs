@@ -8,6 +8,7 @@ public class RailController : MonoBehaviour
 {
     [Header("References")]
     public SpaceShooterController playerRef;
+    public SplineAnimate playerSplineAnimateRef;
 
     [Header("Spline Settings")]
     public SplineContainer splineContainer; // assign in inspector
@@ -18,12 +19,6 @@ public class RailController : MonoBehaviour
     public float maxSidewaysOffset = 200f;
     public float maxUpwardOffset = 200f;
 
-    public float defaultSplineSpeed = 250f;
-    public FloatRef currentSplineSpeed;
-
-    [Header("Speed Fade")]
-    public RailSpeedController boostModeSpeedFade;
-
     [field: Header("Spline Cache")]
     public Vector3 SplinePosition { get; private set; }
     public Vector3 SplineForward { get; private set; }
@@ -31,11 +26,20 @@ public class RailController : MonoBehaviour
     public Vector3 SplineRight { get; private set; }
     public Quaternion SplineRotation { get; private set; }
 
+    [Header("Internal Speed Values")]
+    public float defaultSplineSpeed;
+    public FloatRef currentSplineSpeed;
+
+    [Header("Speed Fade")]
+    public RailSpeedController boostModeSpeedFade;
+
     // Start is called before the first frame update
     void Awake()
     {
         if (!playerRef)
             playerRef = GetComponent<SpaceShooterController>();
+
+        defaultSplineSpeed = playerSplineAnimateRef.MaxSpeed;
 
         currentSplineSpeed.value = defaultSplineSpeed;
 
@@ -45,14 +49,21 @@ public class RailController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        boostModeSpeedFade.Update();
-
+        UpdateRailSpeed();
         UpdateRail(currentSplineSpeed.value);
+    }
+
+    public void UpdateRailSpeed()
+    {
+        playerSplineAnimateRef.MaxSpeed = currentSplineSpeed.value;
+
+        boostModeSpeedFade.Update();
     }
 
     public void UpdateRail(float speed)
     {
-        // Sample
+        splineT = playerSplineAnimateRef.NormalizedTime;
+
         splineContainer.Spline.Evaluate(
             splineT,
             out float3 splinePos,
@@ -73,13 +84,6 @@ public class RailController : MonoBehaviour
         SplineUp = up;
         SplineRight = right;
         SplineRotation = Quaternion.LookRotation(forward, up);
-
-        // Advance
-        float splineLength = splineContainer.Spline.CalculateLength(transform.localToWorldMatrix);
-        splineT += speed * Time.deltaTime / splineLength;
-
-        if (loopSpline) splineT %= 1f;
-        else splineT = Mathf.Clamp01(splineT);
     }
 
     public Vector3 GetNextSplinePosition()
