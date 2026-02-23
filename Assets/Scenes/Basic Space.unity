@@ -15861,7 +15861,6 @@ GameObject:
   - component: {fileID: 522300481}
   - component: {fileID: 522300480}
   - component: {fileID: 522300479}
-  - component: {fileID: 522300478}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -15869,53 +15868,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &522300478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 522300477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b6d757185be97747bba95f0372a3689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rail: {fileID: 691622034}
-  xAxis:
-    type: 1
-    customCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    amplitude: 0
-    frequency: 1
-    phase: 0
-  yAxis:
-    type: 1
-    customCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    amplitude: 0
-    frequency: 1
-    phase: 0
-  zAxis:
-    type: 0
-    customCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    amplitude: 0
-    frequency: 1
-    phase: 0
-  driverT: 0
 --- !u!65 &522300479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17655,7 +17607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &578732855
 Transform:
   m_ObjectHideFlags: 0
@@ -21767,8 +21719,8 @@ MonoBehaviour:
   overboostOverheatDurationCurrent: 0
   overboostOverheatDurationRestoreRate: 1
   overboostForward: 1
-  boostMode: 1
-  boostInitiated: 1
+  boostMode: 0
+  boostInitiated: 0
   dodgeMaxSpeed: 250
   dodgeMaxSpeedCap: 0
   perDodgeMaxSpeedIncrease: 10
@@ -21782,7 +21734,7 @@ MonoBehaviour:
   timeSinceLastDodge: 0
   timeToImproveDodgeRechargeRate: 2.5
   dodgeRechargeRate: 4
-  dodgeTimeLimit: 0.1
+  dodgeTimeLimit: 0.05
   isDodging: 0
   rageCharged: 0
   rageActive: 0
@@ -21826,7 +21778,6 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   desiredVelocity: {x: 0, y: 0, z: 0}
   desiredDodgeVelocity: {x: 0, y: 0, z: 0}
-  splineOffset: {x: 0, y: 0}
 --- !u!54 &691622030
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21936,16 +21887,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 691622027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1ae43a0d071b8f4896ff9091c485450, type: 3}
+  m_Script: {fileID: 11500000, guid: 87f75a1995a1cad4593c5bda3e6ff481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRef: {fileID: 691622029}
-  playerSplineAnimateRef: {fileID: 1691204106}
   splineContainer: {fileID: 1309605317}
   loopSpline: 1
   splineT: 0
+  playerRef: {fileID: 691622029}
+  playerSplineAnimateRef: {fileID: 1691204106}
   maxSidewaysOffset: 200
   maxUpwardOffset: 200
+  splineOffset: {x: 0, y: 0}
+  velocity: {x: 0, y: 0, z: 0}
   defaultSplineSpeed: 0
   currentSplineSpeed:
     value: 0
@@ -32898,7 +32851,7 @@ MonoBehaviour:
   - eventTimelinePosition: 0.051
     type: 2
     canShootAgain: 0
-    canShoot: 0
+    canShoot: 1
     intPtr: 0
     floatPtr: 0
     boolPtr: 0
@@ -47536,7 +47489,7 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1309605320
 MeshFilter:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -62485,7 +62438,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691204104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
   m_Name: 
@@ -80683,13 +80636,13 @@ MonoBehaviour:
       type: 3}
     size: 200
   - tag: Adrenaline Projectile
-    prefab: {fileID: 2419084691901430364, guid: 2ad6bdcfa499ff843b9ead211797e0bd,
+    prefab: {fileID: 2419084691901430364, guid: c4f32ca0802096245a866292b28416b4,
       type: 3}
     size: 250
   - tag: Rage-Adrenaline Projectile
     prefab: {fileID: 1781730700649855329, guid: 141b402c76af0f8459512d8b2f5a108e,
       type: 3}
-    size: 300
+    size: 500
   - tag: Sniper Projectile
     prefab: {fileID: 6765627477619855397, guid: 1a4ffb422ce9f3d44a91381cda7fc48d,
       type: 3}

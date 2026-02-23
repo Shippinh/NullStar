@@ -7,7 +7,7 @@ using UnityEngine.Splines;
 public class RailEventController : MonoBehaviour
 {
     [Header("References")]
-    public RailController railControllerRef;
+    public PlayerRailController railControllerRef;
 
     [Header("Events")]
     [SerializeField] public List<RailEvent> eventList = new List<RailEvent>();

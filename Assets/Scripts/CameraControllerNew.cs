@@ -192,18 +192,15 @@ public class CameraControllerNew : MonoBehaviour
         UpdateCamDot();
     }
 
-    private void FixedUpdate()
+
+
+    void LateUpdate()
     {
         if (canRotate)
         {
             CalculateDesiredRotation();
             AdjustOverboostFoV();
         }
-    }
-
-    void LateUpdate()
-    {
-        
 
         ApplyRotation(); // Has to be called here to not cause any jitter
 
