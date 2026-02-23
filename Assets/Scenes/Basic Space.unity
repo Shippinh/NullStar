@@ -80636,7 +80636,7 @@ MonoBehaviour:
       type: 3}
     size: 200
   - tag: Adrenaline Projectile
-    prefab: {fileID: 2419084691901430364, guid: c4f32ca0802096245a866292b28416b4,
+    prefab: {fileID: 2419084691901430364, guid: 2ad6bdcfa499ff843b9ead211797e0bd,
       type: 3}
     size: 250
   - tag: Rage-Adrenaline Projectile
