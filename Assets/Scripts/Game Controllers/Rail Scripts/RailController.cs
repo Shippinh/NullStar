@@ -5,10 +5,19 @@ using UnityEngine.Splines;
 
 public abstract class RailController : MonoBehaviour
 {
+    [Header("References")]
+    public RailMover railMoverRef;
+
+    [Header("Parameters")]
+    public float maxSidewaysOffset = 200f;
+    public float maxUpwardOffset = 200f;
+
     [Header("Spline Settings")]
     public SplineContainer splineContainer; // assign in inspector, this defines the spline we follow
     public bool loopSpline = true;
 
+    [Header("Internal Values")]
+    public Vector2 splineOffset;
     [Range(0f, 1f)] public float splineT = 0f; // CURRENT SPLINE PROGRESS
 
     [field: Header("Spline Cache")]
@@ -18,13 +27,25 @@ public abstract class RailController : MonoBehaviour
     public Vector3 SplineRight { get; protected set; }
     public Quaternion SplineRotation { get; protected set; }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Awake()
     {
-        UpdateRail();
+        Initialize();
     }
 
-    public abstract void UpdateRail();
+    public abstract void EvaluateSpline();
+
+    public virtual void Initialize()
+    {
+        if (!railMoverRef)
+        {
+            railMoverRef = GetComponent<RailMover>();
+        }
+
+        if (!splineContainer && railMoverRef)
+        {
+            splineContainer = railMoverRef.Container;
+        }
+    }
 
     public Vector3 GetNextSplinePosition()
     {

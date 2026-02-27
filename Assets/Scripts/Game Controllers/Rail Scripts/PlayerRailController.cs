@@ -7,14 +7,8 @@ public class PlayerRailController : RailController
 {
     [Header("References")]
     public SpaceShooterController playerRef;
-    public SplineAnimate playerSplineAnimateRef;
-
-    [Header("Parameters")]
-    public float maxSidewaysOffset = 200f;
-    public float maxUpwardOffset = 200f;
 
     [Header("Internal Values")]
-    public Vector2 splineOffset;
     public Vector3 velocity;
 
     [Header("Internal Speed Values")]
@@ -25,12 +19,14 @@ public class PlayerRailController : RailController
     public RailSpeedController boostModeSpeedFade;
 
     // Start is called before the first frame update
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         if (!playerRef)
             playerRef = GetComponent<SpaceShooterController>();
 
-        defaultSplineSpeed = playerSplineAnimateRef.MaxSpeed;
+        defaultSplineSpeed = railMoverRef.MaxSpeed;
 
         currentSplineSpeed.value = defaultSplineSpeed;
 
@@ -38,27 +34,33 @@ public class PlayerRailController : RailController
     }
 
     // Update is called once per framea
-    void FixedUpdate()
+    public void Update()
     {
         if (!playerRef.boostMode) return;
 
         UpdateRailSpeed();
-        UpdateRail();
+    }
 
+    public void FixedUpdate()
+    {
+        if (!playerRef.boostMode) return;
+
+        railMoverRef.Tick(Time.fixedDeltaTime);  // advances spline in fixed step
+        EvaluateSpline();
         ModifyOffset();
         CorrectOrientation();
     }
 
     public void UpdateRailSpeed()
     {
-        playerSplineAnimateRef.MaxSpeed = currentSplineSpeed.value;
+        railMoverRef.MaxSpeed = currentSplineSpeed.value;
 
         boostModeSpeedFade.Update();
     }
-    //
-    public override void UpdateRail()
+    
+    public override void EvaluateSpline()
     {
-        splineT = playerSplineAnimateRef.NormalizedTime;
+        splineT = railMoverRef.NormalizedTime;
 
         splineContainer.Spline.Evaluate(
             splineT,

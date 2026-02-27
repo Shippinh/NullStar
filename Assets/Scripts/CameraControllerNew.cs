@@ -198,13 +198,19 @@ public class CameraControllerNew : MonoBehaviour
     {
         if (canRotate)
         {
-            CalculateDesiredRotation();
+            if(!playerRef.boostMode && !playerRef.boostInitiated)
+                CalculateDesiredRotation();
+            else if(playerRef.boostMode && playerRef.boostInitiated)
+                CalculateDesiredRotationBoostMode();
             AdjustOverboostFoV();
         }
 
-        ApplyRotation(); // Has to be called here to not cause any jitter
+        if (!playerRef.boostMode && !playerRef.boostInitiated)
+            ApplyRotation(); // Has to be called here to not cause any jitter
+        else if (playerRef.boostMode && playerRef.boostInitiated)
+            ApplyRotationBoostMode();
 
-        // Apply any shake after all rotations so it doesn't interfere with rotations
+            // Apply any shake after all rotations so it doesn't interfere with rotations
         if (playerRef.overboostMode && playerRef.overboostOverheatMode)
             AdjustShakeOverheat();
         else
@@ -234,10 +240,34 @@ public class CameraControllerNew : MonoBehaviour
         desiredRotation = Quaternion.Euler(pitch + pitchTilt, yaw, roll);
     }
 
+    private void CalculateDesiredRotationBoostMode()
+    {
+        CalculateTiltAndPitchFromInput();
+
+        yaw += inputX;
+        pitch -= inputY;
+        pitch = Mathf.Clamp(pitch, minRotationY, maxRotationY);
+
+        // Get spline base rotation from rail controller
+        Quaternion splineBase = playerRef.railControllerRef.SplineRotation;
+
+        // Build desired rotation on top of spline orientation
+        desiredRotation = splineBase * Quaternion.Euler(pitch + pitchTilt, yaw, roll);
+    }
+
     // This is the single final desiredRotation application
     private void ApplyRotation()
     {
         mainCameraRef.transform.localRotation = Quaternion.Slerp(mainCameraRef.transform.localRotation, desiredRotation, cameraRotationSpeed);
+    }
+
+    private void ApplyRotationBoostMode()
+    {
+        mainCameraRef.transform.rotation = Quaternion.Slerp(
+            mainCameraRef.transform.rotation,
+            desiredRotation,
+            cameraRotationSpeed
+        );
     }
 
     private void CalculateTiltAndPitchFromInput()
