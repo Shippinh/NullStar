@@ -13,6 +13,19 @@ public class RammerEnemy : MonoBehaviour
     public bool randomizeMaxAirAcceleration = true;
     public bool canMove = true;
 
+    [Header("Chaotic offset parameters")]
+    // Scale chaotic vertical offset based on distance
+    public float minMultiplier = 1f;   // when close
+    public float maxMultiplier = 1000f; // when far
+    public float scalerDistance = 30f; // distance considered "close"
+    public float farDistance = 500f;    // distance considered "far"
+
+    [Range(0, 0.5f)] public float noiseFrequency = 0.5f;
+    public float lateralModifier = 16f;
+    public float verticalModifier = 0.08f;
+    private float seedX;
+    private float seedY;
+
     [Header("Avoidance")]
     public float avoidanceForce = 1000f;  
     public float detectionRadius = 40f;
@@ -43,7 +56,10 @@ public class RammerEnemy : MonoBehaviour
 
         velocity = Vector3.zero;
 
-        if(randomizeMaxAirAcceleration)
+        seedX = Random.Range(0f, 1000f);
+        seedY = Random.Range(0f, 1000f);
+
+        if (randomizeMaxAirAcceleration)
         {
             maxAirAcceleration = Random.Range(maxAirAcceleration - 25f, maxAirAcceleration + 50f);
         }
@@ -77,23 +93,7 @@ public class RammerEnemy : MonoBehaviour
         Vector3 rawToPlayer = player.transform.position - transform.position;
         float distanceToPlayer = rawToPlayer.magnitude;
 
-        // Add chaotic lateral + vertical offsets
-        Vector3 sideOffset = Vector3.Cross(Vector3.up, rawToPlayer).normalized;
-        Vector3 upOffset = Vector3.up;
-
-        float sideStrength = Mathf.PerlinNoise(transform.position.x * 0.5f, Time.time * 0.7f + 42f) - 0.5f;
-        float upStrength = Mathf.PerlinNoise(transform.position.z * 0.5f, Time.time * 0.7f + 42f) - 0.5f;
-
-        // Scale chaotic vertical offset based on distance
-        float minMultiplier = 1f;   // when close
-        float maxMultiplier = 1000f; // when far
-        float scalerDistance = 30f; // distance considered "close"
-        float farDistance = 500f;    // distance considered "far"
-
-        float distanceScaler = Mathf.Clamp01((distanceToPlayer - scalerDistance) / (farDistance - scalerDistance));
-        float finalUpMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, distanceScaler);
-
-        Vector3 chaoticOffset = sideOffset * sideStrength * finalUpMultiplier/16 + upOffset * upStrength * finalUpMultiplier;
+        Vector3 chaoticOffset = CalculateChaoticOffset(rawToPlayer, distanceToPlayer);
 
         // Always move at maxSpeed toward player
         Vector3 toPlayerDir = (rawToPlayer + chaoticOffset).normalized * maxSpeed;
@@ -112,6 +112,27 @@ public class RammerEnemy : MonoBehaviour
         desiredVelocity = combined;
     }
 
+    Vector3 CalculateChaoticOffset(Vector3 rawDirectionToPlayerPtr, float distanceToPlayerPtr)
+    {
+        // --- Stable axes ---
+        Vector3 sideOffset = Vector3.Cross(Vector3.up, rawDirectionToPlayerPtr).normalized;
+        Vector3 upOffset = Vector3.up;
+
+        // --- Perlin noise ---
+        float noiseX = Mathf.PerlinNoise(seedX, Time.time * noiseFrequency) - 0.5f;
+        float noiseY = Mathf.PerlinNoise(seedY, Time.time * noiseFrequency) - 0.5f;
+
+        // --- Scale based on distance (optional for effect) ---
+        float distanceScaler = Mathf.Clamp01((distanceToPlayerPtr - scalerDistance) / (farDistance - scalerDistance));
+        float finalSideMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, distanceScaler) / lateralModifier;
+        float finalUpMultiplier = Mathf.Lerp(minMultiplier, maxMultiplier, distanceScaler) / verticalModifier;
+
+        // --- Combine offsets ---
+        Vector3 lateralNoise = sideOffset * noiseX * finalSideMultiplier;
+        Vector3 verticalNoise = upOffset * noiseY * finalUpMultiplier;
+
+        return lateralNoise + verticalNoise;
+    }
 
 
     Vector3 CalculateObstacleAvoidance()
