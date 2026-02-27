@@ -21,9 +21,9 @@ public static class LerpFactorMethods
     }
 
     // Exponential / Smooth Damp (speed-based)
-    public static float SmoothDamp(float speed, float deltaTime)
+    public static float SmoothDamp(float speed, float t)
     {
-        return 1f - Mathf.Exp(-speed * deltaTime);
+        return 1f - Mathf.Exp(-speed * t);
     }
 
     // Quadratic Ease-in (slow start, fast end)

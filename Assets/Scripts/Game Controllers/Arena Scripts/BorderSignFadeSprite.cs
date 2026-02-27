@@ -38,7 +38,7 @@ public class BorderSignFadeSprite : MonoBehaviour
             player = FindObjectOfType<SpaceShooterController>();
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (!player)
             return;
@@ -78,7 +78,7 @@ public class BorderSignFadeSprite : MonoBehaviour
         Vector3 localMove = right * moveX + up * moveY;
 
         // Move sprite smoothly along its local axes
-        spriteTransform.position += localMove * followSpeed * Time.deltaTime;
+        spriteTransform.position = Vector3.Lerp(spriteTransform.position, spriteTransform.position + localMove, followSpeed * Time.deltaTime * 0.5f);
     }
 
     void UpdateScaleDistance()
