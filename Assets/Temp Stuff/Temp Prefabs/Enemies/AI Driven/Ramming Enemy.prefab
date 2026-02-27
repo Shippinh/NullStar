@@ -54,6 +54,13 @@ MonoBehaviour:
   maxAirAcceleration: 180
   randomizeMaxAirAcceleration: 1
   canMove: 1
+  minMultiplier: 1
+  maxMultiplier: 1000
+  scalerDistance: 30
+  farDistance: 500
+  noiseFrequency: 0.5
+  lateralModifier: 1
+  verticalModifier: 1
   avoidanceForce: 2000
   detectionRadius: 70
   obstacleMask:
@@ -100,7 +107,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &5371080958144277377
