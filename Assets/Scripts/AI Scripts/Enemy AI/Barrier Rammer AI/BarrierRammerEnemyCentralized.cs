@@ -397,6 +397,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             // End the attack after attackTime expires
             if (attackTimer >= currentPreset.attackTime)
             {
+                //Some sort of CD will be eventually implemented
+
                 isAttacking = false;
                 enemiesAligned = false;
                 barrierObj.SetActive(false);
@@ -471,9 +473,6 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             float sideNoise = Mathf.PerlinNoise(Time.time * 0.3f + seed, transform.position.x * 0.15f) - 0.5f;
             float upNoise = Mathf.PerlinNoise(Time.time * 0.33f + seed * 3f, transform.position.z * 0.15f + 11f) - 0.5f;
 
-            float minChaos = 150f;
-            float maxChaos = 300f;
-
         if (isSolo)
         {
             Vector3 toPlayer = player.transform.position - transform.position;
@@ -498,10 +497,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             side = tilt45 * side;
             up = tilt45 * up;
 
-            float closeDist = 100f;
-            float farDist = 200f;
-            float chaosScaler = Mathf.Clamp01((distanceToPlayer - closeDist) / (farDist - closeDist));
-            float chaosRange = Mathf.Lerp(minChaos, maxChaos, chaosScaler);
+            float chaosScaler = Mathf.Clamp01((distanceToPlayer - currentPreset.closeDist) / (currentPreset.farDist - currentPreset.closeDist));
+            float chaosRange = Mathf.Lerp(currentPreset.minChaos, currentPreset.maxChaos, chaosScaler);
 
             Vector3 chaoticOffset = side * sideNoise * chaosRange
                                   + up * upNoise * chaosRange * 0.5f;
@@ -540,7 +537,7 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             Vector3 avoidanceVector = CalculateObstacleAvoidance();
 
             float chaosScaler = Mathf.Clamp01(distanceToPivot / 250f);
-            float chaosRange = Mathf.Lerp(minChaos, maxChaos, chaosScaler);
+            float chaosRange = Mathf.Lerp(currentPreset.minChaos, currentPreset.maxChaos, chaosScaler);
 
             Vector3 side = Vector3.Cross(Vector3.up, toPivotDir).normalized;
             Vector3 up = Vector3.up;

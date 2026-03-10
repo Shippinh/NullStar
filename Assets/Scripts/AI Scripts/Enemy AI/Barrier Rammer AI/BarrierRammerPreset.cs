@@ -12,6 +12,11 @@ public class BarrierRammerPreset : ScriptableObject
     public float maxBurstDistance = 50f;
     public float burstCooldown = 0.5f;
 
+    public float minChaos = 150f;
+    public float maxChaos = 300f;
+    public float closeDist = 100f;
+    public float farDist = 200f;
+
     public bool randomizeSpinDirection = true;
 
     [Header("Spiral Settings (Solo)")]
