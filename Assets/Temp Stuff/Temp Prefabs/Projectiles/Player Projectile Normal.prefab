@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.63899976}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6655808430052826237}
@@ -4862,7 +4862,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.6183655}
+  m_LocalScale: {x: 0.00625, y: 0.00625, z: 0.0772957}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6141923991645896956}
@@ -4951,7 +4951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1a4d8a1d5461448a0f1863d2173082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9000
+  speed: 1125
   maxLifetime: 3
 --- !u!54 &-4321271408785257041
 Rigidbody:

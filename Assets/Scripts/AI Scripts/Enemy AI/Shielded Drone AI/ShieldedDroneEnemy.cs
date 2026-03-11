@@ -134,7 +134,7 @@ public class ShieldedDroneEnemy : MonoBehaviour
             if (turretRef.stopWhenShooting)
             {
                 // Gradual slowdown while charging/sending (keeps behavior consistent)
-                if (turretRef.isChargingShot || turretRef.isSendingShot)
+                if (turretRef.GetShootingState() != TurretBehavior.ShootingState.Charging || turretRef.GetShootingState() != TurretBehavior.ShootingState.Shooting)
                 {
                     float t = Mathf.Clamp01(turretRef.GetWeaponChargeDurationTimer() / turretRef.weaponChargeDuration);
                     float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out

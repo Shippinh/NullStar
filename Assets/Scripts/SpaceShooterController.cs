@@ -5,6 +5,7 @@ using UnityEditor.Splines;
 using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.Splines;
+using static UnityEditor.IMGUI.Controls.CapsuleBoundsHandle;
 
 //omni.OS
 public class SpaceShooterController : MonoBehaviour
@@ -167,6 +168,12 @@ public class SpaceShooterController : MonoBehaviour
     // Stored offset in spline-local space
     //public Vector2 splineOffset;
 
+    [Header("Boost Plane Offsets")]
+    public float currentRightOffset = 0f;
+    public float currentUpOffset = 0f;
+    float currentRightVelocity = 0f;
+    float currentUpVelocity = 0f;
+
 
 
     void OnValidate() 
@@ -208,7 +215,11 @@ public class SpaceShooterController : MonoBehaviour
 
         OverboostVelocityDeathLimit = maxOverboostSpeed * 0.65f; // hardcoded = bad, remake this
 
-        railControllerRef = GetComponent<PlayerRailController>();
+       /* body.isKinematic = true;
+        body.interpolation = RigidbodyInterpolation.Interpolate;
+        body.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;*/
+
+        //railControllerRef = GetComponent<PlayerRailController>();
 
         // DEBUG
         //boostDirection = Vector3.zero;
@@ -231,51 +242,41 @@ public class SpaceShooterController : MonoBehaviour
 
     void FixedUpdate()
     {
-        CalculateDesiredVelocity();
         UpdateState();
 
         if (boostMode)
         {
+            CalculateDesiredVelocity();
             AdjustBoostVelocity();
-            AdjustBoostAirVelocity();
+            AdjustDodgeVelocity();
         }
         else
         {
+            CalculateDesiredVelocity();
             AdjustVelocity();
-        }
-        AdjustDodgeVelocity();
+            AdjustDodgeVelocity();
 
+            if (!OnGround && body.useGravity)
+                ApplyGravity();
 
-        if (!OnGround && body.useGravity) 
-        {
-            ApplyGravity();
-        }
-
-        if (jumpInput && overboostMode == false)
-        {
-            if (OnGround)
+            if (jumpInput && overboostMode == false)
             {
-                Jump();
+                if (OnGround)
+                    Jump();
+                else
+                    AdjustAirVelocity();
             }
-            else
-            {
+
+            if (overboostInitiated)
                 AdjustAirVelocity();
-            }
-        }
-        
-        if (overboostInitiated == true)
-        {
-            AdjustAirVelocity();
+
+            if (healInput)
+                healthController.Heal(100, true);
+
+            body.velocity = velocity;
         }
 
-        if(healInput)
-        {
-            healthController.Heal(100, true);
-        }
-
-        body.velocity = velocity;
         ClearState();
-
         DecayMaxSpeedToDefault();
     }
 
@@ -348,7 +349,7 @@ public class SpaceShooterController : MonoBehaviour
     // Custom gravity
     void ApplyGravity()
     {
-        float gravityMultiplier = 4f; // Increase for stronger gravity
+        float gravityMultiplier = 1f; // Increase for stronger gravity
         velocity += Physics.gravity * gravityMultiplier * Time.fixedDeltaTime;
         if (velocity.y < maxFallSpeed && !overboostMode && !boostMode)
             velocity.y = maxFallSpeed;
@@ -360,17 +361,24 @@ public class SpaceShooterController : MonoBehaviour
         contactNormal = Vector3.zero;
     }
 
-    void UpdateState() 
+    void UpdateState()
     {
-        velocity = body.velocity;
-        if (OnGround) 
+        if (boostMode)
         {
-            if (groundContactCount > 1) 
-            {
-                contactNormal.Normalize();
-            }
+            velocity = railControllerRef.SplineRight * currentRightVelocity
+                     + railControllerRef.SplineUp * currentUpVelocity;
         }
-        else 
+        else
+        {
+            velocity = body.velocity; // will need revisiting when non-boost kinematic transition is done
+        }
+
+        if (OnGround)
+        {
+            if (groundContactCount > 1)
+                contactNormal.Normalize();
+        }
+        else
         {
             contactNormal = Vector3.up;
         }
@@ -452,18 +460,19 @@ public class SpaceShooterController : MonoBehaviour
 
                 // Determine if the player is looking backward
                 // Dot product: forward along spline vs. player’s forward (or camera forward)
-                bool invertHorizontal = cameraControllerRef.LookingForward;
+                bool lookingForward = cameraControllerRef.LookingForward;
                 bool lookingSideways = cameraControllerRef.LookingSideways;
 
-                float adjustedHorizontal = invertHorizontal ? -moveDirection.x : moveDirection.x;
-                adjustedHorizontal = lookingSideways ? 0 : adjustedHorizontal;
+                float adjustedHorizontal = lookingForward ? -moveDirection.x : moveDirection.x; //invert horizontal move direction based on the way the player is looking to
+                adjustedHorizontal = lookingSideways ? 0 : adjustedHorizontal; // stop the horizontal movement if the player is looking sidewas
 
-                // Physics velocity only in offset plane
+                // Then we apply speed and input to the current local spline orientation
                 desiredVelocity =
                     adjustedHorizontal * horizontalSpeed * railControllerRef.SplineRight +
                     verticalComponent * verticalSpeed * railControllerRef.SplineUp;
 
                 // Kill any accidental forward drift
+                // Then we project the current velocity on the rail plane
                 desiredVelocity = Vector3.ProjectOnPlane(desiredVelocity, railControllerRef.SplineForward);
             }
             else
@@ -530,13 +539,8 @@ public class SpaceShooterController : MonoBehaviour
 
     void AdjustBoostVelocity()
     {
-        // Spline plane axes
         Vector3 rightAxis = railControllerRef.SplineRight;
         Vector3 upAxis = railControllerRef.SplineUp;
-
-        // Current velocity components in spline space
-        float currentRight = Vector3.Dot(velocity, rightAxis);
-        float currentUp = Vector3.Dot(velocity, upAxis);
 
         // Desired components in spline space
         float targetRight = Vector3.Dot(desiredVelocity, rightAxis);
@@ -544,18 +548,27 @@ public class SpaceShooterController : MonoBehaviour
 
         float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
 
-        float deltaRight = targetRight - currentRight;
-        float deltaUp = targetUp - currentUp;
+        // Compute velocity toward target
+        float deltaRight = targetRight - currentRightVelocity;
+        float deltaUp = targetUp - currentUpVelocity;
 
-        // Accelerate toward desired velocity, spline-local only
-        velocity += rightAxis * Mathf.Sign(deltaRight) *
-            Mathf.Min(Mathf.Abs(deltaRight), acceleration * Time.fixedDeltaTime);
+        currentRightVelocity += Mathf.Sign(deltaRight) * Mathf.Min(Mathf.Abs(deltaRight), acceleration * Time.fixedDeltaTime);
+        currentUpVelocity += Mathf.Sign(deltaUp) * Mathf.Min(Mathf.Abs(deltaUp), acceleration * Time.fixedDeltaTime);
 
-        velocity += upAxis * Mathf.Sign(deltaUp) *
-            Mathf.Min(Mathf.Abs(deltaUp), acceleration * Time.fixedDeltaTime);
+        // Accumulate into offsets
+        currentRightOffset += currentRightVelocity * Time.fixedDeltaTime;
+        currentUpOffset += currentUpVelocity * Time.fixedDeltaTime;
 
-        // Safety: strip any accidental spline-forward drift
-        velocity = Vector3.ProjectOnPlane(velocity, railControllerRef.SplineForward);
+        // Clamp to limits
+        currentRightOffset = Mathf.Clamp(currentRightOffset, -railControllerRef.maxSidewaysOffset, railControllerRef.maxSidewaysOffset);
+        currentUpOffset = Mathf.Clamp(currentUpOffset, -railControllerRef.maxUpwardOffset, railControllerRef.maxUpwardOffset);
+
+        // Hard stop on limits — kill velocity on that axis if clamped
+        if (Mathf.Abs(currentRightOffset) >= railControllerRef.maxSidewaysOffset && Mathf.Sign(currentRightVelocity) == Mathf.Sign(currentRightOffset))
+            currentRightVelocity = 0f;
+
+        if (Mathf.Abs(currentUpOffset) >= railControllerRef.maxUpwardOffset && Mathf.Sign(currentUpVelocity) == Mathf.Sign(currentUpOffset))
+            currentUpVelocity = 0f;
     }
 
 
@@ -695,7 +708,6 @@ public class SpaceShooterController : MonoBehaviour
             if (cameraControllerRef.LookingSideways)
             {
                 horizontal = 0f;
-
                 if (vertical == 0f)
                     return;
             }
@@ -703,24 +715,15 @@ public class SpaceShooterController : MonoBehaviour
             if (horizontal == 0f && vertical == 0f)
                 return;
 
-            // --- Sample spline to get orientation ---
-
             bool invertHorizontal = cameraControllerRef.LookingForward;
-            bool lookingSideways = cameraControllerRef.LookingSideways;
-
             horizontal = invertHorizontal ? -horizontal : horizontal;
 
-            // --- Compute dodge direction in spline plane only ---
+            // Direction calculation unchanged
             Vector3 inputDirection = new Vector3(horizontal, vertical, 0f).normalized;
+            Vector3 dodgeDirection = railControllerRef.SplineRight * inputDirection.x
+                                   + railControllerRef.SplineUp * inputDirection.y;
 
-            // Project input onto spline plane (ignore forward along spline)
-            Vector3 dodgeDirection = railControllerRef.SplineRight * inputDirection.x + railControllerRef.SplineUp * inputDirection.y;
-            //dodgeDirection.Normalize();
-
-            // --- Forward along spline is ignored for dodge ---
-            Vector3 finalVelocity = dodgeDirection * dodgeMaxSpeed; // NO spline-forward component
-
-            // --- Apply dodge ---
+            // Charge/cooldown logic unchanged
             isDodging = true;
             dodgeTime = 0f;
             timeSinceLastDodge = 0f;
@@ -733,26 +736,16 @@ public class SpaceShooterController : MonoBehaviour
                     break;
                 }
             }
+
             dodgeCharges = Mathf.Max(0, dodgeCharges - 1);
             OnDodgeUsed?.Invoke();
 
             maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
             maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
 
-            desiredDodgeVelocity = dodgeDirection;
-
-            // Project onto the spline plane (right/up), removing forward component
-            Vector3 lateralVelocity = Vector3.ProjectOnPlane(finalVelocity, railControllerRef.SplineForward);
-
-            // Extra safety: zero out any forward projection
-            lateralVelocity -= railControllerRef.SplineForward * Vector3.Dot(lateralVelocity, railControllerRef.SplineForward);
-
-            // **Set** velocity along spline plane axes instead of adding
-            // Preserve any forward velocity along spline if needed
-            float forwardSpeed = Vector3.Dot(velocity, railControllerRef.SplineForward);
-            velocity = lateralVelocity + railControllerRef.SplineForward * forwardSpeed;
-
-            //velocity = finalVelocity;
+            // Instead of setting velocity — set offset velocities directly
+            currentRightVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineRight) * dodgeMaxSpeed;
+            currentUpVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineUp) * dodgeMaxSpeed;
         }
 
 

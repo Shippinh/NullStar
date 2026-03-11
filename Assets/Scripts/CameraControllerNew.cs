@@ -219,6 +219,13 @@ public class CameraControllerNew : MonoBehaviour
         // Apply hands rotation after everything since they just follow
         RotateHandsSmoothly();
         UpdateHandsPositionLag();
+
+        AttachCamera();
+    }
+
+    private void AttachCamera()
+    {
+        transform.position = playerRef.transform.position;
     }
 
     private void HandleMouseInput()
@@ -263,11 +270,7 @@ public class CameraControllerNew : MonoBehaviour
 
     private void ApplyRotationBoostMode()
     {
-        mainCameraRef.transform.rotation = Quaternion.Slerp(
-            mainCameraRef.transform.rotation,
-            desiredRotation,
-            cameraRotationSpeed
-        );
+        mainCameraRef.transform.rotation = Quaternion.Slerp(mainCameraRef.transform.rotation, desiredRotation, cameraRotationSpeed);
     }
 
     private void CalculateTiltAndPitchFromInput()

@@ -53,9 +53,9 @@ MonoBehaviour:
   triggerTimer: 0
   player: {fileID: 0}
   reinitializeOnEnable: 1
-  triggerRange: 300
+  triggerRange: 37.5
   fuseDelay: 2
-  explosionRadius: 250
+  explosionRadius: 31.25
   dieOnExploding: 1
   explodeOnDying: 1
   oneTimeFuse: 1
@@ -103,7 +103,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &4184424767531033703
@@ -125,7 +125,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 25
+  m_Radius: 3.125
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6920089805928584969
 GameObject:
@@ -157,7 +157,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 107702432175919999}
@@ -252,6 +252,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0

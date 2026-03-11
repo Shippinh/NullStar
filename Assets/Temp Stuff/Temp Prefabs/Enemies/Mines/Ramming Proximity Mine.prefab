@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 817507242241292872}
@@ -125,6 +125,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -183,9 +185,9 @@ MonoBehaviour:
   triggerTimer: 0
   player: {fileID: 0}
   reinitializeOnEnable: 1
-  triggerRange: 150
+  triggerRange: 18.75
   fuseDelay: 1.5
-  explosionRadius: 100
+  explosionRadius: 12.5
   dieOnExploding: 1
   explodeOnDying: 0
   oneTimeFuse: 1
@@ -194,15 +196,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 12360
   enemyControllerRef: {fileID: 0}
-  maxSpeed: 200
-  maxAcceleration: 80
-  maxAirAcceleration: 80
+  maxSpeed: 25
+  maxAcceleration: 10
+  maxAirAcceleration: 10
   randomizeMaxAirAcceleration: 0
   canMove: 1
   reinitializeCanMove: 0
   motionlessDrag: 0.5
-  avoidanceForce: 1000
-  detectionRadius: 40
+  avoidanceForce: 125
+  detectionRadius: 5
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
@@ -245,7 +247,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &1540028631258346126
@@ -267,5 +269,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 25
+  m_Radius: 3.125
   m_Center: {x: 0, y: 0, z: 0}

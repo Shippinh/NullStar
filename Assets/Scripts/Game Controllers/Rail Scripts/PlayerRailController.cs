@@ -1,4 +1,3 @@
-using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -7,6 +6,7 @@ public class PlayerRailController : RailController
 {
     [Header("References")]
     public SpaceShooterController playerRef;
+    public Rigidbody body;
 
     [Header("Internal Values")]
     public Vector3 velocity;
@@ -18,7 +18,6 @@ public class PlayerRailController : RailController
     [Header("Speed Fade")]
     public RailSpeedController boostModeSpeedFade;
 
-    // Start is called before the first frame update
     public override void Awake()
     {
         base.Awake();
@@ -26,18 +25,20 @@ public class PlayerRailController : RailController
         if (!playerRef)
             playerRef = GetComponent<SpaceShooterController>();
 
-        defaultSplineSpeed = railMoverRef.MaxSpeed;
+        if (!body)
+            body = playerRef.body;
 
+        defaultSplineSpeed = MaxSpeed;
         currentSplineSpeed.value = defaultSplineSpeed;
-
         boostModeSpeedFade = new RailSpeedController(currentSplineSpeed, defaultSplineSpeed);
+
+        // Initialize spline state so first frame has no pop
+        EvaluateSpline();
     }
 
-    // Update is called once per framea
     public void Update()
     {
         if (!playerRef.boostMode) return;
-
         UpdateRailSpeed();
     }
 
@@ -45,95 +46,26 @@ public class PlayerRailController : RailController
     {
         if (!playerRef.boostMode) return;
 
-        railMoverRef.Tick(Time.fixedDeltaTime);  // advances spline in fixed step
+        TickSpline(Time.fixedDeltaTime);
         EvaluateSpline();
-        ModifyOffset();
-        CorrectOrientation();
+
+        // Spline position + lateral offset owned by SpaceShooterController
+        Vector3 targetPosition = SplinePosition
+            + SplineRight * playerRef.currentRightOffset
+            + SplineUp * playerRef.currentUpOffset;
+
+        body.MovePosition(targetPosition);
+        body.MoveRotation(SplineRotation);
     }
 
     public void UpdateRailSpeed()
     {
-        railMoverRef.MaxSpeed = currentSplineSpeed.value;
-
+        MaxSpeed = currentSplineSpeed.value;
         boostModeSpeedFade.Update();
     }
-    
-    public override void EvaluateSpline()
-    {
-        splineT = railMoverRef.NormalizedTime;
 
-        splineContainer.Spline.Evaluate(
-            splineT,
-            out float3 splinePos,
-            out float3 splineTangent,
-            out float3 splineUp
-        );
-
-        Vector3 forward = ((Vector3)splineTangent).normalized;
-        Vector3 up = ((Vector3)splineUp).normalized;
-
-        Vector3 right = Vector3.Cross(up, forward);
-        if (right.sqrMagnitude < 0.001f)
-            right = transform.right;
-        right.Normalize();
-
-        SplinePosition = splinePos;
-        SplineForward = forward;
-        SplineUp = up;
-        SplineRight = right;
-        SplineRotation = Quaternion.LookRotation(forward, up);
-    }
-
-    public void ModifyOffset()
-    {
-        velocity = playerRef.body.velocity;
-
-        // Remove spline-forward component (SplineAnimate owns this)
-        Vector3 lateralVelocity =
-            Vector3.ProjectOnPlane(velocity, SplineForward);
-
-        // Convert lateral velocity into spline-local axes
-        float rightDelta =
-            Vector3.Dot(lateralVelocity, SplineRight) * Time.fixedDeltaTime;
-
-        float upDelta =
-            Vector3.Dot(lateralVelocity, SplineUp) * Time.fixedDeltaTime;
-
-        // Accumulate offset (physics-based)
-        splineOffset.x += rightDelta;
-        splineOffset.y += upDelta;
-
-        splineOffset.x = Mathf.Clamp(
-                    splineOffset.x,
-                    -maxSidewaysOffset,
-                     maxSidewaysOffset
-                );
-
-        splineOffset.y = Mathf.Clamp(
-            splineOffset.y,
-            -maxUpwardOffset,
-             maxUpwardOffset
-        );
-
-        transform.localPosition = new Vector3(
-            splineOffset.x,
-            splineOffset.y,
-            0f
-        );
-    }
-
-    public void CorrectOrientation()
-    {
-        Quaternion planeRotation = Quaternion.LookRotation(
-                    SplineForward,
-                    SplineUp
-                );
-
-        playerRef.playerRoot.rotation = planeRotation;
-    }
-
-    // dumb stupid hack because i don't want to remake RailSpeedController
-    [Serializable]
+    // Unchanged from before
+    [System.Serializable]
     public class FloatRef
     {
         public float value;
@@ -142,11 +74,9 @@ public class PlayerRailController : RailController
     public class RailSpeedController
     {
         FloatRef currentSpeedRef;
-
         float speedTarget;
-        float speedSpeed;   // rate of change per second
+        float speedSpeed;
         bool speedRunning;
-
         float defaultSpeed;
 
         public RailSpeedController(FloatRef currentSpeedPtr, float defaultSpeedPtr)
@@ -176,8 +106,7 @@ public class PlayerRailController : RailController
 
         public void Update()
         {
-            if (!speedRunning)
-                return;
+            if (!speedRunning) return;
 
             float delta = speedSpeed * Time.fixedDeltaTime;
             float remaining = speedTarget - currentSpeedRef.value;
@@ -199,7 +128,6 @@ public class PlayerRailController : RailController
         if (!Application.isPlaying) return;
 
         Vector3 center = SplinePosition;
-
         Vector3 right = SplineRight * maxSidewaysOffset;
         Vector3 up = SplineUp * maxUpwardOffset;
 
@@ -209,13 +137,11 @@ public class PlayerRailController : RailController
         Vector3 p4 = center - right + up;
 
         Gizmos.color = Color.red;
-
         Gizmos.DrawLine(p1, p2);
         Gizmos.DrawLine(p2, p3);
         Gizmos.DrawLine(p3, p4);
         Gizmos.DrawLine(p4, p1);
 
-        // Optional: show plane normal
         Gizmos.color = Color.red;
         Gizmos.DrawRay(center, SplineForward * 2f);
     }

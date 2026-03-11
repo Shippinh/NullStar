@@ -94,7 +94,7 @@ Transform:
   m_GameObject: {fileID: 2342279754010584055}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: -10}
+  m_LocalPosition: {x: 0.75, y: 0, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -157,7 +157,7 @@ Transform:
   m_GameObject: {fileID: 3527030586409430434}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 0, z: 0}
+  m_LocalPosition: {x: -6.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -220,9 +220,9 @@ MonoBehaviour:
   barrierIsColliding: 0
   barrierLeftAnchor: {fileID: 4893830532546747109}
   barrierRightAnchor: {fileID: 3359396336145572335}
-  duoStats: {fileID: 11400000, guid: 62185ee16aed420449a1df69f7e8cb65, type: 2}
-  soloStats: {fileID: 11400000, guid: 5ddb57e3651f2a640918f48de5c54808, type: 2}
-  currentPreset: {fileID: 11400000, guid: 5ddb57e3651f2a640918f48de5c54808, type: 2}
+  duoStats: {fileID: 11400000, guid: caf6f205bb322eb41bfdbbed58ef4acf, type: 2}
+  soloStats: {fileID: 11400000, guid: ffded47bb30b497458804200ddb49d51, type: 2}
+  currentPreset: {fileID: 11400000, guid: ffded47bb30b497458804200ddb49d51, type: 2}
   isSolo: 0
   randomizeInitialBurstTimer: 1
   maxRandomInitialBurstTimer: 0.025
@@ -250,7 +250,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5388454978139456094}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.125
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -309,6 +309,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 2
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -339,7 +341,7 @@ Transform:
   m_GameObject: {fileID: 5852204460126271340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalPosition: {x: 0, y: 6.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -374,7 +376,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 50, z: 1}
+  m_LocalScale: {x: 12.5, y: 6.25, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4893830532546747109}
@@ -509,7 +511,7 @@ Transform:
   m_GameObject: {fileID: 6829212630817357618}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -50, z: 0}
+  m_LocalPosition: {x: 0, y: -6.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -540,7 +542,7 @@ Transform:
   m_GameObject: {fileID: 7194801529693895135}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 0, z: 0}
+  m_LocalPosition: {x: 6.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -571,7 +573,7 @@ Transform:
   m_GameObject: {fileID: 8039929358547984393}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0, z: -10}
+  m_LocalPosition: {x: -0.75, y: 0, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -661,7 +663,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 437109368918692688}
@@ -694,7 +696,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
+  - {fileID: 2100000, guid: 8be9c0e3e80db5e4abc23ed4adfd77e0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -765,12 +767,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 5
-  CurrentHP: 1
+  CurrentHP: 5
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0

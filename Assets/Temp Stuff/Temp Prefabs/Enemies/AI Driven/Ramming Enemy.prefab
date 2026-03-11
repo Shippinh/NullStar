@@ -49,20 +49,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxSpeed: 400
-  maxAcceleration: 150
-  maxAirAcceleration: 180
+  maxSpeed: 50
+  maxAcceleration: 18.75
+  maxAirAcceleration: 22.5
   randomizeMaxAirAcceleration: 1
   canMove: 1
   minMultiplier: 1
-  maxMultiplier: 1000
-  scalerDistance: 30
-  farDistance: 500
+  maxMultiplier: 125
+  scalerDistance: 3.75
+  farDistance: 62.5
   noiseFrequency: 0.5
   lateralModifier: 1
   verticalModifier: 1
-  avoidanceForce: 2000
-  detectionRadius: 70
+  avoidanceForce: 250
+  detectionRadius: 8.75
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
@@ -91,9 +91,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4300115145832643847}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.125
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -129,7 +129,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 25
+  m_Radius: 3.125
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6484262195363316023
 GameObject:
@@ -161,7 +161,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 119819053985461766}

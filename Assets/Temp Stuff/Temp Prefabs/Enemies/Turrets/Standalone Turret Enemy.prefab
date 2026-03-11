@@ -119,8 +119,8 @@ MonoBehaviour:
   weaponShootDurationTimer: 0
   weaponCooldownDuration: 0
   weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
+  minShootingRange: 0
+  maxShootingRange: 100
   minShootingRangeIncrement: 0
   maxShootingRangeIncrement: 0
   slightyRandomizeDurations: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
     m_Bits: 1024
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
+  projectileSpeed: 37.5
   aimSmoothing: 2
   aimLeadTime: 0.8
   coneMinAngle: 10
@@ -172,7 +172,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!135 &2505562229624137330
@@ -194,7 +194,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 25
+  m_Radius: 3.125
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3583724648847073082
 GameObject:
@@ -258,7 +258,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 600188499461302604}
@@ -353,6 +353,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0

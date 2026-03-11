@@ -13,7 +13,10 @@ public class EntityHealthController : MonoBehaviour
     public bool canBeDamaged = true;                // tells if it can take any damage (in general, it won't take any damage, nor it will react to any if this is false)
     public bool isInvincible = false;               // tells if it can currently take any damage (this controls the on hit invincibility)
     public bool instaKillable = false;              // tells if it can die in one hit (defines if it can be with the soft instakill method InstantlyDie())
-    public bool godMode = false;                    // tells if it can die. THE WAY ITS INTERACTIONS ARE WORKING SHOULD BE AND WILL BE CHANGED LATER, THIS SHIT BREAKS STUFF
+    public bool godMode = false;                    // tells if it can die. 
+
+    public bool shouldInvokeGodModeDeath = false;   // tells if fake death in godmode invokes all death related stuff
+    public bool shouldAutoReviveGodMode = false;          // tells if an entity should be revived in godmode after dying
 
     public float invincibilityDuration = 2f;
     public float currentInvincibilityDuration = 0f;
@@ -132,19 +135,27 @@ public class EntityHealthController : MonoBehaviour
 
     private void DetectDeath()
     {
-        if(isAlive && CurrentHP <= 0)
+        if(isAlive && CurrentHP <= 0 && !godMode)
         {
             // if we detect death in god mode - call death event, revive the entity and don't actually treat it as killed
             Died?.Invoke();
 
-            if (godMode)
-            {
-                // Hard revive, calls methods associated with it
-                Revive(true);
-                return;
-            }
-
             isAlive = false;
+
+        }
+
+        // Special handle for godmode death
+        if (godMode && !isAlive || godMode && CurrentHP <= 0)
+        {
+            //Fake die conditional
+            if(shouldInvokeGodModeDeath)
+                Died?.Invoke();
+
+            // Hard revive
+            if(shouldAutoReviveGodMode)
+                Revive(true);
+            
+            return;
         }
     }
 

@@ -46,42 +46,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 3875856849250664455}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 3875856849250664455}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0.1
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.05
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &98257163566233572
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +136,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 8, z: 30}
+  m_LocalScale: {x: 5, y: 1, z: 3.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6361907061769542803}
@@ -278,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 556134645270651977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -90}
+  m_LocalPosition: {x: 0, y: 0, z: -11.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -298,8 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 591080684505810598}
-  followDistance: 90
-  moveSpeed: 300
+  followDistance: 11.25
+  moveSpeed: 37.5
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
@@ -492,6 +485,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -619,42 +614,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 1210904981972690620}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 1210904981972690620}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.1
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &1347364489837096765
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,19 +693,69 @@ MonoBehaviour:
   - {fileID: 500774628748114686}
   - {fileID: 2983228595052513665}
   projectileTag: Emitter Projectile
-  fireTimer: 0
+  pattern: 2
+  fireRate:
+    value: 0.6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 2
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -728,72 +766,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.75
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &1521821833032964763
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +908,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1066,6 +1055,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1173,7 +1164,7 @@ Transform:
   m_GameObject: {fileID: 2075670907928713673}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -270}
+  m_LocalPosition: {x: 0, y: 0, z: -33.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1193,8 +1184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 8531068538085029563}
-  followDistance: 90
-  moveSpeed: 300
+  followDistance: 11.25
+  moveSpeed: 37.5
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
@@ -1278,19 +1269,69 @@ MonoBehaviour:
   guns:
   - {fileID: 901449801239829876}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.4
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -1301,72 +1342,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 6
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 1
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &2250344145545238906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,6 +1641,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1717,8 +1709,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerCamera: {fileID: 0}
-  maxSpeed: 300
-  maxAcceleration: 300
+  maxSpeed: 37.5
+  maxAcceleration: 37.5
   LOSMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -1732,14 +1724,14 @@ MonoBehaviour:
   pivotChangeInterval: 5
   invertMovementOnNewPivot: 0
   randomizeMovementPatternOnNewPivot: 1
-  avoidanceForce: 1000
-  detectionRadius: 100
+  avoidanceForce: 125
+  detectionRadius: 12.5
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  pivotDistance: 400
-  pivotForwardPush: 50
-  pivotHeightOffset: 50
+  pivotDistance: 50
+  pivotForwardPush: 6.25
+  pivotHeightOffset: 6.25
   reinitializeOnEnable: 1
 --- !u!54 &1620553845512054945
 Rigidbody:
@@ -1749,9 +1741,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2678128455905674578}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.25
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1818,7 +1810,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 8, z: 30}
+  m_LocalScale: {x: 5, y: 1, z: 3.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1756712875400451031}
@@ -2007,19 +1999,69 @@ MonoBehaviour:
   - {fileID: 732229424982279869}
   - {fileID: 8621965839210040792}
   projectileTag: Emitter Projectile
-  fireTimer: 0
+  pattern: 2
+  fireRate:
+    value: 0.6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 2
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -2030,72 +2072,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.75
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &3098422406844270470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,6 +2214,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2432,6 +2425,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2560,42 +2555,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 5522040514758146814}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 5522040514758146814}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.1
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &3988396979929975690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,7 +2613,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 8, z: 30}
+  m_LocalScale: {x: 5, y: 1, z: 3.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2591533961555318548}
@@ -2749,42 +2737,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 5972475601508579400}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 5972475601508579400}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0.1
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.05
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &4428554062398902326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2912,6 +2893,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2980,19 +2963,69 @@ MonoBehaviour:
   - {fileID: 4007186249678619365}
   - {fileID: 3646139194851911515}
   projectileTag: Emitter Projectile
-  fireTimer: 0
+  pattern: 2
+  fireRate:
+    value: 0.6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 2
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -3003,72 +3036,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.75
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &4640357110172794489
 GameObject:
   m_ObjectHideFlags: 0
@@ -3117,19 +3099,69 @@ MonoBehaviour:
   guns:
   - {fileID: 2762146161415246204}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.4
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -3140,72 +3172,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 6
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 1
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &4702938217713874439
 GameObject:
   m_ObjectHideFlags: 0
@@ -3364,6 +3345,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3411,7 +3394,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 8, z: 30}
+  m_LocalScale: {x: 5, y: 1, z: 3.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2389415291586084590}
@@ -3579,7 +3562,7 @@ Transform:
   m_GameObject: {fileID: 5112710015510009924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -225}
+  m_LocalPosition: {x: 0, y: 0, z: -28.125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3599,8 +3582,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 7423732438340960376}
-  followDistance: 90
-  moveSpeed: 300
+  followDistance: 11.25
+  moveSpeed: 37.5
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 0
@@ -3664,7 +3647,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 8, z: 30}
+  m_LocalScale: {x: 5, y: 1, z: 3.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7545642636260268410}
@@ -3790,19 +3773,69 @@ MonoBehaviour:
   guns:
   - {fileID: 7777682366604947622}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.4
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -3813,72 +3846,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 6
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 1
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &5925145631489717334
 GameObject:
   m_ObjectHideFlags: 0
@@ -3957,42 +3939,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 6193905845462995422}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 6193905845462995422}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0.1
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.05
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &6044463562741516978
 GameObject:
   m_ObjectHideFlags: 0
@@ -4039,42 +4014,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 1601700921603996670}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 1601700921603996670}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.1
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &6059306021823373294
 GameObject:
   m_ObjectHideFlags: 0
@@ -4153,42 +4121,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 2202687174224379898}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 2202687174224379898}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0.1
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.05
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &6325198029843370650
 GameObject:
   m_ObjectHideFlags: 0
@@ -4249,7 +4210,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 8, z: 30}
+  m_LocalScale: {x: 5, y: 1, z: 3.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 591080684505810598}
@@ -4373,19 +4334,69 @@ MonoBehaviour:
   guns:
   - {fileID: 2809135026998479127}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.4
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -4396,72 +4407,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 6
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 1
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &6843727418836065194
 GameObject:
   m_ObjectHideFlags: 0
@@ -4583,7 +4543,7 @@ Transform:
   m_GameObject: {fileID: 7247294748736893773}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -135}
+  m_LocalPosition: {x: 0, y: 0, z: -16.875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4603,8 +4563,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 7808610706379538004}
-  followDistance: 90
-  moveSpeed: 300
+  followDistance: 11.25
+  moveSpeed: 37.5
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 0
@@ -4654,42 +4614,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 9196592354581037654}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 9196592354581037654}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.1
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &7570149896214451754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4772,19 +4725,69 @@ MonoBehaviour:
   - {fileID: 4315731135792261683}
   - {fileID: 1371719238936878849}
   projectileTag: Emitter Projectile
-  fireTimer: 0
+  pattern: 2
+  fireRate:
+    value: 0.6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 2
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -4795,72 +4798,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.75
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &8002497645364818529
 GameObject:
   m_ObjectHideFlags: 0
@@ -4887,7 +4839,7 @@ Transform:
   m_GameObject: {fileID: 8002497645364818529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -45}
+  m_LocalPosition: {x: 0, y: 0, z: -5.625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4907,8 +4859,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 5395688352050688654}
-  followDistance: 90
-  moveSpeed: 300
+  followDistance: 11.25
+  moveSpeed: 37.5
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 0
@@ -4990,42 +4942,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 4271194157945600694}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 4271194157945600694}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.1
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &8136599806317427635
 GameObject:
   m_ObjectHideFlags: 0
@@ -5153,6 +5098,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -5252,6 +5199,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -5307,19 +5256,69 @@ MonoBehaviour:
   - {fileID: 8965567402433758442}
   - {fileID: 3130571570350015057}
   projectileTag: Emitter Projectile
-  fireTimer: 0
+  pattern: 2
+  fireRate:
+    value: 0.6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 2
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -5330,72 +5329,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.75
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &8401077743617558281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5473,42 +5421,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 1513481824071272012}
   aimType: 3
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 7168
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 1513481824071272012}
-  gunsPositions: []
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0.1
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.05
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 7168
 --- !u!1 &8672980552760052091
 GameObject:
   m_ObjectHideFlags: 0
@@ -5535,7 +5476,7 @@ Transform:
   m_GameObject: {fileID: 8672980552760052091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -180}
+  m_LocalPosition: {x: 0, y: 0, z: -22.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5555,8 +5496,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 970526073853532891}
-  followDistance: 90
-  moveSpeed: 300
+  followDistance: 11.25
+  moveSpeed: 37.5
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
@@ -5589,7 +5530,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 8, z: 30}
+  m_LocalScale: {x: 5, y: 1, z: 3.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1887742295067787627}
@@ -5794,6 +5735,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -5876,7 +5819,7 @@ Transform:
   m_GameObject: {fileID: 8751906045425272850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -315}
+  m_LocalPosition: {x: 0, y: 0, z: -39.375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5896,8 +5839,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 2034322052118509479}
-  followDistance: 90
-  moveSpeed: 300
+  followDistance: 11.25
+  moveSpeed: 37.5
   rotationSpeed: 30
   localZRotationSpeed: 0
   invertLocalRotation: 0
@@ -5980,19 +5923,69 @@ MonoBehaviour:
   guns:
   - {fileID: 6628021385221065054}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.4
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -6003,72 +5996,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 6
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 1
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &8944835224631642944
 GameObject:
   m_ObjectHideFlags: 0

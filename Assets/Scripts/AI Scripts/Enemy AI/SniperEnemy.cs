@@ -115,7 +115,7 @@ public class SniperEnemy : MonoBehaviour
         {
             CalculateDesiredVelocity(distToPlayer);
 
-            if (turretRef.stopWhenShooting && (turretRef.isChargingShot || turretRef.isSendingShot))
+            if (turretRef.stopWhenShooting && (turretRef.GetShootingState() != TurretBehavior.ShootingState.Charging || turretRef.GetShootingState() != TurretBehavior.ShootingState.Shooting))
             {
                 float t = Mathf.Clamp01(turretRef.GetWeaponChargeDurationTimer() / turretRef.weaponChargeDuration);
                 float easeFactor = 1f - Mathf.Pow(1f - t, 2f); // quadratic easing out

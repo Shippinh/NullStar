@@ -1,24 +1,23 @@
-using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-
 public abstract class RailController : MonoBehaviour
 {
-    [Header("References")]
-    public RailMover railMoverRef;
+    [Header("Spline Settings")]
+    public SplineContainer splineContainer;
+    public bool loopSpline = true;
 
     [Header("Parameters")]
     public float maxSidewaysOffset = 200f;
     public float maxUpwardOffset = 200f;
 
-    [Header("Spline Settings")]
-    public SplineContainer splineContainer; // assign in inspector, this defines the spline we follow
-    public bool loopSpline = true;
+    [Header("Speed")]
+    public float MaxSpeed = 10f;
 
     [Header("Internal Values")]
-    public Vector2 splineOffset;
-    [Range(0f, 1f)] public float splineT = 0f; // CURRENT SPLINE PROGRESS
+    public Vector3 splineOffset;
+    [Range(0f, 1f)] public float splineT = 0f;
 
     [field: Header("Spline Cache")]
     public Vector3 SplinePosition { get; protected set; }
@@ -27,24 +26,50 @@ public abstract class RailController : MonoBehaviour
     public Vector3 SplineRight { get; protected set; }
     public Quaternion SplineRotation { get; protected set; }
 
+    protected float splineLength;
+
     public virtual void Awake()
     {
         Initialize();
     }
 
-    public abstract void EvaluateSpline();
-
     public virtual void Initialize()
     {
-        if (!railMoverRef)
-        {
-            railMoverRef = GetComponent<RailMover>();
-        }
+        if (!splineContainer)
+            Debug.LogError("No SplineContainer assigned to RailController");
 
-        if (!splineContainer && railMoverRef)
-        {
-            splineContainer = railMoverRef.Container;
-        }
+        splineLength = splineContainer.Spline.GetLength();
+    }
+
+    // Replaces RailMover.Tick() — advances splineT, no transform writes
+    public void TickSpline(float dt)
+    {
+        if (splineLength <= 0f) return;
+        splineT = (splineT + (MaxSpeed * dt) / splineLength) % 1f;
+    }
+
+    public virtual void EvaluateSpline()
+    {
+        splineContainer.Spline.Evaluate(
+            splineT,
+            out float3 splinePos,
+            out float3 splineTangent,
+            out float3 splineUp
+        );
+
+        Vector3 forward = ((Vector3)splineTangent).normalized;
+        Vector3 up = ((Vector3)splineUp).normalized;
+
+        Vector3 right = Vector3.Cross(up, forward);
+        if (right.sqrMagnitude < 0.001f)
+            right = transform.right;
+        right.Normalize();
+
+        SplinePosition = splinePos;
+        SplineForward = forward;
+        SplineUp = up;
+        SplineRight = right;
+        SplineRotation = Quaternion.LookRotation(forward, up);
     }
 
     public Vector3 GetNextSplinePosition()
@@ -52,4 +77,3 @@ public abstract class RailController : MonoBehaviour
         return splineContainer.Spline.EvaluatePosition(splineT);
     }
 }
-

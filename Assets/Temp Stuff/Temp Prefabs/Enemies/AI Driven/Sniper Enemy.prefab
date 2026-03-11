@@ -60,7 +60,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7220889228217832968}
@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e3e84b18a84f6574d88cb3cb6c8a0a8c, type: 2}
+  - {fileID: 2100000, guid: 315eba6b106fc3f44a2ebaf3ef37d919, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -165,20 +165,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxSpeed: 400
-  maxAcceleration: 150
-  jetpackAcceleration: 140
-  orbitMaxSpeed: 150
-  orbitMaxAcceleration: 300
-  orbitVerticalAcceleration: 300
+  maxSpeed: 50
+  maxAcceleration: 18.75
+  jetpackAcceleration: 17.5
+  orbitMaxSpeed: 18.75
+  orbitMaxAcceleration: 37.5
+  orbitVerticalAcceleration: 37.5
   orbitSpeedFactor: 1
-  minRange: 300
-  maxRange: 600
+  minRange: 37.5
+  maxRange: 75
   baseMinRange: 0
   baseMaxRange: 0
   tiltSpeed: 45
-  avoidanceForce: 1000
-  detectionRadius: 40
+  avoidanceForce: 125
+  detectionRadius: 5
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
@@ -218,9 +218,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4654918671434767847}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.125
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -256,7 +256,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 25
+  m_Radius: 3.125
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5902727668331518656
 GameObject:
@@ -314,7 +314,7 @@ MonoBehaviour:
   minShootingRange: 0
   maxShootingRange: 0
   minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 300
+  maxShootingRangeIncrement: 37.5
   slightyRandomizeDurations: 0
   randomDurationsRange: 0.1
   randomizeInitialWeaponChargeTimers: 0
@@ -328,7 +328,7 @@ MonoBehaviour:
     m_Bits: 1024
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
+  projectileSpeed: 37.5
   aimSmoothing: 2
   aimLeadTime: 0
   coneMinAngle: 10
@@ -371,7 +371,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6735381522923424525}
@@ -404,7 +404,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
+  - {fileID: 2100000, guid: e3e84b18a84f6574d88cb3cb6c8a0a8c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -466,6 +466,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -497,7 +499,7 @@ Transform:
   m_GameObject: {fileID: 8358988878065079457}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

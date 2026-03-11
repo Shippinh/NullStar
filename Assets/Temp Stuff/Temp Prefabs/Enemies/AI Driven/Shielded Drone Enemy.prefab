@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.13052596, z: -0, w: 0.99144495}
   m_LocalPosition: {x: 115.91113, y: 0, z: -31.058243}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -119,13 +119,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -175,7 +177,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268274, z: -0, w: 0.9238798}
   m_LocalPosition: {x: -84.852905, y: 0, z: 84.85272}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -263,13 +265,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -318,8 +322,8 @@ Transform:
   m_GameObject: {fileID: 1691484190869379611}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 60, y: -50, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 7.5, y: -6.25, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301793332565154896}
@@ -352,7 +356,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
+  - {fileID: 2100000, guid: 315eba6b106fc3f44a2ebaf3ef37d919, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -393,6 +397,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 2
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -463,7 +469,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 120, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -551,13 +557,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -603,7 +611,7 @@ Transform:
   m_GameObject: {fileID: 2215687770485437625}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 545.4116, y: 102.99685, z: 175.86801}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -656,6 +664,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 2
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -692,7 +702,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.13052596, z: -0, w: 0.99144495}
   m_LocalPosition: {x: -115.91113, y: 0, z: 31.058228}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -780,13 +790,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -836,7 +848,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.86602443, z: -0, w: 0.5000018}
   m_LocalPosition: {x: -59.999695, y: 0, z: -103.92322}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -924,13 +936,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -979,8 +993,8 @@ Transform:
   m_GameObject: {fileID: 3206266277248802290}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50, y: 50, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 6.25, y: 6.25, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301793332565154896}
@@ -1013,7 +1027,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
+  - {fileID: 2100000, guid: 315eba6b106fc3f44a2ebaf3ef37d919, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1054,6 +1068,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 2
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1119,7 +1135,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1063897369116997622}
@@ -1179,7 +1195,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.2588186, z: -0, w: 0.965926}
   m_LocalPosition: {x: -103.923096, y: 0, z: 59.99991}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -1267,13 +1283,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1323,7 +1341,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.49999917, z: -0, w: 0.8660259}
   m_LocalPosition: {x: -60.000122, y: 0, z: 103.92297}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -1411,13 +1429,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1467,7 +1487,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7933523, z: -0, w: 0.60876286}
   m_LocalPosition: {x: 31.057983, y: 0, z: 115.91116}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -1555,13 +1575,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1611,7 +1633,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9914446, z: -0, w: 0.13052888}
   m_LocalPosition: {x: -115.91101, y: 0, z: -31.058731}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -1699,13 +1721,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1755,7 +1779,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.2588186, z: -0, w: 0.965926}
   m_LocalPosition: {x: 103.923096, y: 0, z: -59.999924}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -1843,13 +1867,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1898,8 +1924,8 @@ Transform:
   m_GameObject: {fileID: 5304278413628934744}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -60, y: -50, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: -7.5, y: -6.25, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301793332565154896}
@@ -1932,7 +1958,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
+  - {fileID: 2100000, guid: 315eba6b106fc3f44a2ebaf3ef37d919, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1973,6 +1999,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 2
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2038,7 +2066,7 @@ Transform:
   m_GameObject: {fileID: 5338148870313930871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2066,19 +2094,69 @@ MonoBehaviour:
   - {fileID: 7874960088164727175}
   - {fileID: 5512636711920592458}
   projectileTag: Emitter Projectile
-  fireTimer: 0
+  pattern: 1
+  fireRate:
+    value: 0.5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 1
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -2089,72 +2167,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.5
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 1
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &5502201475702021257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,7 +2213,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
   m_LocalPosition: {x: -0.00024414062, y: 0, z: 120}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -2274,13 +2301,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2330,7 +2359,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9914446, z: -0, w: 0.13052888}
   m_LocalPosition: {x: 115.91101, y: 0, z: 31.058746}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -2418,13 +2447,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2474,7 +2505,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.86602443, z: -0, w: 0.5000018}
   m_LocalPosition: {x: 59.999695, y: 0, z: 103.92322}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -2562,13 +2593,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2650,7 +2683,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -120, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -2738,13 +2771,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2794,7 +2829,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9659252, z: -0, w: 0.25882143}
   m_LocalPosition: {x: 103.92285, y: 0, z: 60.000366}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -2882,13 +2917,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2938,7 +2975,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7114655358321472121}
@@ -2971,7 +3008,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6e056a093c7ab2f4d82ffb5f2540e923, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3026,13 +3063,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 15
-  CurrentHP: 15
+  MaxHP: 30
+  CurrentHP: 30
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3084,7 +3123,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.49999917, z: -0, w: 0.8660259}
   m_LocalPosition: {x: 60.000122, y: 0, z: -103.92296}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -3172,13 +3211,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3228,7 +3269,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7933523, z: -0, w: 0.60876286}
   m_LocalPosition: {x: -31.057983, y: 0, z: -115.91116}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -3316,13 +3357,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3372,7 +3415,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9659252, z: -0, w: 0.25882143}
   m_LocalPosition: {x: -103.92285, y: 0, z: -60.000366}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -3460,13 +3503,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3516,7 +3561,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6087605, z: -0, w: 0.79335415}
   m_LocalPosition: {x: -31.058472, y: 0, z: 115.91104}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -3604,13 +3649,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3660,7 +3707,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268274, z: -0, w: 0.9238798}
   m_LocalPosition: {x: 84.852905, y: 0, z: -84.85272}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -3748,13 +3795,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3804,7 +3853,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6087605, z: -0, w: 0.79335415}
   m_LocalPosition: {x: 31.058472, y: 0, z: -115.91104}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -3892,13 +3941,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3948,7 +3999,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.92387867, z: -0, w: 0.38268548}
   m_LocalPosition: {x: 84.85254, y: 0, z: 84.85309}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -4036,13 +4087,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -4092,7 +4145,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
   m_LocalPosition: {x: 0.00024414062, y: 0, z: -120}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -4180,13 +4233,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -4253,20 +4308,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  maxSpeed: 200
-  maxAcceleration: 80
-  jetpackAcceleration: 70
-  orbitMaxSpeed: 150
-  orbitMaxAcceleration: 200
-  orbitVerticalAcceleration: 300
+  maxSpeed: 25
+  maxAcceleration: 10
+  jetpackAcceleration: 8.75
+  orbitMaxSpeed: 18.75
+  orbitMaxAcceleration: 25
+  orbitVerticalAcceleration: 37.5
   orbitSpeedFactor: 1
-  minRange: 50
-  maxRange: 350
+  minRange: 6.25
+  maxRange: 43.75
   baseMinRange: 0
   baseMaxRange: 0
   tiltSpeed: 60
-  avoidanceForce: 1000
-  detectionRadius: 130
+  avoidanceForce: 125
+  detectionRadius: 16.25
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
@@ -4288,7 +4343,7 @@ MonoBehaviour:
   shieldTiltPivot: {fileID: 6127139530685551880}
   shieldRing: {fileID: 2854808593370126626}
   hitboxTransformRef: {fileID: 7237594899270799643}
-  shieldRotationSpeed: 90
+  shieldRotationSpeed: 180
   shieldTiltSpeed: 4
 --- !u!54 &9084587941220844120
 Rigidbody:
@@ -4298,7 +4353,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8707553545667161472}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.125
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4384,42 +4439,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  projectileEmittersControllerRef: {fileID: 7723051723367529157}
   aimType: 2
-  weaponChargeDuration: 3
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 2
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 3
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 0
-  maxShootingRange: 0
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 500
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
   aimTimeToPerfect: 2
   aimResetThreshold: 30
-  projectileSpeed: 300
   aimSmoothing: 2
   aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
   coneMinAngle: 10
   coneMaxAngle: 45
   coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 7723051723367529157}
-  gunsPositions: []
+  minShootingRange: 0
+  maxShootingRange: 0
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 62.5
+  weaponChargeDuration: 3
+  weaponCooldownDuration: 3
+  weaponShootDuration: 2
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.1
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
   stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
+  shootingState: 0
+  hasAngle: 1
   canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &8988679496477544676
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,8 +4498,8 @@ Transform:
   m_GameObject: {fileID: 8988679496477544676}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50, y: 50, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: -6.25, y: 6.25, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1301793332565154896}
@@ -4484,7 +4532,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
+  - {fileID: 2100000, guid: 315eba6b106fc3f44a2ebaf3ef37d919, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4525,6 +4573,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 2
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -4595,7 +4645,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.92387867, z: -0, w: 0.38268548}
   m_LocalPosition: {x: -84.85254, y: 0, z: -84.85309}
-  m_LocalScale: {x: 1, y: 30, z: 15}
+  m_LocalScale: {x: 0.3, y: 45, z: 25.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854808593370126626}
@@ -4683,13 +4733,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 2
-  CurrentHP: 2
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0

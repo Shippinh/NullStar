@@ -499,6 +499,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -726,6 +728,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -921,6 +925,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1065,6 +1071,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1517,6 +1525,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -1826,6 +1836,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2105,7 +2117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &78867104
 Transform:
   m_ObjectHideFlags: 0
@@ -2115,7 +2127,7 @@ Transform:
   m_GameObject: {fileID: 78867103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 228.2, y: 42.6, z: 922.7}
+  m_LocalPosition: {x: 228.2, y: -13.2, z: 487.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2282,6 +2294,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -2902,19 +2916,69 @@ MonoBehaviour:
   guns:
   - {fileID: 2014700244}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 1
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -2925,72 +2989,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &98565955
 GameObject:
   m_ObjectHideFlags: 0
@@ -3016,15 +3029,15 @@ Transform:
   m_GameObject: {fileID: 98565955}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -293.9, y: 41.9, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 910255070}
   - {fileID: 1796481809}
   - {fileID: 8926947518782509707}
-  - {fileID: 425590854}
   - {fileID: 6950077595067920456}
+  - {fileID: 425590854}
   - {fileID: 1478434963}
   m_Father: {fileID: 451543453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3432,6 +3445,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3592,7 +3607,7 @@ Transform:
   m_GameObject: {fileID: 125580269}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -196, y: -2.9, z: -106.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3728,6 +3743,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -3872,6 +3889,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -4016,6 +4035,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -4308,6 +4329,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -4503,6 +4526,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -4678,6 +4703,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -5082,6 +5109,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -5352,6 +5381,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -5641,6 +5672,12 @@ MonoBehaviour:
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
+--- !u!4 &182587176 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 937587681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &183192065
 GameObject:
   m_ObjectHideFlags: 0
@@ -5767,6 +5804,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -6468,6 +6507,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -6931,6 +6972,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -7997,6 +8040,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -8205,6 +8250,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -8400,6 +8447,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -8544,6 +8593,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -8688,6 +8739,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -8722,7 +8775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &299653179
 Transform:
   m_ObjectHideFlags: 0
@@ -9011,6 +9064,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -9155,6 +9210,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -9299,6 +9356,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -9558,6 +9617,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -9768,6 +9829,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -9912,6 +9975,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -10107,6 +10172,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -10251,6 +10318,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -10283,7 +10352,7 @@ GameObject:
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10328,7 +10397,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 50000
   field of view: 105
   orthographic: 0
@@ -10357,7 +10426,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.075, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10664,6 +10733,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -11028,6 +11099,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -11502,6 +11575,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -11926,19 +12001,69 @@ MonoBehaviour:
   guns:
   - {fileID: 1508065311}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 1
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -11949,72 +12074,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &404054511
 GameObject:
   m_ObjectHideFlags: 0
@@ -12141,6 +12215,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -12285,6 +12361,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -12429,6 +12507,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -12644,13 +12724,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 691622029}
-  showDistance: 500
+  showDistance: 93.75
   fadeSpeed: 50
-  scaleFactor: 0.05
-  scaleDistanceMin: 300
+  scaleFactor: 0.2
+  scaleDistanceMin: 56.25
   distance: 0
   scale: 1
-  followSpeed: 5
+  followSpeed: 10
 --- !u!43 &416404062
 Mesh:
   m_ObjectHideFlags: 0
@@ -13215,12 +13295,12 @@ Transform:
   m_GameObject: {fileID: 425590853}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -120, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1091080408300720152}
-  - {fileID: 8197987269842403357}
+  - {fileID: 1200556519}
+  - {fileID: 182587176}
   m_Father: {fileID: 98565956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &429704009
@@ -13987,6 +14067,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -14055,7 +14137,7 @@ MonoBehaviour:
   particleSystemRef: {fileID: 1861469719}
   player: {fileID: 691622029}
   invisibleFollower: {fileID: 1141737860}
-  showDistance: 200
+  showDistance: 100
   constrainDepth: 1
   topConstraint: 0
   constrainPositionY: 250
@@ -14673,6 +14755,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -15071,7 +15155,7 @@ MonoBehaviour:
   childPivot: {fileID: 0}
   enemyA: {fileID: 800206219}
   enemyB: {fileID: 0}
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   barrierObj: {fileID: 0}
   barrierIsColliding: 0
   barrierLeftAnchor: {fileID: 0}
@@ -15291,19 +15375,69 @@ MonoBehaviour:
   guns:
   - {fileID: 1009202293}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 1
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -15314,72 +15448,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &499208938
 GameObject:
   m_ObjectHideFlags: 0
@@ -15665,6 +15748,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -15911,6 +15996,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -16055,6 +16142,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -16199,6 +16288,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -16343,6 +16434,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -16687,6 +16780,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -17108,6 +17203,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -17252,6 +17349,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -17336,7 +17435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &578732855
 Transform:
   m_ObjectHideFlags: 0
@@ -17480,6 +17579,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -17675,6 +17776,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -17819,6 +17922,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -17885,19 +17990,69 @@ MonoBehaviour:
   guns:
   - {fileID: 1308172115}
   projectileTag: Emitter Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 0
   maxSequenceShots: 5
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 2
-  sequenceTimer: 0
   useRecharge: 0
   rechargeTime: 0
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 0
   scaleWithEachShot: 0
   radiusTarget: 5
   projectileCountTarget: 6
@@ -17908,72 +18063,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 6
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 1
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 1
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 0
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &589560470
 GameObject:
   m_ObjectHideFlags: 0
@@ -18454,6 +18558,74 @@ Transform:
   - {fileID: 430597115}
   m_Father: {fileID: 1519034309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &616867920
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 425590854}
+    m_Modifications:
+    - target: {fileID: 4459130529708940694, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_Name
+      value: Barrier Rammer Enemy Duo
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 339acf193ae46c848bad67eddab1237b, type: 3}
 --- !u!850595691 &618072529
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -18644,6 +18816,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -18687,7 +18861,7 @@ Transform:
   m_GameObject: {fileID: 619769865}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.3, z: 0.8}
+  m_LocalPosition: {x: -0.125, y: 0.075, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18820,6 +18994,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -19015,6 +19191,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -19236,6 +19414,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -19355,7 +19535,7 @@ MonoBehaviour:
   particleSystemRef: {fileID: 1520505427}
   player: {fileID: 691622029}
   invisibleFollower: {fileID: 1137215784}
-  showDistance: 200
+  showDistance: 100
   constrainDepth: 1
   topConstraint: 1
   constrainPositionY: -250
@@ -19518,6 +19698,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -19737,6 +19919,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -19932,6 +20116,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -20077,7 +20263,7 @@ Transform:
   m_GameObject: {fileID: 657565284}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.3, z: 0.8}
+  m_LocalPosition: {x: 0.0625, y: 0.0375, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20210,6 +20396,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -20405,6 +20593,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -20570,7 +20760,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 912520039}
@@ -20665,6 +20855,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -20902,6 +21094,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -21046,6 +21240,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -21190,6 +21386,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -21268,6 +21466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 691622028}
+  - component: {fileID: 691622035}
   - component: {fileID: 691622029}
   - component: {fileID: 691622030}
   - component: {fileID: 691622032}
@@ -21295,7 +21494,7 @@ Transform:
   m_Children:
   - {fileID: 1592044616}
   - {fileID: 675718028}
-  m_Father: {fileID: 1649139883}
+  m_Father: {fileID: 1691204105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &691622029
 MonoBehaviour:
@@ -21316,29 +21515,29 @@ MonoBehaviour:
   cameraControllerRef: {fileID: 1914964613}
   railControllerRef: {fileID: 691622034}
   playerRoot: {fileID: 1691204105}
-  maxSpeed: 110
-  maxVerticalSpeed: 55
-  maxFallSpeed: -75
-  maxAcceleration: 110
-  maxAirAcceleration: 110
-  jumpForce: 10
-  maxSpeedDecayRate: 81.6
-  jetpackAcceleration: 150
+  maxSpeed: 13.75
+  maxVerticalSpeed: 6.875
+  maxFallSpeed: -9.375
+  maxAcceleration: 13.75
+  maxAirAcceleration: 13.75
+  jumpForce: 1.25
+  maxSpeedDecayRate: 10.2
+  jetpackAcceleration: 18.75
   defaultMaxSpeed: 0
   overboostMode: 0
   overboostOverheatMode: 0
   overboostInitiated: 0
   overboostActivationDelay: 0.5
   overboostChargeTimer: 0
-  maxOverboostInitiationSpeed: 5
-  maxExtraOverboostSpeed: 200
+  maxOverboostInitiationSpeed: 2.5
+  maxExtraOverboostSpeed: 25
   defaultMaxExtraOverboostSpeed: 0
   currentExtraOverboostSpeed: 0
-  extraOverboostSpeedRate: 8
-  maxOverboostSpeed: 200
+  extraOverboostSpeedRate: 1
+  maxOverboostSpeed: 25
   defaultMaxOverboostSpeed: 0
   overboostTurnMultiplier: 0.4
-  maxOverboostVerticalSpeed: 200
+  maxOverboostVerticalSpeed: 25
   overboostDuration: 7.5
   overboostDurationCurrent: 0
   overboostDurationRestoreRate: 3
@@ -21346,12 +21545,12 @@ MonoBehaviour:
   overboostOverheatDurationCurrent: 0
   overboostOverheatDurationRestoreRate: 1
   overboostForward: 1
-  boostMode: 1
-  boostInitiated: 1
-  dodgeMaxSpeed: 250
+  boostMode: 0
+  boostInitiated: 0
+  dodgeMaxSpeed: 31.25
   dodgeMaxSpeedCap: 0
-  perDodgeMaxSpeedIncrease: 10
-  perDodgeMaxOverboostSpeedIncrease: 15
+  perDodgeMaxSpeedIncrease: 1.25
+  perDodgeMaxOverboostSpeedIncrease: 1.875
   dodgeMaxOverboostSpeedCap: 0
   maxDodgeCharges: 6
   dodgeCharges: 0
@@ -21389,9 +21588,9 @@ MonoBehaviour:
   lastExclusiveDirectionalInput: {x: 0, y: 0, z: 1}
   isCooled: 1
   playerHasControl: 1
-  baseMinRange: 1000
-  baseMaxRange: 1500
-  safeBuffer: 5
+  baseMinRange: 125
+  baseMaxRange: 187.5
+  safeBuffer: 0.625
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -21405,6 +21604,8 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   desiredVelocity: {x: 0, y: 0, z: 0}
   desiredDodgeVelocity: {x: 0, y: 0, z: 0}
+  currentRightOffset: 0
+  currentUpOffset: 0
 --- !u!54 &691622030
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21413,7 +21614,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691622027}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.125
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -21501,10 +21702,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.03125
   m_Height: 0
   m_Direction: 1
-  m_Center: {x: 0, y: 0.25, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &691622034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21512,23 +21713,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691622027}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87f75a1995a1cad4593c5bda3e6ff481, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localSplineRef: {fileID: 1649139884}
-  maxSidewaysOffset: 200
-  maxUpwardOffset: 200
   splineContainer: {fileID: 1309605317}
   loopSpline: 1
-  splineOffset: {x: 0, y: 0}
+  maxSidewaysOffset: 200
+  maxUpwardOffset: 200
+  MaxSpeed: 4.5
+  splineOffset: {x: 0, y: 0, z: 0}
   splineT: 0
   playerRef: {fileID: 691622029}
+  body: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   defaultSplineSpeed: 0
   currentSplineSpeed:
     value: 0
+--- !u!114 &691622035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691622027}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6e315c49699954a9b22bbb636cb432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &694664779
 GameObject:
   m_ObjectHideFlags: 0
@@ -22042,6 +22256,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -22285,6 +22501,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -22563,6 +22781,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -22758,6 +22978,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -22902,6 +23124,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -23449,6 +23673,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -23815,6 +24041,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -23926,7 +24154,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 330585545}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -24607,6 +24835,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -24853,6 +25083,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -25134,6 +25366,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -25278,6 +25512,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -25422,6 +25658,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -25566,6 +25804,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -26432,6 +26672,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -26576,6 +26818,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -26900,6 +27144,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -26946,7 +27192,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1337088088}
@@ -27279,7 +27525,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -31883,6 +32129,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -32288,7 +32536,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.07578941, y: 0.07715, z: 1}
+  m_LocalScale: {x: 0.009375, y: 0.00875, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 642446554}
@@ -32420,8 +32668,8 @@ MonoBehaviour:
     type: 1
     canShootAgain: 0
     canShoot: 1
-    intPtr: 900
-    floatPtr: 10
+    intPtr: 9
+    floatPtr: 0
     boolPtr: 0
     objectParam: {fileID: 0}
   - eventTimelinePosition: 0.051
@@ -32558,6 +32806,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -32860,6 +33110,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -33082,19 +33334,69 @@ MonoBehaviour:
   guns:
   - {fileID: 18782611}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 1
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -33105,72 +33407,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!4 &910255070 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4537677740375504978, guid: f4b32ef00873d1749ba528b9305a2412,
@@ -33303,6 +33554,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -33396,13 +33649,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912520038}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 678597647}
-  m_Father: {fileID: 1783674212}
+  m_Father: {fileID: 1517333846}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &913216333 stripped
 Transform:
@@ -33445,19 +33698,69 @@ MonoBehaviour:
   - {fileID: 2053862174}
   - {fileID: 165439223}
   projectileTag: Emitter Projectile
-  fireTimer: 0
+  pattern: 1
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 1
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 1
+  resetOnRecharge: 1
   scaleWithEachShot: 1
   radiusTarget: 2
   projectileCountTarget: 4
@@ -33468,72 +33771,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 5
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 1
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 1
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!4 &914146298
 Transform:
   m_ObjectHideFlags: 0
@@ -33720,6 +33972,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -34068,6 +34322,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -34086,6 +34342,79 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!1001 &937587681
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 425590854}
+    m_Modifications:
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468824057757409567, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863146051153493190, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_Name
+      value: Barrier Rammer Enemy Solo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863146051153493190, guid: 996af2e5d266eaf499745b13df6314ff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 996af2e5d266eaf499745b13df6314ff, type: 3}
 --- !u!1 &941157099
 GameObject:
   m_ObjectHideFlags: 0
@@ -34570,6 +34899,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -34765,6 +35096,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -34830,13 +35163,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 691622029}
-  showDistance: 500
+  showDistance: 93.75
   fadeSpeed: 50
-  scaleFactor: 0.05
-  scaleDistanceMin: 300
+  scaleFactor: 0.2
+  scaleDistanceMin: 56.25
   distance: 0
   scale: 1
-  followSpeed: 5
+  followSpeed: 10
 --- !u!1 &967585671
 GameObject:
   m_ObjectHideFlags: 0
@@ -34963,6 +35296,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -35107,6 +35442,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -35608,6 +35945,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -35985,6 +36324,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -36129,6 +36470,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -36439,6 +36782,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -36651,6 +36996,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -36795,6 +37142,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -37801,6 +38150,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -38083,6 +38434,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -38227,6 +38580,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -38461,6 +38816,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -38605,6 +38962,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -38870,6 +39229,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -39014,6 +39375,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -39245,6 +39608,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -39288,8 +39653,8 @@ Transform:
   m_GameObject: {fileID: 1086891026}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -198, y: -45, z: -914}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 771960071}
@@ -39476,6 +39841,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -39824,6 +40191,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -40188,6 +40557,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -40466,6 +40837,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -40844,6 +41217,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -40945,38 +41320,6 @@ MonoBehaviour:
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
---- !u!1 &1138562742
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1138562743}
-  m_Layer: 0
-  m_Name: Rammin Enemy Obj
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1138562743
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138562742}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1834772820}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1139771991
 GameObject:
   m_ObjectHideFlags: 0
@@ -41224,6 +41567,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -41539,6 +41884,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -41734,6 +42081,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -41878,6 +42227,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -42022,6 +42373,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -42172,13 +42525,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 691622029}
-  showDistance: 500
+  showDistance: 93.75
   fadeSpeed: 50
-  scaleFactor: 0.05
-  scaleDistanceMin: 300
+  scaleFactor: 0.2
+  scaleDistanceMin: 56.25
   distance: 0
   scale: 1
-  followSpeed: 5
+  followSpeed: 10
 --- !u!1 &1173439525
 GameObject:
   m_ObjectHideFlags: 0
@@ -42732,6 +43085,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 0
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -42962,6 +43317,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -43106,6 +43463,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -43250,6 +43609,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -43370,6 +43731,12 @@ MonoBehaviour:
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
+--- !u!4 &1200556519 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4872455192236830183, guid: 339acf193ae46c848bad67eddab1237b,
+    type: 3}
+  m_PrefabInstance: {fileID: 616867920}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1204629325
 GameObject:
   m_ObjectHideFlags: 0
@@ -43496,6 +43863,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -43722,6 +44091,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -44347,6 +44718,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -44491,6 +44864,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -44714,6 +45089,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -44816,8 +45193,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1249535331}
+  - component: {fileID: 1249535332}
   m_Layer: 3
-  m_Name: Turret
+  m_Name: Turret Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44831,14 +45209,56 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249535330}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 589338037}
-  m_Father: {fileID: 1783674212}
+  m_Father: {fileID: 1517333846}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1249535332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1249535330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e3bf646b0f6eb41887eb5776c8b6d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 691622029}
+  projectileEmittersControllerRef: {fileID: 589338038}
+  aimType: 0
+  aimTimeToPerfect: 2
+  aimResetThreshold: 30
+  aimSmoothing: 2
+  aimLeadTime: 0.8
+  playerOverboostSimpleAim: 0
+  coneMinAngle: 10
+  coneMaxAngle: 45
+  coneBlendStrength: 1
+  minShootingRange: 12.5
+  maxShootingRange: 100
+  minShootingRangeIncrement: 0
+  maxShootingRangeIncrement: 0
+  weaponChargeDuration: 0
+  weaponCooldownDuration: 0
+  weaponShootDuration: 0
+  slightlyRandomizeDurations: 1
+  randomDurationsRange: 0.1
+  randomizeInitialChargeTimer: 1
+  randomizeStopWhenShooting: 0
+  stopWhenShooting: 0
+  shootingState: 0
+  hasAngle: 1
+  canAct: 1
+  stateTimer: 0
+  losCheck:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1253245149
 GameObject:
   m_ObjectHideFlags: 0
@@ -44965,6 +45385,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -45140,6 +45562,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -45409,13 +45833,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 691622029}
-  showDistance: 500
+  showDistance: 93.75
   fadeSpeed: 50
-  scaleFactor: 0.05
-  scaleDistanceMin: 300
+  scaleFactor: 0.2
+  scaleDistanceMin: 56.25
   distance: 0
   scale: 1
-  followSpeed: 5
+  followSpeed: 10
 --- !u!1 &1270264694
 GameObject:
   m_ObjectHideFlags: 0
@@ -46042,6 +46466,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -46406,6 +46832,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -46601,6 +47029,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -46940,7 +47370,7 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1309605320
 MeshFilter:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -47072,6 +47502,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -47369,6 +47801,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -47700,7 +48134,7 @@ MonoBehaviour:
   particleSystemRef: {fileID: 870874551}
   player: {fileID: 691622029}
   invisibleFollower: {fileID: 1919988096}
-  showDistance: 200
+  showDistance: 100
   constrainDepth: 1
   topConstraint: 0
   constrainPositionY: 250
@@ -47969,6 +48403,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -48337,7 +48773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1376875054
 Transform:
   m_ObjectHideFlags: 0
@@ -48347,8 +48783,8 @@ Transform:
   m_GameObject: {fileID: 1376875052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -221, y: 3.4874992, z: -812.1775}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -13.8125, y: 0.21796867, z: -50.7611}
+  m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2097749746}
@@ -48492,13 +48928,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 691622029}
-  showDistance: 500
+  showDistance: 93.75
   fadeSpeed: 50
-  scaleFactor: 0.05
-  scaleDistanceMin: 300
+  scaleFactor: 0.2
+  scaleDistanceMin: 56.25
   distance: 0
   scale: 1
-  followSpeed: 5
+  followSpeed: 10
 --- !u!1 &1382828160
 GameObject:
   m_ObjectHideFlags: 0
@@ -48676,6 +49112,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -48871,6 +49309,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -49066,6 +49506,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -49261,6 +49703,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -49456,6 +49900,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -49991,6 +50437,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -50228,6 +50676,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -50372,6 +50822,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -50567,6 +51019,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -50669,7 +51123,7 @@ MonoBehaviour:
   childPivot: {fileID: 0}
   enemyA: {fileID: 1904587056}
   enemyB: {fileID: 1988496053}
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   barrierObj: {fileID: 1212644279}
   barrierIsColliding: 0
   barrierLeftAnchor: {fileID: 792258843}
@@ -50764,19 +51218,69 @@ MonoBehaviour:
   guns:
   - {fileID: 216594060}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 1
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -50787,72 +51291,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &1456760159
 GameObject:
   m_ObjectHideFlags: 0
@@ -51168,6 +51621,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -51312,6 +51767,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -51488,6 +51945,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -51848,6 +52307,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -51992,6 +52453,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -52227,6 +52690,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508065310}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1517333845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517333846}
+  m_Layer: 0
+  m_Name: Mesh and Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1517333846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517333845}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 912520039}
+  - {fileID: 1249535331}
+  m_Father: {fileID: 1783674212}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1518494607
 GameObject:
   m_ObjectHideFlags: 0
@@ -52404,6 +52900,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -52822,7 +53320,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -57970,6 +58468,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -58114,6 +58614,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -58289,6 +58791,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -58661,6 +59165,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -58805,6 +59311,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -58985,8 +59493,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1914964612}
+  m_Children: []
   m_Father: {fileID: 691622028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1596985589
@@ -59115,6 +59622,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -59457,6 +59966,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -59601,6 +60112,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -59796,6 +60309,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -60272,6 +60787,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -60296,63 +60813,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4790460235060863296}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1649139882
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1649139883}
-  - component: {fileID: 1649139884}
-  m_Layer: 6
-  m_Name: Spline Animate
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1649139883
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649139882}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1984151498}
-  - {fileID: 691622028}
-  m_Father: {fileID: 1691204105}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1649139884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649139882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 1309605317}
-  m_PlayOnAwake: 1
-  m_LoopMode: 1
-  m_Method: 1
-  m_Duration: 47.42755
-  m_MaxSpeed: 450
-  m_EasingMode: 0
-  m_AlignmentMode: 0
-  m_ObjectForwardAxis: 2
-  m_ObjectUpAxis: 1
-  m_StartOffset: 0
 --- !u!1 &1653994959
 GameObject:
   m_ObjectHideFlags: 0
@@ -60530,6 +60990,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -60964,6 +61426,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 2
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -61404,6 +61868,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -61619,6 +62085,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -61662,11 +62130,13 @@ Transform:
   m_GameObject: {fileID: 1691204104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.008888245, y: 47.8, z: 0.041992188}
+  m_LocalPosition: {x: 0, y: 22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1649139883}
+  - {fileID: 1984151498}
+  - {fileID: 1914964612}
+  - {fileID: 691622028}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1693146860
@@ -62424,6 +62894,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -62568,6 +63040,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -62812,6 +63286,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -63077,6 +63553,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -63221,6 +63699,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -63365,6 +63845,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -63509,6 +63991,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -64339,6 +64823,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -64403,7 +64889,6 @@ GameObject:
   - component: {fileID: 1783674212}
   - component: {fileID: 1783674208}
   - component: {fileID: 1783674207}
-  - component: {fileID: 1783674214}
   - component: {fileID: 1783674213}
   m_Layer: 3
   m_Name: Example Turret (Attachable)
@@ -64469,12 +64954,11 @@ Transform:
   m_GameObject: {fileID: 1783674205}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -316.88843, y: 73.23368, z: 94.81622}
+  m_LocalPosition: {x: 50, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 912520039}
-  - {fileID: 1249535331}
+  - {fileID: 1517333846}
   m_Father: {fileID: 1858685530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1783674213
@@ -64490,55 +64974,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 678597651}
---- !u!114 &1783674214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1783674205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e3bf646b0f6eb41887eb5776c8b6d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 691622029}
-  aimType: 0
-  weaponChargeDuration: 0
-  weaponChargeDurationTimer: 0
-  weaponShootDuration: 0
-  weaponShootDurationTimer: 0
-  weaponCooldownDuration: 0
-  weaponCooldownDurationTimer: 0
-  minShootingRange: 100
-  maxShootingRange: 800
-  minShootingRangeIncrement: 0
-  maxShootingRangeIncrement: 0
-  slightyRandomizeDurations: 0
-  randomDurationsRange: 0.1
-  randomizeInitialWeaponChargeTimers: 0
-  randomizeStopWhenShooting: 0
-  isShooting: 0
-  isChargingShot: 0
-  isSendingShot: 0
-  isShootingOnCD: 0
-  losCheck:
-    serializedVersion: 2
-    m_Bits: 1024
-  aimTimeToPerfect: 2
-  aimResetThreshold: 30
-  projectileSpeed: 300
-  aimSmoothing: 2
-  aimLeadTime: 0.8
-  coneMinAngle: 10
-  coneMaxAngle: 45
-  coneBlendStrength: 1
-  hasAngle: 1
-  projectileEmittersControllerRef: {fileID: 589338038}
-  gunsPositions: []
-  stopWhenShooting: 0
-  playerOverboostSimpleAim: 0
-  canAct: 1
 --- !u!1 &1785066119
 GameObject:
   m_ObjectHideFlags: 0
@@ -64979,6 +65414,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -65225,6 +65662,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -65808,62 +66247,6 @@ MonoBehaviour:
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
---- !u!1 &1834772819
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1834772820}
-  - component: {fileID: 1834772821}
-  m_Layer: 0
-  m_Name: Spline Animate
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1834772820
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834772819}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.008888245, y: 47.8, z: 0.041992188}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1936528549647332154}
-  m_Father: {fileID: 1138562743}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1834772821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834772819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 1309605317}
-  m_PlayOnAwake: 1
-  m_LoopMode: 1
-  m_Method: 1
-  m_Duration: 47.42755
-  m_MaxSpeed: 450
-  m_EasingMode: 0
-  m_AlignmentMode: 0
-  m_ObjectForwardAxis: 2
-  m_ObjectUpAxis: 1
-  m_StartOffset: 0
 --- !u!1 &1836356999
 GameObject:
   m_ObjectHideFlags: 0
@@ -66073,6 +66456,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -66321,6 +66706,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -66516,6 +66903,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -66559,11 +66948,11 @@ Transform:
   m_GameObject: {fileID: 1858685529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -241, y: 23.8, z: -60.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2106434004}
+  - {fileID: 1736821733969626955}
   - {fileID: 1783674212}
   m_Father: {fileID: 451543453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66595,7 +66984,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 463822495}
@@ -66928,7 +67317,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -71583,6 +71972,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -71727,6 +72118,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -71871,6 +72264,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -72168,6 +72563,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -72601,6 +72998,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -72889,7 +73288,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1981360265}
-  m_Father: {fileID: 1592044616}
+  m_Father: {fileID: 1691204105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1914964613
 MonoBehaviour:
@@ -72915,15 +73314,15 @@ MonoBehaviour:
   handRotationSpeed: 15
   handPositionSpeed: 10
   handSwayPowerMultiplier: 2
-  handLagPowerMultiplier: 0.02
+  handLagPowerMultiplier: 0.0025
   handRotationLerpFactor: 1
   handPositionLerpFactor: 4
-  shakeMagnitude: 0.05
+  shakeMagnitude: 0.00625
   shakeDuration: 0.25
-  overheatShakeFadeRate: 0.002
+  overheatShakeFadeRate: 0.00025
   currentOverheatShakeMagnitude: 0
-  minShakeMagnitude: 0.0005
-  maxShakeMagnitude: 0.25
+  minShakeMagnitude: 0.00003125
+  maxShakeMagnitude: 0.03125
   cameraTiltSpeed: 10
   maxHorizontalTiltAngle: 1.2
   maxVerticalTiltAngle: 0.325
@@ -72932,7 +73331,7 @@ MonoBehaviour:
   pitchTilt: 0
   extraOverboostFieldOfView: 30
   fieldOfViewChangeRate: 0.95
-  fieldOfViewResetRate: 5
+  fieldOfViewResetRate: 10
   sidewaysLookCriteria: 0.3
   forwardLookCriteria: 0.3
   inputX: 0
@@ -73213,6 +73612,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -73557,7 +73958,7 @@ Transform:
   m_GameObject: {fileID: 1944553957}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6499939, z: 0}
+  m_LocalPosition: {x: 0, y: -0.08125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -73835,6 +74236,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -74325,6 +74728,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -74374,7 +74779,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1649139883}
+  m_Father: {fileID: 1691204105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1984151499
 SphereCollider:
@@ -74395,7 +74800,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1984151500
 MonoBehaviour:
@@ -74416,6 +74821,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 2
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -74622,6 +75029,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -74766,6 +75175,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -75098,6 +75509,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -75242,6 +75655,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -75899,6 +76314,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -76326,7 +76743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2037873694
 Transform:
   m_ObjectHideFlags: 0
@@ -76432,6 +76849,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -76851,6 +77270,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -76995,6 +77416,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -77274,6 +77697,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -77418,6 +77843,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -77613,6 +78040,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -78004,19 +78433,69 @@ MonoBehaviour:
   guns:
   - {fileID: 2097474296}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 1
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -78027,72 +78506,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!4 &2090369617
 Transform:
   m_ObjectHideFlags: 0
@@ -78235,6 +78663,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -78477,19 +78907,69 @@ MonoBehaviour:
   guns:
   - {fileID: 957744178}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 1
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -78500,72 +78980,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &2099404754
 GameObject:
   m_ObjectHideFlags: 0
@@ -78668,12 +79097,6 @@ MonoBehaviour:
   gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
   baseArrowLength: 0.5
   baseArrowHeadSize: 0.15
---- !u!4 &2106434004 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 4705300536586622555}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2106932827
 GameObject:
   m_ObjectHideFlags: 0
@@ -78833,6 +79256,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -79028,6 +79453,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -79247,19 +79674,69 @@ MonoBehaviour:
   guns:
   - {fileID: 717348861}
   projectileTag: Sniper Projectile
-  fireTimer: 0
+  pattern: 0
+  fireRate:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spread:
+    value: 15
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  projectileCount:
+    value: 6
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  spiralSpeed:
+    value: 90
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  radius:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
   limitByCount: 1
   maxSequenceShots: 3
-  currentShotCount: 0
   limitByTime: 0
   sequenceDuration: 5
-  sequenceTimer: 0
   useRecharge: 1
   rechargeTime: 5
-  rechargeTimer: 0
-  isRecharging: 0
-  spiralAngle: 0
-  pattern: 0
+  resetOnRecharge: 1
   scaleWithEachShot: 0
   radiusTarget: 2
   projectileCountTarget: 4
@@ -79270,72 +79747,21 @@ MonoBehaviour:
   projectileCountTargetOverTime: 6
   spreadTargetOverTime: 15
   scaleDuration: 2
-  fireRateOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0.2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spreadOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 15
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  projectileCountOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 2
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  spiralSpeedOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 90
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
-  radiusOsc:
-    enabled: 0
-    amplitude: 0
-    frequency: 1
-    offset: 0
-    baseValue: 0
-    waveform: 0
-    useRange: 0
-    minValue: -1
-    maxValue: 1
+  gunSequenceMode: 0
+  sequentialShotsPerGun: 1
   allowSoftStop: 1
   isShooting: 0
+  forceDefaults: 0
+  fireTimer: 0
+  currentShotCount: 0
+  sequenceTimer: 0
+  rechargeTimer: 0
+  isRecharging: 0
   requestedStop: 0
   requestedStart: 0
-  randomGunSequence: 0
-  stableGunSequence: 0
-  stableGunShotsPerTurn: 3
-  stableGunIndex: 0
-  stableGunShotCounter: 0
-  forceDefaults: 0
-  resetOnRecharge: 1
-  baseRadius: 0
-  baseProjectileCount: 0
-  baseSpread: 0
-  baseSpiralSpeed: 0
-  baseFireRateValue: 0
+  sequentialGunIndex: 0
+  sequentialShotCounter: 0
+  spiralAngle: 0
 --- !u!1 &2133740883
 GameObject:
   m_ObjectHideFlags: 0
@@ -79576,6 +80002,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -79720,6 +80148,8 @@ MonoBehaviour:
   isInvincible: 0
   instaKillable: 1
   godMode: 0
+  shouldInvokeGodModeDeath: 0
+  shouldAutoReviveGodMode: 0
   invincibilityDuration: 0
   currentInvincibilityDuration: 0
   hasHealed: 0
@@ -79824,11 +80254,11 @@ MonoBehaviour:
       type: 3}
     size: 2
   - tag: Barrier Rammer Duo
-    prefab: {fileID: 4459130529708940694, guid: 6f85687bdc6d1df439173dd95a8e1032,
+    prefab: {fileID: 4459130529708940694, guid: 339acf193ae46c848bad67eddab1237b,
       type: 3}
     size: 2
   - tag: Barrier Rammer Solo
-    prefab: {fileID: 8863146051153493190, guid: d53eea72a7253a74bbe95e2d52b6b13d,
+    prefab: {fileID: 8863146051153493190, guid: 996af2e5d266eaf499745b13df6314ff,
       type: 3}
     size: 2
   - tag: Jumping Proximity Mine
@@ -79847,158 +80277,9 @@ MonoBehaviour:
       type: 3}
     size: 2
   - tag: Standalone Turret
-    prefab: {fileID: 4937089234977214735, guid: 2e043a27e69007544835f02a446498ca,
+    prefab: {fileID: 2161173967706515398, guid: 2e043a27e69007544835f02a446498ca,
       type: 3}
     size: 2
---- !u!1 &163527045829149988
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2977563265146727116}
-  m_Layer: 0
-  m_Name: Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &167402601043522130
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6044292356389155515}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7634896674997947588}
-  m_Father: {fileID: 2977563265146727116}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &442848733388974778
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858867326902205576}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &473877827586079993
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7096427891427882755}
-  - component: {fileID: 8860072984449366169}
-  - component: {fileID: 1069385311845408533}
-  - component: {fileID: 5941125646074829262}
-  - component: {fileID: 8777417927643823463}
-  - component: {fileID: 485387718927522842}
-  - component: {fileID: 8860072984449366170}
-  m_Layer: 12
-  m_Name: B Mesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &485387718927522842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473877827586079993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 5
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 1
-  isInvincible: 0
-  instaKillable: 0
-  godMode: 0
-  invincibilityDuration: 0
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
---- !u!135 &526780198307632792
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658196926008927068}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &619482193693720089
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858867326902205576}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: af8fa94753fb5af4cb770b70a7b6b0f2, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &746808101190497426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80078,17 +80359,17 @@ PrefabInstance:
     - target: {fileID: 4537677740375504978, guid: f4b32ef00873d1749ba528b9305a2412,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 196.81165
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4537677740375504978, guid: f4b32ef00873d1749ba528b9305a2412,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 121.23368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4537677740375504978, guid: f4b32ef00873d1749ba528b9305a2412,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 219.81622
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4537677740375504978, guid: f4b32ef00873d1749ba528b9305a2412,
         type: 3}
@@ -80145,217 +80426,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4b32ef00873d1749ba528b9305a2412, type: 3}
---- !u!1 &935942833672426644
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7982202196015673114}
-  m_Layer: 0
-  m_Name: Point (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1011701199595694168
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834541584508982896}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 50, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6595359175355692741}
-  - {fileID: 1814966948272508746}
-  m_Father: {fileID: 3085140373875985872}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1058115164604883396
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1205868900386368921}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3816389293304969914}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &1069385311845408533
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473877827586079993}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 46c2ad42e3d886046a9d36ca0203a830, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!4 &1091080408300720152
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8167339911167942761}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 170.41162, y: 33.284477, z: 129.81622}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1816778830422394321}
-  - {fileID: 1881242096487347275}
-  m_Father: {fileID: 425590854}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1123400208970169332
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4794920332553208843}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1936528549647332154}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &1196281085940237577
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834541584508982896}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: af8fa94753fb5af4cb770b70a7b6b0f2, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1205868900386368921
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1058115164604883396}
-  m_Layer: 0
-  m_Name: Point (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1284219425379877407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367577627572598843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 5117214968346165701}
-  enemyName: Default Enemy Name
-  countsAsSeparateEnemy: 1
---- !u!1 &1360784581454275016
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1881242096487347275}
-  m_Layer: 0
-  m_Name: Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1001 &1493067896549569288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80367,17 +80437,17 @@ PrefabInstance:
     - target: {fileID: 5691052095967231838, guid: c589fa316f419a24a8710b4ba1dbfb4e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -79.58838
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5691052095967231838, guid: c589fa316f419a24a8710b4ba1dbfb4e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 73.23368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5691052095967231838, guid: c589fa316f419a24a8710b4ba1dbfb4e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 84.81622
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5691052095967231838, guid: c589fa316f419a24a8710b4ba1dbfb4e,
         type: 3}
@@ -80429,528 +80499,90 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c589fa316f419a24a8710b4ba1dbfb4e, type: 3}
---- !u!1 &1496509801722804322
-GameObject:
+--- !u!1001 &1736821733969626954
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7788815720908351487}
-  m_Layer: 0
-  m_Name: Potential Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1585376188612559340
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3085140373875985872}
-  m_Layer: 12
-  m_Name: Barrier Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1793418119562852352
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3655257696192520994}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7096427891427882755}
-  m_Father: {fileID: 1881242096487347275}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1814966948272508746
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1858685530}
+    m_Modifications:
+    - target: {fileID: 2161173967706515398, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_Name
+      value: Standalone Turret Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4131960902623082171, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4937089234977214735, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5960958178986442374, guid: 2e043a27e69007544835f02a446498ca,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 691622029}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2e043a27e69007544835f02a446498ca, type: 3}
+--- !u!4 &1736821733969626955 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 1736821733969626954}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4966708356616763709}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1011701199595694168}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1815824430919359977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658196926008927068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 15
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 0
-  isInvincible: 0
-  instaKillable: 0
-  godMode: 0
-  invincibilityDuration: 2
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
---- !u!4 &1816778830422394321
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3381768309120457836}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7731223670183991155}
-  m_Father: {fileID: 1091080408300720152}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1881242096487347275
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360784581454275016}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8576553526533599391}
-  - {fileID: 1793418119562852352}
-  - {fileID: 3816389293304969914}
-  m_Father: {fileID: 1091080408300720152}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!4 &1936528549647332154
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367577627572598843}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 63.1, y: 0, z: -33}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1123400208970169332}
-  m_Father: {fileID: 1834772820}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2118416113506609760
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2388639632152555804}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &2138442330231601645
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6845579293396419296}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3816389293304969914}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2367577627572598843
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1936528549647332154}
-  - component: {fileID: 4519240280229334190}
-  - component: {fileID: 1284219425379877407}
-  - component: {fileID: 4919567498761007388}
-  - component: {fileID: 5908627136394833597}
-  - component: {fileID: 5908627136394833598}
-  m_Layer: 14
-  m_Name: Ramming Enemy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &2388639632152555804
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4574738350224446807}
-  - component: {fileID: 5467341227239305266}
-  - component: {fileID: 2529729876115542615}
-  - component: {fileID: 2118416113506609760}
-  - component: {fileID: 4537116199883942243}
-  - component: {fileID: 8081242691163073602}
-  - component: {fileID: 8081242691163073603}
-  m_Layer: 12
-  m_Name: A Mesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &2529729876115542615
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2388639632152555804}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 315eba6b106fc3f44a2ebaf3ef37d919, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &2530085407951611858
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658196926008927068}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 2
---- !u!1 &2649001027699458805
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3088535085180027117}
-  m_Layer: 12
-  m_Name: Right
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2707788854684016591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9170014107865243076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5995e80cce00848449de145ac415118b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 1815824430919359977}
-  enemyName: Barrier Rammer Duo
-  countsAsSeparateEnemy: 1
-  enemyAHealth: {fileID: 5575894099832951322}
-  enemyBHealth: {fileID: 0}
-  deadCount: 0
-  enemyAIRef: {fileID: 6428157187322928007}
---- !u!33 &2709954539530122555
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834541584508982896}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &2977563265146727116
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163527045829149988}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 167402601043522130}
-  - {fileID: 8486478239841132551}
-  - {fileID: 7788815720908351487}
-  m_Father: {fileID: 8415143054298934061}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!4 &3085140373875985872
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1585376188612559340}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1011701199595694168}
-  m_Father: {fileID: 7731223670183991155}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &3088535085180027117
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2649001027699458805}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8571519869750503152}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3242020792207303910
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8486478239841132551}
-  m_Layer: 12
-  m_Name: Barrier Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &3381768309120457836
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1816778830422394321}
-  - component: {fileID: 5871135700412081546}
-  - component: {fileID: 5433943661257873452}
-  - component: {fileID: 4801259703035344589}
-  - component: {fileID: 8746188254837759357}
-  m_Layer: 14
-  m_Name: Barrier Rammer Enemy Logic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &3612888108910821834
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858867326902205576}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &3655257696192520994
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1793418119562852352}
-  m_Layer: 0
-  m_Name: Enemy B Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &3796764015117929632
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4798690153039742913}
-  m_Layer: 0
-  m_Name: Point (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3816389293304969914
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8925538378692083745}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6964019538593552510}
-  - {fileID: 1058115164604883396}
-  - {fileID: 2138442330231601645}
-  - {fileID: 7982202196015673114}
-  m_Father: {fileID: 1881242096487347275}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3935222462435156680
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6595359175355692741}
-  m_Layer: 12
-  m_Name: Left
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &4051022935579783249
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834541584508982896}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4277890944432901223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80982,17 +80614,17 @@ PrefabInstance:
     - target: {fileID: 8582360256681060894, guid: aab1e8950683c3541b0adba9d452861e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 545.4116
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 8582360256681060894, guid: aab1e8950683c3541b0adba9d452861e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 102.99685
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8582360256681060894, guid: aab1e8950683c3541b0adba9d452861e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 175.86801
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8582360256681060894, guid: aab1e8950683c3541b0adba9d452861e,
         type: 3}
@@ -81034,68 +80666,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aab1e8950683c3541b0adba9d452861e, type: 3}
---- !u!114 &4519240280229334190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367577627572598843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c488d743e7ee79e49a2134ea6d1d675b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 691622029}
-  maxSpeed: 400
-  maxAcceleration: 150
-  maxAirAcceleration: 180
-  randomizeMaxAirAcceleration: 0
-  canMove: 1
-  minMultiplier: 1
-  maxMultiplier: 1000
-  scalerDistance: 30
-  farDistance: 500
-  noiseFrequency: 0.5
-  lateralModifier: 1
-  verticalModifier: 1
-  avoidanceForce: 2000
-  detectionRadius: 70
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 3072
-  reinitializeOnEnable: 1
-  reinitializeCanMove: 1
---- !u!114 &4537116199883942243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2388639632152555804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 8081242691163073602}
-  enemyName: Enemy A
-  countsAsSeparateEnemy: 0
---- !u!4 &4574738350224446807
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2388639632152555804}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8576553526533599391}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4606271702618078163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81112,17 +80682,17 @@ PrefabInstance:
     - target: {fileID: 309327135358395741, guid: 31b11641948bd334fbf3b248abdc6a5b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.58838
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 309327135358395741, guid: 31b11641948bd334fbf3b248abdc6a5b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2336794
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 309327135358395741, guid: 31b11641948bd334fbf3b248abdc6a5b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 54.816223
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 309327135358395741, guid: 31b11641948bd334fbf3b248abdc6a5b,
         type: 3}
@@ -81173,7 +80743,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerCamera
       value: 
-      objectReference: {fileID: 330585546}
+      objectReference: {fileID: 330585545}
     - target: {fileID: 564420263884133550, guid: 31b11641948bd334fbf3b248abdc6a5b,
         type: 3}
       propertyPath: player
@@ -81229,79 +80799,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b11641948bd334fbf3b248abdc6a5b, type: 3}
---- !u!1001 &4705300536586622555
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1858685530}
-    m_Modifications:
-    - target: {fileID: 4937089234977214735, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_Name
-      value: Standalone Turret Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4937089234977214735, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9151011344305187935, guid: 2e043a27e69007544835f02a446498ca,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2e043a27e69007544835f02a446498ca, type: 3}
 --- !u!1001 &4790460235060863296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81313,17 +80810,17 @@ PrefabInstance:
     - target: {fileID: 2178880763239036900, guid: 039691dc511b0214e8c5c7e769b828c1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -149.58838
+      value: -140
       objectReference: {fileID: 0}
     - target: {fileID: 2178880763239036900, guid: 039691dc511b0214e8c5c7e769b828c1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -98.76632
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2178880763239036900, guid: 039691dc511b0214e8c5c7e769b828c1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 119.81622
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2178880763239036900, guid: 039691dc511b0214e8c5c7e769b828c1,
         type: 3}
@@ -81375,210 +80872,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 039691dc511b0214e8c5c7e769b828c1, type: 3}
---- !u!1 &4794920332553208843
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1123400208970169332}
-  - component: {fileID: 5054098818793790142}
-  - component: {fileID: 5266318168063687361}
-  - component: {fileID: 8532483750438370926}
-  - component: {fileID: 5117214968346165701}
-  m_Layer: 11
-  m_Name: Mesh and Hitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4798690153039742913
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3796764015117929632}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7788815720908351487}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &4801259703035344589
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3381768309120457836}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &4919567498761007388
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367577627572598843}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 2
---- !u!1 &4966708356616763709
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1814966948272508746}
-  m_Layer: 12
-  m_Name: Right
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!33 &5054098818793790142
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4794920332553208843}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5117214968346165701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4794920332553208843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 1
-  isInvincible: 0
-  instaKillable: 1
-  godMode: 0
-  invincibilityDuration: 0
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
---- !u!4 &5163438065412275175
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7769208842930651403}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8571519869750503152}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &5266318168063687361
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4794920332553208843}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5350124220110811242
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8576553526533599391}
-  m_Layer: 0
-  m_Name: Enemy A Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1001 &5428041338692618426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81590,17 +80883,17 @@ PrefabInstance:
     - target: {fileID: 817507242241292872, guid: a0458eb190753c140a230984ccaba83e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -316.88843
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 817507242241292872, guid: a0458eb190753c140a230984ccaba83e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 73.23368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 817507242241292872, guid: a0458eb190753c140a230984ccaba83e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 259.81622
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 817507242241292872, guid: a0458eb190753c140a230984ccaba83e,
         type: 3}
@@ -81652,388 +80945,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0458eb190753c140a230984ccaba83e, type: 3}
---- !u!54 &5433943661257873452
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3381768309120457836}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 2
---- !u!33 &5467341227239305266
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2388639632152555804}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5575894099832951322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820467335334350986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 5
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 1
-  isInvincible: 0
-  instaKillable: 0
-  godMode: 0
-  invincibilityDuration: 0
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
---- !u!1 &5658196926008927068
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8415143054298934061}
-  - component: {fileID: 6428157187322928007}
-  - component: {fileID: 2530085407951611858}
-  - component: {fileID: 526780198307632792}
-  - component: {fileID: 1815824430919359977}
-  m_Layer: 14
-  m_Name: Barrier Rammer Enemy Logic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &5804048374904972825
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7731223670183991155}
-  m_Layer: 3
-  m_Name: Child Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &5858867326902205576
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8571519869750503152}
-  - component: {fileID: 442848733388974778}
-  - component: {fileID: 619482193693720089}
-  - component: {fileID: 3612888108910821834}
-  m_Layer: 12
-  m_Name: Barrier
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!33 &5864180967959839482
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820467335334350986}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5871135700412081546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3381768309120457836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3006fbb85cbefaa4e94ea55e7da2163f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 691622029}
-  pivot: {fileID: 1881242096487347275}
-  childPivot: {fileID: 7731223670183991155}
-  enemyA: {fileID: 8576553526533599391}
-  enemyB: {fileID: 1793418119562852352}
-  playerCamera: {fileID: 330585546}
-  barrierObj: {fileID: 7834541584508982896}
-  barrierIsColliding: 0
-  barrierLeftAnchor: {fileID: 6595359175355692741}
-  barrierRightAnchor: {fileID: 1814966948272508746}
-  duoStats: {fileID: 11400000, guid: 62185ee16aed420449a1df69f7e8cb65, type: 2}
-  soloStats: {fileID: 11400000, guid: 5ddb57e3651f2a640918f48de5c54808, type: 2}
-  currentPreset: {fileID: 0}
-  isSolo: 0
-  randomizeInitialBurstTimer: 1
-  maxRandomInitialBurstTimer: 0.025
-  currentBurstCooldown: 0.5
-  isClockwise: 1
-  pivotPoints:
-  - {fileID: 6964019538593552510}
-  - {fileID: 1058115164604883396}
-  - {fileID: 2138442330231601645}
-  - {fileID: 7982202196015673114}
-  burstDuration: 0.35
-  canAttack: 1
-  alignTimer: 0
-  leftRightAlignTimer: 0
-  attackTimer: 0
-  isAttacking: 0
-  randomizeABLeftRightPos: 1
-  currentCollisionsBeforePrematureStop: 0
-  aligningToPivot: 0
-  aligningToAnchors: 0
-  enemiesAligned: 0
-  reinitializeOnEnable: 1
-  currentSpiralStep: 0
---- !u!135 &5908627136394833597
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367577627572598843}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 25
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5908627136394833598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2367577627572598843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74fcd320a401b694fbeafd098a79084f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localSplineRef: {fileID: 0}
-  maxSidewaysOffset: 200
-  maxUpwardOffset: 200
-  splineContainer: {fileID: 1309605317}
-  loopSpline: 1
-  splineOffset: {x: 0, y: 0}
-  splineT: 0
-  playerRailControllerRef: {fileID: 691622034}
-  splineSpeedMultiplier: 1
-  offsetVelocity: {x: 0, y: 0}
-  useEntry: 1
-  entryStartOffset: {x: 300, y: 200}
-  entryDuration: 1
-  entryLerpType: 4
---- !u!135 &5941125646074829262
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473877827586079993}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &6044292356389155515
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 167402601043522130}
-  m_Layer: 0
-  m_Name: Enemy A Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &6157937552016823918
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8885757256539905526}
-  m_Layer: 0
-  m_Name: Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &6428157187322928007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658196926008927068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3006fbb85cbefaa4e94ea55e7da2163f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 691622029}
-  pivot: {fileID: 2977563265146727116}
-  childPivot: {fileID: 0}
-  enemyA: {fileID: 167402601043522130}
-  enemyB: {fileID: 0}
-  playerCamera: {fileID: 330585545}
-  barrierObj: {fileID: 5858867326902205576}
-  barrierIsColliding: 0
-  barrierLeftAnchor: {fileID: 5163438065412275175}
-  barrierRightAnchor: {fileID: 3088535085180027117}
-  duoStats: {fileID: 11400000, guid: 62185ee16aed420449a1df69f7e8cb65, type: 2}
-  soloStats: {fileID: 11400000, guid: 5ddb57e3651f2a640918f48de5c54808, type: 2}
-  currentPreset: {fileID: 11400000, guid: 5ddb57e3651f2a640918f48de5c54808, type: 2}
-  isSolo: 0
-  randomizeInitialBurstTimer: 1
-  maxRandomInitialBurstTimer: 0.025
-  currentBurstCooldown: 0.5
-  isClockwise: 1
-  pivotPoints: []
-  burstDuration: 0.25
-  canAttack: 1
-  alignTimer: 0
-  leftRightAlignTimer: 0
-  attackTimer: 0
-  isAttacking: 0
-  randomizeABLeftRightPos: 0
-  currentCollisionsBeforePrematureStop: 0
-  aligningToPivot: 0
-  aligningToAnchors: 0
-  enemiesAligned: 0
-  reinitializeOnEnable: 1
-  currentSpiralStep: 0
---- !u!1 &6522456721111293488
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8828889629524886124}
-  m_Layer: 0
-  m_Name: Point (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6595359175355692741
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3935222462435156680}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1011701199595694168}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6845579293396419296
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2138442330231601645}
-  m_Layer: 0
-  m_Name: Point (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &6950077595067920456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 119819053985461766, guid: 4f4c27794daf8454ca383c564a9a2ff1,
     type: 3}
   m_PrefabInstance: {fileID: 7050961861395400270}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6964019538593552510
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8566223067988153710}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3816389293304969914}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7050961861395400270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82045,17 +80962,17 @@ PrefabInstance:
     - target: {fileID: 119819053985461766, guid: 4f4c27794daf8454ca383c564a9a2ff1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -358.98837
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 119819053985461766, guid: 4f4c27794daf8454ca383c564a9a2ff1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 73.23368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 119819053985461766, guid: 4f4c27794daf8454ca383c564a9a2ff1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.183777
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 119819053985461766, guid: 4f4c27794daf8454ca383c564a9a2ff1,
         type: 3}
@@ -82117,414 +81034,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f4c27794daf8454ca383c564a9a2ff1, type: 3}
---- !u!4 &7096427891427882755
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473877827586079993}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1793418119562852352}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7465638597494790365
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8339575599386504487}
-  m_Layer: 0
-  m_Name: Point (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7634896674997947588
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820467335334350986}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 167402601043522130}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &7731223670183991155
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5804048374904972825}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3085140373875985872}
-  m_Father: {fileID: 1816778830422394321}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7769208842930651403
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5163438065412275175}
-  m_Layer: 12
-  m_Name: Left
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7788815720908351487
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496509801722804322}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8885757256539905526}
-  - {fileID: 8339575599386504487}
-  - {fileID: 8828889629524886124}
-  - {fileID: 4798690153039742913}
-  m_Father: {fileID: 2977563265146727116}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7834541584508982896
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1011701199595694168}
-  - component: {fileID: 2709954539530122555}
-  - component: {fileID: 1196281085940237577}
-  - component: {fileID: 4051022935579783249}
-  m_Layer: 12
-  m_Name: Barrier
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &7854620877913138510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820467335334350986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 5575894099832951322}
-  enemyName: Enemy A
-  countsAsSeparateEnemy: 0
---- !u!4 &7982202196015673114
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935942833672426644}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3816389293304969914}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8081242691163073602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2388639632152555804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 5
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 1
-  isInvincible: 0
-  instaKillable: 0
-  godMode: 0
-  invincibilityDuration: 0
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
---- !u!54 &8081242691163073603
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2388639632152555804}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 2
---- !u!1 &8167339911167942761
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1091080408300720152}
-  - component: {fileID: 8368182432504280885}
-  m_Layer: 0
-  m_Name: Barrier Rammer Enemy Duo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &8197987269842403357
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9170014107865243076}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 266.67413, y: 33.284477, z: 118.14172}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8415143054298934061}
-  m_Father: {fileID: 425590854}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &8339575599386504487
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7465638597494790365}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7788815720908351487}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8368182432504280885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8167339911167942761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5995e80cce00848449de145ac415118b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 8746188254837759357}
-  enemyName: Barrier Rammer Duo
-  countsAsSeparateEnemy: 1
-  enemyAHealth: {fileID: 8081242691163073602}
-  enemyBHealth: {fileID: 485387718927522842}
-  deadCount: 0
-  enemyAIRef: {fileID: 5871135700412081546}
---- !u!4 &8415143054298934061
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5658196926008927068}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2977563265146727116}
-  m_Father: {fileID: 8197987269842403357}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &8455132252921412135
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820467335334350986}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 2eaea797cbebfbb45a04fbbb80a1d5e2, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!4 &8486478239841132551
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3242020792207303910}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8571519869750503152}
-  m_Father: {fileID: 2977563265146727116}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8532483750438370926
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4794920332553208843}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &8566223067988153710
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6964019538593552510}
-  m_Layer: 0
-  m_Name: Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8571519869750503152
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5858867326902205576}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 50, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5163438065412275175}
-  - {fileID: 3088535085180027117}
-  m_Father: {fileID: 8486478239841132551}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &8576553526533599391
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5350124220110811242}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4574738350224446807}
-  m_Father: {fileID: 1881242096487347275}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8628892012044007173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82536,17 +81045,17 @@ PrefabInstance:
     - target: {fileID: 107702432175919999, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -264.58838
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 107702432175919999, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 73.23368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 107702432175919999, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.183777
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 107702432175919999, guid: 0f7f51c86a0d5af47879bb0f0cad1457,
         type: 3}
@@ -82598,191 +81107,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f7f51c86a0d5af47879bb0f0cad1457, type: 3}
---- !u!114 &8746188254837759357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3381768309120457836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHP: 15
-  CurrentHP: 1
-  isAlive: 1
-  canBeDamaged: 0
-  isInvincible: 0
-  instaKillable: 0
-  godMode: 0
-  invincibilityDuration: 2
-  currentInvincibilityDuration: 0
-  hasHealed: 0
-  healingCooldown: 60
-  currentHealingCooldown: 0
---- !u!114 &8777417927643823463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473877827586079993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c43f70d3e8b9df4fb29fc13f73fa87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityHealthControllerRef: {fileID: 485387718927522842}
-  enemyName: Enemy B
-  countsAsSeparateEnemy: 0
---- !u!1 &8820467335334350986
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7634896674997947588}
-  - component: {fileID: 5864180967959839482}
-  - component: {fileID: 8455132252921412135}
-  - component: {fileID: 7854620877913138510}
-  - component: {fileID: 5575894099832951322}
-  - component: {fileID: 8820467335334350987}
-  m_Layer: 12
-  m_Name: A Mesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!135 &8820467335334350987
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820467335334350986}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &8828889629524886124
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6522456721111293488}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7788815720908351487}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8860072984449366169
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473877827586079993}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &8860072984449366170
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473877827586079993}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 2
---- !u!4 &8885757256539905526
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6157937552016823918}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7788815720908351487}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8925538378692083745
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3816389293304969914}
-  m_Layer: 0
-  m_Name: Potential Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &8926947518782509707 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8582360256681060894, guid: aab1e8950683c3541b0adba9d452861e,
     type: 3}
   m_PrefabInstance: {fileID: 4277890944432901223}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9170014107865243076
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8197987269842403357}
-  - component: {fileID: 2707788854684016591}
-  m_Layer: 0
-  m_Name: Barrier Rammer Enemy Solo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -82800,4 +81130,3 @@ SceneRoots:
   - {fileID: 451543453}
   - {fileID: 578732855}
   - {fileID: 1032995051}
-  - {fileID: 1138562743}
