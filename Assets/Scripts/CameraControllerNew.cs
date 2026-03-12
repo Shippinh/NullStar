@@ -255,10 +255,8 @@ public class CameraControllerNew : MonoBehaviour
         pitch -= inputY;
         pitch = Mathf.Clamp(pitch, minRotationY, maxRotationY);
 
-        // Get spline base rotation from rail controller
-        Quaternion splineBase = playerRef.railControllerRef.SplineRotation;
-
-        // Build desired rotation on top of spline orientation
+        // Use interpolated rotation so target doesn't jump every fixed step
+        Quaternion splineBase = playerRef.railControllerRef.InterpolatedSplineRotation;
         desiredRotation = splineBase * Quaternion.Euler(pitch + pitchTilt, yaw, roll);
     }
 

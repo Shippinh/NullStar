@@ -17,14 +17,15 @@ public class EnemyRailController : RailController
     public float rightOffset = 0f;
     public float upOffset = 0f;
 
+
     [Header("Worm Follow")]
     public bool useWormFollow = false;
     public EnemyRailController leaderRef;
     public float followDistance = 5f;
 
-    // Only populated on leaders
+    // Path history for worm following (leader only)
     private List<Vector3> pathHistory = new List<Vector3>();
-    private List<float> pathDistances = new List<float>(); // cumulative distances
+    private List<float> pathDistances = new List<float>();
     private float totalPathLength = 0f;
 
     public override void Awake()
@@ -46,38 +47,51 @@ public class EnemyRailController : RailController
 
         if (!useWormFollow && !usePlayerRelativeOffset)
             splineT = splineTOffset;
+
+        // Evaluate once so interpolation buffers start with valid data
+        EvaluateSpline();
+        InitializeInterpolationBuffers();
+    }
+
+
+    void Update()
+    {
+        UpdateInterpolatedSpline();
     }
 
     void FixedUpdate()
     {
-        if (useWormFollow && leaderRef != null)
-        {
-            TickSpline(Time.fixedDeltaTime);
-            EvaluateSpline();
+        SnapshotSplineForInterpolation();
 
-            body.MovePosition(SplinePosition);
-            body.MoveRotation(SplineRotation);
-        }
-        else
-        {
-            UpdateSplineT();
-            EvaluateSpline();
+        UpdateSplineT();
+        EvaluateSpline();
 
-            Vector3 targetPosition = SplinePosition
-                + SplineRight * rightOffset
-                + SplineUp * upOffset;
+        CommitSplineToInterpolation();
 
-            body.MovePosition(targetPosition);
-            body.MoveRotation(SplineRotation);
-        }
+        Vector3 targetPosition = SplinePosition
+            + SplineRight * rightOffset
+            + SplineUp * upOffset;
+
+        body.MovePosition(targetPosition);
+        body.MoveRotation(SplineRotation);
     }
 
     void UpdateSplineT()
     {
-        if (usePlayerRelativeOffset)
+        if (useWormFollow && leaderRef != null)
+        {
+            // Follow leader at a fixed T distance behind
+            float tOffset = followDistance / splineLength;
+            splineT = (leaderRef.splineT - tOffset + 1f) % 1f;
+        }
+        else if (usePlayerRelativeOffset)
+        {
             splineT = (playerRailControllerRef.splineT + splineTOffset) % 1f;
+        }
         else
+        {
             TickSpline(Time.fixedDeltaTime);
+        }
     }
 
     void RecordPath()
@@ -99,7 +113,7 @@ public class EnemyRailController : RailController
         pathDistances.Add(totalPathLength);
 
         // Trim entries beyond max needed distance
-        float maxNeeded = followDistance * 10f; // enough for a long chain
+        float maxNeeded = followDistance * 10f;
         while (pathHistory.Count > 2 && (totalPathLength - pathDistances[0]) > maxNeeded)
         {
             totalPathLength -= Vector3.Distance(pathHistory[0], pathHistory[1]);
@@ -113,7 +127,6 @@ public class EnemyRailController : RailController
         result = Vector3.zero;
         if (pathHistory.Count < 2) return false;
 
-        // Start from the newest point, walk back by distance
         float target = totalPathLength - distance;
         if (target < pathDistances[0]) return false;
 

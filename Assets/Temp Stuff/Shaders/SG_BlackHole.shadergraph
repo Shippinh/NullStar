@@ -1424,8 +1424,8 @@
     "m_ObjectId": "03c16bcf08a14cca8dcb92cc1a8316a0",
     "m_Title": "Remap so it goes 0-1 from the edge of the sphere to the edge of the black hole",
     "m_Position": {
-        "x": -3065.714599609375,
-        "y": -19.428714752197267
+        "x": -3065.71435546875,
+        "y": -19.4285888671875
     }
 }
 
@@ -1892,7 +1892,7 @@
     "m_ObjectId": "13d1b770d97f4ae0a4b352807ce0b5b8",
     "m_Title": "Screen Space vector towards center",
     "m_Position": {
-        "x": -2631.42919921875,
+        "x": -2631.428466796875,
         "y": -1336.5714111328125
     }
 }
@@ -1966,7 +1966,7 @@
     "m_Title": "Black Hole color",
     "m_Position": {
         "x": -433.142578125,
-        "y": 1142.85693359375
+        "y": 1142.8570556640625
     }
 }
 
@@ -1989,8 +1989,8 @@
     "m_ObjectId": "1551c12aaa9741eb8263460eddefb96e",
     "m_Title": "Fresnel glow on edges on black hole",
     "m_Position": {
-        "x": -1029.1435546875,
-        "y": 1496.0
+        "x": -1029.143310546875,
+        "y": 1495.9998779296875
     }
 }
 
@@ -3947,7 +3947,7 @@
     "m_ObjectId": "4634d75a37a5490dabc9486b11f34cb4",
     "m_Title": "Minimize distortion at grazing angles",
     "m_Position": {
-        "x": -2680.571533203125,
+        "x": -2680.5712890625,
         "y": 538.28564453125
     }
 }
@@ -4674,8 +4674,8 @@
     "m_ObjectId": "57a0e9198e56475ea3c0646e9c6fd0f0",
     "m_Title": "Blackhole Mask",
     "m_Position": {
-        "x": -2291.42919921875,
-        "y": 1306.85693359375
+        "x": -2291.428466796875,
+        "y": 1306.8570556640625
     }
 }
 
@@ -4864,7 +4864,7 @@
     "m_Title": "Increase distortion towards black hole",
     "m_Position": {
         "x": -4240.57177734375,
-        "y": 260.5712890625
+        "y": 260.5714111328125
     }
 }
 
@@ -5500,7 +5500,7 @@
     "m_Title": "Distorted screen grab",
     "m_Position": {
         "x": -1169.71435546875,
-        "y": -1065.1429443359375
+        "y": -1065.142822265625
     }
 }
 

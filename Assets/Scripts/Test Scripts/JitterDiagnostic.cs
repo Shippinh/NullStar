@@ -8,7 +8,7 @@ public class JitterDiagnostic : MonoBehaviour
     void LateUpdate()
     {
         float delta = Vector3.Distance(transform.position, lastPosition);
-        if (Mathf.Abs(delta - lastDelta) > 0.1f)
+        if (Mathf.Abs(delta - lastDelta) > 1.5f)
             Debug.Log($"Position spike: {delta} vs expected {lastDelta}");
         lastDelta = delta;
         lastPosition = transform.position;

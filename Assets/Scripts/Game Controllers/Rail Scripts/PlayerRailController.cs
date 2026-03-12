@@ -4,14 +4,12 @@ using UnityEngine.Splines;
 
 public class PlayerRailController : RailController
 {
+
     [Header("References")]
     public SpaceShooterController playerRef;
     public Rigidbody body;
 
-    [Header("Internal Values")]
-    public Vector3 velocity;
-
-    [Header("Internal Speed Values")]
+    [Header("Speed")]
     public float defaultSplineSpeed;
     public FloatRef currentSplineSpeed;
 
@@ -32,24 +30,35 @@ public class PlayerRailController : RailController
         currentSplineSpeed.value = defaultSplineSpeed;
         boostModeSpeedFade = new RailSpeedController(currentSplineSpeed, defaultSplineSpeed);
 
-        // Initialize spline state so first frame has no pop
+        // Evaluate once so interpolation buffers start with valid data
         EvaluateSpline();
+        InitializeInterpolationBuffers();
     }
+
 
     public void Update()
     {
         if (!playerRef.boostMode) return;
+
         UpdateRailSpeed();
+        UpdateInterpolatedSpline(); // smooth visual values every render frame
     }
+
 
     public void FixedUpdate()
     {
         if (!playerRef.boostMode) return;
 
+        // Snapshot before advancing so interpolation has previous frame
+        SnapshotSplineForInterpolation();
+
         TickSpline(Time.fixedDeltaTime);
         EvaluateSpline();
 
-        // Spline position + lateral offset owned by SpaceShooterController
+        // Commit new raw values to interpolation buffers
+        CommitSplineToInterpolation();
+
+        // Build target position from raw spline values (physics accurate)
         Vector3 targetPosition = SplinePosition
             + SplineRight * playerRef.currentRightOffset
             + SplineUp * playerRef.currentUpOffset;
@@ -64,7 +73,32 @@ public class PlayerRailController : RailController
         boostModeSpeedFade.Update();
     }
 
-    // Unchanged from before
+
+    void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        Vector3 center = InterpolatedSplinePosition;
+        Quaternion rot = InterpolatedSplineRotation;
+
+        Vector3 right = rot * Vector3.right * maxSidewaysOffset;
+        Vector3 up = rot * Vector3.up * maxUpwardOffset;
+
+        Vector3 p1 = center + right + up;
+        Vector3 p2 = center + right - up;
+        Vector3 p3 = center - right - up;
+        Vector3 p4 = center - right + up;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(p1, p2);
+        Gizmos.DrawLine(p2, p3);
+        Gizmos.DrawLine(p3, p4);
+        Gizmos.DrawLine(p4, p1);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(center, rot * Vector3.forward * 2f);
+    }
+
     [System.Serializable]
     public class FloatRef
     {
@@ -121,28 +155,5 @@ public class PlayerRailController : RailController
                 currentSpeedRef.value += delta;
             }
         }
-    }
-
-    void OnDrawGizmos()
-    {
-        if (!Application.isPlaying) return;
-
-        Vector3 center = SplinePosition;
-        Vector3 right = SplineRight * maxSidewaysOffset;
-        Vector3 up = SplineUp * maxUpwardOffset;
-
-        Vector3 p1 = center + right + up;
-        Vector3 p2 = center + right - up;
-        Vector3 p3 = center - right - up;
-        Vector3 p4 = center - right + up;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(p1, p2);
-        Gizmos.DrawLine(p2, p3);
-        Gizmos.DrawLine(p3, p4);
-        Gizmos.DrawLine(p4, p1);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(center, SplineForward * 2f);
     }
 }
