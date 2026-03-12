@@ -152,7 +152,6 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
         burstDuration = currentBurstCooldown;
     }
-
     private void LateUpdate()
     {
         if (player.GetPlayerOnGround())
@@ -161,23 +160,25 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             currentPivot = UpdatePivot();
 
         AttachPivot();
+
         if (childPivot != null)
             SynchronizePivots();
+
+        // Pivot switching is visual positioning — belongs in LateUpdate
+        if (burstingToPivot || !isAttacking)
+            SwitchPivotPoints();   // ← moved here from FixedUpdate
     }
 
     void FixedUpdate()
     {
         if (enemyA == null) return;
 
-        if (!isAttacking) // if not attacking
+        if (!isAttacking)
         {
             UpdateDirections();
-
             CalculateDesiredVelocity();
-
             RotateTowardsCurrentPivot();
-
-            if(canAttack && !isSolo)
+            if (canAttack && !isSolo)
                 HandleAttackInitiation();
         }
         else
@@ -192,11 +193,9 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             }
         }
 
-        if (burstingToPivot || !isAttacking)
-            SwitchPivotPoints();
+        // ← SwitchPivotPoints removed from here
 
         AdjustVelocity();
-
         rb.velocity = velocity;
     }
 
@@ -226,9 +225,11 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     {
         if (!burstingToPivot) return;
 
-        burstTimer += Time.deltaTime;
-        transform.position += burstDir * currentPreset.burstSpeed * Time.deltaTime;
-        // End of burst — transition to alignment
+        burstTimer += Time.fixedDeltaTime;  // ← fixedDeltaTime since this runs in FixedUpdate
+
+        // Drive through rigidbody so physics stays consistent
+        rb.velocity = burstDir * currentPreset.burstSpeed;  // ← was transform.position +=
+
         if (burstTimer >= burstDuration)
         {
             burstingToPivot = false;
@@ -237,6 +238,8 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             alignStartRot = pivot.rotation;
             anchorStartAPos = enemyA.position;
             anchorStartBPos = enemyB.position;
+
+            rb.velocity = Vector3.zero;  // ← kill burst velocity cleanly
 
             Debug.Log("Final burst complete, starting alignment phase!");
         }
@@ -412,25 +415,21 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
         if (isSolo == false && pivotPoints != null && pivotPoints.Length >= 2)
         {
             Transform pivotA = pivotPoints[currentPivotIndex];
-            Transform pivotB = pivotPoints[(currentPivotIndex + 2) % pivotPoints.Length]; // opposite point for symmetry
+            Transform pivotB = pivotPoints[(currentPivotIndex + 2) % pivotPoints.Length];
 
             if (enemyA != null)
-            {
                 enemyA.position = Vector3.Lerp(
                     enemyA.position,
                     pivotA.position,
-                    currentPreset.pivotMoveSpeed * Time.fixedDeltaTime
+                    currentPreset.pivotMoveSpeed * Time.deltaTime  // ← was fixedDeltaTime
                 );
-            }
 
             if (enemyB != null)
-            {
                 enemyB.position = Vector3.Lerp(
                     enemyB.position,
                     pivotB.position,
-                    currentPreset.pivotMoveSpeed * Time.fixedDeltaTime
+                    currentPreset.pivotMoveSpeed * Time.deltaTime  // ← was fixedDeltaTime
                 );
-            }
         }
     }
 
@@ -563,38 +562,30 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             velocity = desiredVelocity;
             nextBurstTime = Time.time + currentBurstCooldown;
             currentSpiralStep++;
-
             CalculateNextPivotPoint();
         }
-        else
+        else if (enemiesAligned)
         {
-            // velocity based movement towards forward
-            if(enemiesAligned)
-            {
-                Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
-                Vector3 yAxis = Vector3.up;
-                Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
+            Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
+            Vector3 yAxis = Vector3.up;
+            Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
 
-                float currentX = Vector3.Dot(velocity, xAxis);
-                float currentY = Vector3.Dot(velocity, yAxis);
-                float currentZ = Vector3.Dot(velocity, zAxis);
+            float currentX = Vector3.Dot(velocity, xAxis);
+            float currentY = Vector3.Dot(velocity, yAxis);
+            float currentZ = Vector3.Dot(velocity, zAxis);
 
-                float desiredX = Vector3.Dot(desiredVelocity, xAxis);
-                float desiredY = Vector3.Dot(desiredVelocity, yAxis);
-                float desiredZ = Vector3.Dot(desiredVelocity, zAxis);
+            float desiredX = Vector3.Dot(desiredVelocity, xAxis);
+            float desiredY = Vector3.Dot(desiredVelocity, yAxis);
+            float desiredZ = Vector3.Dot(desiredVelocity, zAxis);
 
-                float deltaX = desiredX - currentX;
-                float deltaY = desiredY - currentY;
-                float deltaZ = desiredZ - currentZ;
+            float accelStep = currentPreset.maxAcceleration * Time.fixedDeltaTime;
 
-                float accelStep = currentPreset.maxAcceleration * Time.fixedDeltaTime;
-
-                velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), accelStep);
-                velocity += yAxis * Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), accelStep);
-                velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), accelStep);
-
-                return;
-            }
+            velocity += xAxis * Mathf.Sign(desiredX - currentX) * Mathf.Min(Mathf.Abs(desiredX - currentX), accelStep);
+            velocity += yAxis * Mathf.Sign(desiredY - currentY) * Mathf.Min(Mathf.Abs(desiredY - currentY), accelStep);
+            velocity += zAxis * Mathf.Sign(desiredZ - currentZ) * Mathf.Min(Mathf.Abs(desiredZ - currentZ), accelStep);
+        }
+        else if (!burstingToPivot)  // ← don't damp during burst, rb.velocity handles it
+        {
             velocity = Vector3.Lerp(velocity, Vector3.zero, 5f * Time.fixedDeltaTime);
         }
     }

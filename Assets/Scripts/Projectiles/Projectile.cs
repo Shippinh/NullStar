@@ -6,29 +6,22 @@ public class Projectile : MonoBehaviour, IPoolable
 
     public float speed = 400f;
     public float maxLifetime = 2f;
+    public LayerMask hitLayers;
 
-    protected Vector3 direction;
-    private Rigidbody rb;
-
+    private Vector3 direction;
+    private float distanceToTarget;
+    private float travelled = 0f;
     private bool impactHappened = false;
 
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    // POOL → ACTIVE
     public void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
     {
         IPoolableTag = poolableTag;
-
         impactHappened = false;
+        travelled = 0f;
+        distanceToTarget = 0f;
 
         transform.position = position;
         transform.rotation = rotation;
-
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
 
         CancelInvoke();
         Invoke(nameof(Impact), maxLifetime);
@@ -36,52 +29,45 @@ public class Projectile : MonoBehaviour, IPoolable
         gameObject.SetActive(true);
     }
 
-    // ACTIVE → POOL
     public void HandleRepool()
     {
         CancelInvoke();
-
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
         gameObject.SetActive(false);
     }
 
     public void Initialize(Vector3 startPosition, Vector3 targetPosition)
     {
         direction = (targetPosition - startPosition).normalized;
-        rb.velocity = direction * speed;
+        distanceToTarget = Vector3.Distance(startPosition, targetPosition);
     }
 
-    // What happens when a collider enters projectile trigger
-    private void OnTriggerEnter(Collider other)
+    void Update()
     {
-        HandleHit(other);
+        float step = speed * Time.deltaTime;
+
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, step, hitLayers))
+        {
+            transform.position = hit.point;
+            Impact();
+            return;
+        }
+
+        transform.position += direction * step;
+        travelled += step;
+
+        if (travelled >= distanceToTarget)
+            Impact();
     }
 
-    // How we handle hits with the collider
-    protected virtual void HandleHit(Collider other)
-    {
-        Impact();
-    }
-
-
-    // What happens during impact
-    protected virtual void Impact()
+    private void Impact()
     {
         if (impactHappened) return;
         impactHappened = true;
-
         ObjectPool.Instance.ReturnToPool(gameObject, IPoolableTag);
     }
 
-    // SAFETY NET ONLY
     void OnDisable()
     {
         CancelInvoke();
-        if (rb != null)
-        {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
     }
 }

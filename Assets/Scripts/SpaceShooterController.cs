@@ -238,6 +238,7 @@ public class SpaceShooterController : MonoBehaviour
         HandleAdrenalineCharge();
         HandleDodgeRecharge();
         HandleOverboostDuration();
+        HandleDodgeTime();
     }
 
     void FixedUpdate()
@@ -359,6 +360,8 @@ public class SpaceShooterController : MonoBehaviour
     {
         groundContactCount = 0;
         contactNormal = Vector3.zero;
+        horizontalDodgeInput = 0;  // ← add these
+        verticalDodgeInput = 0;
     }
 
     void UpdateState()
@@ -655,6 +658,9 @@ public class SpaceShooterController : MonoBehaviour
                 else
                     velocity = desiredDodgeVelocity * dodgeMaxSpeed;
             }
+
+            horizontalDodgeInput = 0;
+            verticalDodgeInput = 0;
         }
 
         // Vertical dodge
@@ -698,6 +704,8 @@ public class SpaceShooterController : MonoBehaviour
             if (desiredDodgeVelocity != Vector3.zero)
                 velocity = desiredDodgeVelocity * dodgeMaxSpeed * 0.75f;
 
+            horizontalDodgeInput = 0;
+            verticalDodgeInput = 0;
         }
         // Boost mode omnidirectional dodge
         if (!isDodging && dodgeCharges > 0 && boostMode && !overboostMode && horizontalDodgeInput > 0f)
@@ -746,19 +754,11 @@ public class SpaceShooterController : MonoBehaviour
             // Instead of setting velocity — set offset velocities directly
             currentRightVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineRight) * dodgeMaxSpeed;
             currentUpVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineUp) * dodgeMaxSpeed;
+
+            horizontalDodgeInput = 0;
+            verticalDodgeInput = 0;
         }
 
-
-
-        if (isDodging)
-        {
-            dodgeTime += Time.fixedDeltaTime;
-            if (dodgeTime >= dodgeTimeLimit)
-            {
-                isDodging = false;
-                dodgeTime = 0f;
-            }
-        }
     }
 
 
@@ -970,6 +970,18 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
+    void HandleDodgeTime()
+    {
+        if (!isDodging) return;
+
+        dodgeTime += Time.deltaTime;
+        if (dodgeTime >= dodgeTimeLimit)
+        {
+            isDodging = false;
+            dodgeTime = 0f;
+        }
+    }
+
     public (float orbitMin, float orbitMax) CalculateDynamicOrbit(
     float baseMin,
     float baseMax,
@@ -1072,8 +1084,8 @@ public class SpaceShooterController : MonoBehaviour
         leftInput = Input.GetKey(inputConfig.MoveLeft) ? -1 : 0;
         rightInput = Input.GetKey(inputConfig.MoveRight) ? 1 : 0;
         jumpInput = Input.GetKey(inputConfig.Ascend);
-        horizontalDodgeInput = Input.GetKeyDown(inputConfig.HorizontalDodge) ? 1 : 0;
-        verticalDodgeInput = Input.GetKeyDown(inputConfig.VerticalDodge) ? 1 : 0;
+        if (Input.GetKeyDown(inputConfig.HorizontalDodge)) horizontalDodgeInput = 1;
+        if (Input.GetKeyDown(inputConfig.VerticalDodge)) verticalDodgeInput = 1;
         healInput = Input.GetKey(inputConfig.Heal);
         shootInput = Input.GetKey(inputConfig.Shoot) ? 1 : 0;
         rageInput = Input.GetKey(inputConfig.RageMode);

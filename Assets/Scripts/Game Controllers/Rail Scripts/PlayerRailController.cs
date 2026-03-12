@@ -40,7 +40,7 @@ public class PlayerRailController : RailController
     {
         if (!playerRef.boostMode) return;
 
-        UpdateRailSpeed();
+        UpdateRailSpeed(Time.deltaTime);
         UpdateInterpolatedSpline(); // smooth visual values every render frame
     }
 
@@ -65,12 +65,20 @@ public class PlayerRailController : RailController
 
         body.MovePosition(targetPosition);
         body.MoveRotation(SplineRotation);
+
+        // How far you travel per physics tick
+        float distancePerTick = currentSplineSpeed.value * Time.fixedDeltaTime;
+
+        // Samples needed so each tick never skips a segment
+        float optimalResolution = splineLength / distancePerTick;
+
+        Debug.Log("Optimal resolution = " + optimalResolution);
     }
 
-    public void UpdateRailSpeed()
+    public void UpdateRailSpeed(float dt)
     {
         MaxSpeed = currentSplineSpeed.value;
-        boostModeSpeedFade.Update();
+        boostModeSpeedFade.Update(dt);
     }
 
 
@@ -138,11 +146,11 @@ public class PlayerRailController : RailController
             SetSpeedOverTime(defaultSpeed, duration);
         }
 
-        public void Update()
+        public void Update(float dt)
         {
             if (!speedRunning) return;
 
-            float delta = speedSpeed * Time.fixedDeltaTime;
+            float delta = speedSpeed * dt;
             float remaining = speedTarget - currentSpeedRef.value;
 
             if (Mathf.Abs(delta) >= Mathf.Abs(remaining))

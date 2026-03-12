@@ -80,7 +80,6 @@ public class EnemyRailController : RailController
     {
         if (useWormFollow && leaderRef != null)
         {
-            // Follow leader at a fixed T distance behind
             float tOffset = followDistance / splineLength;
             splineT = (leaderRef.splineT - tOffset + 1f) % 1f;
         }
