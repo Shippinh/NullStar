@@ -9,7 +9,7 @@ public class BarrierRammerEnemyController : EnemyController
 
     public int deadCount = 0;
 
-    public BarrierRammerEnemyCentralized enemyAIRef; // preset in inspector
+    public BarrierRammerEnemyCentralized barrierEnemyAIRef; // preset in inspector
 
     void Awake()
     {
@@ -17,8 +17,8 @@ public class BarrierRammerEnemyController : EnemyController
         countsAsSeparateEnemy = true;
         enemyName = "Barrier Rammer";
 
-        if(!enemyAIRef)
-            enemyAIRef = GetComponentInChildren<BarrierRammerEnemyCentralized>();
+        if(!barrierEnemyAIRef)
+            barrierEnemyAIRef = GetComponentInChildren<BarrierRammerEnemyCentralized>();
 
         if (enemyAHealth != null)
             enemyAHealth.Died += OnEnemyADied;
@@ -64,7 +64,7 @@ public class BarrierRammerEnemyController : EnemyController
             return;
         }
 
-        enemyAIRef.HandlePartnerDeath(isA: true);
+        barrierEnemyAIRef.HandlePartnerDeath(isA: true);
     }
 
     private void OnEnemyBDied()
@@ -78,6 +78,6 @@ public class BarrierRammerEnemyController : EnemyController
             return;
         }
 
-        enemyAIRef.HandlePartnerDeath(isA: false);
+        barrierEnemyAIRef.HandlePartnerDeath(isA: false);
     }
 }

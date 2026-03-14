@@ -10,7 +10,7 @@ public class WormEnemyController : EnemyController
     [SerializeField] private List<Transform> segmentsVisuals = new List<Transform>();
     public List<EntityHealthController> weakPointHealths = new List<EntityHealthController>();
 
-    public WormEnemy enemyAIRef;
+    public WormEnemy wormEnemyAIRef;
 
     [Header("Internal Variables")]
 
@@ -43,8 +43,8 @@ public class WormEnemyController : EnemyController
     {
         Initialize();
 
-        if (!enemyAIRef)
-            enemyAIRef = GetComponentInChildren<WormEnemy>();
+        if (!wormEnemyAIRef)
+            wormEnemyAIRef = GetComponentInChildren<WormEnemy>();
 
         if ((segmentsLogic == null || segmentsLogic.Count == 0) || (segmentsVisuals == null || segmentsVisuals.Count == 0))
         {

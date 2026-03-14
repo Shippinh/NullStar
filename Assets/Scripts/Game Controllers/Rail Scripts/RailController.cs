@@ -2,8 +2,17 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
+// This class stores the state of an object on a spline
 public abstract class RailController : MonoBehaviour
 {
+    public enum RailState
+    {
+        NotOnRail,              // When not following the rail, completely detached
+        FollowingRail,          // When following the rail, completely attached
+        Attaching,              // When in the process of attaching to the rail, called in between NotOnRail and FollowingRail
+        Detaching               // When in the process of detaching from the rail, called in between FollowingRail and NotOnRail
+    }
+
     [Header("Spline Settings")]
     public SplineContainer splineContainer;
     public bool loopSpline = true;

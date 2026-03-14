@@ -2,13 +2,15 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public class EnemyController : DestructibleController, IPoolable
+public class EnemyController : DestructibleController, IPoolable, IRailAttachable
 {
     public string IPoolableTag {  get; set; } // always gets set, because no enemy can exists without getting depooled first, unless scripted to be like that specifically
 
     public string enemyName = "Default Enemy Name";
     public bool countsAsSeparateEnemy = true;
     private float waveToAppear;
+
+    protected EnemyAIComponent enemyAIRef;
     // Use this for initialization
     void Awake()
     {
@@ -45,6 +47,23 @@ public class EnemyController : DestructibleController, IPoolable
             ObjectPool.Instance.ReturnToPool(gameObject, IPoolableTag);
     }
 
+    // From the enemy controller side we need to give controls to the RailAIController properly
+    public virtual void HandleRailAttach()
+    {
+        enemyAIRef.enabled = false;
+
+        enemyAIRef.SetRBKinematic(true);
+    }
+
+    // From the enemy controller side we need to make sure we can give back controls to the normal AI properly
+    public virtual void HandleRailDetach()
+    {
+        enemyAIRef.SetRBKinematic(false);
+
+        enemyAIRef.enabled = true;
+
+    }
+
     // On revival
     public override void HandleRevival()
     {
@@ -63,6 +82,9 @@ public class EnemyController : DestructibleController, IPoolable
     protected override void Initialize()
     {
         base.Initialize();
+
+        if (!enemyAIRef)
+            enemyAIRef = GetComponent<EnemyAIComponent>();
 
         /*
         if (entityArenaControllerRef == null)

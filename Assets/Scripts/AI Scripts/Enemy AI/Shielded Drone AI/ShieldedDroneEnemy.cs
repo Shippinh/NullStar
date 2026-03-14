@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Based on sniper enemy but slightly different
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class ShieldedDroneEnemy : MonoBehaviour
+public class ShieldedDroneEnemy : EnemyAIComponent
 {
     [Header("Target & Movement")]
     public SpaceShooterController player;
@@ -26,11 +26,6 @@ public class ShieldedDroneEnemy : MonoBehaviour
     public float tiltSpeed = 45f; // degrees per second to rotate orbit plane axis
     float distToPlayer;
 
-    [Header("Avoidance")]
-    public float avoidanceForce = 5f;
-    public float detectionRadius = 5f;
-    public LayerMask obstacleMask;
-
     [Header("Turret Reference")]
     public TurretBehavior turretRef;
 
@@ -46,13 +41,6 @@ public class ShieldedDroneEnemy : MonoBehaviour
 
     public bool gunsDead = false;
 
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
-    [SerializeField] private Vector3 velocity;
-    [SerializeField] private Vector3 desiredVelocity;
-    [SerializeField] private Vector3 contactNormal = Vector3.up;
-    [SerializeField] private float tiltAngle = 0f;
-
     // Current acceleration type in Update, either orbit of follow
     private float currentAcceleration;
     private float currentVerticalAcceleration;
@@ -67,20 +55,15 @@ public class ShieldedDroneEnemy : MonoBehaviour
     public float shieldRotationSpeed = 90f; // degrees per second
     public float shieldTiltSpeed = 5f;          // optional smoothing
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         if (!player)
             player = FindObjectOfType<SpaceShooterController>();
 
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-
         baseMinRange = minRange;
         baseMaxRange = maxRange;
-
-        SphereCollider trigger = GetComponent<SphereCollider>();
-        trigger.isTrigger = true;
-        trigger.radius = detectionRadius;
 
         velocity = Vector3.zero;
 

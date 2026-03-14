@@ -65,7 +65,16 @@ public class PlayerRailController : RailController
 
         body.MovePosition(targetPosition);
         body.MoveRotation(SplineRotation);
+    }
 
+    public void UpdateRailSpeed(float dt)
+    {
+        MaxSpeed = currentSplineSpeed.value;
+        boostModeSpeedFade.Update(dt);
+    }
+
+    public void GetOptimalResolution()
+    {
         // How far you travel per physics tick
         float distancePerTick = currentSplineSpeed.value * Time.fixedDeltaTime;
 
@@ -73,12 +82,6 @@ public class PlayerRailController : RailController
         float optimalResolution = splineLength / distancePerTick;
 
         Debug.Log("Optimal resolution = " + optimalResolution);
-    }
-
-    public void UpdateRailSpeed(float dt)
-    {
-        MaxSpeed = currentSplineSpeed.value;
-        boostModeSpeedFade.Update(dt);
     }
 
 

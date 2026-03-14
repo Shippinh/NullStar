@@ -3,8 +3,22 @@ using UnityEngine;
 using UnityEngine.Splines;
 using System.Collections.Generic;
 
+// Rail AI Script that allows us to move an enemy along the spline in a specific way
 public class EnemyRailController : RailController
 {
+    public enum TrackingType 
+    {
+        None,                   // Static
+        TrackPlayer,            // Tracks the player
+        TrackMovementDirection  // Tracks towards the movement direction
+    }
+
+    public enum FollowLogic
+    {
+        Follower,               // Repeats  the referenced leader's path unless leader reference is null, and it's null then acts like a leader
+        Leader                  // Parametrically moves along the spline
+    }
+
     [Header("References")]
     public PlayerRailController playerRailControllerRef;
     public Rigidbody body;

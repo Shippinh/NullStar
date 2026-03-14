@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class BarrierRammerEnemyCentralized : MonoBehaviour
+public class BarrierRammerEnemyCentralized : EnemyAIComponent
 {
     [Header("References")]
     public SpaceShooterController player;
@@ -65,16 +65,16 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
     [Header("Other")]
     public bool reinitializeOnEnable = true;
 
-    private Rigidbody rb;
-    private List<Collider> nearbyObstacles = new List<Collider>();
-    private Vector3 velocity;
-    private Vector3 desiredVelocity;
-    private Vector3 contactNormal = Vector3.up;
     private float nextBurstTime = 0f;
     private uint destructibleCount = 0;
     private uint indestructibleCount = 0;
 
     public int currentSpiralStep = 0;
+
+    public override void Start()
+    {
+        base.Start();
+    }
 
     void Awake()
     {
@@ -85,12 +85,6 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
 
         originalEnemyARef = enemyA;
         originalEnemyBRef = enemyB;
-
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-        rb.drag = 0f;
-
-        velocity = Vector3.zero;
 
         if (pivotPoints != null && pivotPoints.Length > 0)
         {
@@ -134,9 +128,9 @@ public class BarrierRammerEnemyCentralized : MonoBehaviour
             isSolo = true;
         }
 
-        SphereCollider trigger = GetComponent<SphereCollider>();
-        trigger.isTrigger = true;
-        trigger.radius = currentPreset.detectionRadius;
+        avoidanceTrigger.isTrigger = true;
+        detectionRadius = currentPreset.detectionRadius; // this is cosmetic and it's an actual problem
+        avoidanceTrigger.radius = currentPreset.detectionRadius;
 
         if (randomizeInitialBurstTimer)
             currentBurstCooldown = Random.Range(currentPreset.burstCooldown - maxRandomInitialBurstTimer, currentPreset.burstCooldown + maxRandomInitialBurstTimer);

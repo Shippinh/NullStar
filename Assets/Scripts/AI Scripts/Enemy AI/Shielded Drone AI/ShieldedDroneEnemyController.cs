@@ -12,7 +12,7 @@ public class ShieldedDroneEnemyController : EnemyController
     public List<EntityHealthController> shieldHealthControllers = new();
     public List<EntityHealthController> gunHealthControllers = new();
 
-    public ShieldedDroneEnemy enemyAIRef;
+    public ShieldedDroneEnemy droneEnemyAIRef;
 
     // Game Juice
     [Header("Random Death Timers")]
@@ -34,8 +34,8 @@ public class ShieldedDroneEnemyController : EnemyController
         Initialize();
         countsAsSeparateEnemy = true;
 
-        if(!enemyAIRef)
-            enemyAIRef = GetComponentInChildren<ShieldedDroneEnemy>();
+        if(!droneEnemyAIRef)
+            droneEnemyAIRef = GetComponentInChildren<ShieldedDroneEnemy>();
 
         // Collect all sub-entity health controllers
         if(shieldHealthControllers == null || shieldHealthControllers.Count == 0)
@@ -51,7 +51,7 @@ public class ShieldedDroneEnemyController : EnemyController
     private void HandleCoreDeath()
     {
         // Stop AI behavior
-        enemyAIRef.canAct = false;
+        droneEnemyAIRef.canAct = false;
 
         // Combine all sub-controllers
         List<EntityHealthController> allSubEntities = new();

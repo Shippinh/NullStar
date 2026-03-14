@@ -32,7 +32,7 @@ Transform:
   - {fileID: 437109368918692688}
   - {fileID: 8179752562259919109}
   - {fileID: 7517978656043452157}
-  m_Father: {fileID: 8468824057757409567}
+  m_Father: {fileID: 8109522112443402799}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1190917176284666208
 GameObject:
@@ -195,7 +195,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3247158430386523086}
   m_Father: {fileID: 8468824057757409567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6734906225811126917
@@ -210,6 +211,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3006fbb85cbefaa4e94ea55e7da2163f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avoidanceForce: 125
+  detectionRadius: 5
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1032
+  rb: {fileID: 2836982059314104016}
+  avoidanceTrigger: {fileID: 219876677304334234}
+  nearbyObstacles: []
+  velocity: {x: 0, y: 0, z: 0}
+  desiredVelocity: {x: 0, y: 0, z: 0}
+  contactNormal: {x: 0, y: 1, z: 0}
+  tiltAngle: 0
   player: {fileID: 0}
   pivot: {fileID: 3247158430386523086}
   childPivot: {fileID: 0}
@@ -610,7 +623,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8109522112443402799}
-  - {fileID: 3247158430386523086}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2436914678064742093
@@ -631,7 +643,7 @@ MonoBehaviour:
   enemyAHealth: {fileID: 5270294878699746072}
   enemyBHealth: {fileID: 0}
   deadCount: 0
-  enemyAIRef: {fileID: 6734906225811126917}
+  barrierEnemyAIRef: {fileID: 0}
 --- !u!1 &9091306602534957448
 GameObject:
   m_ObjectHideFlags: 0

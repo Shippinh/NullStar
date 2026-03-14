@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// THE ONLY NON EnemyAIComponent ENEMY, has no rigidbody, therefore shouldn't be allowed to be attachable
 public class BasicMineEnemy : MonoBehaviour
 {
     [Header("States")]

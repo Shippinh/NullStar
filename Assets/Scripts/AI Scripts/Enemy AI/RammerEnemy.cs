@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class RammerEnemy : MonoBehaviour
+public class RammerEnemy : EnemyAIComponent
 {
     [Header("Target & Movement")]
     public SpaceShooterController player;
@@ -26,33 +26,17 @@ public class RammerEnemy : MonoBehaviour
     private float seedX;
     private float seedY;
 
-    [Header("Avoidance")]
-    public float avoidanceForce = 1000f;  
-    public float detectionRadius = 40f;
-    public LayerMask obstacleMask;
-
     [Header("Other")]
     public bool reinitializeOnEnable = true;
     public bool reinitializeCanMove = false; // Should canMove be set to true when reinitialized ? 
 
-    private Rigidbody rb;
-    private List<Collider> nearbyObstacles = new List<Collider>();
-    private Vector3 velocity;
-    private Vector3 desiredVelocity;
 
-    private Vector3 contactNormal = Vector3.up;
-
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         if (!player)
             player = FindObjectOfType<SpaceShooterController>();
-
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-
-        SphereCollider trigger = GetComponent<SphereCollider>();
-        trigger.isTrigger = true;
-        trigger.radius = detectionRadius;
 
         velocity = Vector3.zero;
 

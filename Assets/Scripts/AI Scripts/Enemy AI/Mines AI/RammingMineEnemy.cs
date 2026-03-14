@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// THIS REQUIRES REWORK BECAUSE WE CANNOT USE EnemyAIComponent here even though it does fit that class way too well
 [RequireComponent(typeof(Rigidbody))]
 public class RammingMineEnemy : BasicMineEnemy
 {

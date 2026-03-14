@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// THIS IS TECHNICALLY A RANGED ENEMY BUT THE MIN MAX RANGE VALUES ARE HARDCODED HERE
 // Describes Movement for the worm head
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class WormEnemy : MonoBehaviour
+public class WormEnemy : EnemyAIComponent
 {
     public enum WormMovementPattern
     {
@@ -43,11 +45,6 @@ public class WormEnemy : MonoBehaviour
 
     private float oscillationTime = 0f;
 
-    [Header("Avoidance")]
-    public float avoidanceForce = 5f;
-    public float detectionRadius = 5f;
-    public LayerMask obstacleMask;
-
     [Header("Worm Behavior")]
     public float pivotDistance = 25f;
     public float pivotForwardPush = 10f;   // worm goes past player
@@ -56,31 +53,20 @@ public class WormEnemy : MonoBehaviour
     [Header("Other")]
     public bool reinitializeOnEnable = true;
 
-    private Rigidbody rb;
-    private List<Collider> nearbyObstacles = new List<Collider>();
-    private Vector3 velocity;
-    private Vector3 desiredVelocity;
-
-    private Vector3 contactNormal = Vector3.up;
     private Vector3 currentPivot;
     private int currentDirectionIndex = -1;
     private List<Vector3> availableDirections;
 
     private Vector3 lastPlayerForward = Vector3.forward;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         if (!player)
             player = FindObjectOfType<SpaceShooterController>();
 
         playerCamera = Camera.main;
-
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-
-        SphereCollider trigger = GetComponent<SphereCollider>();
-        trigger.isTrigger = true;
-        trigger.radius = detectionRadius;
 
         velocity = Vector3.zero;
         UpdateDirections();

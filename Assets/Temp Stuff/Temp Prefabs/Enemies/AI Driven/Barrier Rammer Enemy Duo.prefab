@@ -351,7 +351,7 @@ MonoBehaviour:
   enemyAHealth: {fileID: 4367485166198755773}
   enemyBHealth: {fileID: 5334032688702333413}
   deadCount: 0
-  enemyAIRef: {fileID: 2143798253337090165}
+  barrierEnemyAIRef: {fileID: 0}
 --- !u!1 &4631698209305110891
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +676,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3006fbb85cbefaa4e94ea55e7da2163f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avoidanceForce: 125
+  detectionRadius: 10
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  rb: {fileID: 563799940630668755}
+  avoidanceTrigger: {fileID: 1016612523387783986}
+  nearbyObstacles: []
+  velocity: {x: 0, y: 0, z: 0}
+  desiredVelocity: {x: 0, y: 0, z: 0}
+  contactNormal: {x: 0, y: 1, z: 0}
+  tiltAngle: 0
   player: {fileID: 0}
   pivot: {fileID: 6242473208403724724}
   childPivot: {fileID: 2878056350095977100}

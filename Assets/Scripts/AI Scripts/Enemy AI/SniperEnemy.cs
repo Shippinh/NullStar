@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class SniperEnemy : MonoBehaviour
+public class SniperEnemy : EnemyAIComponent
 {
     [Header("Target")]
     public SpaceShooterController player;
@@ -24,11 +24,6 @@ public class SniperEnemy : MonoBehaviour
     public float baseMinRange, baseMaxRange;
     public float tiltSpeed = 45f; // degrees per second to rotate orbit plane axis
 
-    [Header("Avoidance")]
-    public float avoidanceForce = 5f;
-    public float detectionRadius = 5f;
-    public LayerMask obstacleMask;
-
     [Header("Turret Reference")]
     public TurretBehavior turretRef;
 
@@ -41,31 +36,19 @@ public class SniperEnemy : MonoBehaviour
     public bool reinitializeCanAct = false; // Should canAct be set to true when reinitialized ?
     public bool reinitializeCanMove = false; // Should canMove be set to true when reinitialized ? 
 
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
-    [SerializeField] private Vector3 velocity;
-    [SerializeField] private Vector3 desiredVelocity;
-    [SerializeField] private Vector3 contactNormal = Vector3.up;
-    [SerializeField] private float tiltAngle = 0f;
-
     // Current acceleration type in Update, either orbit of follow
     private float currentAcceleration;
     private float currentVerticalAcceleration;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         if(!player)
             player = FindObjectOfType<SpaceShooterController>();
 
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-
         baseMinRange = minRange;
         baseMaxRange = maxRange;
-
-        SphereCollider trigger = GetComponent<SphereCollider>();
-        trigger.isTrigger = true;
-        trigger.radius = detectionRadius;
 
         velocity = Vector3.zero;
 

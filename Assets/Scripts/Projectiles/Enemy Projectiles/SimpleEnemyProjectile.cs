@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SniperProjectile : MonoBehaviour, IPoolable
+public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
 {
     public string IPoolableTag { get; set; }
 

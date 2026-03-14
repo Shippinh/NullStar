@@ -640,7 +640,7 @@ MonoBehaviour:
   coreHealthController: {fileID: 4294315667447472086}
   shieldHealthControllers: []
   gunHealthControllers: []
-  enemyAIRef: {fileID: 4003160047428594822}
+  droneEnemyAIRef: {fileID: 0}
   minTimerDuration: 0.05
   lowerTimerDuration: 0.1
   maxTimerDuration: 0.4
@@ -4273,7 +4273,7 @@ GameObject:
   - component: {fileID: 9084587941220844120}
   - component: {fileID: 7542398726603983457}
   m_Layer: 14
-  m_Name: Shielded Drone Controller
+  m_Name: Shielded Drone Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4307,6 +4307,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01aa74f69b40dce4ab7c499e260aafa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avoidanceForce: 125
+  detectionRadius: 16.25
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 3072
+  rb: {fileID: 0}
+  avoidanceTrigger: {fileID: 0}
   player: {fileID: 0}
   maxSpeed: 25
   maxAcceleration: 10

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
-public class LeviathanEnemy : MonoBehaviour
+public class LeviathanEnemy : EnemyAIComponent
 {
     [Header("Target & Movement")]
     public SpaceShooterController player;
@@ -27,10 +27,6 @@ public class LeviathanEnemy : MonoBehaviour
     public float tiltSpeed = 45f; // degrees per second to rotate orbit plane axis
     float distToPlayer;
 
-    [Header("Avoidance")]
-    public float avoidanceForce = 5f;
-    public float detectionRadius = 5f;
-    public LayerMask obstacleMask;
 
     [Header("Shooting")]
     public float weaponChargeDuration = 1.5f; // THIS ONE IS INTERNAL, DEFINES HOW MUCH TIME BEFORE SHOOTING HAPPENS PASSES, used for aiming
@@ -71,13 +67,6 @@ public class LeviathanEnemy : MonoBehaviour
 
     public bool canMove = true;
 
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private List<Collider> nearbyObstacles = new List<Collider>();
-    [SerializeField] private Vector3 velocity;
-    [SerializeField] private Vector3 desiredVelocity;
-    [SerializeField] private Vector3 contactNormal = Vector3.up;
-    [SerializeField] private float tiltAngle = 0f;
-
     // Current acceleration type in Update, either orbit of follow
     private float currentAcceleration;
     private float currentVerticalAcceleration;
@@ -87,17 +76,13 @@ public class LeviathanEnemy : MonoBehaviour
     [SerializeField] private Transform[] gunsPositions;
     private Vector3[] aimedDirs; // store per-gun aimed directions
 
-    void Start()
+    public override void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
+        base.Start();
+
 
         baseMinRange = minRange;
         baseMaxRange = maxRange;
-
-        SphereCollider trigger = GetComponent<SphereCollider>();
-        trigger.isTrigger = true;
-        trigger.radius = detectionRadius;
 
         velocity = Vector3.zero;
 
@@ -120,7 +105,7 @@ public class LeviathanEnemy : MonoBehaviour
 
             projectileSpeed = ObjectPool.Instance
                 .GetPooledObject(em.projectileTag, true, false)
-                .GetComponent<SniperProjectile>().speed;
+                .GetComponent<SimpleEnemyProjectile>().speed;
         }
 
         weaponChargeDurationTimer = 0f;
