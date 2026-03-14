@@ -21562,8 +21562,8 @@ MonoBehaviour:
   overboostOverheatDurationCurrent: 0
   overboostOverheatDurationRestoreRate: 1
   overboostForward: 1
-  boostMode: 0
-  boostInitiated: 0
+  boostMode: 1
+  boostInitiated: 1
   dodgeMaxSpeed: 31.25
   dodgeMaxSpeedCap: 0
   perDodgeMaxSpeedIncrease: 1.25
@@ -21646,7 +21646,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
@@ -21730,7 +21730,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691622027}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87f75a1995a1cad4593c5bda3e6ff481, type: 3}
   m_Name: 
@@ -32686,23 +32686,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   railControllerRef: {fileID: 691622034}
-  eventList:
-  - eventTimelinePosition: 0.002
-    type: 1
-    canShootAgain: 0
-    canShoot: 1
-    intPtr: 56
-    floatPtr: 0
-    boolPtr: 0
-    objectParam: {fileID: 0}
-  - eventTimelinePosition: 0.051
-    type: 2
-    canShootAgain: 0
-    canShoot: 1
-    intPtr: 0
-    floatPtr: 0
-    boolPtr: 0
-    objectParam: {fileID: 0}
+  events: []
+  rangeEvents: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &901317817
 GameObject:
   m_ObjectHideFlags: 0
@@ -61695,7 +61683,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1678121016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61709,23 +61697,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   railControllerRef: {fileID: 691622034}
-  eventList:
-  - eventTimelinePosition: 0.002
-    type: 1
-    canShootAgain: 0
-    canShoot: 1
-    intPtr: 56
-    floatPtr: 0
-    boolPtr: 0
-    objectParam: {fileID: 0}
-  - eventTimelinePosition: 0.051
-    type: 2
-    canShootAgain: 0
-    canShoot: 1
-    intPtr: 0
-    floatPtr: 0
-    boolPtr: 0
-    objectParam: {fileID: 0}
+  events:
+  - rid: 1916255583279251457
+  rangeEvents: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1916255583279251457
+      type: {class: ChangeSpeedEvent, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0.012591817
+        enabled: 1
+        repeatable: 0
+        targetSpeed: 12
+        transitionDuration: 0
 --- !u!114 &1678121017
 MonoBehaviour:
   m_ObjectHideFlags: 0
