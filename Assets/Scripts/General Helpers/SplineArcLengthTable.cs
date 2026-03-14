@@ -9,8 +9,8 @@ using Unity.Mathematics;
 /// </summary>
 public class SplineArcLengthTable : MonoBehaviour
 {
-    [Tooltip("More samples = smoother correction. 512 is accurate to ~0.2% for most splines.")]
-    public int resolution = 2600;
+    [Tooltip("More samples = smoother correction. 512 is accurate to ~0.2% for most splines.")] // to get optimal resolution refer to GetOptimalResolution() in PlayerRailController
+    public int resolution = 2651;
 
     private float[] _arcLengths;  // cumulative distance at each sample
     private float _totalLength;
