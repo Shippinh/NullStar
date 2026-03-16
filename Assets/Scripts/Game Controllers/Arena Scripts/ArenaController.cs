@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public enum ArenaStartMode
 {
@@ -20,11 +21,19 @@ public enum ArenaState
     None                // No behavior tied this state at all
 }
 
+public enum ArenaCompletionPlayerEvent
+{
+    None,
+    AttachToRail,
+    ActivateAttachToRailTrigger,
+    StartNextArena
+}
 
 public class ArenaController : MonoBehaviour
 {
     [Header("Arena Settings")]
     public ArenaStartMode startMode = ArenaStartMode.OnStart;
+    public bool setActiveStartTrigger = false;
     public List<ArenaEntitySpawn> spawnPoints = new List<ArenaEntitySpawn>();
     public int totalWaveCount = 5;
 
@@ -41,6 +50,14 @@ public class ArenaController : MonoBehaviour
 
     public bool completeIfPerfectTime = false;
 
+    [Header("References")]
+    public GameObject startTriggerRef;
+    public SpaceShooterController playerRef;
+    public GameObject railAttachTriggerRef;
+    public SplineContainer railAttachSplineRef;
+
+    [Header("Arena Completion Event")]
+    public ArenaCompletionPlayerEvent arenaCompletionPlayerEvent = ArenaCompletionPlayerEvent.None;
 
     [Header("Internals")]
     [SerializeField] private int currentWave = 1;
@@ -73,6 +90,7 @@ public class ArenaController : MonoBehaviour
 
             case ArenaStartMode.OnPlayerEnterTrigger:
                 SetState(ArenaState.WaitingForPlayer);
+                startTriggerRef.SetActive(setActiveStartTrigger);
                 break;
         }
     }
@@ -82,6 +100,48 @@ public class ArenaController : MonoBehaviour
         if (initialized) return;
 
         spawnPoints.AddRange(GetComponentsInChildren<ArenaEntitySpawn>(false));
+
+        if (!playerRef)
+            playerRef = FindObjectOfType<SpaceShooterController>();
+
+        if(arenaCompletionPlayerEvent != ArenaCompletionPlayerEvent.None && (!railAttachTriggerRef || !railAttachSplineRef || !nextArenaControllerRef))
+        {
+            arenaCompletionPlayerEvent = ArenaCompletionPlayerEvent.None;
+            Debug.LogWarning("Arena Completion Event detected no trigger or spline references. Please set up the Arena Completion Event and References on " + name + "\nChanged the completion event to None");
+        }
+
+
+        bool arenaCompletionPlayerEventInitializationOutcome = true;
+        switch (arenaCompletionPlayerEvent)
+        {
+            case ArenaCompletionPlayerEvent.StartNextArena:
+                if (!nextArenaControllerRef)
+                {
+                    arenaCompletionPlayerEventInitializationOutcome = false;
+                    Debug.LogWarning("Arena Completion Event (StartNextArena) detected no next arena reference. Please set up the nextArenaControllerRef in References on " + name + "\nChanged the completion event to None");
+                }
+                break;
+            case ArenaCompletionPlayerEvent.AttachToRail:
+                if (!railAttachSplineRef)
+                {
+                    arenaCompletionPlayerEventInitializationOutcome = false;
+                    Debug.LogWarning("Arena Completion Event (AttachToRail) detected no spline container reference. Please set up the railAttachSplineRef in References on " + name + "\nChanged the completion event to None");
+                }
+                break;
+            case ArenaCompletionPlayerEvent.ActivateAttachToRailTrigger:
+                if (!railAttachTriggerRef)
+                {
+                    arenaCompletionPlayerEventInitializationOutcome = false;
+                    Debug.LogWarning("Arena Completion Event (StartNextArena) detected no rail attach trigger reference. Please set up the railAttachTriggerRef in References on " + name + "\nChanged the completion event to None");
+                }
+                break;
+        }
+
+        if (!arenaCompletionPlayerEventInitializationOutcome)
+        {
+            arenaCompletionPlayerEvent = ArenaCompletionPlayerEvent.None;
+        }
+
         initialized = true;
     }
 
@@ -238,12 +298,23 @@ public class ArenaController : MonoBehaviour
     {
         SetState(ArenaState.Completed);
 
-        if (nextArenaControllerRef)
+        switch(arenaCompletionPlayerEvent)
         {
-            nextArenaControllerRef.gameObject.SetActive(true);
-            gameObject.SetActive(false);
-            State = ArenaState.Disabled;
+            case ArenaCompletionPlayerEvent.StartNextArena:
+                nextArenaControllerRef.gameObject.SetActive(true);
+                break;
+            case ArenaCompletionPlayerEvent.None:
+                break;
+            case ArenaCompletionPlayerEvent.AttachToRail:
+                // playerRef.HandleBoostModeAttach
+                break;
+            case ArenaCompletionPlayerEvent.ActivateAttachToRailTrigger:
+                railAttachTriggerRef.SetActive(true);
+                break;
         }
+
+        gameObject.SetActive(false);
+        State = ArenaState.Disabled;
     }
 
     private float GetNextSpawnDelay()
