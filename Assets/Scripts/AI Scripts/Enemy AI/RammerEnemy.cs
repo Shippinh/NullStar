@@ -11,6 +11,7 @@ public class RammerEnemy : EnemyAIComponent
     public float maxAcceleration = 80f;
     public float maxAirAcceleration = 80f;
     public bool randomizeMaxAirAcceleration = true;
+    public float maxAirAccelerationRandomRange = 10f;
     public bool canMove = true;
 
     [Header("Chaotic offset parameters")]
@@ -45,7 +46,10 @@ public class RammerEnemy : EnemyAIComponent
 
         if (randomizeMaxAirAcceleration)
         {
-            maxAirAcceleration = Random.Range(maxAirAcceleration - 25f, maxAirAcceleration + 50f);
+            if(maxAcceleration > maxAirAccelerationRandomRange)
+                maxAirAcceleration = Random.Range(maxAirAcceleration - maxAirAccelerationRandomRange, maxAirAcceleration + maxAirAccelerationRandomRange);
+            else
+                maxAirAcceleration = Random.Range(maxAirAccelerationRandomRange - maxAirAcceleration, maxAirAccelerationRandomRange + maxAirAcceleration);
         }
     }
 
