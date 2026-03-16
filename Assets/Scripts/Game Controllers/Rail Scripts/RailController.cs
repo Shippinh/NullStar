@@ -2,17 +2,17 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
+public enum RailState
+{
+    NotOnRail,              // When not following the rail, completely detached
+    FollowingRail,          // When following the rail, completely attached
+    Attaching,              // When in the process of attaching to the rail, called in between NotOnRail and FollowingRail
+    Detaching               // When in the process of detaching from the rail, called in between FollowingRail and NotOnRail
+}
+
 // This class stores the state of an object on a spline
 public abstract class RailController : MonoBehaviour
 {
-    public enum RailState
-    {
-        NotOnRail,              // When not following the rail, completely detached
-        FollowingRail,          // When following the rail, completely attached
-        Attaching,              // When in the process of attaching to the rail, called in between NotOnRail and FollowingRail
-        Detaching               // When in the process of detaching from the rail, called in between FollowingRail and NotOnRail
-    }
-
     [Header("Spline Settings")]
     public SplineContainer splineContainer;
     public bool loopSpline = true;
@@ -73,15 +73,13 @@ public abstract class RailController : MonoBehaviour
 
         splineLength = splineContainer.Spline.GetLength();
 
-        // Shared table — baked once, reused by all controllers on this spline
         var table = splineContainer.GetComponent<SplineArcLengthTable>();
         if (table == null)
-            table = splineContainer.gameObject.AddComponent<SplineArcLengthTable>();
+        {
+            Debug.LogError($"No SplineArcLengthTable on {splineContainer.name} — add one in the editor.");
+            return;
+        }
 
-        if (!table.IsReady)
-            table.Bake(splineContainer.Spline);
-
-        // Each controller gets its own O(1) cursor
         _cursor = table.CreateCursor();
     }
 

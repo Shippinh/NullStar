@@ -7,6 +7,7 @@ using Unity.Mathematics;
 /// - Single shared instance per SplineContainer (all RailControllers reuse it)
 /// - O(1) amortized lookup via per-caller cached index instead of binary search
 /// </summary>
+[RequireComponent(typeof(SplineContainer))]
 public class SplineArcLengthTable : MonoBehaviour
 {
     [Tooltip("More samples = smoother correction. 512 is accurate to ~0.2% for most splines.")] // to get optimal resolution refer to GetOptimalResolution() in PlayerRailController
@@ -17,6 +18,23 @@ public class SplineArcLengthTable : MonoBehaviour
 
     public float TotalLength => _totalLength;
     public bool IsReady => _arcLengths != null;
+
+    private void Awake()
+    {
+        var container = GetComponent<SplineContainer>();
+        if (container != null)
+            Bake(container.Spline);
+    }
+
+    private void OnEnable()
+    {
+        if (!IsReady)
+        {
+            var container = GetComponent<SplineContainer>();
+            if (container != null)
+                Bake(container.Spline);
+        }
+    }
 
     public void Bake(Spline spline)
     {

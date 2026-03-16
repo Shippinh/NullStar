@@ -4186,7 +4186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &137519866
 Transform:
   m_ObjectHideFlags: 0
@@ -6315,7 +6315,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2014066164}
   - {fileID: 1518494608}
   - {fileID: 1043827947}
   - {fileID: 1366603074}
@@ -7334,57 +7333,6 @@ AudioHighPassFilter:
   m_Enabled: 0
   m_CutoffFrequency: 90
   m_HighpassResonanceQ: 1
---- !u!1 &232856991
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 232856992}
-  - component: {fileID: 232856993}
-  m_Layer: 0
-  m_Name: Rammer SP
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &232856992
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232856991}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1506975135}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &232856993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232856991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolableEnemyTag: Rammer
-  waveToAppear: 2
-  additionalEnemy: 0
-  showWaveGizmo: 1
-  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
-  baseArrowLength: 0.5
-  baseArrowHeadSize: 0.15
 --- !u!1 &234138649
 GameObject:
   m_ObjectHideFlags: 0
@@ -10489,36 +10437,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e542a85099ad0d4d84bc19124fcda0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputConfig: {fileID: 11400000, guid: 57c7208d781943446a81b405bf7a963b, type: 2}
-  playerRef: {fileID: 691622029}
-  offset: {x: 0, y: 0.6, z: 0}
-  cameraRotationSpeed: 2.5
-  minRotationY: -84
-  maxRotationY: 84
-  attachRotationLimit: 180
-  canRotate: 1
-  handRotationSpeed: 15
-  handResetSpeedVertical: 8
-  handResetSpeedHorizontal: 8
-  cameraTiltSpeed: 10
-  maxHorizontalTiltAngle: 1.2
-  maxVerticalTiltAngle: 0.325
-  dodgeTiltModifier: 1
-  overboostTiltModifier: 0.5
-  extraOverboostFieldOfView: 30
-  fieldOfViewChangeRate: 0.95
-  fieldOfViewResetRate: 5
-  target: {fileID: 1944553957}
-  leftHand: {fileID: 317917909}
-  rightHand: {fileID: 767223727}
-  left: {fileID: 619769866}
-  right: {fileID: 657565285}
-  shakeMagnitude: 0.05
-  shakeDuration: 0.25
-  overheatShakeFadeRate: 0.002
-  currentOverheatShakeMagnitude: 0
-  minShakeMagnitude: 0.0005
-  maxShakeMagnitude: 0.25
 --- !u!1 &339827579
 GameObject:
   m_ObjectHideFlags: 0
@@ -12660,7 +12578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &413563191
 Transform:
   m_ObjectHideFlags: 0
@@ -17462,7 +17380,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1309605316}
-  - {fileID: 900380387}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581141921
@@ -21483,7 +21400,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 691622028}
-  - component: {fileID: 691622035}
   - component: {fileID: 691622029}
   - component: {fileID: 691622030}
   - component: {fileID: 691622032}
@@ -21532,6 +21448,7 @@ MonoBehaviour:
   cameraControllerRef: {fileID: 1914964613}
   railControllerRef: {fileID: 691622034}
   playerRoot: {fileID: 1691204105}
+  playerState: 0
   maxSpeed: 13.75
   maxVerticalSpeed: 6.875
   maxFallSpeed: -9.375
@@ -21541,9 +21458,7 @@ MonoBehaviour:
   maxSpeedDecayRate: 10.2
   jetpackAcceleration: 18.75
   defaultMaxSpeed: 0
-  overboostMode: 0
   overboostOverheatMode: 0
-  overboostInitiated: 0
   overboostActivationDelay: 0.5
   overboostChargeTimer: 0
   maxOverboostInitiationSpeed: 2.5
@@ -21562,8 +21477,15 @@ MonoBehaviour:
   overboostOverheatDurationCurrent: 0
   overboostOverheatDurationRestoreRate: 1
   overboostForward: 1
-  boostMode: 1
-  boostInitiated: 1
+  transitionDuration: 0
+  transitionDurationCurrent: 0
+  transitionStartPosition: {x: 0, y: 0, z: 0}
+  transitionStartRotation: {x: 0, y: 0, z: 0, w: 0}
+  transitionBlend: 0
+  transitionBlendVelocity: 0
+  transitionStartSpeed: 0
+  currentRightOffset: 0
+  currentUpOffset: 0
   dodgeMaxSpeed: 31.25
   dodgeMaxSpeedCap: 0
   perDodgeMaxSpeedIncrease: 1.25
@@ -21621,8 +21543,6 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   desiredVelocity: {x: 0, y: 0, z: 0}
   desiredDodgeVelocity: {x: 0, y: 0, z: 0}
-  currentRightOffset: 0
-  currentUpOffset: 0
 --- !u!54 &691622030
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21645,8 +21565,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 2
@@ -21730,7 +21650,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691622027}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87f75a1995a1cad4593c5bda3e6ff481, type: 3}
   m_Name: 
@@ -21748,18 +21668,6 @@ MonoBehaviour:
   defaultSplineSpeed: 0
   currentSplineSpeed:
     value: 0
---- !u!114 &691622035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691622027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6e315c49699954a9b22bbb636cb432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &694664779
 GameObject:
   m_ObjectHideFlags: 0
@@ -32641,56 +32549,6 @@ MonoBehaviour:
   projectilePool: {fileID: 2147296234}
   tracerPool: {fileID: 0}
   impactEffectPool: {fileID: 0}
---- !u!1 &900380386
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 900380387}
-  - component: {fileID: 900380388}
-  m_Layer: 0
-  m_Name: Event Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &900380387
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 900380386}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 578732855}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &900380388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 900380386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 168141143b4b5e54cbdb72b23c2b427e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  railControllerRef: {fileID: 691622034}
-  events: []
-  rangeEvents: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!1 &901317817
 GameObject:
   m_ObjectHideFlags: 0
@@ -37601,6 +37459,8 @@ GameObject:
   - component: {fileID: 1032995049}
   - component: {fileID: 1032995048}
   - component: {fileID: 1032995047}
+  - component: {fileID: 1032995053}
+  - component: {fileID: 1032995052}
   m_Layer: 0
   m_Name: Spline 2
   m_TagString: Untagged
@@ -37984,6 +37844,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1032995052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032995046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168141143b4b5e54cbdb72b23c2b427e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  railControllerRef: {fileID: 0}
+  events: []
+  rangeEvents: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &1032995053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032995046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412dc130a5e0f594b8e58953a90a25b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolution: 2651
 --- !u!1 &1037074897
 GameObject:
   m_ObjectHideFlags: 0
@@ -47104,6 +46995,8 @@ GameObject:
   - component: {fileID: 1309605320}
   - component: {fileID: 1309605319}
   - component: {fileID: 1309605318}
+  - component: {fileID: 1309605322}
+  - component: {fileID: 1309605321}
   m_Layer: 0
   m_Name: Spline
   m_TagString: Untagged
@@ -47387,6 +47280,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309605315}
   m_Mesh: {fileID: 0}
+--- !u!114 &1309605321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309605315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168141143b4b5e54cbdb72b23c2b427e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  railControllerRef: {fileID: 0}
+  events: []
+  rangeEvents: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &1309605322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309605315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412dc130a5e0f594b8e58953a90a25b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolution: 2651
 --- !u!1 &1313536092
 GameObject:
   m_ObjectHideFlags: 0
@@ -48784,7 +48708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1376875054
 Transform:
   m_ObjectHideFlags: 0
@@ -52496,38 +52420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
---- !u!1 &1506975134
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1506975135}
-  m_Layer: 0
-  m_Name: Rammer Enemies
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1506975135
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506975134}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 676, y: 233.99998, z: 558}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 232856992}
-  m_Father: {fileID: 1604691650}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1507593282
 GameObject:
   m_ObjectHideFlags: 0
@@ -59746,7 +59638,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1897293218}
-  - {fileID: 1506975135}
   - {fileID: 203839759}
   - {fileID: 169529405}
   - {fileID: 2106932828}
@@ -61566,6 +61457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMode: 0
+  setActiveStartTrigger: 0
   spawnPoints: []
   totalWaveCount: 5
   baseDelay: 0.05
@@ -61574,6 +61466,11 @@ MonoBehaviour:
   perfectTime: 180
   currentTime: 0
   completeIfPerfectTime: 0
+  startTriggerRef: {fileID: 0}
+  playerRef: {fileID: 0}
+  railAttachTriggerRef: {fileID: 0}
+  railAttachSplineRef: {fileID: 0}
+  arenaCompletionPlayerEvent: 0
   currentWave: 1
   aliveEnemies: 0
   extraWavePossible: 1
@@ -61676,41 +61573,15 @@ GameObject:
   - component: {fileID: 1678121019}
   - component: {fileID: 1678121018}
   - component: {fileID: 1678121017}
-  - component: {fileID: 1678121016}
+  - component: {fileID: 1678121022}
+  - component: {fileID: 1678121023}
   m_Layer: 0
   m_Name: Spline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1678121016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1678121015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 168141143b4b5e54cbdb72b23c2b427e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  railControllerRef: {fileID: 691622034}
-  events:
-  - rid: 1916255583279251457
-  rangeEvents: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 1916255583279251457
-      type: {class: ChangeSpeedEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.012591817
-        enabled: 1
-        repeatable: 0
-        targetSpeed: 12
-        transitionDuration: 0
+  m_IsActive: 0
 --- !u!114 &1678121017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62047,6 +61918,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1678121022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678121015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168141143b4b5e54cbdb72b23c2b427e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  railControllerRef: {fileID: 691622034}
+  events:
+  - rid: 1916255583279251460
+  rangeEvents: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1916255583279251460
+      type: {class: ChangeSpeedEvent, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0.005
+        enabled: 1
+        repeatable: 0
+        targetSpeed: 56
+        transitionDuration: 0
+--- !u!114 &1678121023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678121015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 412dc130a5e0f594b8e58953a90a25b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolution: 2651
 --- !u!1 &1679683308
 GameObject:
   m_ObjectHideFlags: 0
@@ -62310,7 +62221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1683386395
 Transform:
   m_ObjectHideFlags: 0
@@ -76558,57 +76469,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2014066163
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2014066164}
-  - component: {fileID: 2014066165}
-  m_Layer: 0
-  m_Name: Rammer SP (11)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2014066164
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2014066163}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000000104308114}
-  m_LocalPosition: {x: 150, y: 150, z: -0.00018310547}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 203839759}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &2014066165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2014066163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c0829bb31adcad46b837d856126c757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolableEnemyTag: Rammer
-  waveToAppear: 2
-  additionalEnemy: 0
-  showWaveGizmo: 1
-  gizmoColor: {r: 0.015686274, g: 0.49177963, b: 1, a: 1}
-  baseArrowLength: 0.5
-  baseArrowHeadSize: 0.15
 --- !u!1 &2014700243
 GameObject:
   m_ObjectHideFlags: 0
@@ -79381,6 +79241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startMode: 1
+  setActiveStartTrigger: 1
   spawnPoints: []
   totalWaveCount: 5
   baseDelay: 0.05
@@ -79389,6 +79250,11 @@ MonoBehaviour:
   perfectTime: 180
   currentTime: 0
   completeIfPerfectTime: 0
+  startTriggerRef: {fileID: 78867103}
+  playerRef: {fileID: 691622029}
+  railAttachTriggerRef: {fileID: 0}
+  railAttachSplineRef: {fileID: 0}
+  arenaCompletionPlayerEvent: 0
   currentWave: 1
   aliveEnemies: 0
   extraWavePossible: 1
@@ -80775,7 +80641,7 @@ MonoBehaviour:
   - tag: Sniper
     prefab: {fileID: 4654918671434767847, guid: f4b32ef00873d1749ba528b9305a2412,
       type: 3}
-    size: 8
+    size: 9
   - tag: Rammer
     prefab: {fileID: 4300115145832643847, guid: 4f4c27794daf8454ca383c564a9a2ff1,
       type: 3}
@@ -80787,34 +80653,34 @@ MonoBehaviour:
   - tag: Worm
     prefab: {fileID: 8194889838913286662, guid: 31b11641948bd334fbf3b248abdc6a5b,
       type: 3}
-    size: 2
+    size: 3
   - tag: Barrier Rammer Duo
     prefab: {fileID: 4459130529708940694, guid: 339acf193ae46c848bad67eddab1237b,
       type: 3}
-    size: 2
+    size: 3
   - tag: Barrier Rammer Solo
     prefab: {fileID: 8863146051153493190, guid: 996af2e5d266eaf499745b13df6314ff,
       type: 3}
-    size: 2
+    size: 3
   - tag: Jumping Proximity Mine
     prefab: {fileID: 5570950812861804722, guid: 039691dc511b0214e8c5c7e769b828c1,
       type: 3}
-    size: 2
+    size: 3
   - tag: Ramming Proximity Mine
     prefab: {fileID: 4115985361053931243, guid: a0458eb190753c140a230984ccaba83e,
       type: 3}
-    size: 2
+    size: 3
   - tag: Stationary Proximity Mine
     prefab: {fileID: 609646008402813722, guid: 0f7f51c86a0d5af47879bb0f0cad1457, type: 3}
-    size: 2
+    size: 3
   - tag: Stationary Volatile Mine
     prefab: {fileID: 7382585870670320903, guid: c589fa316f419a24a8710b4ba1dbfb4e,
       type: 3}
-    size: 2
+    size: 3
   - tag: Standalone Turret
     prefab: {fileID: 4937089234977214735, guid: 2e043a27e69007544835f02a446498ca,
       type: 3}
-    size: 2
+    size: 3
 --- !u!1001 &746808101190497426
 PrefabInstance:
   m_ObjectHideFlags: 0

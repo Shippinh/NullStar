@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Splines;
 using static Unity.VisualScripting.FlowStateWidget;
 
+[RequireComponent(typeof(SplineArcLengthTable))]
 public class RailEventController : MonoBehaviour
 {
     [Header("References")]
@@ -22,6 +23,9 @@ public class RailEventController : MonoBehaviour
     {
         SortEvents();
         ResetAll();
+
+        if (!railControllerRef)
+            railControllerRef = FindObjectOfType<PlayerRailController>();
     }
 
     private void Update()
