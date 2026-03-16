@@ -13,9 +13,9 @@ public class BarricadeScript : MonoBehaviour
         {
             SpaceShooterController player = collision.gameObject.GetComponent<SpaceShooterController>();
 
-            if (!player.boostMode)
+            if (player.playerState != PlayerState.BoostActive)
             {
-                if (player.overboostInitiated && player.body.velocity.magnitude >= player.OverboostVelocityDeathLimit)
+                if (player.playerState != PlayerState.OverboostActive && player.body.velocity.magnitude >= player.OverboostVelocityDeathLimit)
                 {
                     player.healthController.InstantlyDie();
                     return;

@@ -285,7 +285,7 @@ public class TurretBehavior : MonoBehaviour
         EnsureAimArrays();
 
         bool useIntercept = aimType == AimType.InterceptPrediction
-            && (!playerOverboostSimpleAim || !player.overboostMode);
+            && (!playerOverboostSimpleAim || player.playerState != PlayerState.OverboostActive);
 
         for (int i = 0; i < gunsPositions.Length; i++)
         {

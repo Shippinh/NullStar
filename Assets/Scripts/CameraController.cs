@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class CameraController : MonoBehaviour
 {
-    public CustomInputs inputConfig;
+    /*public CustomInputs inputConfig;
     public SpaceShooterController playerRef;
 
     public Vector3 offset = new Vector3(0, 1, -10);
@@ -342,5 +342,5 @@ public class CameraController : MonoBehaviour
 
             Gizmos.color = Color.red;
         }
-    }
+    }*/
 }

@@ -128,20 +128,20 @@ public class CameraControllerNew : MonoBehaviour
     {
         if (canRotate)
         {
-            if(!playerRef.boostMode && !playerRef.boostInitiated)
+            if(playerRef.playerState != PlayerState.BoostTransitioning && playerRef.playerState != PlayerState.BoostActive)
                 CalculateDesiredRotation();
-            else if(playerRef.boostMode && playerRef.boostInitiated)
+            else if(playerRef.playerState == PlayerState.BoostTransitioning && playerRef.playerState == PlayerState.BoostActive)
                 CalculateDesiredRotationBoostMode();
             AdjustOverboostFoV();
         }
 
-        if (!playerRef.boostMode && !playerRef.boostInitiated)
+        if (playerRef.playerState != PlayerState.BoostTransitioning && playerRef.playerState != PlayerState.BoostActive)
             ApplyRotation(); // Has to be called here to not cause any jitter
-        else if (playerRef.boostMode && playerRef.boostInitiated)
+        else if (playerRef.playerState == PlayerState.BoostTransitioning && playerRef.playerState == PlayerState.BoostActive)
             ApplyRotationBoostMode();
 
             // Apply any shake after all rotations so it doesn't interfere with rotations
-        if (playerRef.overboostMode && playerRef.overboostOverheatMode)
+        if (playerRef.playerState == PlayerState.OverboostInitiating && playerRef.overboostOverheatMode)
             AdjustShakeOverheat();
         else
             AdjustShake();
@@ -206,7 +206,7 @@ public class CameraControllerNew : MonoBehaviour
         float tiltModifier = 1f;        // Default 1
         float cameraTiltModifier = 1f;  // Default 1
 
-        if (playerRef.overboostInitiated || playerRef.boostInitiated)
+        if (playerRef.playerState == PlayerState.OverboostActive || playerRef.playerState == PlayerState.BoostActive)
             tiltModifier += overboostTiltModifier;
 
         if (playerRef.isDodging)
@@ -219,7 +219,7 @@ public class CameraControllerNew : MonoBehaviour
         bool boostTilt = camDot > 0.25f || camDot < -0.25f;
 
         // Handling if the player is in boost
-        if (playerRef.boostInitiated)
+        if (playerRef.playerState == PlayerState.BoostActive)
         {
             if (playerRef.backwardInput != 0)
             {
@@ -265,11 +265,11 @@ public class CameraControllerNew : MonoBehaviour
     private void AdjustOverboostFoV()
     {
 
-        if (playerRef.overboostMode && playerRef.overboostInitiated)
+        if (playerRef.playerState == PlayerState.OverboostInitiating && playerRef.playerState == PlayerState.OverboostActive)
         {
             mainCameraRef.fieldOfView = Mathf.MoveTowards(mainCameraRef.fieldOfView, defaultFieldOfView + extraOverboostFieldOfView, fieldOfViewChangeRate * Time.deltaTime);
         }
-        else if (!playerRef.overboostMode && !playerRef.overboostInitiated)
+        else if (playerRef.playerState != PlayerState.OverboostInitiating && playerRef.playerState != PlayerState.OverboostActive)
         {
             mainCameraRef.fieldOfView = Mathf.MoveTowards(mainCameraRef.fieldOfView, defaultFieldOfView, fieldOfViewResetRate * Time.deltaTime);
         }

@@ -405,7 +405,7 @@ public class LeviathanEnemy : EnemyAIComponent
 
             Vector3 predictedDir = Vector3.zero;
 
-            if (player.overboostMode)
+            if (player.playerState == PlayerState.OverboostActive)
                 predictedDir = (predictedPos - gunPos).normalized; // linear prediction, should be balanced with lead aim time
             else
                 predictedDir = CalculateInterceptDirection(gunPos, playerPos, playerVel, projectileSpeed); //perfect aim, 

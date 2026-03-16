@@ -31,6 +31,11 @@ public class PlayerRailController : RailController
         boostModeSpeedFade = new RailSpeedController(currentSplineSpeed, defaultSplineSpeed);
 
         // Evaluate once so interpolation buffers start with valid data
+        InitializeSplineValues();
+    }
+
+    public void InitializeSplineValues()
+    {
         EvaluateSpline();
         InitializeInterpolationBuffers();
     }
@@ -38,7 +43,7 @@ public class PlayerRailController : RailController
 
     public void Update()
     {
-        if (!playerRef.boostMode) return;
+        if (playerRef.playerState != PlayerState.BoostTransitioning) return;
 
         UpdateRailSpeed(Time.deltaTime);
         UpdateInterpolatedSpline(); // smooth visual values every render frame
@@ -47,7 +52,7 @@ public class PlayerRailController : RailController
 
     public void FixedUpdate()
     {
-        if (!playerRef.boostMode) return;
+        if (playerRef.playerState != PlayerState.BoostTransitioning) return;
 
         // Snapshot before advancing so interpolation has previous frame
         SnapshotSplineForInterpolation();

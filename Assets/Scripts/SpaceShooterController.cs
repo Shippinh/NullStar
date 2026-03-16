@@ -5,7 +5,17 @@ using UnityEditor.Splines;
 using UnityEngine;
 using UnityEngine.LowLevel;
 using UnityEngine.Splines;
+using static PlayerRailController;
 using static UnityEditor.IMGUI.Controls.CapsuleBoundsHandle;
+
+public enum PlayerState
+{
+    Normal,
+    OverboostInitiating,
+    OverboostActive,
+    BoostTransitioning,
+    BoostActive
+}
 
 //omni.OS
 public class SpaceShooterController : MonoBehaviour
@@ -19,6 +29,9 @@ public class SpaceShooterController : MonoBehaviour
     public CameraControllerNew cameraControllerRef;
     public PlayerRailController railControllerRef;
     public Transform playerRoot;
+
+    [field: Header("Player playerState")]
+    [SerializeField] public PlayerState playerState = PlayerState.Normal;
 
     // Movement
     [field: Header("Basic Movement")]
@@ -34,9 +47,7 @@ public class SpaceShooterController : MonoBehaviour
 
     // Overboost System
     [field: Header("Overboost Movement")]
-    public bool overboostMode;
     public bool overboostOverheatMode;
-    public bool overboostInitiated = false;
     public float overboostActivationDelay = 2f;
     [SerializeField] float overboostChargeTimer;
     [SerializeField, Range(0f, 1000f)] float maxOverboostInitiationSpeed = 5f;
@@ -58,8 +69,21 @@ public class SpaceShooterController : MonoBehaviour
 
     // Boost System
     [field: Header("Boost Movement")]
-    public bool boostMode = false;
-    public bool boostInitiated = false;
+
+    // Transition
+    [SerializeField] private float transitionDuration = 0f;
+    [SerializeField] private float transitionDurationCurrent = 0f;
+    [SerializeField] private Vector3 transitionStartPosition;
+    [SerializeField] private Quaternion transitionStartRotation;
+    [SerializeField] private float transitionBlend = 0f;
+    [SerializeField] private float transitionBlendVelocity = 0f;
+    [SerializeField] private float transitionStartSpeed = 0f;
+
+    // Offsets
+    public float currentRightOffset = 0f;
+    public float currentUpOffset = 0f;
+    float currentRightVelocity = 0f;
+    float currentUpVelocity = 0f;
 
     // Dodge System
     [field: Header("Dodge Movement")]
@@ -114,35 +138,28 @@ public class SpaceShooterController : MonoBehaviour
     public InputToggle overboostToggle;
     public Vector3 lastExclusiveDirectionalInput = Vector3.forward;
 
-    // State Flags
+    // playerState Flags
     [field: Header("Other")]
     public bool isCooled = true;
     public bool playerHasControl = true;
-    public float OverboostVelocityDeathLimit {  get; protected set; }
+    public float OverboostVelocityDeathLimit { get; protected set; }
 
     // AI Dynamic Orbit Calculation
     [Header("AI Dynamic Orbit Calculation")]
     public float baseMinRange = 1000f;
     public float baseMaxRange = 1500f;
-
     public float safeBuffer = 5f;
     public LayerMask obstacleMask;
-
     public Color minRangeColor = Color.cyan;
     public Color maxRangeColor = Color.magenta;
     public Color safeRadiusColor = Color.yellow;
-
     [SerializeField] public float minRange;
     [SerializeField] public float maxRange;
     [SerializeField] public float currentSafeRadius;
 
-    // Precompute sampling directions over a sphere
     private List<Vector3> sampleDirections;
 
-    // Timers and Durations
-    // (already included under each system above for clarity)
-
-    // Stats / Tuning (General)
+    [Header("Internals")]
     [SerializeField, Range(0, 90)] float maxGroundAngle = 25f;
 
     // Events
@@ -163,30 +180,21 @@ public class SpaceShooterController : MonoBehaviour
     bool OnGround => groundContactCount > 0;
     float minGroundDotProduct;
 
-    // Internal State Vectors
+    // Internal playerState Vectors
     public Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
-    // Stored offset in spline-local space
-    //public Vector2 splineOffset;
-
-    [Header("Boost Plane Offsets")]
-    public float currentRightOffset = 0f;
-    public float currentUpOffset = 0f;
-    float currentRightVelocity = 0f;
-    float currentUpVelocity = 0f;
 
 
-
-    void OnValidate() 
+    void OnValidate()
     {
         minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
     }
 
-    void Awake() 
+    void Awake()
     {
-        Application.targetFrameRate = 120; // stupid hack to prevent high fps issues with inputs
+        Application.targetFrameRate = 120;
         QualitySettings.vSyncCount = 0;
 
-        if(!cameraControllerRef)
+        if (!cameraControllerRef)
             cameraControllerRef = FindObjectOfType<CameraControllerNew>();
 
         body = GetComponent<Rigidbody>();
@@ -211,18 +219,9 @@ public class SpaceShooterController : MonoBehaviour
         overboostDurationCurrent = 0f;
         overboostOverheatDurationCurrent = 0f;
 
-        sampleDirections = GenerateSphereDirections(42); // ~42 evenly distributed directions
+        sampleDirections = GenerateSphereDirections(42);
 
-        OverboostVelocityDeathLimit = maxOverboostSpeed * 0.65f; // hardcoded = bad, remake this
-
-       /* body.isKinematic = true;
-        body.interpolation = RigidbodyInterpolation.Interpolate;
-        body.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;*/
-
-        //railControllerRef = GetComponent<PlayerRailController>();
-
-        // DEBUG
-        //boostDirection = Vector3.zero;
+        OverboostVelocityDeathLimit = maxOverboostSpeed * 0.65f;
     }
 
     void Update()
@@ -230,10 +229,8 @@ public class SpaceShooterController : MonoBehaviour
         AttachHitbox();
         AdjustMaxOverboostSpeed();
         HandleInput();
-        if (!boostMode && !boostInitiated)
-        {
+        if (playerState == PlayerState.Normal || playerState == PlayerState.OverboostInitiating || playerState == PlayerState.OverboostActive)
             HandleOverboostInitiation();
-        }
         HandleRageCharge();
         HandleAdrenalineCharge();
         HandleDodgeRecharge();
@@ -243,9 +240,9 @@ public class SpaceShooterController : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateState();
+        UpdateplayerState();
 
-        if (boostMode)
+        if (playerState == PlayerState.BoostActive)
         {
             CalculateDesiredVelocity();
             AdjustBoostVelocity();
@@ -260,7 +257,7 @@ public class SpaceShooterController : MonoBehaviour
             if (!OnGround && body.useGravity)
                 ApplyGravity();
 
-            if (jumpInput && overboostMode == false)
+            if (jumpInput && playerState != PlayerState.OverboostActive)
             {
                 if (OnGround)
                     Jump();
@@ -268,7 +265,7 @@ public class SpaceShooterController : MonoBehaviour
                     AdjustAirVelocity();
             }
 
-            if (overboostInitiated)
+            if (playerState == PlayerState.OverboostActive)
                 AdjustAirVelocity();
 
             if (healInput)
@@ -277,7 +274,7 @@ public class SpaceShooterController : MonoBehaviour
             body.velocity = velocity;
         }
 
-        ClearState();
+        ClearplayerState();
         DecayMaxSpeedToDefault();
     }
 
@@ -288,18 +285,15 @@ public class SpaceShooterController : MonoBehaviour
 
     void AdjustMaxOverboostSpeed()
     {
-        // Calculate current dodge-contributed max speeds before clamping
         float dodgeBonusSpeed = (maxDodgeCharges - dodgeCharges) * perDodgeMaxSpeedIncrease;
         float dodgeBonusOverboostSpeed = (maxDodgeCharges - dodgeCharges) * perDodgeMaxOverboostSpeedIncrease;
 
-        // Cap dodge bonuses
         dodgeBonusSpeed = Mathf.Min(dodgeBonusSpeed, dodgeMaxSpeedCap - defaultMaxSpeed);
         dodgeBonusOverboostSpeed = Mathf.Min(dodgeBonusOverboostSpeed, dodgeMaxOverboostSpeedCap - defaultMaxOverboostSpeed - defaultMaxExtraOverboostSpeed);
 
-        // Update maxSpeed and base overboost speed with dodge bonuses
         maxSpeed = defaultMaxSpeed + dodgeBonusSpeed;
 
-        if (overboostMode && overboostInitiated)
+        if (playerState == PlayerState.OverboostActive)
         {
             float rateMultiplier = overboostOverheatMode ? 2f : 1f;
             currentExtraOverboostSpeed = Mathf.MoveTowards(
@@ -313,28 +307,21 @@ public class SpaceShooterController : MonoBehaviour
             currentExtraOverboostSpeed = 0f;
         }
 
-        // Final max overboost speed
         maxOverboostSpeed = defaultMaxOverboostSpeed + currentExtraOverboostSpeed + dodgeBonusOverboostSpeed;
     }
 
-
-
-    // Gets invoked whenever the referenced entity gets hit
     void HandleTakenHits()
     {
-        // Taking hits resets adrenaline meter
         ResetAdrenaline();
     }
 
     void ResetAdrenaline()
     {
-        if(!adrenalineActive)
+        if (!adrenalineActive)
         {
             adrenalineChargeTimer = 0f;
-            if(adrenalineCharged)
-            {
+            if (adrenalineCharged)
                 adrenalineCharged = false;
-            }
         }
     }
 
@@ -347,33 +334,32 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
-    // Custom gravity
     void ApplyGravity()
     {
-        float gravityMultiplier = 1f; // Increase for stronger gravity
+        float gravityMultiplier = 1f;
         velocity += Physics.gravity * gravityMultiplier * Time.fixedDeltaTime;
-        if (velocity.y < maxFallSpeed && !overboostMode && !boostMode)
+        if (velocity.y < maxFallSpeed && playerState == PlayerState.Normal)
             velocity.y = maxFallSpeed;
     }
 
-    void ClearState() 
+    void ClearplayerState()
     {
         groundContactCount = 0;
         contactNormal = Vector3.zero;
-        horizontalDodgeInput = 0;  // ← add these
+        horizontalDodgeInput = 0;
         verticalDodgeInput = 0;
     }
 
-    void UpdateState()
+    void UpdateplayerState()
     {
-        if (boostMode)
+        if (playerState == PlayerState.BoostActive)
         {
             velocity = railControllerRef.SplineRight * currentRightVelocity
                      + railControllerRef.SplineUp * currentUpVelocity;
         }
         else
         {
-            velocity = body.velocity; // will need revisiting when non-boost kinematic transition is done
+            velocity = body.velocity;
         }
 
         if (OnGround)
@@ -395,111 +381,78 @@ public class SpaceShooterController : MonoBehaviour
         float verticalSpeed;
         float verticalComponent;
 
-        if (overboostMode)
+        if (playerState == PlayerState.OverboostActive)
         {
-            // Pre apply vertical speed
             verticalSpeed = maxOverboostSpeed;
-            //verticalSpeed = maxOverboostVerticalSpeed;
 
-            // If we already overboosting
-            if (overboostInitiated)
-            {
-                // Remember the input
-                float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier; // left or right on demand
-                float verticalInput = 1; //constant jump
-                float forwardBackwardInput = (forwardInput + backwardInput) * overboostTurnMultiplier; // forward or backward on demand
+            float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier;
+            float verticalInput = 1;
+            float forwardBackwardInput = (forwardInput + backwardInput) * overboostTurnMultiplier;
 
-                // Determine lock direction and adjustement direction
-                // lastExclusiveDirectionalInput is calculated on input level for extra precision
-                if (lastExclusiveDirectionalInput.x != 0)
-                    horizontalInput = lastExclusiveDirectionalInput.x;
-                else if (lastExclusiveDirectionalInput.z != 0)
-                    forwardBackwardInput = lastExclusiveDirectionalInput.z;
+            if (lastExclusiveDirectionalInput.x != 0)
+                horizontalInput = lastExclusiveDirectionalInput.x;
+            else if (lastExclusiveDirectionalInput.z != 0)
+                forwardBackwardInput = lastExclusiveDirectionalInput.z;
 
-                moveDirection = new Vector3(horizontalInput, 0, forwardBackwardInput).normalized + new Vector3(0, verticalInput, 0);
+            moveDirection = new Vector3(horizontalInput, 0, forwardBackwardInput).normalized + new Vector3(0, verticalInput, 0);
 
-                // Adjust world direction according to camera
-                worldDirection =
+            worldDirection =
                 cameraControllerRef.mainCameraRef.transform.right * moveDirection.x +
                 cameraControllerRef.mainCameraRef.transform.forward * moveDirection.z;
 
-                worldDirection.Normalize(); // Let camera pitch determine final direction (includes vertical movement)
+            worldDirection.Normalize();
 
-                // Set speed
-                horizontalSpeed = maxOverboostSpeed;
-                // Set y component
-                verticalComponent = worldDirection.y;
+            horizontalSpeed = maxOverboostSpeed;
+            verticalComponent = worldDirection.y;
 
-                // Remember the desiredVelocity
-                desiredVelocity = new Vector3(
-                    worldDirection.x * horizontalSpeed,
-                    verticalComponent * verticalSpeed,
-                    worldDirection.z * horizontalSpeed);
-            }
-            // If we preparing to overboost
-            else
-            {
-                horizontalSpeed = maxOverboostInitiationSpeed;
-            }
+            desiredVelocity = new Vector3(
+                worldDirection.x * horizontalSpeed,
+                verticalComponent * verticalSpeed,
+                worldDirection.z * horizontalSpeed);
         }
-        // WORKS IN TANDEM WITH PLAYER RAIL CONTROLLER
-        else if (boostMode)
+        else if (playerState == PlayerState.OverboostInitiating)
+        {
+            horizontalSpeed = maxOverboostInitiationSpeed;
+        }
+        else if (playerState == PlayerState.BoostActive)
         {
             verticalSpeed = maxOverboostSpeed;
-            //verticalSpeed = maxOverboostVerticalSpeed;
 
-            if (boostInitiated)
-            {
-                // Remember the input
-                float horizontalInput = (rightInput + leftInput);
-                float verticalInput = (forwardInput + backwardInput);
-                float forwardBackwardInput = 0;
+            float horizontalInput = (rightInput + leftInput);
+            float verticalInput = (forwardInput + backwardInput);
 
-                moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
+            moveDirection = new Vector3(horizontalInput, verticalInput, 0);
 
-                // Compute input offset in spline plane
-                horizontalSpeed = maxOverboostSpeed;
-                verticalComponent = moveDirection.y;
+            horizontalSpeed = maxOverboostSpeed;
+            verticalComponent = moveDirection.y;
 
-                // Determine if the player is looking backward
-                // Dot product: forward along spline vs. player’s forward (or camera forward)
-                bool lookingForward = cameraControllerRef.LookingForward;
-                bool lookingSideways = cameraControllerRef.LookingSideways;
+            bool lookingForward = cameraControllerRef.LookingForward;
+            bool lookingSideways = cameraControllerRef.LookingSideways;
 
-                float adjustedHorizontal = lookingForward ? -moveDirection.x : moveDirection.x; //invert horizontal move direction based on the way the player is looking to
-                adjustedHorizontal = lookingSideways ? 0 : adjustedHorizontal; // stop the horizontal movement if the player is looking sidewas
+            float adjustedHorizontal = lookingForward ? -moveDirection.x : moveDirection.x;
+            adjustedHorizontal = lookingSideways ? 0 : adjustedHorizontal;
 
-                // Then we apply speed and input to the current local spline orientation
-                desiredVelocity =
-                    adjustedHorizontal * horizontalSpeed * railControllerRef.SplineRight +
-                    verticalComponent * verticalSpeed * railControllerRef.SplineUp;
+            desiredVelocity =
+                adjustedHorizontal * horizontalSpeed * railControllerRef.SplineRight +
+                verticalComponent * verticalSpeed * railControllerRef.SplineUp;
 
-                // Kill any accidental forward drift
-                // Then we project the current velocity on the rail plane
-                desiredVelocity = Vector3.ProjectOnPlane(desiredVelocity, railControllerRef.SplineForward);
-            }
-            else
-            {
-                horizontalSpeed = maxOverboostInitiationSpeed;
-            }
+            desiredVelocity = Vector3.ProjectOnPlane(desiredVelocity, railControllerRef.SplineForward);
         }
-        else if(!boostInitiated && !overboostInitiated)
+        else if (playerState == PlayerState.Normal)
         {
-            // Remember the input
             float horizontalInput = rightInput + leftInput;
             float verticalInput = jumpInput ? 1 : 0;
             float forwardBackwardInput = forwardInput + backwardInput;
 
             moveDirection = new Vector3(horizontalInput, verticalInput, forwardBackwardInput);
 
-            // Step 2C: Normal mode - movement restricted to horizontal plane, with separate Y input
             Vector3 camRight = cameraControllerRef.mainCameraRef.transform.right;
             Vector3 camForward = cameraControllerRef.mainCameraRef.transform.forward;
-            camForward.y = 0; // Flatten forward to horizontal
+            camForward.y = 0;
             camForward.Normalize();
 
             worldDirection = camRight * moveDirection.x + camForward * moveDirection.z;
-            worldDirection.Normalize(); // Horizontal movement only
+            worldDirection.Normalize();
 
             horizontalSpeed = maxSpeed;
             verticalSpeed = maxVerticalSpeed;
@@ -528,15 +481,12 @@ public class SpaceShooterController : MonoBehaviour
         velocity += xAxis * Mathf.Sign(deltaX) * Mathf.Min(Mathf.Abs(deltaX), acceleration * Time.fixedDeltaTime);
         velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), acceleration * Time.fixedDeltaTime);
     }
-    
+
     void AdjustBoostAirVelocity()
     {
         float currentY = velocity.y;
-
         float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-
         float deltaY = desiredVelocity.y - currentY;
-
         velocity.y += Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), acceleration * Time.fixedDeltaTime);
     }
 
@@ -545,28 +495,23 @@ public class SpaceShooterController : MonoBehaviour
         Vector3 rightAxis = railControllerRef.SplineRight;
         Vector3 upAxis = railControllerRef.SplineUp;
 
-        // Desired components in spline space
         float targetRight = Vector3.Dot(desiredVelocity, rightAxis);
         float targetUp = Vector3.Dot(desiredVelocity, upAxis);
 
         float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
 
-        // Compute velocity toward target
         float deltaRight = targetRight - currentRightVelocity;
         float deltaUp = targetUp - currentUpVelocity;
 
         currentRightVelocity += Mathf.Sign(deltaRight) * Mathf.Min(Mathf.Abs(deltaRight), acceleration * Time.fixedDeltaTime);
         currentUpVelocity += Mathf.Sign(deltaUp) * Mathf.Min(Mathf.Abs(deltaUp), acceleration * Time.fixedDeltaTime);
 
-        // Accumulate into offsets
         currentRightOffset += currentRightVelocity * Time.fixedDeltaTime;
         currentUpOffset += currentUpVelocity * Time.fixedDeltaTime;
 
-        // Clamp to limits
         currentRightOffset = Mathf.Clamp(currentRightOffset, -railControllerRef.maxSidewaysOffset, railControllerRef.maxSidewaysOffset);
         currentUpOffset = Mathf.Clamp(currentUpOffset, -railControllerRef.maxUpwardOffset, railControllerRef.maxUpwardOffset);
 
-        // Hard stop on limits — kill velocity on that axis if clamped
         if (Mathf.Abs(currentRightOffset) >= railControllerRef.maxSidewaysOffset && Mathf.Sign(currentRightVelocity) == Mathf.Sign(currentRightOffset))
             currentRightVelocity = 0f;
 
@@ -574,32 +519,25 @@ public class SpaceShooterController : MonoBehaviour
             currentUpVelocity = 0f;
     }
 
-
     void AdjustAirVelocity()
     {
         Vector3 yAxis = Vector3.up;
-
         float currentY = Vector3.Dot(velocity, yAxis);
         float targetY = desiredVelocity.y;
-
         float deltaY = targetY - currentY;
-
         float change = Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), jetpackAcceleration * Time.fixedDeltaTime);
         velocity += yAxis * change;
     }
 
     void AdjustDodgeVelocity()
     {
-        // Horizontal dodge for normal mode and overboost mode
-        if (horizontalDodgeInput > 0 && !isDodging && verticalDodgeInput == 0 && dodgeCharges > 0 && boostMode == false)
+        // Horizontal dodge — normal and overboost
+        if (horizontalDodgeInput > 0 && !isDodging && verticalDodgeInput == 0 && dodgeCharges > 0 && playerState != PlayerState.BoostActive && playerState != PlayerState.BoostTransitioning)
         {
-            //if no input in overboost mode - just stop the method
-            if (rightInput + leftInput == 0 && lastExclusiveDirectionalInput.z != 0 && overboostMode)
+            if (rightInput + leftInput == 0 && lastExclusiveDirectionalInput.z != 0 && playerState == PlayerState.OverboostActive)
                 return;
-
-            if (forwardInput + backwardInput == 0 && lastExclusiveDirectionalInput.x != 0 && overboostMode)
+            if (forwardInput + backwardInput == 0 && lastExclusiveDirectionalInput.x != 0 && playerState == PlayerState.OverboostActive)
                 return;
-
 
             isDodging = true;
             timeSinceLastDodge = 0f;
@@ -615,8 +553,7 @@ public class SpaceShooterController : MonoBehaviour
             dodgeCharges = Mathf.Max(0, dodgeCharges - 1);
             OnDodgeUsed?.Invoke();
 
-
-            if(overboostMode)
+            if (playerState == PlayerState.OverboostActive)
             {
                 if (lastExclusiveDirectionalInput.x != 0)
                     desiredDodgeVelocity = new Vector3(lastExclusiveDirectionalInput.x, 0, (forwardInput + backwardInput) * overboostTurnMultiplier).normalized;
@@ -631,9 +568,9 @@ public class SpaceShooterController : MonoBehaviour
             Vector3 camRight = cameraControllerRef.mainCameraRef.transform.right;
             Vector3 camForward = cameraControllerRef.mainCameraRef.transform.forward;
 
-            if (overboostMode)
+            if (playerState == PlayerState.OverboostActive)
             {
-                desiredDodgeVelocity = camRight * desiredDodgeVelocity.x  + camForward * desiredDodgeVelocity.z;
+                desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
             }
             else
             {
@@ -650,26 +587,15 @@ public class SpaceShooterController : MonoBehaviour
             maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
 
             if (desiredDodgeVelocity != Vector3.zero)
-            {
-                if (overboostMode)
-                {
-                    velocity = desiredDodgeVelocity * dodgeMaxSpeed * 1.5f;
-                }
-                else
-                    velocity = desiredDodgeVelocity * dodgeMaxSpeed;
-            }
+                velocity = desiredDodgeVelocity * dodgeMaxSpeed * (playerState == PlayerState.OverboostActive ? 1.5f : 1f);
 
             horizontalDodgeInput = 0;
             verticalDodgeInput = 0;
         }
 
-        // Vertical dodge
-        /* This has a more apparent bug where after dodging upwards while flying upwards
-         * it just doesn't do the full thrust resulting in a worse dodge compared
-         * to when you would dodge without accelerating upwards
-         * This happens because of the acceleration and speed limits for jetpack mode
-        */ 
-        if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && overboostMode == false && boostMode == false)
+        // Vertical dodge — normal only
+        if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0
+            && playerState == PlayerState.Normal)
         {
             isDodging = true;
             timeSinceLastDodge = 0f;
@@ -707,8 +633,9 @@ public class SpaceShooterController : MonoBehaviour
             horizontalDodgeInput = 0;
             verticalDodgeInput = 0;
         }
+
         // Boost mode omnidirectional dodge
-        if (!isDodging && dodgeCharges > 0 && boostMode && !overboostMode && horizontalDodgeInput > 0f)
+        if (!isDodging && dodgeCharges > 0 && playerState == PlayerState.BoostActive && horizontalDodgeInput > 0f)
         {
             float horizontal = rightInput + leftInput;
             float vertical = forwardInput + backwardInput;
@@ -716,22 +643,18 @@ public class SpaceShooterController : MonoBehaviour
             if (cameraControllerRef.LookingSideways)
             {
                 horizontal = 0f;
-                if (vertical == 0f)
-                    return;
+                if (vertical == 0f) return;
             }
 
-            if (horizontal == 0f && vertical == 0f)
-                return;
+            if (horizontal == 0f && vertical == 0f) return;
 
             bool invertHorizontal = cameraControllerRef.LookingForward;
             horizontal = invertHorizontal ? -horizontal : horizontal;
 
-            // Direction calculation unchanged
             Vector3 inputDirection = new Vector3(horizontal, vertical, 0f).normalized;
             Vector3 dodgeDirection = railControllerRef.SplineRight * inputDirection.x
                                    + railControllerRef.SplineUp * inputDirection.y;
 
-            // Charge/cooldown logic unchanged
             isDodging = true;
             dodgeTime = 0f;
             timeSinceLastDodge = 0f;
@@ -751,16 +674,13 @@ public class SpaceShooterController : MonoBehaviour
             maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
             maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
 
-            // Instead of setting velocity — set offset velocities directly
             currentRightVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineRight) * dodgeMaxSpeed;
             currentUpVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineUp) * dodgeMaxSpeed;
 
             horizontalDodgeInput = 0;
             verticalDodgeInput = 0;
         }
-
     }
-
 
     void HandleDodgeRecharge()
     {
@@ -789,7 +709,6 @@ public class SpaceShooterController : MonoBehaviour
 
         dodgeCharges = available;
 
-        // Trigger event when all charges are full, only once
         if (available == maxDodgeCharges && !allDodgesFull)
         {
             allDodgesFull = true;
@@ -801,109 +720,100 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
-
-
-    // Handles a brief stop before overboost starts, as well as overboost cancel
     void HandleOverboostInitiation()
     {
-        if (overboostMode == true && overboostInitiated == false)
+        // Enter initiation when toggle turns on
+        if (overboostToggle.GetCurrentToggleState() && playerState == PlayerState.Normal)
+            playerState = PlayerState.OverboostInitiating;
+
+        // Run initiation sequence
+        if (playerState == PlayerState.OverboostInitiating)
         {
-            if(body.useGravity == true)
+            if (body.useGravity)
                 OnOverboostInitiation?.Invoke();
             body.useGravity = false;
             maxOverboostSpeed = maxOverboostInitiationSpeed;
             overboostChargeTimer += Time.deltaTime;
 
-            float t = overboostChargeTimer / (overboostActivationDelay + 2f); // Normalized time (0 to 1)
+            float t = overboostChargeTimer / (overboostActivationDelay + 2f);
             float factor = 1f - (t * t);
+            body.velocity = new Vector3(body.velocity.x, body.velocity.y * factor, body.velocity.z); // brief stop only happens on y, other axis conserve momentum
 
-            body.velocity = new Vector3(body.velocity.x, body.velocity.y * factor, body.velocity.z);
-
-            if(overboostChargeTimer >= overboostActivationDelay)
+            if (overboostChargeTimer >= overboostActivationDelay)
             {
                 maxOverboostSpeed = defaultMaxOverboostSpeed;
                 if (lastExclusiveDirectionalInput.x != 0)
-                    body.velocity = (cameraControllerRef.mainCameraRef.transform.right * lastExclusiveDirectionalInput.x) * dodgeMaxSpeed;
+                    body.velocity = cameraControllerRef.mainCameraRef.transform.right * lastExclusiveDirectionalInput.x * dodgeMaxSpeed;
                 else if (lastExclusiveDirectionalInput.z != 0)
-                    body.velocity = (cameraControllerRef.mainCameraRef.transform.forward * lastExclusiveDirectionalInput.z) * dodgeMaxSpeed;
-                overboostInitiated = true;
+                    body.velocity = cameraControllerRef.mainCameraRef.transform.forward * lastExclusiveDirectionalInput.z * dodgeMaxSpeed;
+
+                playerState = PlayerState.OverboostActive;
                 body.useGravity = true;
                 overboostChargeTimer = 0f;
                 OnOverboostActivation?.Invoke();
             }
         }
 
-        if(overboostToggle.GetCurrentToggleState() == false)
+        // Cancel when toggle turns off
+        if (!overboostToggle.GetCurrentToggleState() &&
+            (playerState == PlayerState.OverboostInitiating || playerState == PlayerState.OverboostActive))
         {
-            if(overboostInitiated)
-                OnOverboostStop?.Invoke();
-            overboostInitiated = false;
-            if(body.useGravity == false)
-                OnOverboostInitiationCancel?.Invoke();
+            if (playerState == PlayerState.OverboostActive) OnOverboostStop?.Invoke();
+            if (!body.useGravity) OnOverboostInitiationCancel?.Invoke();
             body.useGravity = true;
             overboostChargeTimer = 0f;
             overboostOverheatMode = false;
+            playerState = PlayerState.Normal;
         }
     }
 
     void HandleOverboostDuration()
     {
-        // When in overboost
-        if(overboostMode == true && overboostInitiated == true)
+        if (playerState == PlayerState.OverboostActive)
         {
-            // When not overheating
-            if(overboostOverheatMode == false)
+            if (!overboostOverheatMode)
             {
                 overboostDurationCurrent += Time.deltaTime;
 
-                // If we overboost when we can overheat
-                if(overboostDurationCurrent >= overboostDuration && overboostOverheatDurationCurrent < overboostOverheatDuration)
+                if (overboostDurationCurrent >= overboostDuration && overboostOverheatDurationCurrent < overboostOverheatDuration)
                 {
-                    if(overboostOverheatMode == false)
+                    if (!overboostOverheatMode)
                         OnOverboostOverheat?.Invoke();
                     overboostOverheatMode = true;
                 }
-                // If we overboost when we cannot overheat
-                else if(overboostDurationCurrent >= overboostOverheatDuration && overboostOverheatDurationCurrent >= overboostOverheatDuration)
+                else if (overboostDurationCurrent >= overboostOverheatDuration && overboostOverheatDurationCurrent >= overboostOverheatDuration)
                 {
-                    overboostMode = false;
                     overboostToggle.ForceToggle(false);
                     OnOverboostStop?.Invoke();
                     OnOverheatCoolingInitiated?.Invoke();
-                    overboostInitiated = false;
                     overboostOverheatMode = false;
+                    playerState = PlayerState.Normal;
                 }
             }
-            // When overheating
             else
             {
                 overboostOverheatDurationCurrent += Time.deltaTime;
 
-                //healthController.TakeDamage(1, false);
-
-                // If we overheat before death - initiate cooling and disable overboost
-                if(overboostOverheatDurationCurrent >= overboostOverheatDuration)
+                if (overboostOverheatDurationCurrent >= overboostOverheatDuration)
                 {
-                    overboostMode = false;
                     overboostToggle.ForceToggle(false);
                     OnOverboostStop?.Invoke();
                     OnOverheatCoolingInitiated?.Invoke();
-                    overboostInitiated = false;
                     overboostOverheatMode = false;
+                    playerState = PlayerState.Normal;
                 }
             }
         }
-        // When not in overboost
-        else if(overboostMode == false && overboostInitiated == false)
+        else if (playerState == PlayerState.Normal)
         {
             overboostDurationCurrent = Mathf.MoveTowards(overboostDurationCurrent, 0f, overboostDurationRestoreRate * Time.deltaTime);
             overboostOverheatDurationCurrent = Mathf.MoveTowards(overboostOverheatDurationCurrent, 0f, overboostOverheatDurationRestoreRate * Time.deltaTime);
         }
 
-        if(overboostOverheatDurationCurrent > 0)
+        if (overboostOverheatDurationCurrent > 0)
             isCooled = false;
 
-        if(overboostOverheatDurationCurrent <= 0f &&!isCooled)
+        if (overboostOverheatDurationCurrent <= 0f && !isCooled)
         {
             isCooled = true;
             OnOverheatCoolingConcluded?.Invoke();
@@ -912,24 +822,20 @@ public class SpaceShooterController : MonoBehaviour
 
     void HandleRageCharge()
     {
-        if(rageCharged == false)
+        if (!rageCharged)
         {
             rageChargeTimer += Time.deltaTime;
-            if(rageChargeTimer >= rageRechargeTimer)
-            {
+            if (rageChargeTimer >= rageRechargeTimer)
                 rageCharged = true;
-            }
         }
 
-        if(rageCharged && rageInput)
-        {
+        if (rageCharged && rageInput)
             rageActive = true;
-        }
 
-        if(rageActive)
+        if (rageActive)
         {
             rageDurationCurrent -= Time.deltaTime;
-            if(rageDurationCurrent <= 0f)
+            if (rageDurationCurrent <= 0f)
             {
                 rageActive = false;
                 rageCharged = false;
@@ -939,28 +845,22 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
-    // This has to be updated in the future when it will be possible to track hits on player character
-    // For now it's just like rage
     void HandleAdrenalineCharge()
     {
-        if(adrenalineCharged == false)
+        if (!adrenalineCharged)
         {
             adrenalineChargeTimer += Time.deltaTime;
-            if(adrenalineChargeTimer >= adrenalineRechargeTimer)
-            {
+            if (adrenalineChargeTimer >= adrenalineRechargeTimer)
                 adrenalineCharged = true;
-            }
         }
 
-        if(adrenalineCharged && adrenalineInput)
-        {
+        if (adrenalineCharged && adrenalineInput)
             adrenalineActive = true;
-        }
 
-        if(adrenalineActive)
+        if (adrenalineActive)
         {
             adrenalineDurationCurrent -= Time.deltaTime;
-            if(adrenalineDurationCurrent <= 0f)
+            if (adrenalineDurationCurrent <= 0f)
             {
                 adrenalineActive = false;
                 adrenalineCharged = false;
@@ -983,39 +883,26 @@ public class SpaceShooterController : MonoBehaviour
     }
 
     public (float orbitMin, float orbitMax) CalculateDynamicOrbit(
-    float baseMin,
-    float baseMax,
-    float sweetSpot,
-    float safeBuffer = 1f)
+        float baseMin, float baseMax, float sweetSpot, float safeBuffer = 1f)
     {
-        // Start with the maximum possible radius
         float maxRadius = baseMax;
 
-        // Check each sample direction for obstacles
         foreach (var dir in sampleDirections)
         {
             if (Physics.SphereCast(transform.position, 1f, dir, out RaycastHit hit, baseMax, obstacleMask))
             {
                 float safeDist = hit.distance - safeBuffer;
-                maxRadius = Mathf.Min(maxRadius, safeDist); // reduce max if obstacle is closer
+                maxRadius = Mathf.Min(maxRadius, safeDist);
             }
         }
 
-        // Ensure max range >= min range + sweetSpot
         maxRadius = Mathf.Max(maxRadius, sweetSpot);
-
-        // Compute dynamic min range based on max and sweet spot
-        float minRadius = maxRadius - sweetSpot;
-
-        // Clamp to non-negative values
-        minRadius = Mathf.Max(0f, minRadius);
+        float minRadius = Mathf.Max(0f, maxRadius - sweetSpot);
         maxRadius = Mathf.Max(minRadius + sweetSpot, maxRadius);
 
         return (minRadius, maxRadius);
     }
 
-
-    // Generate evenly spread directions on a sphere (using "Fibonacci sphere")
     private List<Vector3> GenerateSphereDirections(int samples)
     {
         List<Vector3> dirs = new List<Vector3>(samples);
@@ -1027,11 +914,7 @@ public class SpaceShooterController : MonoBehaviour
             float y = ((i * offset) - 1) + (offset / 2);
             float r = Mathf.Sqrt(1 - y * y);
             float phi = i * increment;
-
-            float x = Mathf.Cos(phi) * r;
-            float z = Mathf.Sin(phi) * r;
-
-            dirs.Add(new Vector3(x, y, z).normalized);
+            dirs.Add(new Vector3(Mathf.Cos(phi) * r, y, Mathf.Sin(phi) * r).normalized);
         }
         return dirs;
     }
@@ -1039,32 +922,103 @@ public class SpaceShooterController : MonoBehaviour
     void Jump()
     {
         if (OnGround)
-        {
             velocity += Vector3.up * jumpForce;
+    }
+
+    /*public void HandleBoostModeAttach(SplineContainer newSplineTarget, float duration, float xOffset, float yOffset, float initialSplineT, float initialRailSpeed)
+    {
+        if (playerState != PlayerState.BoostTransitioning && playerState != PlayerState.BoostActive)
+        {
+            transitionStartSpeed = initialRailSpeed;
+            body.isKinematic = true;
+            cameraControllerRef.canRotate = false;
+
+            // RailController Reinitialization
+            railControllerRef.splineContainer?.gameObject.SetActive(false);
+            railControllerRef.splineContainer = newSplineTarget;
+
+            var table = newSplineTarget.GetComponent<SplineArcLengthTable>();
+            if (table != null && !table.IsReady)
+                table.Bake(newSplineTarget.GetComponent<SplineContainer>().Spline);
+
+            railControllerRef.Initialize();
+            railControllerRef.splineT = initialSplineT;
+            railControllerRef.defaultSplineSpeed = initialRailSpeed;
+            railControllerRef.currentSplineSpeed.value = initialRailSpeed;
+            railControllerRef.MaxSpeed = initialRailSpeed;
+            railControllerRef.boostModeSpeedFade = new RailSpeedController(railControllerRef.currentSplineSpeed, initialRailSpeed);
+            railControllerRef.InitializeSplineValues();
+
+            transitionDuration = duration;
+            transitionDurationCurrent = 0f;
+            transitionBlend = 0f;
+            transitionBlendVelocity = 0f;
+            transitionStartPosition = body.position;
+            transitionStartRotation = body.rotation;
+
+            playerState = PlayerState.BoostTransitioning;
         }
     }
+
+    public void HandleBoostModeDetach(float detachInitialVelocity)
+    {
+        // TODO
+    }
+
+    private void HandleTransition()
+    {
+        if (playerState == PlayerState.BoostTransitioning && !(playerState != PlayerState.BoostTransitioning && playerState != PlayerState.BoostActive))
+        {
+            float maxBlendSpeed = Mathf.Max(transitionStartSpeed, railControllerRef.MaxSpeed) * 2f;
+            transitionBlend = Mathf.SmoothDamp(transitionBlend, 1f, ref transitionBlendVelocity, transitionDuration * 0.35f, maxBlendSpeed);
+
+            railControllerRef.splineT = initialSplineT;
+            railControllerRef.EvaluateSpline();
+
+            Vector3 targetPos = railControllerRef.SplinePosition
+                + railControllerRef.SplineRight * xOffset
+                + railControllerRef.SplineUp * yOffset;
+
+            body.MovePosition(Vector3.Lerp(transitionStartPosition, targetPos, transitionBlend));
+            body.MoveRotation(Quaternion.Slerp(transitionStartRotation, railControllerRef.SplineRotation, transitionBlend));
+
+            if (transitionBlend >= 0.99f)
+            {
+                currentRightOffset = xOffset;
+                currentUpOffset = yOffset;
+                currentRightVelocity = 0f;
+                currentUpVelocity = 0f;
+
+                railControllerRef.enabled = true;
+                enabled = false;
+
+                playerState = PlayerState.BoostActive;
+                //cameraControllerRef.CameraBoostModeAttach();
+            }
+        }
+    }*/
 
     public bool GetPlayerOnGround()
     {
         return OnGround;
     }
 
-    void OnCollisionEnter(Collision collision) 
+    void OnCollisionEnter(Collision collision)
     {
         EvaluateCollision(collision);
     }
 
-    void OnCollisionStay(Collision collision) 
+    void OnCollisionStay(Collision collision)
     {
         EvaluateCollision(collision);
     }
 
-    void EvaluateCollision(Collision collision) 
+    void EvaluateCollision(Collision collision)
     {
-        for (int i = 0; i < collision.contactCount; i++) 
+        for (int i = 0; i < collision.contactCount; i++)
         {
             Vector3 normal = collision.GetContact(i).normal;
-            if (normal.y >= minGroundDotProduct) 
+            if (normal.y >= minGroundDotProduct)
             {
                 groundContactCount += 1;
                 contactNormal += normal;
@@ -1072,7 +1026,7 @@ public class SpaceShooterController : MonoBehaviour
         }
     }
 
-    Vector3 ProjectOnContactPlane(Vector3 vector) 
+    Vector3 ProjectOnContactPlane(Vector3 vector)
     {
         return vector - contactNormal * Vector3.Dot(vector, contactNormal);
     }
@@ -1091,29 +1045,18 @@ public class SpaceShooterController : MonoBehaviour
         rageInput = Input.GetKey(inputConfig.RageMode);
         adrenalineInput = Input.GetKey(inputConfig.AdrenalineMode);
 
-        if (boostMode == false)
-        {
-            //railControllerRef.playerSplineAnimateRef.enabled = false; // NEED TO RESET ORIENTATION TOO
-            
-            if (isCooled || overboostMode)
+        if (playerState == PlayerState.Normal || playerState == PlayerState.OverboostInitiating || playerState == PlayerState.OverboostActive)
+            {
+            if (isCooled || playerState == PlayerState.OverboostActive)
             {
                 overboostToggle.UpdateToggle();
-                overboostMode = overboostToggle.GetCurrentToggleState();
+                // Note: overboostMode bool is synced via playerState setter,
+                // but toggle playerState drives the initiation check in HandleOverboostInitiation
             }
         }
-        //else
-            //railControllerRef.playerSplineAnimateRef.enabled = true;
 
-
-        if (overboostInitiated == false)
-        {/*
-            overboostForward = true;
-            // Determine in which direction to overboost
-            if (forwardInput == 1 && (backwardInput == 0 || backwardInput == -1))
-                overboostForward = true;
-            else if (forwardInput == 0 && backwardInput == -1)
-                overboostForward = false;*/
-
+        if (playerState != PlayerState.OverboostActive)
+        {
             if (Input.GetKey(inputConfig.MoveLeft)) lastExclusiveDirectionalInput = new Vector3(-1, 0, 0);
             if (Input.GetKey(inputConfig.MoveRight)) lastExclusiveDirectionalInput = new Vector3(1, 0, 0);
             if (Input.GetKey(inputConfig.MoveUp)) lastExclusiveDirectionalInput = new Vector3(0, 0, 1);
@@ -1123,18 +1066,13 @@ public class SpaceShooterController : MonoBehaviour
 
     public bool AnyMovementInput()
     {
-        return overboostMode && overboostInitiated ? true : forwardInput != 0 || backwardInput != 0 || leftInput != 0 || rightInput != 0;
+        return playerState == PlayerState.OverboostActive
+            ? true
+            : forwardInput != 0 || backwardInput != 0 || leftInput != 0 || rightInput != 0;
     }
 
-    public bool AnySidewaysMovementInput()
-    {
-        return leftInput != 0 || rightInput != 0;
-    }
-
-    public bool AnyForwardMovementInput()
-    {
-        return forwardInput != 0 || backwardInput != 0;
-    }
+    public bool AnySidewaysMovementInput() => leftInput != 0 || rightInput != 0;
+    public bool AnyForwardMovementInput() => forwardInput != 0 || backwardInput != 0;
 
     void OnDrawGizmosSelected()
     {
@@ -1175,27 +1113,17 @@ public class InputToggle
     {
         if (isAxis)
         {
-            if (Input.GetButtonDown(axisName)) // Use Unity's button system
-            {
+            if (Input.GetButtonDown(axisName))
                 currentToggleState = !currentToggleState;
-            }
         }
         else
         {
-            if (Input.GetKeyDown(keyName)) // Directly toggles on key press
-            {
+            if (Input.GetKeyDown(keyName))
                 currentToggleState = !currentToggleState;
-            }
         }
     }
 
-    public bool GetCurrentToggleState()
-    {
-        return currentToggleState;
-    }
+    public bool GetCurrentToggleState() => currentToggleState;
 
-    public void ForceToggle(bool value)
-    {
-        currentToggleState = value;
-    }
+    public void ForceToggle(bool value) => currentToggleState = value;
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class SpaceShooterSoundController : MonoBehaviour
 {
@@ -120,7 +121,7 @@ public class SpaceShooterSoundController : MonoBehaviour
         float extraMovementPitch = 0f;
         float finalMovementPitch = baseMovementPitch;
 
-        if (playerController.boostInitiated) // boost
+        if (playerController.playerState == PlayerState.BoostActive) // boost
         {
             extraMovementPitch += 0.5f; // Taking in account constant forward movement during boost mode
 
@@ -132,7 +133,7 @@ public class SpaceShooterSoundController : MonoBehaviour
             if (extraMovementPitch >= 1.5f)
                 extraMovementPitch = 1.25f;
         }
-        else if (playerController.overboostInitiated) // overboost
+        else if (playerController.playerState == PlayerState.OverboostActive) // overboost
         {
             Vector3 inputDir = playerController.lastExclusiveDirectionalInput;
 
@@ -219,7 +220,7 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     void HandleOverboostActivation()
     {
-        Debug.Log("Overboost activated");
+        //Debug.Log("Overboost activated");
         overboostEngineImpactSound.Play();
         overboostAccelerationSound.Play();
         hardBurnSoundLoop.Play();
@@ -229,7 +230,7 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     void HandleOverboostStop()
     {
-        Debug.Log("Overboost concluded");
+        //Debug.Log("Overboost concluded");
         overboostAccelerationFade.SetVolumeOverTime(0f, playerController.overboostActivationDelay);
         
         hardBurnFade.SetVolumeOverTime(0f, hardBurnFadeOutDuration);
@@ -245,14 +246,14 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     void HandleOverboostInitiationCancel()
     {
-        Debug.Log("Overboost initiation cancelled");
+        //Debug.Log("Overboost initiation cancelled");
         overboostSwitchFade.SetPitchOverTime(0.5f, overboostSwitchFadeOutDuration);
         overboostSwitchFade.SetVolumeOverTime(0.1f, overboostSwitchFadeOutDuration);
     }
 
     void HandleOverboostInitiation()
     {
-        Debug.Log("Initiated overboost");
+        //Debug.Log("Initiated overboost");
         overheatCoolingFade.SetVolumeOverTime(0.1f, 0.01f);
         overboostOverheatCoolingIndicatorSound.Stop();
         overboostSwitchFade.SetPitchOverTime(1f, 0f);
@@ -262,20 +263,20 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     void HandleOverboostOverheat()
     {
-        Debug.Log("Overboost Overheating");
+        //Debug.Log("Overboost Overheating");
         overboostOverheatAlarmSound.Play();
     }
 
     void HandleOverboostCooling()
     {
-        Debug.Log("Overboost Overheat Cooling Initiated");
+        //Debug.Log("Overboost Overheat Cooling Initiated");
         overboostOverheatCoolingIndicatorSound.volume = 0.8f;
         overboostOverheatCoolingIndicatorSound.Play();
     }
 
     void HandleOverboostCoolingConcluded()
     {
-        Debug.Log("Overboost Overheat Cooling Concluded");
+        //Debug.Log("Overboost Overheat Cooling Concluded");
         overheatCoolingFade.SetVolumeOverTime(0.1f, 0.01f);
         overboostOverheatCoolingIndicatorSound.Stop();
     }
@@ -323,14 +324,14 @@ public class SpaceShooterSoundController : MonoBehaviour
                 break;
             }
         }
-        Debug.Log("Dodge initiated");
+        //Debug.Log("Dodge initiated");
         dodgeRechargeIndicatorFade.SetVolumeOverTime(0f, 0.3f);
         dodgeRechargeIndicatorFade.SetPitchOverTime(0.8f, 0.3f);
     }
 
     void HandleDodgeActualRechargeStart()
     {
-        Debug.Log("Dodge recharge has actually begun");
+        //Debug.Log("Dodge recharge has actually begun");
         dodgeRechargeIndicator.pitch = 1f;
         dodgeRechargeIndicator.Play();
         dodgeRechargeIndicatorFade.SetPitchOverTime(1.5f, 2f);
@@ -338,7 +339,7 @@ public class SpaceShooterSoundController : MonoBehaviour
 
     void HandleDodgeChargeGain()
     {
-        Debug.Log("Dodge charge gained");
+        //Debug.Log("Dodge charge gained");
         dodgeChargeGainedIndicator.Play();
     }
 }
