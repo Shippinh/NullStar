@@ -29,6 +29,7 @@ public class SpaceShooterController : MonoBehaviour
     public CameraControllerNew cameraControllerRef;
     public PlayerRailController railControllerRef;
     public Transform playerRoot;
+    public SpaceShooterPlasmaGunController gunControllerRef;
 
     [field: Header("Player playerState")]
     [SerializeField] public PlayerState playerState = PlayerState.Normal;
@@ -75,15 +76,20 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField] private float transitionDurationCurrent = 0f;
     [SerializeField] private Vector3 transitionStartPosition;
     [SerializeField] private Quaternion transitionStartRotation;
-    [SerializeField] private float transitionBlend = 0f;
-    [SerializeField] private float transitionBlendVelocity = 0f;
+    //[SerializeField] private float transitionBlend = 0f;
+    //[SerializeField] private float transitionBlendVelocity = 0f;
     [SerializeField] private float transitionStartSpeed = 0f;
+    [SerializeField] private float transitionDesiredOffsetX = 0f;
+    [SerializeField] private float transitionDesiredOffsetY = 0f;
+    [SerializeField] private AnimationCurve _transitionCurve;
+
 
     // Offsets
     public float currentRightOffset = 0f;
     public float currentUpOffset = 0f;
     float currentRightVelocity = 0f;
     float currentUpVelocity = 0f;
+
 
     // Dodge System
     [field: Header("Dodge Movement")]
@@ -197,6 +203,9 @@ public class SpaceShooterController : MonoBehaviour
         if (!cameraControllerRef)
             cameraControllerRef = FindObjectOfType<CameraControllerNew>();
 
+        if (!gunControllerRef)
+            gunControllerRef = GetComponentInChildren<SpaceShooterPlasmaGunController>();
+
         body = GetComponent<Rigidbody>();
         overboostToggle = new InputToggle(inputConfig.Overboost);
         healthController.TookHit += HandleTakenHits;
@@ -240,13 +249,17 @@ public class SpaceShooterController : MonoBehaviour
 
     void FixedUpdate()
     {
-        UpdateplayerState();
+        UpdateState();
 
         if (playerState == PlayerState.BoostActive)
         {
             CalculateDesiredVelocity();
             AdjustBoostVelocity();
             AdjustDodgeVelocity();
+        }
+        else if(playerState == PlayerState.BoostTransitioning)
+        {
+            HandleBoostModeTransition();
         }
         else
         {
@@ -274,7 +287,7 @@ public class SpaceShooterController : MonoBehaviour
             body.velocity = velocity;
         }
 
-        ClearplayerState();
+        ClearState();
         DecayMaxSpeedToDefault();
     }
 
@@ -342,7 +355,7 @@ public class SpaceShooterController : MonoBehaviour
             velocity.y = maxFallSpeed;
     }
 
-    void ClearplayerState()
+    void ClearState()
     {
         groundContactCount = 0;
         contactNormal = Vector3.zero;
@@ -350,7 +363,7 @@ public class SpaceShooterController : MonoBehaviour
         verticalDodgeInput = 0;
     }
 
-    void UpdateplayerState()
+    void UpdateState()
     {
         if (playerState == PlayerState.BoostActive)
         {
@@ -925,13 +938,30 @@ public class SpaceShooterController : MonoBehaviour
             velocity += Vector3.up * jumpForce;
     }
 
-    /*public void HandleBoostModeAttach(SplineContainer newSplineTarget, float duration, float xOffset, float yOffset, float initialSplineT, float initialRailSpeed)
+    // Called externally
+    public void InitiateBoostModeAttach(SplineContainer newSplineTarget, float duration, float xOffset, float yOffset, float initialSplineT, float initialRailSpeed)
     {
         if (playerState != PlayerState.BoostTransitioning && playerState != PlayerState.BoostActive)
         {
-            transitionStartSpeed = initialRailSpeed;
-            body.isKinematic = true;
+            if (playerState == PlayerState.OverboostActive || playerState == PlayerState.OverboostInitiating)
+                CancelOverboostForBoostAttach();
+
+            transitionStartSpeed = body.velocity.magnitude;
+
+            float totalDistance = Vector3.Distance(body.position, railControllerRef.SplinePosition + railControllerRef.SplineRight * xOffset + railControllerRef.SplineUp * yOffset);
+
+            // Normalize speeds against distance/duration so the curve slopes match actual velocity
+            float entrySlope = (transitionStartSpeed * transitionDuration) / Mathf.Max(totalDistance, 0.001f);
+            float exitSlope = (initialRailSpeed * transitionDuration) / Mathf.Max(totalDistance, 0.001f);
+
+            // Hermite curve — start at 0, end at 1, slopes set by entry/exit speed
+            Keyframe startKey = new Keyframe(0f, 0f, 0f, entrySlope);
+            Keyframe endKey = new Keyframe(1f, 1f, exitSlope, 0f);
+            _transitionCurve = new AnimationCurve(startKey, endKey);
+
+            body.useGravity = false;
             cameraControllerRef.canRotate = false;
+            gunControllerRef.canFire = false;
 
             // RailController Reinitialization
             railControllerRef.splineContainer?.gameObject.SetActive(false);
@@ -951,52 +981,97 @@ public class SpaceShooterController : MonoBehaviour
 
             transitionDuration = duration;
             transitionDurationCurrent = 0f;
-            transitionBlend = 0f;
-            transitionBlendVelocity = 0f;
+            //transitionBlend = 0f;
+            //transitionBlendVelocity = 0f;
             transitionStartPosition = body.position;
             transitionStartRotation = body.rotation;
+            transitionDesiredOffsetX = xOffset;
+            transitionDesiredOffsetY = yOffset;
+
+            railControllerRef.splineContainer.gameObject.SetActive(true);
+            cameraControllerRef.BeginBoostModeAttachTransition(duration);
 
             playerState = PlayerState.BoostTransitioning;
         }
     }
 
-    public void HandleBoostModeDetach(float detachInitialVelocity)
+    public void InitiateBoostModeDetach(float detachInitialVelocity)
     {
         // TODO
     }
 
-    private void HandleTransition()
+    // Called only internally in FixedUpdate
+    // In HandleBoostModeTransition — physics steering instead of MovePosition
+    private void HandleBoostModeTransition()
     {
-        if (playerState == PlayerState.BoostTransitioning && !(playerState != PlayerState.BoostTransitioning && playerState != PlayerState.BoostActive))
+        if (playerState != PlayerState.BoostTransitioning) return;
+
+        transitionDurationCurrent += Time.fixedDeltaTime;
+        float t = Mathf.Clamp01(transitionDurationCurrent / transitionDuration);
+        float smoothT = Mathf.SmoothStep(0f, 1f, t);
+
+        railControllerRef.EvaluateSpline();
+
+        Vector3 targetPos = railControllerRef.SplinePosition
+            + railControllerRef.SplineRight * transitionDesiredOffsetX
+            + railControllerRef.SplineUp * transitionDesiredOffsetY;
+
+        float remainingTime = Mathf.Max(transitionDuration - transitionDurationCurrent, Time.fixedDeltaTime);
+
+        // Velocity required to reach target in exactly the remaining time
+        Vector3 requiredVelocity = (targetPos - body.position) / remainingTime;
+
+        // Blend from current velocity toward required velocity
+        // Early in transition: more current velocity (preserves drift feel)
+        // Late in transition: more required velocity (guarantees arrival)
+        body.velocity = Vector3.Lerp(body.velocity, requiredVelocity, smoothT);
+
+        body.MoveRotation(Quaternion.Slerp(transitionStartRotation, railControllerRef.SplineRotation, smoothT));
+
+        //cameraControllerRef.UpdateBoostModeAttachTransition(smoothT);
+
+        if (t >= 1f)
         {
-            float maxBlendSpeed = Mathf.Max(transitionStartSpeed, railControllerRef.MaxSpeed) * 2f;
-            transitionBlend = Mathf.SmoothDamp(transitionBlend, 1f, ref transitionBlendVelocity, transitionDuration * 0.35f, maxBlendSpeed);
+            body.velocity = Vector3.zero;
+            body.isKinematic = true;
+            body.MovePosition(targetPos);
 
-            railControllerRef.splineT = initialSplineT;
+            currentRightOffset = transitionDesiredOffsetX;
+            currentUpOffset = transitionDesiredOffsetY;
+            currentRightVelocity = 0f;
+            currentUpVelocity = 0f;
+
+            gunControllerRef.canFire = true;
+            railControllerRef.enabled = true;
+            playerState = PlayerState.BoostActive;
+
+            // Manually kick the first rail tick so there's no 1-frame delay
+            railControllerRef.UpdateRailSpeed(Time.fixedDeltaTime);
+            railControllerRef.SnapshotSplineForInterpolation();
+            railControllerRef.TickSpline(Time.fixedDeltaTime);
             railControllerRef.EvaluateSpline();
-
-            Vector3 targetPos = railControllerRef.SplinePosition
-                + railControllerRef.SplineRight * xOffset
-                + railControllerRef.SplineUp * yOffset;
-
-            body.MovePosition(Vector3.Lerp(transitionStartPosition, targetPos, transitionBlend));
-            body.MoveRotation(Quaternion.Slerp(transitionStartRotation, railControllerRef.SplineRotation, transitionBlend));
-
-            if (transitionBlend >= 0.99f)
-            {
-                currentRightOffset = xOffset;
-                currentUpOffset = yOffset;
-                currentRightVelocity = 0f;
-                currentUpVelocity = 0f;
-
-                railControllerRef.enabled = true;
-                enabled = false;
-
-                playerState = PlayerState.BoostActive;
-                //cameraControllerRef.CameraBoostModeAttach();
-            }
+            railControllerRef.CommitSplineToInterpolation();
         }
-    }*/
+    }
+
+    private void CancelOverboostForBoostAttach()
+    {
+        if (playerState == PlayerState.OverboostActive)
+        {
+            OnOverboostStop?.Invoke();
+            overboostOverheatMode = false;
+        }
+        else if (playerState == PlayerState.OverboostInitiating)
+        {
+            OnOverboostInitiationCancel?.Invoke();
+        }
+
+        // Shared cleanup regardless of which overboost state we were in
+        body.useGravity = false; // transition will manage gravity
+        overboostChargeTimer = 0f;
+        overboostToggle.ForceToggle(false);
+        overboostOverheatMode = false;
+    }
 
     public bool GetPlayerOnGround()
     {
@@ -1046,7 +1121,7 @@ public class SpaceShooterController : MonoBehaviour
         adrenalineInput = Input.GetKey(inputConfig.AdrenalineMode);
 
         if (playerState == PlayerState.Normal || playerState == PlayerState.OverboostInitiating || playerState == PlayerState.OverboostActive)
-            {
+        {
             if (isCooled || playerState == PlayerState.OverboostActive)
             {
                 overboostToggle.UpdateToggle();

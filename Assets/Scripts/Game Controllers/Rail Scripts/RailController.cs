@@ -116,7 +116,7 @@ public abstract class RailController : MonoBehaviour
         SplineRotation = Quaternion.LookRotation(SplineForward, SplineUp);
     }
 
-    protected void SnapshotSplineForInterpolation()
+    public void SnapshotSplineForInterpolation()
     {
         previousSplinePosition = currentSplinePosition;
         previousSplineForward = currentSplineForward;
@@ -125,7 +125,7 @@ public abstract class RailController : MonoBehaviour
         previousSplineRotation = currentSplineRotation;
     }
 
-    protected void CommitSplineToInterpolation()
+    public void CommitSplineToInterpolation()
     {
         currentSplinePosition = SplinePosition;
         currentSplineForward = SplineForward;

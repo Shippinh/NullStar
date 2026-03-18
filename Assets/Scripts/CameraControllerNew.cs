@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using static LerpFactorMethods;
 
@@ -6,7 +7,7 @@ public class CameraControllerNew : MonoBehaviour
 
     [Header("References")]
     public SpaceShooterController playerRef;            // Take inputs and target transform from here
-    
+
     public Camera mainCameraRef;
 
     public Transform handPivotRef;
@@ -81,6 +82,13 @@ public class CameraControllerNew : MonoBehaviour
     public Vector3 defaultLeftHandOffset;
     public Vector3 defaultRightHandOffset;
 
+    [SerializeField] private Quaternion _attachStartRotation;
+    [SerializeField] private bool _attachTransitionActive;
+    [SerializeField] private float _attachTransitionDuration;
+    [SerializeField] private float _attachTransitionElapsed;
+
+    [SerializeField] private bool _boostCameraActive = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -90,7 +98,7 @@ public class CameraControllerNew : MonoBehaviour
         if (!playerRef)
             playerRef = FindObjectOfType<SpaceShooterController>();
 
-        if(!mainCameraRef)
+        if (!mainCameraRef)
             mainCameraRef = GetComponentInChildren<Camera>();
 
         playerRef.OnOverboostActivation += HandleOverboostActivation; // Sub to player event so we trigger a massive shake when the player activates the overboost (and maybe boost in the near future as well)
@@ -118,7 +126,13 @@ public class CameraControllerNew : MonoBehaviour
 
     void Update()
     {
-        HandleMouseInput();
+        if (!_attachTransitionActive)
+            HandleMouseInput();
+        else
+        {
+            inputX = 0;
+            inputY = 0;
+        }
         UpdateCamDot();
     }
 
@@ -126,31 +140,38 @@ public class CameraControllerNew : MonoBehaviour
 
     void LateUpdate()
     {
+        AttachCamera();
+
+        UpdateBoostModeTransitionCam();
+
+        if (_attachTransitionActive) return;
+
         if (canRotate)
         {
-            if(playerRef.playerState != PlayerState.BoostTransitioning && playerRef.playerState != PlayerState.BoostActive)
+            if (!_boostCameraActive)
                 CalculateDesiredRotation();
-            else if(playerRef.playerState == PlayerState.BoostTransitioning && playerRef.playerState == PlayerState.BoostActive)
+            else
                 CalculateDesiredRotationBoostMode();
             AdjustOverboostFoV();
         }
 
-        if (playerRef.playerState != PlayerState.BoostTransitioning && playerRef.playerState != PlayerState.BoostActive)
+        if (!_boostCameraActive)
             ApplyRotation(); // Has to be called here to not cause any jitter
-        else if (playerRef.playerState == PlayerState.BoostTransitioning && playerRef.playerState == PlayerState.BoostActive)
+        else
             ApplyRotationBoostMode();
 
-            // Apply any shake after all rotations so it doesn't interfere with rotations
+        // Apply any shake after all rotations so it doesn't interfere with rotations
         if (playerRef.playerState == PlayerState.OverboostInitiating && playerRef.overboostOverheatMode)
             AdjustShakeOverheat();
         else
             AdjustShake();
 
         // Apply hands rotation after everything since they just follow
-        RotateHandsSmoothly();
-        UpdateHandsPositionLag();
-
-        AttachCamera();
+        if (playerRef.playerState != PlayerState.BoostTransitioning)
+        {
+            RotateHandsSmoothly();
+            UpdateHandsPositionLag();
+        }
     }
 
     private void AttachCamera()
@@ -177,6 +198,12 @@ public class CameraControllerNew : MonoBehaviour
         desiredRotation = Quaternion.Euler(pitch + pitchTilt, yaw, roll);
     }
 
+    // This is the single final desiredRotation application
+    private void ApplyRotation()
+    {
+        mainCameraRef.transform.localRotation = Quaternion.Slerp(mainCameraRef.transform.localRotation, desiredRotation, cameraRotationSpeed);
+    }
+
     private void CalculateDesiredRotationBoostMode()
     {
         CalculateTiltAndPitchFromInput();
@@ -188,12 +215,6 @@ public class CameraControllerNew : MonoBehaviour
         // Use interpolated rotation so target doesn't jump every fixed step
         Quaternion splineBase = playerRef.railControllerRef.InterpolatedSplineRotation;
         desiredRotation = splineBase * Quaternion.Euler(pitch + pitchTilt, yaw, roll);
-    }
-
-    // This is the single final desiredRotation application
-    private void ApplyRotation()
-    {
-        mainCameraRef.transform.localRotation = Quaternion.Slerp(mainCameraRef.transform.localRotation, desiredRotation, cameraRotationSpeed);
     }
 
     private void ApplyRotationBoostMode()
@@ -255,9 +276,9 @@ public class CameraControllerNew : MonoBehaviour
                 roll = Mathf.Lerp(roll, -maxHorizontalTiltAngle * tiltModifier, Time.deltaTime * (cameraTiltSpeed * cameraTiltModifier));
             else
                 roll = Mathf.Lerp(roll, 0f, Time.deltaTime * cameraTiltSpeed);
-            
+
             // Not boosting — reset pitchTilt smoothly
-            if(pitchTilt != 0f)
+            if (pitchTilt != 0f)
                 pitchTilt = Mathf.Lerp(pitchTilt, 0f, Time.deltaTime * cameraTiltSpeed);
         }
     }
@@ -265,11 +286,11 @@ public class CameraControllerNew : MonoBehaviour
     private void AdjustOverboostFoV()
     {
 
-        if (playerRef.playerState == PlayerState.OverboostInitiating && playerRef.playerState == PlayerState.OverboostActive)
+        if (playerRef.playerState == PlayerState.OverboostInitiating || playerRef.playerState == PlayerState.OverboostActive)
         {
             mainCameraRef.fieldOfView = Mathf.MoveTowards(mainCameraRef.fieldOfView, defaultFieldOfView + extraOverboostFieldOfView, fieldOfViewChangeRate * Time.deltaTime);
         }
-        else if (playerRef.playerState != PlayerState.OverboostInitiating && playerRef.playerState != PlayerState.OverboostActive)
+        else if (playerRef.playerState != PlayerState.OverboostInitiating || playerRef.playerState != PlayerState.OverboostActive)
         {
             mainCameraRef.fieldOfView = Mathf.MoveTowards(mainCameraRef.fieldOfView, defaultFieldOfView, fieldOfViewResetRate * Time.deltaTime);
         }
@@ -383,5 +404,55 @@ public class CameraControllerNew : MonoBehaviour
         float camDot = Vector3.Dot(mainCameraRef.transform.forward, playerRef.transform.forward);
         LookingForward = camDot < 0f;
         LookingSideways = camDot < 0.3f && camDot > -0.3f;
+    }
+
+    // Used from other scripts
+    // In CameraControllerNew:
+    public void BeginBoostModeAttachTransition(float duration)
+    {
+        _attachStartRotation = mainCameraRef.transform.rotation;
+        _attachTransitionActive = true;
+        _attachTransitionDuration = duration;
+        _attachTransitionElapsed = 0f;
+    }
+
+    private void UpdateBoostModeTransitionCam()
+    {
+        if (!_attachTransitionActive) return;
+
+        _attachTransitionElapsed += Time.deltaTime;
+        float t = Mathf.Clamp01(_attachTransitionElapsed / _attachTransitionDuration);
+        float smoothT = Mathf.SmoothStep(0f, 1f, t);
+
+        // Use SplineRotation directly — InterpolatedSplineRotation may be stale
+        // since PlayerRailController isn't ticking yet during transition
+        Quaternion targetRot = playerRef.railControllerRef.SplineRotation;
+        mainCameraRef.transform.rotation = Quaternion.Slerp(_attachStartRotation, targetRot, smoothT);
+
+        AdjustOverboostFoV();
+        RotateHandsSmoothly();
+        UpdateHandsPositionLag();
+
+        if (t >= 1f)
+        {
+            _attachTransitionActive = false;
+            _boostCameraActive = true;
+
+            // Decompose relative to spline for pitch/yaw tracking
+            Quaternion localFromSpline = Quaternion.Inverse(targetRot) * mainCameraRef.transform.rotation;
+            Vector3 angles = localFromSpline.eulerAngles;
+            pitch = angles.x > 180f ? angles.x - 360f : angles.x;
+            yaw = angles.y > 180f ? angles.y - 360f : angles.y;
+            roll = 0f;
+
+            desiredRotation = mainCameraRef.transform.rotation;
+
+            // KEY FIX: re-express desired world rotation as local rotation
+            // so the Slerp in ApplyRotationBoostMode starts from the right place
+            mainCameraRef.transform.localRotation =
+                Quaternion.Inverse(transform.rotation) * desiredRotation;
+
+            canRotate = true;
+        }
     }
 }

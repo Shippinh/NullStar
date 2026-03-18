@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 public class SpaceShooterSoundController : MonoBehaviour
 {
     public SpaceShooterController playerController;
+    public SpaceShooterPlasmaGunController gunController;
 
     public AudioSource blowerSoundLoop;
     public AudioSource airIntakeSoundLoop;
@@ -178,11 +179,14 @@ public class SpaceShooterSoundController : MonoBehaviour
         desiredPitch = desiredPitch + Random.Range(plasmaPitchExtraMagnitude, -plasmaPitchExtraMagnitude);
         float desiredOscialtionVolume = plasmaGeneratorVolume + Random.Range(plasmaPitchExtraMagnitude, -plasmaPitchExtraMagnitude);
 
+        // Combine shooting + canFire into one truth
+        bool canActuallyFire = isShootingPlasma && gunController.canFire;
 
-        if (isShootingPlasma)
+        if (canActuallyFire)
         {
             shootingFade.SetPitchOverTime(desiredPitch, 0.1f);
             generatorFade.SetVolumeOverTime(desiredOscialtionVolume, 0.01f);
+
             if (!wasShootingPlasmaLastFrame)
             {
                 // Just started firing
@@ -197,13 +201,14 @@ public class SpaceShooterSoundController : MonoBehaviour
         {
             if (wasShootingPlasmaLastFrame)
             {
-                // Just stopped firing
+                // Just stopped firing (either released or can't fire anymore)
                 plasmaShootEndTimer = plasmaShootEndDelay;
             }
 
             if (plasmaShootEndTimer > 0f)
             {
                 plasmaShootEndTimer -= Time.deltaTime;
+
                 if (plasmaShootEndTimer <= 0f)
                 {
                     // Stop loop and play end
@@ -215,7 +220,8 @@ public class SpaceShooterSoundController : MonoBehaviour
             }
         }
 
-        wasShootingPlasmaLastFrame = isShootingPlasma;
+        // Track actual firing state, not just input
+        wasShootingPlasmaLastFrame = canActuallyFire;
     }
 
     void HandleOverboostActivation()

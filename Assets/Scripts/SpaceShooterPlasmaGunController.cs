@@ -15,6 +15,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
     public float fireRate = 0.2f;
     public float hitscanRange = 2000f;
     private float nextFireTime;
+    public bool canFire = false;
     
     [Header("Power-ups")]
     private float fireRateMultiplier = 1f;
@@ -29,7 +30,8 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
         UpdatePowerUps();
         if (Input.GetKey(inputConfig.Shoot) && Time.time >= nextFireTime)
         {
-            Fire();
+            if(canFire)
+                Fire();
             nextFireTime = Time.time + (fireRate / fireRateMultiplier);
         }
     }

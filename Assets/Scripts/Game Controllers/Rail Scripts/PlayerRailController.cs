@@ -43,7 +43,7 @@ public class PlayerRailController : RailController
 
     public void Update()
     {
-        if (playerRef.playerState != PlayerState.BoostTransitioning) return;
+        if (playerRef.playerState != PlayerState.BoostActive) return;
 
         UpdateRailSpeed(Time.deltaTime);
         UpdateInterpolatedSpline(); // smooth visual values every render frame
@@ -52,7 +52,7 @@ public class PlayerRailController : RailController
 
     public void FixedUpdate()
     {
-        if (playerRef.playerState != PlayerState.BoostTransitioning) return;
+        if (playerRef.playerState != PlayerState.BoostActive) return;
 
         // Snapshot before advancing so interpolation has previous frame
         SnapshotSplineForInterpolation();
