@@ -39,12 +39,16 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 1000f)] float maxSpeed = 10f;
     [SerializeField, Range(0f, 1000f)] float maxVerticalSpeed = 10f;
     [SerializeField, Range(0f, -1000f)] float maxFallSpeed = -10f;
+    [SerializeField, Range(0f, 100f)] float maxFallSpeedDecayRate = 10f;
+    [SerializeField, Range(0f, 1000f)] float maxRiseSpeed = 10f;
+    [SerializeField, Range(0f, 100f)] float maxRiseSpeedDecayRate = 10f;
     [SerializeField, Range(0f, 1000f)] float maxAcceleration = 10f;
     [SerializeField, Range(0f, 1000f)] float maxAirAcceleration = 1f;
     [SerializeField, Range(0f, 100f)] float jumpForce = 2f;
     [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
     [SerializeField, Range(0f, 2000f)] float jetpackAcceleration = 10f;
     [SerializeField] float defaultMaxSpeed;
+    [SerializeField] float gravityModifier = 1f;
 
     // Overboost System
     [field: Header("Overboost Movement")]
@@ -349,10 +353,13 @@ public class SpaceShooterController : MonoBehaviour
 
     void ApplyGravity()
     {
-        float gravityMultiplier = 1f;
-        velocity += Physics.gravity * gravityMultiplier * Time.fixedDeltaTime;
+        velocity += Physics.gravity * gravityModifier * Time.fixedDeltaTime;
+
         if (velocity.y < maxFallSpeed && playerState == PlayerState.Normal)
-            velocity.y = maxFallSpeed;
+            velocity.y = Mathf.MoveTowards(velocity.y, maxFallSpeed, maxFallSpeedDecayRate * Time.fixedDeltaTime);
+
+        if (velocity.y > maxRiseSpeed && playerState == PlayerState.Normal)
+            velocity.y = Mathf.MoveTowards(velocity.y, maxRiseSpeed, maxRiseSpeedDecayRate * Time.fixedDeltaTime);
     }
 
     void ClearState()
@@ -534,10 +541,18 @@ public class SpaceShooterController : MonoBehaviour
 
     void AdjustAirVelocity()
     {
+        if (isDodging) return;
+
         Vector3 yAxis = Vector3.up;
         float currentY = Vector3.Dot(velocity, yAxis);
         float targetY = desiredVelocity.y;
         float deltaY = targetY - currentY;
+
+        // Don't apply if we're already moving faster than target in the same direction
+        // This lets dodge vertical momentum carry naturally without fighting it
+        if (Mathf.Abs(currentY) > Mathf.Abs(targetY) && Mathf.Sign(currentY) == Mathf.Sign(targetY))
+            return;
+
         float change = Mathf.Sign(deltaY) * Mathf.Min(Mathf.Abs(deltaY), jetpackAcceleration * Time.fixedDeltaTime);
         velocity += yAxis * change;
     }
