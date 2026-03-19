@@ -10,6 +10,7 @@ public class CustomInputs : ScriptableObject
 
     public KeyCode HorizontalDodge = KeyCode.LeftShift;
     public KeyCode VerticalDodge = KeyCode.LeftControl;
+    public KeyCode DownwardDodge = KeyCode.LeftAlt;
     public KeyCode Ascend = KeyCode.Space;
     public KeyCode Shoot = KeyCode.Mouse0;
     public KeyCode Overboost = KeyCode.Q;
@@ -25,6 +26,7 @@ public class CustomInputs : ScriptableObject
         PlayerPrefs.SetString("MoveRight", MoveRight.ToString());
         PlayerPrefs.SetString("HorizontalDodge", HorizontalDodge.ToString());
         PlayerPrefs.SetString("VerticalDodge", VerticalDodge.ToString());
+        PlayerPrefs.SetString("DownwardDodge", DownwardDodge.ToString());
         PlayerPrefs.SetString("Ascend", Ascend.ToString());
         PlayerPrefs.SetString("Shoot", Shoot.ToString());
         PlayerPrefs.SetString("Overboost", Overboost.ToString());
@@ -43,6 +45,7 @@ public class CustomInputs : ScriptableObject
         MoveRight = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveRight", MoveRight.ToString()));
         HorizontalDodge = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("HorizontalDodge", HorizontalDodge.ToString()));
         VerticalDodge = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("VerticalDodge", VerticalDodge.ToString()));
+        DownwardDodge = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("DownwardDodge", DownwardDodge.ToString()));
         Ascend = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Ascend", Ascend.ToString()));
         Shoot = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Shoot", Shoot.ToString()));
         Overboost = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Overboost", Overboost.ToString()));

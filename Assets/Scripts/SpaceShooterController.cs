@@ -143,6 +143,7 @@ public class SpaceShooterController : MonoBehaviour
     public int shootInput;
     public int horizontalDodgeInput;
     public int verticalDodgeInput;
+    public int downwardDodgeInput;
     public bool rageInput;
     public bool adrenalineInput;
     public InputToggle overboostToggle;
@@ -368,6 +369,7 @@ public class SpaceShooterController : MonoBehaviour
         contactNormal = Vector3.zero;
         horizontalDodgeInput = 0;
         verticalDodgeInput = 0;
+        downwardDodgeInput = 0;
     }
 
     void UpdateState()
@@ -622,8 +624,7 @@ public class SpaceShooterController : MonoBehaviour
         }
 
         // Vertical dodge — normal only
-        if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0
-            && playerState == PlayerState.Normal)
+        if (verticalDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && playerState == PlayerState.Normal)
         {
             isDodging = true;
             timeSinceLastDodge = 0f;
@@ -660,6 +661,46 @@ public class SpaceShooterController : MonoBehaviour
 
             horizontalDodgeInput = 0;
             verticalDodgeInput = 0;
+        }
+
+        // Downward dodge — normal only
+        if (downwardDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && playerState == PlayerState.Normal)
+        {
+            isDodging = true;
+            timeSinceLastDodge = 0f;
+            dodgeTime = 0f;
+            for (int i = 0; i < dodgeCooldowns.Count; i++)
+            {
+                if (dodgeCooldowns[i] <= 0f)
+                {
+                    dodgeCooldowns[i] = dodgeRechargeTime;
+                    break;
+                }
+            }
+            dodgeCharges = Mathf.Max(0, dodgeCharges - 1);
+            OnDodgeUsed?.Invoke();
+
+            desiredDodgeVelocity = new Vector3(rightInput + leftInput, -1f, forwardInput + backwardInput).normalized;
+
+            Vector3 camRight = cameraControllerRef.mainCameraRef.transform.right;
+            Vector3 camForward = cameraControllerRef.mainCameraRef.transform.forward;
+            camRight.y = 0f;
+            camForward.y = 0f;
+
+            if (desiredDodgeVelocity == Vector3.zero)
+                desiredDodgeVelocity = -transform.up;
+
+            desiredDodgeVelocity = camRight * desiredDodgeVelocity.x + camForward * desiredDodgeVelocity.z;
+            desiredDodgeVelocity = new Vector3(desiredDodgeVelocity.x, -1f, desiredDodgeVelocity.z);
+            desiredDodgeVelocity.Normalize();
+
+            maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
+
+            if (desiredDodgeVelocity != Vector3.zero)
+                velocity = desiredDodgeVelocity * dodgeMaxSpeed * 0.75f;
+
+            horizontalDodgeInput = 0;
+            downwardDodgeInput = 0;
         }
 
         // Boost mode omnidirectional dodge
@@ -1130,6 +1171,7 @@ public class SpaceShooterController : MonoBehaviour
         jumpInput = Input.GetKey(inputConfig.Ascend);
         if (Input.GetKeyDown(inputConfig.HorizontalDodge)) horizontalDodgeInput = 1;
         if (Input.GetKeyDown(inputConfig.VerticalDodge)) verticalDodgeInput = 1;
+        if (Input.GetKeyDown(inputConfig.DownwardDodge)) downwardDodgeInput = 1;
         healInput = Input.GetKey(inputConfig.Heal);
         shootInput = Input.GetKey(inputConfig.Shoot) ? 1 : 0;
         rageInput = Input.GetKey(inputConfig.RageMode);
