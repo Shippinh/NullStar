@@ -21421,12 +21421,16 @@ MonoBehaviour:
   maxSpeed: 13.75
   maxVerticalSpeed: 6.875
   maxFallSpeed: -9.375
+  maxFallSpeedDecayRate: 10
+  maxRiseSpeed: 0
+  maxRiseSpeedDecayRate: 10
   maxAcceleration: 13.75
   maxAirAcceleration: 13.75
-  jumpForce: 1.25
+  jumpForce: 7.5
   maxSpeedDecayRate: 10.2
   jetpackAcceleration: 18.75
   defaultMaxSpeed: 0
+  gravityModifier: 1.5
   overboostOverheatMode: 0
   overboostActivationDelay: 0.5
   overboostChargeTimer: 0
@@ -21438,7 +21442,7 @@ MonoBehaviour:
   maxOverboostSpeed: 25
   defaultMaxOverboostSpeed: 0
   overboostTurnMultiplier: 0.4
-  maxOverboostVerticalSpeed: 25
+  maxOverboostVerticalSpeed: 7.5
   overboostDuration: 7.5
   overboostDurationCurrent: 0
   overboostDurationRestoreRate: 3
@@ -21515,6 +21519,7 @@ MonoBehaviour:
   shootInput: 0
   horizontalDodgeInput: 0
   verticalDodgeInput: 0
+  downwardDodgeInput: 0
   rageInput: 0
   adrenalineInput: 0
   lastExclusiveDirectionalInput: {x: 0, y: 0, z: 1}

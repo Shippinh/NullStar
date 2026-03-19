@@ -405,8 +405,6 @@ public class SpaceShooterController : MonoBehaviour
 
         if (playerState == PlayerState.OverboostActive)
         {
-            verticalSpeed = maxOverboostSpeed;
-
             float horizontalInput = (rightInput + leftInput) * overboostTurnMultiplier;
             float verticalInput = 1;
             float forwardBackwardInput = (forwardInput + backwardInput) * overboostTurnMultiplier;
@@ -425,11 +423,17 @@ public class SpaceShooterController : MonoBehaviour
             worldDirection.Normalize();
 
             horizontalSpeed = maxOverboostSpeed;
+            verticalSpeed = maxOverboostVerticalSpeed;
+
             verticalComponent = worldDirection.y;
+
+            // Explicit vertical nudge on top of camera-derived direction
+            float explicitVertical = 0f;
+            if (jumpInput) explicitVertical = 1f;
 
             desiredVelocity = new Vector3(
                 worldDirection.x * horizontalSpeed,
-                verticalComponent * verticalSpeed,
+                verticalComponent * verticalSpeed + explicitVertical * verticalSpeed,
                 worldDirection.z * horizontalSpeed);
         }
         else if (playerState == PlayerState.OverboostInitiating)
@@ -562,7 +566,7 @@ public class SpaceShooterController : MonoBehaviour
     void AdjustDodgeVelocity()
     {
         // Horizontal dodge — normal and overboost
-        if (horizontalDodgeInput > 0 && !isDodging && verticalDodgeInput == 0 && dodgeCharges > 0 && playerState != PlayerState.BoostActive && playerState != PlayerState.BoostTransitioning)
+        if (horizontalDodgeInput > 0 && !isDodging && dodgeCharges > 0 && playerState != PlayerState.BoostActive && playerState != PlayerState.BoostTransitioning)
         {
             if (rightInput + leftInput == 0 && lastExclusiveDirectionalInput.z != 0 && playerState == PlayerState.OverboostActive)
                 return;
