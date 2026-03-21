@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 // Fire once at a specific T position on the rail.
 
@@ -41,6 +42,18 @@ public class SetObjectActiveEvent : RailEvent
 
     public override string EditorLabel => $"{(active ? "Enable" : "Disable")} {(target != null ? target.name : "—")}";
     public override Color EditorColor => new Color(0.3f, 1f, 0.5f);
+}
+
+[System.Serializable]
+public class DetachPlayerFromRail : RailEvent
+{
+    public SpaceShooterController playerRef;
+    public float transitionDuration = 0f;
+
+    public override void Execute(PlayerRailController ctx) => playerRef?.InitiateBoostModeDetach(transitionDuration);
+
+    public override string EditorLabel => $"Detach player over {transitionDuration}s";
+    public override Color EditorColor => new Color(0.5f, 0.5f, 0.8f);
 }
 
 // Span a region of the timeline; fire Enter/Exit/Update callbacks.

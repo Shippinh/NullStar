@@ -58,6 +58,23 @@ public class CameraControllerNew : MonoBehaviour
     [Range(0f, 5f)] public float fieldOfViewChangeRate = 0.95f;
     [Range(0f, 25f)] public float fieldOfViewResetRate = 5f;
 
+    [Header("Boost Transition")]
+    public LerpFactor attachEasing = LerpFactor.EaseInOutCubic;
+    public LerpFactor detachEasing = LerpFactor.EaseOutQuad;
+
+    [SerializeField] private Quaternion attachStartRotation;
+    [SerializeField] private bool attachTransitionActive;
+    [SerializeField] private float attachTransitionDuration;
+    [SerializeField] private float attachTransitionElapsed;
+
+    [SerializeField] private bool detachTransitionActive;
+    [SerializeField] private float detachTransitionDuration;
+    [SerializeField] private float detachTransitionElapsed;
+    [SerializeField] private Quaternion detachStartRotation;
+    [SerializeField] private Quaternion detachTargetRotation;
+
+    public bool boostCameraActive = false;
+
     [field: Header("Externals")]
     public bool LookingSideways { get; protected set; }
     [Range(0f, 1f)] public float sidewaysLookCriteria = 0.3f;
@@ -81,13 +98,6 @@ public class CameraControllerNew : MonoBehaviour
 
     public Vector3 defaultLeftHandOffset;
     public Vector3 defaultRightHandOffset;
-
-    [SerializeField] private Quaternion _attachStartRotation;
-    [SerializeField] private bool _attachTransitionActive;
-    [SerializeField] private float _attachTransitionDuration;
-    [SerializeField] private float _attachTransitionElapsed;
-
-    [SerializeField] private bool _boostCameraActive = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -126,7 +136,7 @@ public class CameraControllerNew : MonoBehaviour
 
     void Update()
     {
-        if (!_attachTransitionActive)
+        if (!IsInBoostTransition)
             HandleMouseInput();
         else
         {
@@ -136,26 +146,27 @@ public class CameraControllerNew : MonoBehaviour
         UpdateCamDot();
     }
 
-
-
     void LateUpdate()
     {
         AttachCamera();
 
-        UpdateBoostModeTransitionCam();
+        if (attachTransitionActive)
+            UpdateBoostModeAttachTransition();
+        if (detachTransitionActive)
+            UpdateBoostModeDetachTransition();
 
-        if (_attachTransitionActive) return;
+        if (IsInBoostTransition) return;
 
         if (canRotate)
         {
-            if (!_boostCameraActive)
+            if (!boostCameraActive)
                 CalculateDesiredRotation();
             else
                 CalculateDesiredRotationBoostMode();
             AdjustOverboostFoV();
         }
 
-        if (!_boostCameraActive)
+        if (!boostCameraActive)
             ApplyRotation(); // Has to be called here to not cause any jitter
         else
             ApplyRotationBoostMode();
@@ -167,7 +178,7 @@ public class CameraControllerNew : MonoBehaviour
             AdjustShake();
 
         // Apply hands rotation after everything since they just follow
-        if (playerRef.playerState != PlayerState.BoostTransitioning)
+        if (!playerRef.BoostTransitioning)
         {
             RotateHandsSmoothly();
             UpdateHandsPositionLag();
@@ -410,24 +421,46 @@ public class CameraControllerNew : MonoBehaviour
     // In CameraControllerNew:
     public void BeginBoostModeAttachTransition(float duration)
     {
-        _attachStartRotation = mainCameraRef.transform.rotation;
-        _attachTransitionActive = true;
-        _attachTransitionDuration = duration;
-        _attachTransitionElapsed = 0f;
+        attachStartRotation = mainCameraRef.transform.rotation;
+        attachTransitionActive = true;
+        attachTransitionDuration = duration;
+        attachTransitionElapsed = 0f;
     }
 
-    private void UpdateBoostModeTransitionCam()
+    public void BeginBoostModeDetachTransition(float duration, Vector3 exitVelocity)
     {
-        if (!_attachTransitionActive) return;
+        detachStartRotation = mainCameraRef.transform.rotation;
+        detachTransitionDuration = duration;
+        detachTransitionElapsed = 0f;
+        detachTransitionActive = true;
+        boostCameraActive = false;
+        canRotate = false;
 
-        _attachTransitionElapsed += Time.deltaTime;
-        float t = Mathf.Clamp01(_attachTransitionElapsed / _attachTransitionDuration);
-        float smoothT = Mathf.SmoothStep(0f, 1f, t);
+        // Build target rotation from exit velocity direction, keeping world up
+        if (exitVelocity.sqrMagnitude > 0.001f)
+        {
+            Quaternion exitRot = Quaternion.LookRotation(exitVelocity.normalized, Vector3.up);
+            // Decompose into yaw/pitch so normal camera mode picks up cleanly after
+            Vector3 angles = exitRot.eulerAngles;
+            pitch = angles.x > 180f ? angles.x - 360f : angles.x;
+            yaw = angles.y > 180f ? angles.y - 360f : angles.y;
+            roll = 0f;
+        }
+
+        // Target is now the world-space rotation matching exit velocity
+        detachTargetRotation = Quaternion.Euler(pitch, yaw, 0f);
+    }
+
+    private void UpdateBoostModeAttachTransition()
+    {
+        attachTransitionElapsed += Time.deltaTime;
+        float t = Mathf.Clamp01(attachTransitionElapsed / attachTransitionDuration);
+        float smoothT = GetLerpFactor(attachEasing, t);
 
         // Use SplineRotation directly — InterpolatedSplineRotation may be stale
         // since PlayerRailController isn't ticking yet during transition
         Quaternion targetRot = playerRef.railControllerRef.SplineRotation;
-        mainCameraRef.transform.rotation = Quaternion.Slerp(_attachStartRotation, targetRot, smoothT);
+        mainCameraRef.transform.rotation = Quaternion.Slerp(attachStartRotation, targetRot, smoothT);
 
         AdjustOverboostFoV();
         RotateHandsSmoothly();
@@ -435,8 +468,8 @@ public class CameraControllerNew : MonoBehaviour
 
         if (t >= 1f)
         {
-            _attachTransitionActive = false;
-            _boostCameraActive = true;
+            attachTransitionActive = false;
+            boostCameraActive = true;
 
             // Decompose relative to spline for pitch/yaw tracking
             Quaternion localFromSpline = Quaternion.Inverse(targetRot) * mainCameraRef.transform.rotation;
@@ -447,12 +480,30 @@ public class CameraControllerNew : MonoBehaviour
 
             desiredRotation = mainCameraRef.transform.rotation;
 
-            // KEY FIX: re-express desired world rotation as local rotation
-            // so the Slerp in ApplyRotationBoostMode starts from the right place
-            mainCameraRef.transform.localRotation =
-                Quaternion.Inverse(transform.rotation) * desiredRotation;
-
             canRotate = true;
         }
     }
+
+    private void UpdateBoostModeDetachTransition()
+    {
+        detachTransitionElapsed += Time.deltaTime;
+        float t = Mathf.Clamp01(detachTransitionElapsed / detachTransitionDuration);
+        float smoothT = GetLerpFactor(detachEasing, t);
+
+        mainCameraRef.transform.rotation = Quaternion.Slerp(detachStartRotation, detachTargetRotation, smoothT);
+
+        AdjustOverboostFoV();
+        RotateHandsSmoothly();
+        UpdateHandsPositionLag();
+
+        if (t >= 1f)
+        {
+            detachTransitionActive = false;
+            canRotate = true;
+        }
+    }
+
+    public bool IsInAttachTransition => attachTransitionActive;
+    public bool IsInDetachTransition => detachTransitionActive;
+    public bool IsInBoostTransition => attachTransitionActive || detachTransitionActive;
 }

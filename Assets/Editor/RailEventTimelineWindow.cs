@@ -393,6 +393,7 @@ public class RailEventTimelineWindow : EditorWindow
     {
         typeof(ChangeSpeedEvent),
         typeof(SetObjectActiveEvent),
+        typeof(DetachPlayerFromRail)
     };
 
     private static readonly Type[] RangeEventTypes =

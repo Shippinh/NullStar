@@ -21450,37 +21450,17 @@ MonoBehaviour:
   overboostOverheatDurationCurrent: 0
   overboostOverheatDurationRestoreRate: 1
   overboostForward: 1
-  transitionDuration: 0
-  transitionDurationCurrent: 0
-  transitionStartPosition: {x: 0, y: 0, z: 0}
-  transitionStartRotation: {x: 0, y: 0, z: 0, w: 0}
-  transitionStartSpeed: 0
-  transitionDesiredOffsetX: 0
-  transitionDesiredOffsetY: 0
-  _transitionCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  attachDuration: 0
+  attachDurationCurrent: 0
+  attachStartPosition: {x: 0, y: 0, z: 0}
+  attachStartRotation: {x: 0, y: 0, z: 0, w: 0}
+  attachStartSpeed: 0
+  attachDesiredOffsetX: 0
+  attachDesiredOffsetY: 0
+  detachRotationActive: 0
+  detachRotationDuration: 0
+  detachRotationElapsed: 0
+  detachStartBodyRotation: {x: 0, y: 0, z: 0, w: 0}
   currentRightOffset: 0
   currentUpOffset: 0
   dodgeMaxSpeed: 31.25
@@ -60827,7 +60807,13 @@ MonoBehaviour:
   startTriggerRef: {fileID: 0}
   playerRef: {fileID: 0}
   railAttachTriggerRef: {fileID: 0}
-  railAttachSplineRef: {fileID: 0}
+  railDirectAttachPtrs:
+    newSplineContainer: {fileID: 0}
+    transitionDuration: 3
+    xOffset: 0
+    yOffset: 0
+    newSplineT: 0
+    initialSpeed: 56
   arenaCompletionPlayerEvent: 0
   currentWave: 1
   aliveEnemies: 0
@@ -64180,12 +64166,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da4a95b385740149908b10660637dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newSplineContainer: {fileID: 1678121020}
-  transitionDuration: 5
-  xOffset: 0
-  yOffset: 0
-  newSplineT: 0
-  initialSpeed: 56
+  attachParameters:
+    newSplineContainer: {fileID: 1678121020}
+    transitionDuration: 5
+    xOffset: 0
+    yOffset: 0
+    newSplineT: 0
+    initialSpeed: 56
 --- !u!65 &1752800122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73097,11 +73084,15 @@ MonoBehaviour:
   defaultRightHandRot: {x: 0, y: 0, z: 0, w: 0}
   defaultLeftHandOffset: {x: 0, y: 0, z: 0}
   defaultRightHandOffset: {x: 0, y: 0, z: 0}
-  _attachStartRotation: {x: 0, y: 0, z: 0, w: 0}
-  _attachTransitionActive: 0
-  _attachTransitionDuration: 0
-  _attachTransitionElapsed: 0
-  _boostCameraActive: 0
+  attachStartRotation: {x: 0, y: 0, z: 0, w: 0}
+  attachTransitionActive: 0
+  attachTransitionDuration: 0
+  attachTransitionElapsed: 0
+  detachTransitionActive: 0
+  detachTransitionDuration: 0
+  detachTransitionElapsed: 0
+  detachStartRotation: {x: 0, y: 0, z: 0, w: 0}
+  boostCameraActive: 0
 --- !u!1 &1919848003
 GameObject:
   m_ObjectHideFlags: 0
@@ -78689,7 +78680,13 @@ MonoBehaviour:
   startTriggerRef: {fileID: 78867103}
   playerRef: {fileID: 691622029}
   railAttachTriggerRef: {fileID: 1752800119}
-  railAttachSplineRef: {fileID: 1678121020}
+  railDirectAttachPtrs:
+    newSplineContainer: {fileID: 1678121020}
+    transitionDuration: 3
+    xOffset: 0
+    yOffset: 0
+    newSplineT: 0
+    initialSpeed: 56
   arenaCompletionPlayerEvent: 2
   currentWave: 1
   aliveEnemies: 0
