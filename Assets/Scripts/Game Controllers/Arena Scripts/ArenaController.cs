@@ -23,10 +23,10 @@ public enum ArenaState
 
 public enum ArenaCompletionPlayerEvent
 {
-    None,
-    AttachToRail,
-    ActivateAttachToRailTrigger,
-    StartNextArena
+    None,                           // No completion event
+    AttachToRail,                   // Attach to a spline immediately after the arena ends
+    ActivateAttachToRailTrigger,    // Activate a trigger which can be interacted with to attach to a spline
+    StartNextArena                  // Start next arena immediately after this arena completes
 }
 
 public class ArenaController : MonoBehaviour
@@ -54,7 +54,7 @@ public class ArenaController : MonoBehaviour
     public GameObject startTriggerRef;
     public SpaceShooterController playerRef;
     public GameObject railAttachTriggerRef;
-    public SplineContainer railAttachSplineRef;
+    public AttachParameters railDirectAttachPtrs;
 
     [Header("Arena Completion Event")]
     public ArenaCompletionPlayerEvent arenaCompletionPlayerEvent = ArenaCompletionPlayerEvent.None;
@@ -104,13 +104,6 @@ public class ArenaController : MonoBehaviour
         if (!playerRef)
             playerRef = FindObjectOfType<SpaceShooterController>();
 
-        if(arenaCompletionPlayerEvent != ArenaCompletionPlayerEvent.None && (!railAttachTriggerRef || !railAttachSplineRef || !nextArenaControllerRef))
-        {
-            arenaCompletionPlayerEvent = ArenaCompletionPlayerEvent.None;
-            Debug.LogWarning("Arena Completion Event detected no trigger or spline references. Please set up the Arena Completion Event and References on " + name + "\nChanged the completion event to None");
-        }
-
-
         bool arenaCompletionPlayerEventInitializationOutcome = true;
         switch (arenaCompletionPlayerEvent)
         {
@@ -122,10 +115,10 @@ public class ArenaController : MonoBehaviour
                 }
                 break;
             case ArenaCompletionPlayerEvent.AttachToRail:
-                if (!railAttachSplineRef)
+                if (!railDirectAttachPtrs.newSplineContainer)
                 {
                     arenaCompletionPlayerEventInitializationOutcome = false;
-                    Debug.LogWarning("Arena Completion Event (AttachToRail) detected no spline container reference. Please set up the railAttachSplineRef in References on " + name + "\nChanged the completion event to None");
+                    Debug.LogWarning("Arena Completion Event (AttachToRail) detected no spline container reference. Please set up the newSplineContainer in References on " + name + "\nChanged the completion event to None");
                 }
                 break;
             case ArenaCompletionPlayerEvent.ActivateAttachToRailTrigger:
@@ -306,7 +299,7 @@ public class ArenaController : MonoBehaviour
             case ArenaCompletionPlayerEvent.None:
                 break;
             case ArenaCompletionPlayerEvent.AttachToRail:
-                // playerRef.HandleBoostModeAttach
+                playerRef.InitiateBoostModeAttach(railDirectAttachPtrs.newSplineContainer, railDirectAttachPtrs.transitionDuration, railDirectAttachPtrs.xOffset, railDirectAttachPtrs.yOffset, railDirectAttachPtrs.newSplineT, railDirectAttachPtrs.initialSpeed);
                 break;
             case ArenaCompletionPlayerEvent.ActivateAttachToRailTrigger:
                 railAttachTriggerRef.SetActive(true);
