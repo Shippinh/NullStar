@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor.Splines;
 using UnityEngine;
-using UnityEngine.LowLevel;
 using UnityEngine.Splines;
 using static PlayerRailController;
-using static UnityEditor.IMGUI.Controls.CapsuleBoundsHandle;
 
 public enum PlayerState
 {

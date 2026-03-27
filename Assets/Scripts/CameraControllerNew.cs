@@ -172,7 +172,7 @@ public class CameraControllerNew : MonoBehaviour
             ApplyRotationBoostMode();
 
         // Apply any shake after all rotations so it doesn't interfere with rotations
-        if (playerRef.playerState == PlayerState.OverboostInitiating && playerRef.overboostOverheatMode)
+        if (playerRef.playerState == PlayerState.OverboostActive && playerRef.overboostOverheatMode)
             AdjustShakeOverheat();
         else
             AdjustShake();
