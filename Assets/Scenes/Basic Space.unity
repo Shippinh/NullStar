@@ -21442,7 +21442,7 @@ MonoBehaviour:
   maxOverboostSpeed: 25
   defaultMaxOverboostSpeed: 0
   overboostTurnMultiplier: 0.4
-  maxOverboostVerticalSpeed: 7.5
+  maxOverboostVerticalSpeed: 10
   overboostDuration: 7.5
   overboostDurationCurrent: 0
   overboostDurationRestoreRate: 3
@@ -61085,9 +61085,9 @@ MonoBehaviour:
         z: 80.62433
       Rotation:
         value:
-          x: -0.09975722
+          x: -0.099757195
           y: -0.657701
-          z: 0.15216471
+          z: 0.15216468
           w: 0.73097456
     - Position:
         x: -418
@@ -61103,10 +61103,10 @@ MonoBehaviour:
         z: 79.51967
       Rotation:
         value:
-          x: -0.15651183
-          y: 0.9155773
-          z: 0.034775734
-          w: -0.36879918
+          x: 0.9267391
+          y: 0.06271012
+          z: -0.3704241
+          w: 0.002861891
     - Position:
         x: -485
         y: 0
@@ -61121,10 +61121,10 @@ MonoBehaviour:
         z: 129.97154
       Rotation:
         value:
-          x: 0.13980873
-          y: 0.9895198
-          z: 0.030768383
-          w: 0.018903743
+          x: -0.3685869
+          y: 0.9288916
+          z: 0.017368443
+          w: 0.031660415
     - Position:
         x: -314
         y: 0
@@ -61139,10 +61139,10 @@ MonoBehaviour:
         z: 116.68199
       Rotation:
         value:
-          x: -0.1808659
-          y: 0.91173714
-          z: -0.052899238
-          w: 0.36499947
+          x: 0.10839983
+          y: 0.92316127
+          z: 0.061957594
+          w: 0.3635715
     - Position:
         x: 6
         y: 23
@@ -61277,6 +61277,7 @@ MonoBehaviour:
   railControllerRef: {fileID: 691622034}
   events:
   - rid: 1916255583279251460
+  - rid: 1916255742863867904
   rangeEvents: []
   references:
     version: 2
@@ -61289,6 +61290,14 @@ MonoBehaviour:
         repeatable: 0
         targetSpeed: 56
         transitionDuration: 0
+    - rid: 1916255742863867904
+      type: {class: DetachPlayerFromRail, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0.17295365
+        enabled: 1
+        repeatable: 0
+        playerRef: {fileID: 691622029}
+        transitionDuration: 1.5
 --- !u!114 &1678121023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73069,6 +73078,18 @@ MonoBehaviour:
   extraOverboostFieldOfView: 30
   fieldOfViewChangeRate: 0.95
   fieldOfViewResetRate: 10
+  attachEasing: 5
+  detachEasing: 4
+  attachStartRotation: {x: 0, y: 0, z: 0, w: 0}
+  attachTransitionActive: 0
+  attachTransitionDuration: 0
+  attachTransitionElapsed: 0
+  detachTransitionActive: 0
+  detachTransitionDuration: 0
+  detachTransitionElapsed: 0
+  detachStartRotation: {x: 0, y: 0, z: 0, w: 0}
+  detachTargetRotation: {x: 0, y: 0, z: 0, w: 0}
+  boostCameraActive: 0
   sidewaysLookCriteria: 0.3
   forwardLookCriteria: 0.3
   inputX: 0
@@ -73084,15 +73105,6 @@ MonoBehaviour:
   defaultRightHandRot: {x: 0, y: 0, z: 0, w: 0}
   defaultLeftHandOffset: {x: 0, y: 0, z: 0}
   defaultRightHandOffset: {x: 0, y: 0, z: 0}
-  attachStartRotation: {x: 0, y: 0, z: 0, w: 0}
-  attachTransitionActive: 0
-  attachTransitionDuration: 0
-  attachTransitionElapsed: 0
-  detachTransitionActive: 0
-  detachTransitionDuration: 0
-  detachTransitionElapsed: 0
-  detachStartRotation: {x: 0, y: 0, z: 0, w: 0}
-  boostCameraActive: 0
 --- !u!1 &1919848003
 GameObject:
   m_ObjectHideFlags: 0

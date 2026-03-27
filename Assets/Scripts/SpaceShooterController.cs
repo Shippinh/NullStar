@@ -435,7 +435,7 @@ public class SpaceShooterController : MonoBehaviour
 
             desiredVelocity = new Vector3(
                 worldDirection.x * horizontalSpeed,
-                verticalComponent * verticalSpeed + explicitVertical * verticalSpeed,
+                verticalComponent * horizontalSpeed + explicitVertical * verticalSpeed,
                 worldDirection.z * horizontalSpeed);
         }
         else if (playerState == PlayerState.OverboostInitiating)
@@ -1131,7 +1131,12 @@ public class SpaceShooterController : MonoBehaviour
         float t = Mathf.Clamp01(detachRotationElapsed / detachRotationDuration);
         float smoothT = Mathf.SmoothStep(0f, 1f, t);
 
-        Quaternion targetRot = Quaternion.Euler(0f, cameraControllerRef.yaw, 0f);
+        // Normalize yaw to -180..180 range to avoid slerp taking the long way around
+        float normalizedYaw = cameraControllerRef.yaw % 360f;
+        if (normalizedYaw > 180f) normalizedYaw -= 360f;
+        if (normalizedYaw < -180f) normalizedYaw += 360f;
+
+        Quaternion targetRot = Quaternion.Euler(0f, normalizedYaw, 0f);
         body.MoveRotation(Quaternion.Slerp(detachStartBodyRotation, targetRot, smoothT));
 
         if (t >= 1f)

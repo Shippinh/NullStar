@@ -51,6 +51,8 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
     [SerializeField] private float alignTimer = 0f;
     [SerializeField] private float leftRightAlignTimer = 0f;
     [SerializeField] private float attackTimer = 0f;
+    public float attackCooldownDuration = 5f;
+    [SerializeField] private float attackCooldownTimer = 0f;
     public bool isAttacking; // general state, tells if the enemy is within the attack sequence
     public bool randomizeABLeftRightPos; // if true - enemy a and b will assume left and right position randomly
     [SerializeField] private int currentCollisionsBeforePrematureStop = 0;
@@ -145,7 +147,9 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
         }
 
         burstDuration = currentBurstCooldown;
+        attackCooldownTimer = 0f;
     }
+
     private void LateUpdate()
     {
         if (player.GetPlayerOnGround())
@@ -172,8 +176,16 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
             UpdateDirections();
             CalculateDesiredVelocity();
             RotateTowardsCurrentPivot();
-            if (canAttack && !isSolo)
-                HandleAttackInitiation();
+
+            if (attackCooldownTimer >= attackCooldownDuration)
+            {
+                if (canAttack && !isSolo)
+                    HandleAttackInitiation();
+            }
+            else
+            {
+                attackCooldownTimer += Time.fixedDeltaTime;
+            }
         }
         else
         {
@@ -399,6 +411,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
                 isAttacking = false;
                 enemiesAligned = false;
                 barrierObj.SetActive(false);
+                attackCooldownTimer = 0f;
                 Debug.Log("Attack finished!");
             }
         }
@@ -855,6 +868,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
 
         enemyA.transform.localPosition = Vector3.zero;
         enemyA.transform.localPosition = Vector3.zero;
+        attackCooldownTimer = 0;
 
         // Prevent paired pivot updates from running
         //pivotPoints = null;
