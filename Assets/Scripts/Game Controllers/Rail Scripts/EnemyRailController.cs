@@ -1,72 +1,39 @@
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Splines;
-using System.Collections.Generic;
 
-// Rail AI Script that allows us to move an enemy along the spline in a specific way
 public class EnemyRailController : RailController
 {
-    public enum TrackingType 
-    {
-        None,                   // Static
-        TrackPlayer,            // Tracks the player
-        TrackMovementDirection  // Tracks towards the movement direction
-    }
-
-    public enum FollowLogic
-    {
-        Follower,               // Repeats  the referenced leader's path unless leader reference is null, and it's null then acts like a leader
-        Leader                  // Parametrically moves along the spline
-    }
-
     [Header("References")]
     public PlayerRailController playerRailControllerRef;
     public Rigidbody body;
-
-    [Header("Spline Positioning")]
-    public bool usePlayerRelativeOffset = false;
-    [Range(-1f, 1f)] public float splineTOffset = 0.1f;
 
     [Header("Plane Offset")]
     public float rightOffset = 0f;
     public float upOffset = 0f;
 
-
-    [Header("Worm Follow")]
-    public bool useWormFollow = false;
-    public EnemyRailController leaderRef;
-    public float followDistance = 5f;
-
-    // Path history for worm following (leader only)
-    private List<Vector3> pathHistory = new List<Vector3>();
-    private List<float> pathDistances = new List<float>();
-    private float totalPathLength = 0f;
+    private Vector3 _formationTargetPosition;
+    private Quaternion _formationTargetRotation;
+    private bool _hasFormationTarget;
 
     public override void Awake()
     {
         base.Awake();
 
+        if (initializeOnAwake)
+        {
+            InitializeEnemy();
+        }
+    }
+
+    public void InitializeEnemy()
+    {
         if (!playerRailControllerRef)
             playerRailControllerRef = FindObjectOfType<PlayerRailController>();
-
         if (!body)
             body = GetComponent<Rigidbody>();
 
-        if (body)
-        {
-            body.isKinematic = true;
-            body.interpolation = RigidbodyInterpolation.Interpolate;
-            body.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        }
-
-        if (!useWormFollow && !usePlayerRelativeOffset)
-            splineT = splineTOffset;
-
-        // Evaluate once so interpolation buffers start with valid data
         EvaluateSpline();
         InitializeInterpolationBuffers();
     }
-
 
     void Update()
     {
@@ -76,84 +43,28 @@ public class EnemyRailController : RailController
     void FixedUpdate()
     {
         SnapshotSplineForInterpolation();
-
-        UpdateSplineT();
+        TickSpline(Time.fixedDeltaTime);
         EvaluateSpline();
-
         CommitSplineToInterpolation();
 
-        Vector3 targetPosition = SplinePosition
-            + SplineRight * rightOffset
-            + SplineUp * upOffset;
+        Vector3 desiredPos = _hasFormationTarget
+            ? _formationTargetPosition
+            : SplinePosition + SplineRight * rightOffset + SplineUp * upOffset;
 
-        body.MovePosition(targetPosition);
-        body.MoveRotation(SplineRotation);
+        Quaternion desiredRot = _hasFormationTarget
+            ? _formationTargetRotation
+            : SplineRotation;
+
+        body.MovePosition(desiredPos);
+        body.MoveRotation(desiredRot);
     }
 
-    void UpdateSplineT()
+    public void SetFormationTarget(Vector3 position, Quaternion rotation)
     {
-        if (useWormFollow && leaderRef != null)
-        {
-            float tOffset = followDistance / splineLength;
-            splineT = (leaderRef.splineT - tOffset + 1f) % 1f;
-        }
-        else if (usePlayerRelativeOffset)
-        {
-            splineT = (playerRailControllerRef.splineT + splineTOffset) % 1f;
-        }
-        else
-        {
-            TickSpline(Time.fixedDeltaTime);
-        }
+        _formationTargetPosition = position;
+        _formationTargetRotation = rotation;
+        _hasFormationTarget = true;
     }
 
-    void RecordPath()
-    {
-        Vector3 current = SplinePosition;
-
-        if (pathHistory.Count == 0)
-        {
-            pathHistory.Add(current);
-            pathDistances.Add(0f);
-            return;
-        }
-
-        float delta = Vector3.Distance(pathHistory[pathHistory.Count - 1], current);
-        if (delta < 0.01f) return;
-
-        totalPathLength += delta;
-        pathHistory.Add(current);
-        pathDistances.Add(totalPathLength);
-
-        // Trim entries beyond max needed distance
-        float maxNeeded = followDistance * 10f;
-        while (pathHistory.Count > 2 && (totalPathLength - pathDistances[0]) > maxNeeded)
-        {
-            totalPathLength -= Vector3.Distance(pathHistory[0], pathHistory[1]);
-            pathHistory.RemoveAt(0);
-            pathDistances.RemoveAt(0);
-        }
-    }
-
-    public bool TryGetPositionAtDistance(float distance, out Vector3 result)
-    {
-        result = Vector3.zero;
-        if (pathHistory.Count < 2) return false;
-
-        float target = totalPathLength - distance;
-        if (target < pathDistances[0]) return false;
-
-        for (int i = pathHistory.Count - 1; i > 0; i--)
-        {
-            if (pathDistances[i - 1] <= target && pathDistances[i] >= target)
-            {
-                float segLength = pathDistances[i] - pathDistances[i - 1];
-                float t = segLength > 0f ? (target - pathDistances[i - 1]) / segLength : 0f;
-                result = Vector3.Lerp(pathHistory[i - 1], pathHistory[i], t);
-                return true;
-            }
-        }
-
-        return false;
-    }
+    public void ClearFormationTarget() => _hasFormationTarget = false;
 }

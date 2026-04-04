@@ -54,7 +54,7 @@ public class ArenaController : MonoBehaviour
     public GameObject startTriggerRef;
     public SpaceShooterController playerRef;
     public GameObject railAttachTriggerRef;
-    public AttachParameters railDirectAttachPtrs;
+    public PlayerAttachParameters railDirectAttachPtrs;
 
     [Header("Arena Completion Event")]
     public ArenaCompletionPlayerEvent arenaCompletionPlayerEvent = ArenaCompletionPlayerEvent.None;

@@ -1673,6 +1673,7 @@ GameObject:
   - component: {fileID: 547121675388577014}
   - component: {fileID: 1620553845512054945}
   - component: {fileID: 6066309777564292797}
+  - component: {fileID: 6868554629999838161}
   m_Layer: 0
   m_Name: Actual Worm Head
   m_TagString: Untagged
@@ -1707,6 +1708,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d47b163278a5764384188973064b473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avoidanceForce: 125
+  detectionRadius: 12.5
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 3072
+  rb: {fileID: 0}
+  avoidanceTrigger: {fileID: 0}
+  nearbyObstacles: []
+  velocity: {x: 0, y: 0, z: 0}
+  desiredVelocity: {x: 0, y: 0, z: 0}
+  contactNormal: {x: 0, y: 1, z: 0}
+  tiltAngle: 0
+  enemyState: 0
   player: {fileID: 0}
   playerCamera: {fileID: 0}
   maxSpeed: 37.5
@@ -1724,11 +1738,6 @@ MonoBehaviour:
   pivotChangeInterval: 5
   invertMovementOnNewPivot: 0
   randomizeMovementPatternOnNewPivot: 1
-  avoidanceForce: 125
-  detectionRadius: 12.5
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 3072
   pivotDistance: 50
   pivotForwardPush: 6.25
   pivotHeightOffset: 6.25
@@ -1781,6 +1790,31 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6868554629999838161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678128455905674578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fcd320a401b694fbeafd098a79084f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineContainer: {fileID: 0}
+  loopSpline: 1
+  maxSidewaysOffset: 200
+  maxUpwardOffset: 200
+  MaxSpeed: 56
+  splineOffset: {x: 0, y: 0, z: 0}
+  splineT: 0
+  initializeOnAwake: 0
+  splineLength: 0
+  playerRailControllerRef: {fileID: 0}
+  body: {fileID: 0}
+  rightOffset: 0
+  upOffset: 0
 --- !u!1 &2907245687209686459
 GameObject:
   m_ObjectHideFlags: 0
@@ -5172,7 +5206,7 @@ MonoBehaviour:
   segmentsLogic: []
   segmentsVisuals: []
   weakPointHealths: []
-  enemyAIRef: {fileID: 547121675388577014}
+  wormEnemyAIRef: {fileID: 0}
   deadWeakPoints: 0
   segmentMaxHP: 3
   minTimerDuration: 0.25

@@ -18,7 +18,7 @@ public class PlayerRailController : RailController
 
     public override void Awake()
     {
-        base.Awake();
+        InitializeSpline();
 
         if (!playerRef)
             playerRef = GetComponent<SpaceShooterController>();

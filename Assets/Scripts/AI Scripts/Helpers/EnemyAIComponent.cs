@@ -1,6 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyAIState
+{
+    Normal,             // When not on rail
+    BoostAttaching,     // When attach to rail initiated
+    BoostActive,        // When on rail
+    BoostDetaching      // When detach from rail initiated
+}
+
 // Allows us to reference enemy AI components generally
 [RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
 public class EnemyAIComponent : MonoBehaviour
@@ -18,6 +26,7 @@ public class EnemyAIComponent : MonoBehaviour
     [SerializeField] protected Vector3 desiredVelocity;
     [SerializeField] protected Vector3 contactNormal = Vector3.up;
     [SerializeField] protected float tiltAngle = 0f;
+    [SerializeField] public EnemyAIState enemyState = EnemyAIState.Normal;
 
     public virtual void Start()
     {
@@ -31,13 +40,50 @@ public class EnemyAIComponent : MonoBehaviour
         velocity = Vector3.zero;
     }
 
-    public void SetRBKinematic(bool kinematic)
+    public Rigidbody GetRidigbody()
     {
-        rb.isKinematic = kinematic;
+        return rb;
     }
 
-    public bool GetRBKinematic()
+    public void InitializeOnRail()
     {
-        return rb.isKinematic;
+
     }
+
+    public void InitializeNormally()
+    {
+
+    }
+
+    /*public virtual void InitiateBoostModeAttach()
+    {
+        if (BoostTransitioning || enemyState == EnemyAIState.BoostActive) return;
+    }
+
+    public virtual void InitiateBoostModeDetach(float duration)
+    {
+        if (enemyState != EnemyAIState.BoostActive) return;
+    }
+
+    public virtual void HandleBoostModeTransition()
+    {
+        if (enemyState == EnemyAIState.BoostAttaching)
+            HandleBoostAttach();
+        else if (enemyState == EnemyAIState.BoostDetaching)
+            HandleBoostDetach();
+    }
+
+    public virtual void HandleBoostAttach()
+    {
+
+    }
+
+    public virtual void HandleBoostDetach()
+    {
+
+    }
+
+    public bool BoostTransitioning => enemyState == EnemyAIState.BoostAttaching
+                                || enemyState == EnemyAIState.BoostDetaching;
+    */
 }

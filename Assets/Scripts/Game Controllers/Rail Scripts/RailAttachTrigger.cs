@@ -3,7 +3,7 @@ using UnityEngine.Splines;
 
 public class RailAttachTrigger : MonoBehaviour
 {
-    public AttachParameters attachParameters;
+    public PlayerAttachParameters attachParameters;
 
     private void OnTriggerEnter(Collider other)
     {

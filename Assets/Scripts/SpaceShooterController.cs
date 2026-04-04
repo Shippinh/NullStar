@@ -1018,7 +1018,7 @@ public class SpaceShooterController : MonoBehaviour
         if (table != null && !table.IsReady)
             table.Bake(newSplineTarget.GetComponent<SplineContainer>().Spline);
 
-        railControllerRef.Initialize();
+        railControllerRef.InitializeSpline();
         railControllerRef.splineT = initialSplineT;
         railControllerRef.defaultSplineSpeed = initialRailSpeed;
         railControllerRef.currentSplineSpeed.value = initialRailSpeed;
@@ -1041,7 +1041,7 @@ public class SpaceShooterController : MonoBehaviour
         playerState = PlayerState.BoostAttaching;
     }
 
-    public void InitiateBoostModeDetach(float transitionDuration)
+    public void InitiateBoostModeDetach(float duration)
     {
         if (playerState != PlayerState.BoostActive) return;
 
@@ -1061,11 +1061,11 @@ public class SpaceShooterController : MonoBehaviour
         currentUpVelocity = 0f;
 
         detachStartBodyRotation = body.rotation;
-        detachRotationDuration = transitionDuration;
+        detachRotationDuration = duration;
         detachRotationElapsed = 0f;
 
         gunControllerRef.canFire = true;
-        cameraControllerRef.BeginBoostModeDetachTransition(transitionDuration, exitVelocity);
+        cameraControllerRef.BeginBoostModeDetachTransition(duration, exitVelocity);
 
         playerState = PlayerState.BoostDetaching;
     }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 766797745891395363}
   - component: {fileID: 6859985179846718496}
   - component: {fileID: 5371080958144277377}
+  - component: {fileID: 5656839242108351328}
   m_Layer: 14
   m_Name: Ramming Enemy
   m_TagString: Untagged
@@ -60,6 +61,7 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
+  enemyState: 0
   player: {fileID: 0}
   maxSpeed: 50
   maxAcceleration: 18.75
@@ -139,6 +141,31 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3.125
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5656839242108351328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4300115145832643847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fcd320a401b694fbeafd098a79084f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineContainer: {fileID: 0}
+  loopSpline: 1
+  maxSidewaysOffset: 200
+  maxUpwardOffset: 200
+  MaxSpeed: 56
+  splineOffset: {x: 0, y: 0, z: 0}
+  splineT: 0
+  initializeOnAwake: 0
+  splineLength: 0
+  playerRailControllerRef: {fileID: 0}
+  body: {fileID: 0}
+  rightOffset: 0
+  upOffset: 0
 --- !u!1 &6484262195363316023
 GameObject:
   m_ObjectHideFlags: 0

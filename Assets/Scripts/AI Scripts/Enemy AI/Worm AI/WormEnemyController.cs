@@ -6,7 +6,7 @@ public class WormEnemyController : EnemyController
 {
     [Header("References")]
     public Transform segmentsParentRef;
-    [SerializeField] private List<Transform> segmentsLogic = new List<Transform>();
+    [SerializeField] private List<WormEnemySegment> segmentsLogic = new List<WormEnemySegment>();
     [SerializeField] private List<Transform> segmentsVisuals = new List<Transform>();
     public List<EntityHealthController> weakPointHealths = new List<EntityHealthController>();
 
@@ -48,10 +48,10 @@ public class WormEnemyController : EnemyController
 
         if ((segmentsLogic == null || segmentsLogic.Count == 0) || (segmentsVisuals == null || segmentsVisuals.Count == 0))
         {
-            foreach (Transform child1 in segmentsParentRef)
+            foreach (WormEnemySegment child1 in segmentsParentRef.GetComponentsInChildren<WormEnemySegment>(true))
             {
                 segmentsLogic.Add(child1);
-                foreach (Transform child2 in child1)
+                foreach (Transform child2 in child1.transform)
                 {
                     segmentsVisuals.Add(child2);
                 }
@@ -70,7 +70,7 @@ public class WormEnemyController : EnemyController
         {
             firstInitialization = false;
 
-            distanceBetweenSegments = Vector3.Distance(transform.position, segmentsLogic[0].position);
+            distanceBetweenSegments = Vector3.Distance(transform.position, segmentsLogic[0].transform.position);
 
             // Subscribe to weak point deaths
             foreach (var wp in weakPointHealths)
@@ -92,6 +92,12 @@ public class WormEnemyController : EnemyController
         {
             StartCoroutine(DeathSequence());
         }
+    }
+
+    public override void HandleRailAttach(float initialRailSpeed)
+    {
+        foreach (WormEnemySegment segment in segmentsLogic)
+            segment.moveSpeed = initialRailSpeed + 5f;
     }
 
     // Overrides the basic method to properly revive all sub-entity health controllers
@@ -194,7 +200,7 @@ public class WormEnemyController : EnemyController
 
         for (int i = 0; i < segmentsLogic.Count; i++)
         {
-            Transform segment = segmentsLogic[i];
+            Transform segment = segmentsLogic[i].transform;
 
             // Position segment behind the previous transform
             segment.position = previous.position + backward * distanceBetweenSegments;

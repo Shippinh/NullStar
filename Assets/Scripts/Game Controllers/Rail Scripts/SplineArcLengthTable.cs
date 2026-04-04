@@ -2,11 +2,6 @@ using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Mathematics;
 
-/// <summary>
-/// Bakes an arc-length LUT once at startup.
-/// - Single shared instance per SplineContainer (all RailControllers reuse it)
-/// - O(1) amortized lookup via per-caller cached index instead of binary search
-/// </summary>
 [RequireComponent(typeof(SplineContainer))]
 public class SplineArcLengthTable : MonoBehaviour
 {

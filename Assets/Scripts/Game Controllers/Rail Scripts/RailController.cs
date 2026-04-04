@@ -2,14 +2,6 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public enum RailState
-{
-    NotOnRail,              // When not following the rail, completely detached
-    FollowingRail,          // When following the rail, completely attached
-    Attaching,              // When in the process of attaching to the rail, called in between NotOnRail and FollowingRail
-    Detaching               // When in the process of detaching from the rail, called in between FollowingRail and NotOnRail
-}
-
 // This class stores the state of an object on a spline
 public abstract class RailController : MonoBehaviour
 {
@@ -27,6 +19,7 @@ public abstract class RailController : MonoBehaviour
     [Header("Internal Values")]
     public Vector3 splineOffset;
     [Range(0f, 1f)] public float splineT = 0f;  // arc-length fraction 0..1
+    public bool initializeOnAwake = false;
 
     [field: Header("Spline Cache — Raw (Physics)")]
     public Vector3 SplinePosition { get; protected set; }
@@ -60,14 +53,15 @@ public abstract class RailController : MonoBehaviour
 
     public virtual void Awake()
     {
-        Initialize();
+        if(initializeOnAwake)
+            InitializeSpline();
     }
 
-    public virtual void Initialize()
+    public void InitializeSpline()
     {
         if (!splineContainer)
         {
-            Debug.LogError("No SplineContainer assigned to RailController");
+            Debug.LogWarning("No SplineContainer assigned to RailController");
             return;
         }
 
