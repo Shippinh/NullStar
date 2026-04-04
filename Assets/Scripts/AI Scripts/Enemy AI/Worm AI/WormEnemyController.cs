@@ -96,10 +96,15 @@ public class WormEnemyController : EnemyController
 
     public override void HandleRailAttach(float initialRailSpeed)
     {
-        foreach (WormEnemySegment segment in segmentsLogic)
-            segment.moveSpeed = initialRailSpeed + 5f;
+        HandleRailSpeedChange(initialRailSpeed);
     }
 
+    public override void HandleRailSpeedChange(float newSpeed)
+    {
+        foreach (WormEnemySegment segment in segmentsLogic)
+            segment.moveSpeed = newSpeed + 5f;
+    }
+   
     // Overrides the basic method to properly revive all sub-entity health controllers
     public override void HandleRevival()
     {

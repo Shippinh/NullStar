@@ -22,6 +22,11 @@ public class EnemyController : DestructibleController, IPoolable
         // Does nothing at base
     }
 
+    public virtual void HandleRailSpeedChange(float newSpeed)
+    {
+        // Does nothing at base
+    }
+
     // When grabbing from the pool
     public virtual void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
     {
