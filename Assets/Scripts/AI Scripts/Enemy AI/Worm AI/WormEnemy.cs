@@ -379,7 +379,7 @@ public class WormEnemy : EnemyAIComponent
 
     void OnDrawGizmosSelected()
     {
-        //if (player == null || player.body || playerCamera == null || availableDirections == null) return;
+        if (!enabled) return;
 
         // Draw detection radius
         Gizmos.color = Color.cyan;
