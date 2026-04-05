@@ -11,6 +11,7 @@ public class EnemyController : DestructibleController, IPoolable
     private float waveToAppear;
 
     protected EnemyAIComponent enemyAIRef;
+    protected TurretBehavior[] enemyTurretsRefs;
     // Use this for initialization
     void Awake()
     {
@@ -79,9 +80,17 @@ public class EnemyController : DestructibleController, IPoolable
         if (!enemyAIRef)
             enemyAIRef = GetComponent<EnemyAIComponent>();
 
+        if (enemyTurretsRefs == null)
+            enemyTurretsRefs = GetComponentsInChildren<TurretBehavior>();
+
         /*
         if (entityArenaControllerRef == null)
             entityArenaControllerRef = GetComponent<EntityArenaController>();
         */
+    }
+
+    public TurretBehavior[] GetTurrets()
+    {
+        return enemyTurretsRefs;
     }
 }

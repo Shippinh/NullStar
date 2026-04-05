@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// Describes movement for segments
 public class WormEnemySegment : MonoBehaviour
 {
     [Header("Follow Settings")]
@@ -10,12 +9,12 @@ public class WormEnemySegment : MonoBehaviour
     public float rotationSpeed = 5f;
 
     [Header("Local Rotation")]
-    public float localZRotationSpeed = 90f; // degrees per second
+    public float localZRotationSpeed = 90f;
     public bool invertLocalRotation = false;
 
-    private float currentZRotation = 0f;
-
+    private float _currentZRotation;
     private Vector3 _smoothedTargetPos;
+    private Vector3 _smoothedTargetVelocity;
     private bool _initialized;
 
     void Update()
@@ -29,27 +28,31 @@ public class WormEnemySegment : MonoBehaviour
             return;
         }
 
-        // Smooth the target position before chasing it — hides discrete physics steps
-        _smoothedTargetPos = Vector3.Lerp(_smoothedTargetPos, targetSegment.position, moveSpeed * Time.deltaTime);
+        // Real position drives movement — no lag, no gaps
+        Vector3 realToTarget = targetSegment.position - transform.position;
+        float distance = realToTarget.magnitude;
 
-        Vector3 toTarget = _smoothedTargetPos - transform.position;
-        float distance = toTarget.magnitude;
-
-        if (distance > followDistance)
+        if (distance > followDistance + 0.01f)
         {
-            Vector3 movePosition = _smoothedTargetPos - toTarget.normalized * followDistance;
+            Vector3 movePosition = targetSegment.position - realToTarget.normalized * followDistance;
             transform.position = Vector3.MoveTowards(transform.position, movePosition, moveSpeed * Time.deltaTime);
         }
 
-        float rotationDirection = invertLocalRotation ? -1f : 1f;
-        currentZRotation += localZRotationSpeed * rotationDirection * Time.deltaTime;
+        // Smoothed position drives rotation only — eliminates jitter without affecting distance
+        _smoothedTargetPos = Vector3.SmoothDamp(
+            _smoothedTargetPos, targetSegment.position,
+            ref _smoothedTargetVelocity, 0.12f);
 
-        if (toTarget.sqrMagnitude > 0.001f)
+        Vector3 smoothToTarget = _smoothedTargetPos - transform.position;
+
+        float rotDir = invertLocalRotation ? -1f : 1f;
+        _currentZRotation += localZRotationSpeed * rotDir * Time.deltaTime;
+
+        if (smoothToTarget.sqrMagnitude > 0.001f)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(toTarget);
-            Quaternion localRotation = Quaternion.Euler(0f, 0f, currentZRotation);
-            Quaternion targetRotation = lookRotation * localRotation;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Quaternion lookRotation = Quaternion.LookRotation(smoothToTarget);
+            Quaternion localRotation = Quaternion.Euler(0f, 0f, _currentZRotation);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation * localRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }

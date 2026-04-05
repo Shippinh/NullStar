@@ -291,8 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 591080684505810598}
-  followDistance: 11.25
-  moveSpeed: 37.5
+  followDistance: 11
+  moveSpeed: 37
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
@@ -1184,8 +1184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 8531068538085029563}
-  followDistance: 11.25
-  moveSpeed: 37.5
+  followDistance: 11
+  moveSpeed: 37
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
@@ -1674,6 +1674,7 @@ GameObject:
   - component: {fileID: 1620553845512054945}
   - component: {fileID: 6066309777564292797}
   - component: {fileID: 6868554629999838161}
+  - component: {fileID: 7563323442987167085}
   m_Layer: 0
   m_Name: Actual Worm Head
   m_TagString: Untagged
@@ -1815,6 +1816,24 @@ MonoBehaviour:
   body: {fileID: 0}
   rightOffset: 0
   upOffset: 0
+--- !u!114 &7563323442987167085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678128455905674578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fbf65715321da41a760551d5f694d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSegment: {fileID: 0}
+  followDistance: 1
+  moveSpeed: 10
+  rotationSpeed: 0
+  localZRotationSpeed: 0
+  invertLocalRotation: 0
 --- !u!1 &2907245687209686459
 GameObject:
   m_ObjectHideFlags: 0
@@ -3616,8 +3635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 7423732438340960376}
-  followDistance: 11.25
-  moveSpeed: 37.5
+  followDistance: 11
+  moveSpeed: 37
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 0
@@ -4597,8 +4616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 7808610706379538004}
-  followDistance: 11.25
-  moveSpeed: 37.5
+  followDistance: 11
+  moveSpeed: 37
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 0
@@ -4893,8 +4912,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 5395688352050688654}
-  followDistance: 11.25
-  moveSpeed: 37.5
+  followDistance: 11
+  moveSpeed: 37
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 0
@@ -5530,8 +5549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 970526073853532891}
-  followDistance: 11.25
-  moveSpeed: 37.5
+  followDistance: 11
+  moveSpeed: 37
   rotationSpeed: 30
   localZRotationSpeed: 50
   invertLocalRotation: 1
@@ -5873,8 +5892,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSegment: {fileID: 2034322052118509479}
-  followDistance: 11.25
-  moveSpeed: 37.5
+  followDistance: 11
+  moveSpeed: 37
   rotationSpeed: 30
   localZRotationSpeed: 0
   invertLocalRotation: 0

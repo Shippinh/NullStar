@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60411460cbc8ac040915359502168b50, type: 3}
+  m_Name: Formation Preset 2
+  m_EditorClassIdentifier: 
+  shape: 3
+  slotSpacing:
+    value: 20
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  gridColumns: 3
+  slots:
+  - poolTag: Worm
+  - poolTag: Worm
+  - poolTag: Worm
+  - poolTag: Worm
+  perSlotUpOffset:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  perSlotRightOffset:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  slotPhaseSpread: 0
+  travelPattern: 7
+  travelRadius: 1
+  travelFrequency:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: -1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  randomizeTravelPerSlot: 0
+  randomFrequencyVariance: 0.05
+  randomPhaseVariance: 1
+  invertAll: 0
+  alternateInversion: 1
+  orientation: 0
+  shootingEnabled: 1

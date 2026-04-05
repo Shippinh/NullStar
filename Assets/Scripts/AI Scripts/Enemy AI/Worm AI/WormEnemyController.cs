@@ -102,7 +102,7 @@ public class WormEnemyController : EnemyController
     public override void HandleRailSpeedChange(float newSpeed)
     {
         foreach (WormEnemySegment segment in segmentsLogic)
-            segment.moveSpeed = newSpeed + 5f;
+            segment.moveSpeed = newSpeed + newSpeed/4f;
     }
    
     // Overrides the basic method to properly revive all sub-entity health controllers

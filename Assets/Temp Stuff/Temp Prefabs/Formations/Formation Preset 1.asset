@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60411460cbc8ac040915359502168b50, type: 3}
+  m_Name: Formation Preset 1
+  m_EditorClassIdentifier: 
+  shape: 6
+  slotSpacing:
+    value: 80
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  gridColumns: 3
+  perSlotUpOffset:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  perSlotRightOffset:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  slotPhaseSpread:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  travelPattern: 9
+  travelRadius: 5
+  travelFrequency:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  randomizeTravelPerSlot: 1
+  randomFrequencyVariance: 0.1
+  randomPhaseVariance: 1
+  lateralAmplitude:
+    value: 20
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  lateralFrequency:
+    value: 0.2
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  verticalAmplitude:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  verticalFrequency:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  orbitRadius:
+    value: 25
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  orbitFrequency:
+    value: 0.1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  orbitRotationOffset:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  lissajousRadiusX:
+    value: 20
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  lissajousRadiusY:
+    value: 5
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  lissajousFreqX:
+    value: 0.1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  lissajousFreqY:
+    value: 0.1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  lissajousPhaseShift:
+    value: 0
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  surgeAmplitude:
+    value: 0.05
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  surgeFrequency:
+    value: 1
+    oscillator:
+      enabled: 0
+      waveform: 0
+      amplitude: 0
+      frequency: 1
+      offset: 0
+      useRange: 0
+      minValue: -1
+      maxValue: 1
+  driftSpeed: 0.5
+  driftRadius: 30
+  driftSeedX: 2
+  driftSeedY: 42
+  orientation: 0
+  shootingEnabled: 1
