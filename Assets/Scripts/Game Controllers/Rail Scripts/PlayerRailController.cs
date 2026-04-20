@@ -31,7 +31,11 @@ public class PlayerRailController : RailController
         boostModeSpeedFade = new RailSpeedController(currentSplineSpeed, defaultSplineSpeed);
 
         // Evaluate once so interpolation buffers start with valid data
-        InitializeSplineValues();
+        if (splineContainer)
+        {
+            InitializeSplineValues();
+            GetOptimalResolution();
+        }
     }
 
     public void InitializeSplineValues()

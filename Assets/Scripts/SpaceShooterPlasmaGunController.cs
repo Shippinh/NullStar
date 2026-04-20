@@ -12,7 +12,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
     public Transform muzzlePoint;
     public Camera playerCamera;
     public LayerMask hitLayers;
-    public float fireRate = 0.2f;
+    public float fireRate = 0.2f; //0.0625 in inspector at base
     public float hitscanRange = 2000f;
     private float nextFireTime;
     public bool canFire = false;

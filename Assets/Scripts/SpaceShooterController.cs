@@ -71,8 +71,9 @@ public class SpaceShooterController : MonoBehaviour
 
     // Boost System
     [field: Header("Boost Movement")]
-
-    // Transition
+    [SerializeField, Range(0f, 200f)] float maxBoostVerticalStrafeSpeed = 25f;
+    [SerializeField, Range(0f, 200f)] float maxBoostHorizontalStrafeSpeed = 25f;
+    [SerializeField, Range(0f, 200f)] float maxBoostAcceleration = 13.75f;
     [SerializeField] private float attachDuration = 0f;
     [SerializeField] private float attachDurationCurrent = 0f;
     [SerializeField] private Vector3 attachStartPosition;
@@ -80,22 +81,19 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField] private float attachStartSpeed = 0f;
     [SerializeField] private float attachDesiredOffsetX = 0f;
     [SerializeField] private float attachDesiredOffsetY = 0f;
-
     [SerializeField] private bool detachRotationActive;
     [SerializeField] private float detachRotationDuration;
     [SerializeField] private float detachRotationElapsed;
     [SerializeField] private Quaternion detachStartBodyRotation;
-
-    // Offsets
     public float currentRightOffset = 0f;
     public float currentUpOffset = 0f;
     float currentRightVelocity = 0f;
     float currentUpVelocity = 0f;
 
-
     // Dodge System
     [field: Header("Dodge Movement")]
     [SerializeField, Range(0f, 1000)] float dodgeMaxSpeed = 10f;
+    [SerializeField, Range(0f, 1000)] float boostDodgeMaxSpeed = 10f;
     [SerializeField] float dodgeMaxSpeedCap;
     [SerializeField, Range(0f, 1000f)] float perDodgeMaxSpeedIncrease = 6.5f;
     [SerializeField, Range(0f, 1000f)] float perDodgeMaxOverboostSpeedIncrease = 8f;
@@ -440,14 +438,14 @@ public class SpaceShooterController : MonoBehaviour
         }
         else if (playerState == PlayerState.BoostActive)
         {
-            verticalSpeed = maxOverboostSpeed;
+            verticalSpeed = maxBoostVerticalStrafeSpeed;
+            horizontalSpeed = maxBoostHorizontalStrafeSpeed;
 
             float horizontalInput = (rightInput + leftInput);
             float verticalInput = (forwardInput + backwardInput);
 
             moveDirection = new Vector3(horizontalInput, verticalInput, 0);
 
-            horizontalSpeed = maxOverboostSpeed;
             verticalComponent = moveDirection.y;
 
             bool lookingForward = cameraControllerRef.LookingForward;
@@ -522,7 +520,7 @@ public class SpaceShooterController : MonoBehaviour
         float targetRight = Vector3.Dot(desiredVelocity, rightAxis);
         float targetUp = Vector3.Dot(desiredVelocity, upAxis);
 
-        float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
+        float acceleration = maxBoostAcceleration;
 
         float deltaRight = targetRight - currentRightVelocity;
         float deltaUp = targetUp - currentUpVelocity;
@@ -666,7 +664,7 @@ public class SpaceShooterController : MonoBehaviour
         }
 
         // Downward dodge — normal only
-        if (downwardDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && playerState == PlayerState.Normal)
+        if (downwardDodgeInput > 0 && !isDodging && horizontalDodgeInput == 0 && dodgeCharges > 0 && playerState == PlayerState.Normal && !OnGround)
         {
             isDodging = true;
             timeSinceLastDodge = 0f;
@@ -742,11 +740,11 @@ public class SpaceShooterController : MonoBehaviour
             dodgeCharges = Mathf.Max(0, dodgeCharges - 1);
             OnDodgeUsed?.Invoke();
 
-            maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
-            maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
+            //maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
+            //maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
 
-            currentRightVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineRight) * dodgeMaxSpeed;
-            currentUpVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineUp) * dodgeMaxSpeed;
+            currentRightVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineRight) * boostDodgeMaxSpeed;
+            currentUpVelocity = Vector3.Dot(dodgeDirection, railControllerRef.SplineUp) * boostDodgeMaxSpeed;
 
             horizontalDodgeInput = 0;
             verticalDodgeInput = 0;
