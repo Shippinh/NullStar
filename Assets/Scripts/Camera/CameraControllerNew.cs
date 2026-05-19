@@ -386,35 +386,39 @@ public class CameraControllerNew : MonoBehaviour
     {
         if (leftHandRef == null || rightHandRef == null || handPivotRef == null) return;
 
-        // Base position = pivot + camera rotation + default hand offsets
-        Vector3 baseLeftTarget = handPivotRef.position + mainCameraRef.transform.rotation * defaultLeftHandOffset;
-        Vector3 baseRightTarget = handPivotRef.position + mainCameraRef.transform.rotation * defaultRightHandOffset;
+        // Work in pivot-local space to avoid world-space fp drift
+        Quaternion pivotLocalCameraRot = Quaternion.Inverse(handPivotRef.rotation) * mainCameraRef.transform.rotation;
 
-        // Calculate sway based on input
-        Vector3 inputSway = new Vector3(inputX, -inputY, 0f) * handLagPowerMultiplier; // Y inverted so up = backward sway
+        // Base targets in local space
+        Vector3 baseLeftLocal = pivotLocalCameraRot * defaultLeftHandOffset;
+        Vector3 baseRightLocal = pivotLocalCameraRot * defaultRightHandOffset;
 
-        // Convert sway from camera space to world space
-        Vector3 swayWorld = mainCameraRef.transform.rotation * inputSway;
+        // Sway in local space (camera-relative, then brought into pivot-local)
+        Vector3 inputSway = new Vector3(inputX, -inputY, 0f) * handLagPowerMultiplier;
+        Vector3 swayLocal = pivotLocalCameraRot * inputSway;
 
-        // Add shake offset
+        // Shake is already in pivot-local space (it's applied to localPosition)
         Vector3 shakeOffset = handPivotRef.localPosition - defaultHandPivotPosition;
 
-        // Final target positions
-        Vector3 leftTarget = baseLeftTarget + swayWorld + shakeOffset;
-        Vector3 rightTarget = baseRightTarget + swayWorld + shakeOffset;
+        Vector3 leftLocalTarget = baseLeftLocal + swayLocal + shakeOffset;
+        Vector3 rightLocalTarget = baseRightLocal + swayLocal + shakeOffset;
 
-        float t = handRotationSpeed * Time.deltaTime; // normalized "time step"
+        float t = handPositionSpeed * Time.deltaTime;
         float lerpFactor = GetLerpFactor(handPositionLerpFactor, t, handPositionSpeed);
 
-        leftHandRef.position = Vector3.Lerp(leftHandRef.position, leftTarget, lerpFactor);
-        rightHandRef.position = Vector3.Lerp(rightHandRef.position, rightTarget, lerpFactor);
+        // Lerp in local space, assign back as local
+        leftHandRef.localPosition = Vector3.Lerp(leftHandRef.localPosition, leftLocalTarget, lerpFactor);
+        rightHandRef.localPosition = Vector3.Lerp(rightHandRef.localPosition, rightLocalTarget, lerpFactor);
     }
 
     private void UpdateCamDot()
     {
-        float camDot = Vector3.Dot(mainCameraRef.transform.forward, playerRef.transform.forward);
-        LookingForward = camDot < 0f;
-        LookingSideways = camDot < 0.3f && camDot > -0.3f;
+        Vector3 camFlat = Vector3.ProjectOnPlane(mainCameraRef.transform.forward, Vector3.up).normalized;
+        Vector3 playerFlat = Vector3.ProjectOnPlane(playerRef.transform.forward, Vector3.up).normalized;
+
+        float camDot = Vector3.Dot(camFlat, playerFlat);
+        LookingForward = camDot < forwardLookCriteria;
+        LookingSideways = camDot < sidewaysLookCriteria && camDot > -sidewaysLookCriteria;
     }
 
     // Used from other scripts

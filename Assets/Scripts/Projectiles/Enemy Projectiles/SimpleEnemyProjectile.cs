@@ -12,17 +12,19 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
     public int damage = 1;
     public LayerMask hitLayers;
 
-    private Rigidbody rb;
-    private Vector3 direction;
-    private bool impactHappened = false;
-
-    void Awake()
+    protected Rigidbody rb;
+    protected Collider col;
+    protected Vector3 direction;
+    protected bool impactHappened = false;
+    
+    public virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
     }
 
     // POOL → ACTIVE
-    public void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
+    public virtual void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
     {
         IPoolableTag = poolableTag;
         impactHappened = false;
@@ -40,7 +42,7 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
     }
 
     // ACTIVE → POOL
-    public void HandleRepool()
+    public virtual void HandleRepool()
     {
         CancelInvoke();
         rb.velocity = Vector3.zero;
@@ -54,18 +56,14 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
         rb.velocity = direction * speed;
     }
 
+
+    // Check for hits on trigger enter
     private void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & hitLayers) == 0) return;
-
-        EntityHealthController health = other.GetComponent<EntityHealthController>();
-        if (health != null)
-            health.TakeDamage(damage, true);
-
-        Impact();
+        HandleHit(other);
     }
 
-    private void Impact()
+    protected void Impact()
     {
         if (impactHappened) return;
         impactHappened = true;
@@ -81,14 +79,16 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
             rb.angularVelocity = Vector3.zero;
         }
     }
-    protected  void HandleHit(Collider other)
+
+    // On demand API to call hit
+    protected void HandleHit(Collider other)
     {
-        if (((1 << other.gameObject.layer) & hitLayers) != 0)
-        {
-            EntityHealthController health = other.GetComponent<EntityHealthController>();
-            if (health != null)
-                health.TakeDamage(damage, true);
-        }
+        if (((1 << other.gameObject.layer) & hitLayers) == 0) return;
+
+        EntityHealthController health = other.GetComponent<EntityHealthController>();
+        if (health != null)
+            health.TakeDamage(damage, true);
+
         Impact();
     }
 }

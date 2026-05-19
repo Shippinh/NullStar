@@ -71,9 +71,9 @@ public class SpaceShooterController : MonoBehaviour
 
     // Boost System
     [field: Header("Boost Movement")]
-    [SerializeField, Range(0f, 200f)] float maxBoostVerticalStrafeSpeed = 25f;
-    [SerializeField, Range(0f, 200f)] float maxBoostHorizontalStrafeSpeed = 25f;
-    [SerializeField, Range(0f, 200f)] float maxBoostAcceleration = 13.75f;
+    [SerializeField, Range(0f, 200f)] public float maxBoostVerticalStrafeSpeed = 25f;
+    [SerializeField, Range(0f, 200f)] public float maxBoostHorizontalStrafeSpeed = 25f;
+    [SerializeField, Range(0f, 200f)] public float maxBoostAcceleration = 13.75f;
     [SerializeField] private float attachDuration = 0f;
     [SerializeField] private float attachDurationCurrent = 0f;
     [SerializeField] private Vector3 attachStartPosition;
@@ -93,7 +93,7 @@ public class SpaceShooterController : MonoBehaviour
     // Dodge System
     [field: Header("Dodge Movement")]
     [SerializeField, Range(0f, 1000)] float dodgeMaxSpeed = 10f;
-    [SerializeField, Range(0f, 1000)] float boostDodgeMaxSpeed = 10f;
+    [SerializeField, Range(0f, 1000)] public float boostDodgeMaxSpeed = 10f;
     [SerializeField] float dodgeMaxSpeedCap;
     [SerializeField, Range(0f, 1000f)] float perDodgeMaxSpeedIncrease = 6.5f;
     [SerializeField, Range(0f, 1000f)] float perDodgeMaxOverboostSpeedIncrease = 8f;
@@ -188,7 +188,7 @@ public class SpaceShooterController : MonoBehaviour
     float minGroundDotProduct;
 
     // Internal playerState Vectors
-    public Vector3 velocity, desiredVelocity, desiredDodgeVelocity;
+    public Vector3 velocity, desiredVelocity, desiredDodgeVelocity, externalVelocity, previousVelocity;
 
 
     void OnValidate()
@@ -264,6 +264,8 @@ public class SpaceShooterController : MonoBehaviour
         }
         else
         {
+            previousVelocity = body.velocity;
+
             CalculateDesiredVelocity();
             AdjustVelocity();
             AdjustDodgeVelocity();
@@ -285,7 +287,7 @@ public class SpaceShooterController : MonoBehaviour
             if (healInput)
                 healthController.Heal(100, true);
 
-            body.velocity = velocity;
+            body.velocity = (velocity - previousVelocity) + externalVelocity;
         }
 
         ClearState();
@@ -370,6 +372,8 @@ public class SpaceShooterController : MonoBehaviour
 
     void UpdateState()
     {
+        externalVelocity = body.velocity;
+
         if (playerState == PlayerState.BoostActive)
         {
             velocity = railControllerRef.SplineRight * currentRightVelocity

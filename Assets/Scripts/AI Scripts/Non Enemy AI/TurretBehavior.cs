@@ -9,10 +9,12 @@ public class TurretBehavior : MonoBehaviour
 
     public enum AimType
     {
-        SmoothRotation = 0,    // Cheapest, least accurate
-        InterceptPrediction = 1,    // Most expensive, most accurate
-        LinearPrediction = 2,    // Middle ground
-        UpwardConePrediction = 3    // Cone-constrained upward aiming
+        SmoothRotation = 0,
+        InterceptPrediction = 1,
+        LinearPrediction = 2,
+        UpwardConePrediction = 3,
+        SplineCardinal = 4,   // Fires along a fixed direction in spline space
+        ScriptedFormation = 5
     }
 
     public enum ShootingState
@@ -47,6 +49,33 @@ public class TurretBehavior : MonoBehaviour
     [Range(0f, 89f)] public float coneMinAngle = 10f;
     [Range(0f, 89f)] public float coneMaxAngle = 45f;
     public float coneBlendStrength = 1f;
+
+    // ─────────────────────────────────────────────
+    //  Spline Cardinal Settings
+    // ─────────────────────────────────────────────
+
+    [Header("Spline Cardinal Settings")]
+    [Tooltip("Direction in spline basis. (0,1,0) = SplineUp, (1,0,0) = SplineRight, (0,0,-1) = toward player on rail, etc.")]
+    public Vector3 cardinalDir = Vector3.up;
+
+    public enum CardinalBasis
+    {
+        /// <summary>
+        /// Uses the enemy's own spline basis (EnemyRailController on this or a parent).
+        /// Best when the passby spline is roughly co-planar with the player rail.
+        /// </summary>
+        EnemySpline = 0,
+
+        /// <summary>
+        /// Uses the player's rail basis sampled at the player's current splineT.
+        /// Always relative to what the player sees as up/right regardless of how
+        /// the passby spline is oriented.
+        /// </summary>
+        PlayerSpline = 1,
+    }
+
+    [Tooltip("Which spline's basis vectors are used to interpret cardinalDir.")]
+    public CardinalBasis cardinalBasis = CardinalBasis.PlayerSpline;
 
     // ─────────────────────────────────────────────
     //  Range Settings
@@ -101,6 +130,14 @@ public class TurretBehavior : MonoBehaviour
     private Vector3[] previousPredictedDirs;
     private Vector3 aimedDir;
     private float projectileSpeed;
+    private Vector3[] _formationTargets;
+
+    // Cached for SplineCardinal — resolved once in Initialize()
+    private EnemyRailController _enemyRail;
+
+    // Single-shot burst: overrides the normal state machine for exactly one
+    // shoot cycle, ignoring range/LOS/canAct checks.
+    private bool _singleShotPending = false;
 
     // ─────────────────────────────────────────────
     //  Init
@@ -142,6 +179,9 @@ public class TurretBehavior : MonoBehaviour
         projectileSpeed = ObjectPool.Instance
             .GetPooledObject(projectileEmittersControllerRef.projectileTag, true, false)
             .GetComponent<SimpleEnemyProjectile>().speed;
+
+        // Cache enemy rail for SplineCardinal — walk up the hierarchy from this turret
+        _enemyRail = GetComponentInParent<EnemyRailController>();
     }
 
     // ─────────────────────────────────────────────
@@ -150,7 +190,7 @@ public class TurretBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (canAct) UpdateAiming();
+        UpdateAiming();
         HandleShooting();
     }
 
@@ -160,6 +200,16 @@ public class TurretBehavior : MonoBehaviour
 
     public void HandleShooting()
     {
+        // ── Single-shot override path ─────────────────────────────────────
+        if (_singleShotPending)
+        {
+            _singleShotPending = false;
+            shootingState = ShootingState.Shooting;
+            stateTimer = 0f;
+            projectileEmittersControllerRef.ForceStartSequence();
+        }
+
+        // ── Normal gating ─────────────────────────────────────────────────
         if (!hasAngle)
         {
             ResetShooting();
@@ -172,7 +222,10 @@ public class TurretBehavior : MonoBehaviour
                     && distToPlayer <= maxShootingRange + maxShootingRangeIncrement;
         bool hasLOS = HasLineOfSight();
 
-        if (!inRange || !hasLOS || !canAct)
+        bool allowCompletion = shootingState == ShootingState.Shooting
+                            || shootingState == ShootingState.Cooldown;
+
+        if ((!inRange || !hasLOS || !canAct) && !allowCompletion)
         {
             ResetShooting();
             projectileEmittersControllerRef.ForceStopSequence();
@@ -222,8 +275,39 @@ public class TurretBehavior : MonoBehaviour
         stateTimer = 0f;
     }
 
-    public void SyncState(bool canActPtr) => canAct = canActPtr;
+    public void SyncState(bool canActPtr)
+    {
+        canAct = canActPtr;
+    }
+
     public float GetWeaponChargeDurationTimer() => stateTimer;
+    public ShootingState GetShootingState() => shootingState;
+
+    public void FireSingleShot()
+    {
+        shootingState = ShootingState.Shooting;
+        stateTimer = 0f;
+        projectileEmittersControllerRef.ForceStartSequence();
+    }
+    public void FireFormationShot(Vector3[] targets, string tag, float speed, float steerStrength, float snapDistance)
+    {
+        var guns = projectileEmittersControllerRef.GetActiveGuns();
+
+        for (int i = 0; i < targets.Length; i++)
+        {
+            Transform gun = guns[i % guns.Count];
+            var obj = ObjectPool.Instance.GetPooledObject(tag, gun.position, gun.rotation, false);
+            if (obj == null) continue;
+
+            var proj = obj.GetComponent<ScriptedInflatableProjectile>();
+            if (proj == null) continue;
+
+            proj.speed = speed;
+            proj.snapDistance = snapDistance;
+            proj.Initialize(gun.position, gun.position + gun.forward);
+            proj.SetTarget(targets[i]);
+        }
+    }
 
     // ─────────────────────────────────────────────
     //  Aiming
@@ -245,6 +329,12 @@ public class TurretBehavior : MonoBehaviour
             case AimType.SmoothRotation:
                 SmoothRotationAiming();
                 break;
+            case AimType.SplineCardinal:
+                SplineCardinalAiming();
+                break;
+            case AimType.ScriptedFormation:
+                ScriptedFormationAiming();
+                break;
         }
     }
 
@@ -255,6 +345,70 @@ public class TurretBehavior : MonoBehaviour
         if (aimStrengths == null || aimStrengths.Length != count) aimStrengths = new float[count];
         if (previousPredictedDirs == null || previousPredictedDirs.Length != count) previousPredictedDirs = new Vector3[count];
     }
+
+    // ─────────────────────────────────────────────
+    //  Spline Cardinal Aiming
+    // ─────────────────────────────────────────────
+
+    private void SplineCardinalAiming()
+    {
+        Vector3 right, up, forward;
+
+        if (cardinalBasis == CardinalBasis.PlayerSpline)
+        {
+            // Player rail basis — always matches what the player sees as up/right
+            var rail = player.railControllerRef;
+            right = rail.InterpolatedSplineRight;
+            up = rail.InterpolatedSplineUp;
+            forward = rail.InterpolatedSplineForward;
+        }
+        else
+        {
+            // Enemy's own spline basis — good when passby spline is co-planar with player rail
+            if (_enemyRail == null)
+            {
+                // Fallback: no EnemyRailController found, use world axes
+                Debug.LogWarning($"[TurretBehavior] SplineCardinal with EnemySpline basis on {name} " +
+                                  "but no EnemyRailController found in parents. Falling back to world axes.");
+                right = Vector3.right;
+                up = Vector3.up;
+                forward = Vector3.forward;
+            }
+            else
+            {
+                right = _enemyRail.InterpolatedSplineRight;
+                up = _enemyRail.InterpolatedSplineUp;
+                forward = _enemyRail.InterpolatedSplineForward;
+            }
+        }
+
+        // Build the world-space direction from the cardinal components
+        Vector3 worldDir = (right * cardinalDir.x
+                          + up * cardinalDir.y
+                          + forward * cardinalDir.z).normalized;
+
+        if (worldDir.sqrMagnitude < 0.001f)
+        {
+            Debug.LogWarning($"[TurretBehavior] SplineCardinal on {name} produced a zero direction. " +
+                              "Check cardinalDir is not (0,0,0).");
+            return;
+        }
+
+        // Apply to every gun — no per-gun variation needed for cardinal aiming
+        for (int i = 0; i < gunsPositions.Length; i++)
+        {
+            Transform gun = gunsPositions[i];
+            gun.localRotation = Quaternion.Inverse(gun.parent.rotation)
+                              * Quaternion.LookRotation(worldDir);
+        }
+
+        // Cardinal aiming always has a valid angle
+        hasAngle = true;
+    }
+
+    // ─────────────────────────────────────────────
+    //  Existing Aim Methods (unchanged)
+    // ─────────────────────────────────────────────
 
     private Vector3 GetPredictedDirection(Vector3 gunPos, Vector3 playerPos, Vector3 playerVel, bool useIntercept)
     {
@@ -304,10 +458,11 @@ public class TurretBehavior : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
         float timeToHit = distance / projectileSpeed;
-        Vector3 predictedPos = player.transform.position + player.velocity * timeToHit;
+        Vector3 predicted = player.transform.position + player.velocity * timeToHit;
 
-        aimedDir = (predictedPos - transform.position).normalized;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(aimedDir), Time.deltaTime * aimSmoothing);
+        aimedDir = (predicted - transform.position).normalized;
+        transform.rotation = Quaternion.Slerp(transform.rotation,
+            Quaternion.LookRotation(aimedDir), Time.deltaTime * aimSmoothing);
     }
 
     private void UpwardConeAiming()
@@ -339,6 +494,20 @@ public class TurretBehavior : MonoBehaviour
         hasAngle = !anyOutOfCone;
     }
 
+    // New method — just points guns at cone center, no prediction, no checks
+    private void ScriptedFormationAiming()
+    {
+        if (_formationTargets == null) return;
+        for (int i = 0; i < gunsPositions.Length; i++)
+        {
+            if (i >= _formationTargets.Length) break;
+            Vector3 dir = (_formationTargets[i] - gunsPositions[i].position).normalized;
+            gunsPositions[i].localRotation = Quaternion.Inverse(gunsPositions[i].parent.rotation)
+                                           * Quaternion.LookRotation(dir);
+        }
+        hasAngle = true;
+    }
+
     // ─────────────────────────────────────────────
     //  Helpers
     // ─────────────────────────────────────────────
@@ -361,7 +530,14 @@ public class TurretBehavior : MonoBehaviour
         return Quaternion.AngleAxis(clampedAngle, rotAxis.normalized) * coneAxis;
     }
 
-    private Vector3 CalculateInterceptDirection(Vector3 shooterPos, Vector3 targetPos, Vector3 targetVel, float projSpeed)
+    public void SetFormationTargets(Vector3[] targets)
+    {
+        _formationTargets = targets;
+        aimType = AimType.ScriptedFormation;
+    }
+
+    private Vector3 CalculateInterceptDirection(Vector3 shooterPos, Vector3 targetPos,
+                                                Vector3 targetVel, float projSpeed)
     {
         Vector3 displacement = targetPos - shooterPos;
         float a = Vector3.Dot(targetVel, targetVel) - projSpeed * projSpeed;
@@ -388,10 +564,5 @@ public class TurretBehavior : MonoBehaviour
         Vector3 dir = (player.transform.position - transform.position).normalized;
         float dist = Vector3.Distance(transform.position, player.transform.position);
         return !Physics.Raycast(transform.position, dir, out _, dist, losCheck, QueryTriggerInteraction.Ignore);
-    }
-
-    public ShootingState GetShootingState()
-    {
-        return shootingState;
     }
 }

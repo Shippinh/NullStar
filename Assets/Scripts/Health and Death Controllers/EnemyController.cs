@@ -44,6 +44,8 @@ public class EnemyController : DestructibleController, IPoolable
     // When returning to the pool
     public virtual void HandleRepool()
     {
+
+        this.gameObject.SetActive(false);
         //HandleDeath();
     }
 

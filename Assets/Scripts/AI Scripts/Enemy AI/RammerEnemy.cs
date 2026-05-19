@@ -200,7 +200,7 @@ public class RammerEnemy : EnemyAIComponent
 
         if(collision.gameObject.tag == "Player")
         {
-            player.healthController.InstantlyDie();
+            //player.healthController.InstantlyDie();
             return;
         }
 

@@ -16,13 +16,12 @@ public class ObjectPool : MonoBehaviour
 
     public List<Pool> pools;
     private Dictionary<string, Queue<GameObject>> poolDictionary;
+    private Dictionary<string, Transform> poolContainers;
 
     void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
         {
             Destroy(gameObject);
@@ -30,18 +29,22 @@ public class ObjectPool : MonoBehaviour
         }
 
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        poolContainers = new Dictionary<string, Transform>();
 
         foreach (Pool pool in pools)
         {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
+            // Create a named empty GameObject as parent
+            GameObject container = new GameObject($"Pool_{pool.tag}");
+            container.transform.SetParent(transform);
+            poolContainers.Add(pool.tag, container.transform);
 
+            Queue<GameObject> objectPool = new Queue<GameObject>();
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.prefab, container.transform);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
-
             poolDictionary.Add(pool.tag, objectPool);
         }
     }
