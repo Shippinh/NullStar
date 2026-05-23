@@ -2277,7 +2277,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76735315}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222dc08d484f16869bdd89edd9d368fc, type: 3}
   m_Name: 
@@ -2345,7 +2345,7 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &76735319
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 8
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -16502,6 +16502,7 @@ MonoBehaviour:
     travelRadius: 1
     travelFrequency: 2
     pathMode: 1
+  repoolDelay: 30
   anchorT: 0
 --- !u!1 &817483889
 GameObject:
@@ -18465,7 +18466,7 @@ MonoBehaviour:
     transitionDuration: 0
     xOffset: 0
     yOffset: 0
-    newSplineT: 0.39
+    newSplineT: 0
     initialSpeed: 112
 --- !u!65 &921758017
 BoxCollider:
@@ -21137,6 +21138,7 @@ MonoBehaviour:
     travelRadius: 1
     travelFrequency: 2
     pathMode: 1
+  repoolDelay: 30
   anchorT: 0
 --- !u!1 &1058079209
 GameObject:
@@ -22036,6 +22038,7 @@ MonoBehaviour:
     travelRadius: 1
     travelFrequency: 2
     pathMode: 2
+  repoolDelay: 0
   anchorT: 0
 --- !u!1 &1090751196
 GameObject:
@@ -26600,6 +26603,7 @@ MonoBehaviour:
     travelRadius: 1
     travelFrequency: 2
     pathMode: 1
+  repoolDelay: 30
   anchorT: 0
 --- !u!1 &1392692551
 GameObject:
@@ -28265,6 +28269,7 @@ MonoBehaviour:
     travelRadius: 1
     travelFrequency: 2
     pathMode: 1
+  repoolDelay: 30
   anchorT: 0
 --- !u!1 &1490710352
 GameObject:
@@ -28761,6 +28766,7 @@ MonoBehaviour:
     travelRadius: 1
     travelFrequency: 2
     pathMode: 1
+  repoolDelay: 30
   anchorT: 0
 --- !u!1 &1496251372
 GameObject:
@@ -37649,6 +37655,7 @@ MonoBehaviour:
     travelRadius: 1
     travelFrequency: 2
     pathMode: 1
+  repoolDelay: 30
   anchorT: 0
 --- !u!4 &1964749377
 Transform:
@@ -40410,6 +40417,7 @@ MonoBehaviour:
     travelRadius: 1
     travelFrequency: 2
     pathMode: 2
+  repoolDelay: 0
   anchorT: 0
 --- !u!1 &2126761340
 GameObject:

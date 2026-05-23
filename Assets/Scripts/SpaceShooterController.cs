@@ -1129,13 +1129,7 @@ public class SpaceShooterController : MonoBehaviour
         float t = Mathf.Clamp01(detachRotationElapsed / detachRotationDuration);
         float smoothT = Mathf.SmoothStep(0f, 1f, t);
 
-        // Normalize yaw to -180..180 range to avoid slerp taking the long way around
-        float normalizedYaw = cameraControllerRef.yaw % 360f;
-        if (normalizedYaw > 180f) normalizedYaw -= 360f;
-        if (normalizedYaw < -180f) normalizedYaw += 360f;
-
-        Quaternion targetRot = Quaternion.Euler(0f, normalizedYaw, 0f);
-        body.MoveRotation(Quaternion.Slerp(detachStartBodyRotation, targetRot, smoothT));
+        body.MoveRotation(Quaternion.Slerp(detachStartBodyRotation, Quaternion.identity, smoothT));
 
         if (t >= 1f)
             playerState = PlayerState.Normal;

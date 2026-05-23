@@ -440,19 +440,23 @@ public class CameraControllerNew : MonoBehaviour
         boostCameraActive = false;
         canRotate = false;
 
-        // Build target rotation from exit velocity direction, keeping world up
         if (exitVelocity.sqrMagnitude > 0.001f)
         {
-            Quaternion exitRot = Quaternion.LookRotation(exitVelocity.normalized, Vector3.up);
-            // Decompose into yaw/pitch so normal camera mode picks up cleanly after
-            Vector3 angles = exitRot.eulerAngles;
-            pitch = angles.x > 180f ? angles.x - 360f : angles.x;
-            yaw = angles.y > 180f ? angles.y - 360f : angles.y;
-            roll = 0f;
-        }
+            Vector3 flatForward = exitVelocity;
+            flatForward.y = 0f;
+            if (flatForward.sqrMagnitude < 0.001f)
+                flatForward = Vector3.forward;
 
-        // Target is now the world-space rotation matching exit velocity
-        detachTargetRotation = Quaternion.Euler(pitch, yaw, 0f);
+            Quaternion exitRot = Quaternion.LookRotation(flatForward.normalized, Vector3.up);
+            Vector3 angles = exitRot.eulerAngles;
+            float targetPitch = angles.x > 180f ? angles.x - 360f : angles.x;
+            float targetYaw = angles.y > 180f ? angles.y - 360f : angles.y;
+            detachTargetRotation = Quaternion.Euler(targetPitch, targetYaw, 0f);
+        }
+        else
+        {
+            detachTargetRotation = detachStartRotation;
+        }
     }
 
     private void UpdateBoostModeAttachTransition()
@@ -503,6 +507,13 @@ public class CameraControllerNew : MonoBehaviour
         if (t >= 1f)
         {
             detachTransitionActive = false;
+
+            Vector3 angles = mainCameraRef.transform.rotation.eulerAngles;
+            pitch = angles.x > 180f ? angles.x - 360f : angles.x;
+            yaw = angles.y > 180f ? angles.y - 360f : angles.y;
+            roll = 0f;
+
+            desiredRotation = mainCameraRef.transform.rotation;
             canRotate = true;
         }
     }

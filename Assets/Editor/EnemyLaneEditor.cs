@@ -179,6 +179,9 @@ public class EnemyLaneEditor : Editor
                 EditorGUI.indentLevel--;
             }
 
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("repoolDelay"),
+                new GUIContent("Repool Delay", "Seconds after Activate() before all live enemies are returned to pool. 0 = disabled."));
+
             EditorGUI.indentLevel--;
         }
         EditorGUILayout.EndFoldoutHeaderGroup();

@@ -42,6 +42,10 @@ public class EnemyLane : MonoBehaviour
     [Header("Slots")]
     public List<LaneSlot> slots = new();
 
+    [Header("Repool")]
+    public float repoolDelay = 0f;          // 0 = disabled
+    private float _repoolCountdown = -1f;
+
     // ──────────────────────────────────────────────────────────────────────────
 
     [System.Serializable]
@@ -105,6 +109,18 @@ public class EnemyLane : MonoBehaviour
     private void FixedUpdate()
     {
         if (!_activated) return;
+
+        if (_repoolCountdown > 0f)
+        {
+            _repoolCountdown -= Time.fixedDeltaTime;
+            if (_repoolCountdown <= 0f)
+            {
+                _repoolCountdown = -1f;
+                RepoolAll();
+                return;
+            }
+        }
+
         if (_splineLength <= 0f || slots.Count == 0) return;
 
         float dt = Time.fixedDeltaTime;
@@ -157,6 +173,9 @@ public class EnemyLane : MonoBehaviour
         _nextSpawnCountdown = 0f;
         _passbyShootFired = false;
         foreach (var s in slots) s.passbyShootFired = false;
+
+        if (repoolDelay > 0f)
+            _repoolCountdown = repoolDelay;
     }
 
     // ── Slot ticking ──────────────────────────────────────────────────────────
@@ -299,6 +318,16 @@ public class EnemyLane : MonoBehaviour
         slot.cursor = null;
         slot.passbyShootFired = false;
         slot.activePoolTag = null;
+    }
+
+    private void RepoolAll()
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].isAlive)
+                ReturnSlotToPool(slots[i]);
+        }
+        _activated = false;
     }
 
     // ── Spawn ─────────────────────────────────────────────────────────────────
