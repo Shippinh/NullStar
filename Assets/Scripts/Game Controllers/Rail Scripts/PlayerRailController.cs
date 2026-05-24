@@ -225,10 +225,14 @@ public class PlayerRailController : RailController
     public class RailSpeedController
     {
         FloatRef currentSpeedRef;
-        float speedTarget;
-        float speedSpeed;
-        bool speedRunning;
         float defaultSpeed;
+
+        float speedStart;
+        float speedTarget;
+        float speedDuration;
+        float speedElapsed;
+        bool speedRunning;
+        LerpFactorMethods.LerpFactor speedEasing;
 
         public RailSpeedController(FloatRef currentSpeedPtr, float defaultSpeedPtr)
         {
@@ -236,7 +240,8 @@ public class PlayerRailController : RailController
             defaultSpeed = defaultSpeedPtr;
         }
 
-        public void SetSpeedOverTime(float target, float duration)
+        public void SetSpeedOverTime(float target, float duration,
+            LerpFactorMethods.LerpFactor easing = LerpFactorMethods.LerpFactor.None)
         {
             if (duration <= 0f)
             {
@@ -245,31 +250,34 @@ public class PlayerRailController : RailController
                 return;
             }
 
+            speedStart = currentSpeedRef.value;
             speedTarget = target;
-            speedSpeed = (target - currentSpeedRef.value) / duration;
+            speedDuration = duration;
+            speedElapsed = 0f;
+            speedEasing = easing;
             speedRunning = true;
         }
 
-        public void ResetToDefault(float duration = 0f)
+        public void ResetToDefault(float duration = 0f,
+            LerpFactorMethods.LerpFactor easing = LerpFactorMethods.LerpFactor.None)
         {
-            SetSpeedOverTime(defaultSpeed, duration);
+            SetSpeedOverTime(defaultSpeed, duration, easing);
         }
 
         public void Update(float dt)
         {
             if (!speedRunning) return;
 
-            float delta = speedSpeed * dt;
-            float remaining = speedTarget - currentSpeedRef.value;
+            speedElapsed += dt;
+            float t = Mathf.Clamp01(speedElapsed / speedDuration);
+            float curvedT = LerpFactorMethods.GetLerpFactor(speedEasing, t);
 
-            if (Mathf.Abs(delta) >= Mathf.Abs(remaining))
+            currentSpeedRef.value = Mathf.Lerp(speedStart, speedTarget, curvedT);
+
+            if (t >= 1f)
             {
                 currentSpeedRef.value = speedTarget;
                 speedRunning = false;
-            }
-            else
-            {
-                currentSpeedRef.value += delta;
             }
         }
     }

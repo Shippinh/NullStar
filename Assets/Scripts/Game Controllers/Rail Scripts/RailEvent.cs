@@ -30,24 +30,30 @@ public class ChangeSpeedEvent : RailEvent
     public float targetPlaneAcceleration = 35f;
     public float targetDodgeSpeed = 20f;
 
+    public LerpFactorMethods.LerpFactor speedEasing = LerpFactorMethods.LerpFactor.None;
+    public LerpFactorMethods.LerpFactor sidewaysPlaneSpeedEasing = LerpFactorMethods.LerpFactor.None;
+    public LerpFactorMethods.LerpFactor upwardPlaneSpeedEasing = LerpFactorMethods.LerpFactor.None;
+    public LerpFactorMethods.LerpFactor planeAccelerationEasing = LerpFactorMethods.LerpFactor.None;
+    public LerpFactorMethods.LerpFactor dodgeSpeedEasing = LerpFactorMethods.LerpFactor.None;
+
     [Min(0f)] public float transitionDuration = 1f;
 
     public override void Execute(PlayerRailController ctx)
     {
         if (targetSpeed >= 0f)
-            ctx.boostModeSpeedFade.SetSpeedOverTime(targetSpeed, transitionDuration);
+            ctx.boostModeSpeedFade.SetSpeedOverTime(targetSpeed, transitionDuration, speedEasing);
 
         if (targetSidewaysPlaneSpeed >= 0f)
-            ctx.boostModeSidewaySplineMaxSpeedFade.SetSpeedOverTime(targetSidewaysPlaneSpeed, transitionDuration);
+            ctx.boostModeSidewaySplineMaxSpeedFade.SetSpeedOverTime(targetSidewaysPlaneSpeed, transitionDuration, sidewaysPlaneSpeedEasing);
 
         if (targetUpwardPlaneSpeed >= 0f)
-            ctx.boostModeUpwardSplineMaxSpeedFade.SetSpeedOverTime(targetUpwardPlaneSpeed, transitionDuration);
+            ctx.boostModeUpwardSplineMaxSpeedFade.SetSpeedOverTime(targetUpwardPlaneSpeed, transitionDuration, upwardPlaneSpeedEasing);
 
         if (targetPlaneAcceleration >= 0f)
-            ctx.boostModeAccelerationFade.SetSpeedOverTime(targetPlaneAcceleration, transitionDuration);
+            ctx.boostModeAccelerationFade.SetSpeedOverTime(targetPlaneAcceleration, transitionDuration, planeAccelerationEasing);
 
         if (targetDodgeSpeed >= 0f)
-            ctx.boostModeDodgeSpeedFade.SetSpeedOverTime(targetDodgeSpeed, transitionDuration);
+            ctx.boostModeDodgeSpeedFade.SetSpeedOverTime(targetDodgeSpeed, transitionDuration, dodgeSpeedEasing);
     }
 
     public override string EditorLabel => $"Speed → {targetSpeed} | S:{targetSidewaysPlaneSpeed} U:{targetUpwardPlaneSpeed} A:{targetPlaneAcceleration} D:{targetDodgeSpeed} over {transitionDuration}s";
@@ -273,6 +279,18 @@ public class ActivateLaneEvent : RailEvent
         (targetLane != null && targetLane.passbySpline != null)
             ? new Color(0.4f, 1f, 0.6f)   // mint  — passby
             : new Color(0.6f, 1f, 0.3f);  // lime  — entry / activate
+}
+
+[System.Serializable]
+public class TriggerCameraShake : RailEvent
+{
+    [Header("Shake Parameters")]
+    public float magnitude = 0.25f;
+    public float duration = 0.25f;
+
+    public override void Execute(PlayerRailController ctx) => ctx?.playerRef.cameraControllerRef.TriggerShake(duration, magnitude);
+    public override string EditorLabel => $"Shake Player Camera | M:{magnitude} over {duration}s";
+    public override Color EditorColor => new Color(0.2f, 0.2f, 0.7f);
 }
 
 // Span a region of the timeline; fire Enter/Exit/Update callbacks.

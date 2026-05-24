@@ -99,6 +99,8 @@ public class CameraControllerNew : MonoBehaviour
     public Vector3 defaultLeftHandOffset;
     public Vector3 defaultRightHandOffset;
 
+    public float actualMagnitude;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -132,6 +134,8 @@ public class CameraControllerNew : MonoBehaviour
 
         defaultOffset = transform.position - playerRef.transform.position;
         defaultFieldOfView = mainCameraRef.fieldOfView;
+
+        actualMagnitude = shakeMagnitude;
     }
 
     void Update()
@@ -317,6 +321,13 @@ public class CameraControllerNew : MonoBehaviour
     public void TriggerShake()
     {
         shakeTime = shakeDuration;
+        actualMagnitude = shakeMagnitude;
+    }
+
+    public void TriggerShake(float duration, float magnitude)
+    {
+        shakeTime = duration;
+        actualMagnitude = magnitude;
     }
 
     // Standard shake — can target any transform
@@ -325,7 +336,7 @@ public class CameraControllerNew : MonoBehaviour
         if (shakeTime > 0f)
         {
             float fadeFactor = shakeTime / shakeDuration;
-            float currentMagnitude = shakeMagnitude * fadeFactor;
+            float currentMagnitude = actualMagnitude * fadeFactor;
 
             // Random offsets
             float shakeX = Random.Range(-currentMagnitude, currentMagnitude);

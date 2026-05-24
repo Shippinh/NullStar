@@ -2277,7 +2277,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76735315}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 222dc08d484f16869bdd89edd9d368fc, type: 3}
   m_Name: 
@@ -2345,7 +2345,7 @@ MeshRenderer:
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &76735319
 MeshFilter:
-  m_ObjectHideFlags: 8
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2380,7 +2380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   railControllerRef: {fileID: 4130703078701761979}
   layers:
-  - name: Player
+  - name: Player Tech
     color: {r: 1, g: 0, b: 0, a: 1}
     visible: 1
     locked: 0
@@ -2418,6 +2418,10 @@ MonoBehaviour:
     locked: 0
   - name: Scripted 7
     color: {r: 1, g: 0.75, b: 0.3, a: 1}
+    visible: 1
+    locked: 0
+  - name: Player Visual
+    color: {r: 1, g: 0.4, b: 0.9, a: 1}
     visible: 1
     locked: 0
   events:
@@ -2466,6 +2470,9 @@ MonoBehaviour:
   - rid: 6254652576295288857
   - rid: 6254652576295288858
   - rid: 6254652576295288859
+  - rid: 6254652711886651392
+  - rid: 6254652711886651394
+  - rid: 6254652711886651395
   rangeEvents: []
   references:
     version: 2
@@ -2482,7 +2489,7 @@ MonoBehaviour:
     - rid: 4570727542867099648
       type: {class: ChangeOffsetPlaneEvent, ns: , asm: Assembly-CSharp}
       data:
-        t: 0.4
+        t: 0.42
         enabled: 1
         repeatable: 0
         layerIndex: 0
@@ -2506,12 +2513,17 @@ MonoBehaviour:
         enabled: 1
         repeatable: 0
         layerIndex: 0
-        targetSpeed: 112
-        targetSidewaysPlaneSpeed: 35
-        targetUpwardPlaneSpeed: 35
-        targetPlaneAcceleration: 120
-        targetDodgeSpeed: 90
-        transitionDuration: 1
+        targetSpeed: 0
+        targetSidewaysPlaneSpeed: 5
+        targetUpwardPlaneSpeed: 5
+        targetPlaneAcceleration: 10
+        targetDodgeSpeed: 20
+        speedEasing: 5
+        sidewaysPlaneSpeedEasing: 0
+        upwardPlaneSpeedEasing: 0
+        planeAccelerationEasing: 0
+        dodgeSpeedEasing: 0
+        transitionDuration: 6
     - rid: 4570727542867099651
       type: {class: ChangeSpeedEvent, ns: , asm: Assembly-CSharp}
       data:
@@ -2524,6 +2536,11 @@ MonoBehaviour:
         targetUpwardPlaneSpeed: 20
         targetPlaneAcceleration: 80
         targetDodgeSpeed: 25
+        speedEasing: 0
+        sidewaysPlaneSpeedEasing: 0
+        upwardPlaneSpeedEasing: 0
+        planeAccelerationEasing: 0
+        dodgeSpeedEasing: 0
         transitionDuration: 1
     - rid: 4570727542867099652
       type: {class: ChangeSpeedEvent, ns: , asm: Assembly-CSharp}
@@ -2537,6 +2554,11 @@ MonoBehaviour:
         targetUpwardPlaneSpeed: 10
         targetPlaneAcceleration: 35
         targetDodgeSpeed: 25
+        speedEasing: 0
+        sidewaysPlaneSpeedEasing: 0
+        upwardPlaneSpeedEasing: 0
+        planeAccelerationEasing: 0
+        dodgeSpeedEasing: 0
         transitionDuration: 20
     - rid: 4570727563709382656
       type: {class: ChangeSpeedEvent, ns: , asm: Assembly-CSharp}
@@ -2550,6 +2572,11 @@ MonoBehaviour:
         targetUpwardPlaneSpeed: 10
         targetPlaneAcceleration: 35
         targetDodgeSpeed: -1
+        speedEasing: 0
+        sidewaysPlaneSpeedEasing: 0
+        upwardPlaneSpeedEasing: 0
+        planeAccelerationEasing: 0
+        dodgeSpeedEasing: 0
         transitionDuration: 0.2
     - rid: 4570727655482064900
       type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
@@ -3097,6 +3124,51 @@ MonoBehaviour:
         turretIndex: -1
         steerStrength: 80
         snapDistance: 1.5
+    - rid: 6254652711886651392
+      type: {class: TriggerCameraShake, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0.42
+        enabled: 1
+        repeatable: 0
+        layerIndex: 10
+        magnitude: 0.025
+        duration: 0.25
+    - rid: 6254652711886651394
+      type: {class: ChangeSpeedEvent, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0.4199
+        enabled: 1
+        repeatable: 0
+        layerIndex: 10
+        targetSpeed: 160
+        targetSidewaysPlaneSpeed: 35
+        targetUpwardPlaneSpeed: 35
+        targetPlaneAcceleration: 120
+        targetDodgeSpeed: 90
+        speedEasing: 0
+        sidewaysPlaneSpeedEasing: 0
+        upwardPlaneSpeedEasing: 0
+        planeAccelerationEasing: 0
+        dodgeSpeedEasing: 0
+        transitionDuration: 0
+    - rid: 6254652711886651395
+      type: {class: ChangeSpeedEvent, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0.421
+        enabled: 1
+        repeatable: 0
+        layerIndex: 10
+        targetSpeed: 112
+        targetSidewaysPlaneSpeed: 35
+        targetUpwardPlaneSpeed: 35
+        targetPlaneAcceleration: 120
+        targetDodgeSpeed: 90
+        speedEasing: 0
+        sidewaysPlaneSpeedEasing: 0
+        upwardPlaneSpeedEasing: 0
+        planeAccelerationEasing: 0
+        dodgeSpeedEasing: 0
+        transitionDuration: 5
 --- !u!114 &76735322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18466,7 +18538,7 @@ MonoBehaviour:
     transitionDuration: 0
     xOffset: 0
     yOffset: 0
-    newSplineT: 0
+    newSplineT: 0.38
     initialSpeed: 112
 --- !u!65 &921758017
 BoxCollider:
