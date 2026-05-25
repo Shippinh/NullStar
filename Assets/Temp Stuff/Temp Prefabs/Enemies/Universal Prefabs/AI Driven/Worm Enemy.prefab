@@ -56,6 +56,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -624,6 +626,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -1730,14 +1734,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   canMove: 1
-  movementPattern: 2
+  movementPattern: 1
   oscillationAmplitude: 1
   oscillationFrequency: 2
   oscillationStrengthFactor: 1
   invertSpiral: 0
   invertWiggle: 0
-  pivotChangeInterval: 5
-  invertMovementOnNewPivot: 0
+  pivotChangeInterval: 10
+  invertMovementOnNewPivot: 1
   randomizeMovementPatternOnNewPivot: 1
   pivotDistance: 50
   pivotForwardPush: 6.25
@@ -1814,8 +1818,7 @@ MonoBehaviour:
   splineLength: 0
   playerRailControllerRef: {fileID: 0}
   body: {fileID: 0}
-  rightOffset: 0
-  upOffset: 0
+  _debugLog: 0
 --- !u!114 &7563323442987167085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2618,6 +2621,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -2800,6 +2805,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -4002,6 +4009,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -4077,6 +4086,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -4184,6 +4195,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -4677,6 +4690,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -5005,6 +5020,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -5484,6 +5501,8 @@ MonoBehaviour:
   coneMinAngle: 1
   coneMaxAngle: 60
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0

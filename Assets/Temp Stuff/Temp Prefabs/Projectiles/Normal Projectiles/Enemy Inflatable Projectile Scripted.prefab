@@ -106,7 +106,7 @@ MonoBehaviour:
   damage: 1
   hitLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 32832
   bouncyPhysicsRef: {fileID: 0}
   healthControllerRef: {fileID: 0}
   forceFieldRef: {fileID: 0}
@@ -115,8 +115,6 @@ MonoBehaviour:
   timeUntillInflation: 1
   timerToInflate: 0
   timeToInflate: 0.25
-  randomizeTimeToInflate: 1
-  desiredTimeToInflateRandomizationMultiplier: 0.2
   desiredScaleMultiplier: 30
   randomizeScale: 1
   desiredScaleMinimumRandomizationRange: 0.95

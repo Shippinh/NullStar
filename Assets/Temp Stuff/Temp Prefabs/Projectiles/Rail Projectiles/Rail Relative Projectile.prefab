@@ -4842,11 +4842,11 @@ GameObject:
   - component: {fileID: 3251175189695082119}
   - component: {fileID: 8322493520245276657}
   - component: {fileID: 4684245015413290036}
-  - component: {fileID: -677207144175236486}
+  - component: {fileID: -7462434501431959450}
   - component: {fileID: 3328904270321274369}
   - component: {fileID: -1463059722455509944}
   m_Layer: 7
-  m_Name: Emitter Projectile
+  m_Name: Rail Relative Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4918,7 +4918,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-677207144175236486
+--- !u!114 &-7462434501431959450
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4927,15 +4927,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6765627477619855397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c95f2532375fb4e81909a7ef43b640, type: 3}
+  m_Script: {fileID: 11500000, guid: e999a825bd911bb4f9cc8e8fbaedcac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 37.5
+  speed: 112
   maxLifetime: 8
   damage: 1
   hitLayers:
     serializedVersion: 2
     m_Bits: 1088
+  splineMovementMode: 1
+  rail: {fileID: 0}
 --- !u!135 &3328904270321274369
 SphereCollider:
   m_ObjectHideFlags: 0

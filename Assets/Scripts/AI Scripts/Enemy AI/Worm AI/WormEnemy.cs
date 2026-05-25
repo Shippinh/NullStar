@@ -85,10 +85,7 @@ public class WormEnemy : EnemyAIComponent
 
     private void LateUpdate()
     {
-        if (player.GetPlayerOnGround())
-            currentPivot = CheckForceTopPivot();
-        else
-            currentPivot = UpdatePivot();
+        currentPivot = UpdatePivot();
     }
 
     void FixedUpdate()
@@ -187,52 +184,55 @@ public class WormEnemy : EnemyAIComponent
     {
         Vector3 playerPos = player.transform.position;
         Vector3 playerForward = GetPlayerForward();
+        bool playerGrounded = player.GetPlayerOnGround();
 
-        List<Vector3> validPivots = new List<Vector3>();
-        foreach (var dir in availableDirections)
+        List<int> shuffledIndices = new List<int>();
+        for (int i = 0; i < availableDirections.Count; i++)
+            shuffledIndices.Add(i);
+
+        for (int i = shuffledIndices.Count - 1; i > 0; i--)
         {
-            // Start with pure cardinal pivot
+            int j = UnityEngine.Random.Range(0, i + 1);
+            (shuffledIndices[i], shuffledIndices[j]) = (shuffledIndices[j], shuffledIndices[i]);
+        }
+
+        List<(Vector3 pivot, int dirIndex)> validPivots = new List<(Vector3, int)>();
+
+        foreach (int idx in shuffledIndices)
+        {
+            Vector3 dir = availableDirections[idx];
+
+            // Skip downward pivots when grounded — they'll always fail LOS or be underground
+            if (playerGrounded && Vector3.Dot(dir, Vector3.up) < -0.1f)
+                continue;
+
             Vector3 candidate = playerPos + dir * pivotDistance;
-
-            // Then apply global "forward push"
             candidate += playerForward * pivotForwardPush;
+            candidate += Vector3.up * pivotHeightOffset; // world-up offset, not raw Y
 
-            // Offset upwards from ground
-            candidate.y += pivotHeightOffset;
-
-            if (HasLineOfSight(candidate))
-                validPivots.Add(candidate);
+            if (HasLineOfSight(candidate) && !IsPivotUnderground(candidate))
+                validPivots.Add((candidate, idx));
         }
 
         if (validPivots.Count > 0)
         {
-            int randIndex = UnityEngine.Random.Range(0, validPivots.Count);
-            currentDirectionIndex = randIndex; // just remember the index
-            return validPivots[randIndex];
+            int pick = UnityEngine.Random.Range(0, validPivots.Count);
+            currentDirectionIndex = validPivots[pick].dirIndex;
+            return validPivots[pick].pivot;
         }
 
-        // fallback pivot directly in front of player
         return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
     }
 
-    Vector3 CheckForceTopPivot()
+    bool IsPivotUnderground(Vector3 pivot)
     {
-        Vector3 playerPos = player.transform.position;
-        Vector3 playerForward = GetPlayerForward();
-
-        if (currentDirectionIndex < 0 || currentDirectionIndex >= availableDirections.Count)
-            return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
-
-        Vector3 dir = availableDirections[2]; // recalc direction relative to camera
-        Vector3 pivot = playerPos + dir * pivotDistance;
-
-        pivot += playerForward * pivotForwardPush;
-        pivot.y += pivotHeightOffset;
-
-        if (HasLineOfSight(pivot))
-            return pivot;
-
-        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+        // Cast downward from the pivot to find ground beneath it
+        if (Physics.Raycast(pivot, Vector3.down, out RaycastHit hit, Mathf.Infinity, LOSMask))
+        {
+            // If the pivot is below the ground hit point, it's underground
+            return pivot.y < hit.point.y;
+        }
+        return false;
     }
 
     Vector3 UpdatePivot()
@@ -241,18 +241,19 @@ public class WormEnemy : EnemyAIComponent
         Vector3 playerForward = GetPlayerForward();
 
         if (currentDirectionIndex < 0 || currentDirectionIndex >= availableDirections.Count)
-            return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+            return ChoosePivot();
 
-        Vector3 dir = availableDirections[currentDirectionIndex]; // recalc direction relative to camera
+        Vector3 dir = availableDirections[currentDirectionIndex];
         Vector3 pivot = playerPos + dir * pivotDistance;
-
         pivot += playerForward * pivotForwardPush;
-        pivot.y += pivotHeightOffset;
+        pivot += Vector3.up * pivotHeightOffset;
 
-        if (HasLineOfSight(pivot))
+        if (HasLineOfSight(pivot) && !IsPivotUnderground(pivot))
             return pivot;
 
-        return playerPos + playerForward * (pivotDistance + pivotForwardPush) + Vector3.up * pivotHeightOffset;
+        // Current pivot is invalid — immediately pick a new one and reset the timer
+        nextPivotTime = Time.time + pivotChangeInterval;
+        return ChoosePivot();
     }
 
 
