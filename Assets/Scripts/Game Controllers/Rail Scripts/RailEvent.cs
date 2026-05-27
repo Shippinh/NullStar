@@ -109,7 +109,7 @@ public class ScriptedFormationShotEvent : RailEvent
 
             Vector3[] slice = new Vector3[count];
             System.Array.Copy(positions, start, slice, 0, count);
-            liveTurrets[t].FireFormationShot(slice, projectileTag, travelDuration, steerStrength, snapDistance);
+            liveTurrets[t].FireFormationShot(slice, projectileTag, travelDuration);
         }
     }
 

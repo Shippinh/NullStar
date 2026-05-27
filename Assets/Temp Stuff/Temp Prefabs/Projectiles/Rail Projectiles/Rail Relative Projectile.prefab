@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.488}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3251175189695082119}
@@ -4842,7 +4842,7 @@ GameObject:
   - component: {fileID: 3251175189695082119}
   - component: {fileID: 8322493520245276657}
   - component: {fileID: 4684245015413290036}
-  - component: {fileID: -7462434501431959450}
+  - component: {fileID: 5321363076460204247}
   - component: {fileID: 3328904270321274369}
   - component: {fileID: -1463059722455509944}
   m_Layer: 7
@@ -4862,7 +4862,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.375, y: 0.375, z: 0.375}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8366543080038131995}
@@ -4896,7 +4896,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: af8fa94753fb5af4cb770b70a7b6b0f2, type: 2}
+  - {fileID: 2100000, guid: 6e056a093c7ab2f4d82ffb5f2540e923, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4918,7 +4918,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-7462434501431959450
+--- !u!114 &5321363076460204247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4927,17 +4927,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 6765627477619855397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e999a825bd911bb4f9cc8e8fbaedcac4, type: 3}
+  m_Script: {fileID: 11500000, guid: 34c95f2532375fb4e81909a7ef43b640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 112
+  speed: -30
   maxLifetime: 8
+  movementMode: 2
   damage: 1
   hitLayers:
     serializedVersion: 2
     m_Bits: 1088
-  splineMovementMode: 1
-  rail: {fileID: 0}
+  rb: {fileID: 0}
+  col: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  impactHappened: 0
+  _turretRail: {fileID: 0}
+  _turretLocalOffset: {x: 0, y: 0, z: 0}
+  _playerRail: {fileID: 0}
+  _playerRightOffset: 0
+  _playerUpOffset: 0
+  _rayProgress: 0
+  _laneRail: {fileID: 0}
+  _laneSplineT: 0
+  _laneRight: 0
+  _laneUp: 0
 --- !u!135 &3328904270321274369
 SphereCollider:
   m_ObjectHideFlags: 0

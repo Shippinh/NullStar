@@ -64,7 +64,7 @@ public class InflatableEnemyProjectile : SimpleEnemyProjectile
         }
     }
 
-    public void Update()
+    protected override void Update()
     {
         HandleState(Time.deltaTime);
     }

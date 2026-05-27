@@ -14,6 +14,15 @@ public class SplineArcLengthTable : MonoBehaviour
     public float TotalLength => _totalLength;
     public bool IsReady => _arcLengths != null;
 
+    /// <summary>Number of segments (samples - 1). The valid index range is 0..Resolution.</summary>
+    public int Resolution => resolution;
+
+    /// <summary>
+    /// Returns the cumulative arc length at sample index i.
+    /// Used by RailController's stateless binary-search fallback.
+    /// </summary>
+    public float GetArcLength(int index) => _arcLengths[index];
+
     private void Awake()
     {
         var container = GetComponent<SplineContainer>();
@@ -50,6 +59,7 @@ public class SplineArcLengthTable : MonoBehaviour
     /// <summary>
     /// Allocate a cursor for one RailController. Each caller gets its own cursor
     /// so the index walk stays O(1) amortized — no binary search per frame.
+    /// Only use cursors when input fractions are monotonically increasing each frame.
     /// </summary>
     public ArcLengthCursor CreateCursor() => new ArcLengthCursor(this);
 

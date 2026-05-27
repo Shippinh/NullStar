@@ -51,9 +51,12 @@ public abstract class RailController : MonoBehaviour
     // Each RailController owns one cursor into the shared arc-length table
     private SplineArcLengthTable.ArcLengthCursor _cursor;
 
+    // Cached table reference for stateless EvaluateAt lookups
+    private SplineArcLengthTable _arcLengthTable;
+
     public virtual void Awake()
     {
-        if(initializeOnAwake)
+        if (initializeOnAwake)
             InitializeSpline();
     }
 
@@ -74,6 +77,7 @@ public abstract class RailController : MonoBehaviour
             return;
         }
 
+        _arcLengthTable = table;
         _cursor = table.CreateCursor();
     }
 
@@ -166,5 +170,67 @@ public abstract class RailController : MonoBehaviour
         return splineContainer.transform.TransformPoint(
             (Vector3)splineContainer.Spline.EvaluatePosition(curveT)
         );
+    }
+
+    /// <summary>
+    /// Evaluate the spline at an arc-length fraction (0..1), matching the same
+    /// remapping used by EvaluateSpline() and TickSpline(). Use this wherever
+    /// you previously called EvaluateAt() with a raw splineT value.
+    ///
+    /// Uses a stateless binary search so it is safe to call with non-monotonic
+    /// or wrapping fractions (e.g. from projectile PlayerSpace tracking).
+    /// </summary>
+    public (Vector3 pos, Vector3 fwd, Vector3 up, Vector3 right) EvaluateAt(float arcFraction)
+    {
+        // Remap arc-length fraction → true curve parameter via binary search.
+        // Binary search is used instead of the cursor because EvaluateAt is
+        // called with arbitrary (potentially non-monotonic) fractions from
+        // projectile code, while the cursor requires monotonically increasing input.
+        float curveT = _arcLengthTable != null
+            ? ArcFractionToCurveTBinarySearch(_arcLengthTable, arcFraction)
+            : arcFraction;
+
+        splineContainer.Spline.Evaluate(curveT,
+            out Unity.Mathematics.float3 sp,
+            out Unity.Mathematics.float3 st,
+            out Unity.Mathematics.float3 su);
+
+        var tr = splineContainer.transform;
+        var fwd = tr.TransformDirection(((Vector3)st).normalized);
+        var up = tr.TransformDirection(((Vector3)su).normalized);
+        // Cross(up, fwd) matches the convention in EvaluateSpline()
+        var right = Vector3.Cross(up, fwd).normalized;
+
+        return (tr.TransformPoint((Vector3)sp), fwd, up, right);
+    }
+
+    /// <summary>
+    /// Stateless binary search: arc-length fraction → spline curve parameter t.
+    /// O(log N) but safe for any input order. Suitable for infrequent callers
+    /// such as per-projectile updates.
+    /// </summary>
+    private static float ArcFractionToCurveTBinarySearch(SplineArcLengthTable table, float fraction)
+    {
+        if (!table.IsReady) return fraction;
+
+        fraction = Mathf.Clamp01(fraction);
+        float targetDist = fraction * table.TotalLength;
+
+        int lo = 0;
+        int hi = table.Resolution;           // last valid index == resolution
+
+        while (lo < hi - 1)
+        {
+            int mid = (lo + hi) / 2;
+            if (table.GetArcLength(mid) < targetDist)
+                lo = mid;
+            else
+                hi = mid;
+        }
+
+        float segLen = table.GetArcLength(hi) - table.GetArcLength(lo);
+        float localT = segLen > 0f ? (targetDist - table.GetArcLength(lo)) / segLen : 0f;
+
+        return Mathf.Lerp(lo / (float)table.Resolution, hi / (float)table.Resolution, localT);
     }
 }
