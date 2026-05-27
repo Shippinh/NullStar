@@ -226,12 +226,16 @@ public class WormEnemy : EnemyAIComponent
 
     bool IsPivotUnderground(Vector3 pivot)
     {
-        // Cast downward from the pivot to find ground beneath it
-        if (Physics.Raycast(pivot, Vector3.down, out RaycastHit hit, Mathf.Infinity, LOSMask))
+        // Cast downward from well above the pivot's XZ position to find the ground surface.
+        // Starting FROM the pivot itself fails when the pivot is already inside geometry.
+        Vector3 castOrigin = new Vector3(pivot.x, pivot.y + 500f, pivot.z);
+
+        if (Physics.Raycast(castOrigin, Vector3.down, out RaycastHit hit, Mathf.Infinity, LOSMask))
         {
-            // If the pivot is below the ground hit point, it's underground
             return pivot.y < hit.point.y;
         }
+
+        // No ground found below at all — treat as safe (open sky / void level)
         return false;
     }
 
@@ -400,7 +404,7 @@ public class WormEnemy : EnemyAIComponent
             {
                 Vector3 candidate = playerPos + dir * pivotDistance;
                 candidate += playerForward * pivotForwardPush;
-                candidate.y += pivotHeightOffset;
+                candidate += Vector3.up * pivotHeightOffset;
 
                 bool los = HasLineOfSight(candidate);
 
