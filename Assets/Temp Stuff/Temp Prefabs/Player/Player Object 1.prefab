@@ -1156,6 +1156,7 @@ MonoBehaviour:
   jumpForce: 7.5
   maxSpeedDecayRate: 10.2
   jetpackAcceleration: 18.75
+  noInputVelocityDrainRate: 2
   defaultMaxSpeed: 0
   gravityModifier: 1.5
   overboostOverheatMode: 0
@@ -1177,9 +1178,9 @@ MonoBehaviour:
   overboostOverheatDurationCurrent: 0
   overboostOverheatDurationRestoreRate: 1
   overboostForward: 1
-  maxBoostVerticalStrafeSpeed: 10
-  maxBoostHorizontalStrafeSpeed: 10
-  maxBoostAcceleration: 35
+  maxBoostVerticalStrafeSpeed: 15
+  maxBoostHorizontalStrafeSpeed: 15
+  maxBoostAcceleration: 80
   attachDuration: 0
   attachDurationCurrent: 0
   attachStartPosition: {x: 0, y: 0, z: 0}
@@ -1194,7 +1195,7 @@ MonoBehaviour:
   currentRightOffset: 0
   currentUpOffset: 0
   dodgeMaxSpeed: 31.25
-  boostDodgeMaxSpeed: 20
+  boostDodgeMaxSpeed: 25
   dodgeMaxSpeedCap: 0
   perDodgeMaxSpeedIncrease: 1.25
   perDodgeMaxOverboostSpeedIncrease: 1.875
@@ -1208,6 +1209,7 @@ MonoBehaviour:
   timeToImproveDodgeRechargeRate: 2.5
   dodgeRechargeRate: 4
   dodgeTimeLimit: 0.05
+  consectuiveDodgeMaxSpeedMultiplierLimit: 2.5
   isDodging: 0
   rageCharged: 0
   rageActive: 0
@@ -1252,6 +1254,10 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   desiredVelocity: {x: 0, y: 0, z: 0}
   desiredDodgeVelocity: {x: 0, y: 0, z: 0}
+  externalVelocity: {x: 0, y: 0, z: 0}
+  previousVelocity: {x: 0, y: 0, z: 0}
+  dodgeMomentum: {x: 0, y: 0, z: 0}
+  currentSpeed: 0
 --- !u!54 &2081600106996708171
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1369,7 +1375,7 @@ MonoBehaviour:
   loopSpline: 1
   maxSidewaysOffset: 6
   maxUpwardOffset: 6
-  MaxSpeed: 56
+  MaxSpeed: 112
   splineOffset: {x: 0, y: 0, z: 0}
   splineT: 0
   initializeOnAwake: 0
@@ -1378,6 +1384,24 @@ MonoBehaviour:
   body: {fileID: 0}
   defaultSplineSpeed: 0
   currentSplineSpeed:
+    value: 0
+  defaultSidewaysPlaneMaxSpeed: 0
+  currentSidewaysPlaneMaxSpeed:
+    value: 0
+  defaultUpwardPlaneMaxSpeed: 0
+  currentUpwardPlaneMaxSpeed:
+    value: 0
+  defaultPlaneAcceleration: 0
+  currentPlaneAcceleration:
+    value: 0
+  defaultDodgeSpeed: 0
+  currentDodgeSpeed:
+    value: 0
+  defaultSidewaysOffset: 0
+  currentSidewaysOffset:
+    value: 0
+  defaultUpwardOffset: 0
+  currentUpwardOffset:
     value: 0
 --- !u!1 &3882815770802991311
 GameObject:
@@ -2718,7 +2742,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 131071
+    m_Bits: 393215
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3085,7 +3109,7 @@ MonoBehaviour:
   playerCamera: {fileID: 7345669981496776060}
   hitLayers:
     serializedVersion: 2
-    m_Bits: 15368
+    m_Bits: 277512
   fireRate: 0.0625
   hitscanRange: 2000
   canFire: 1
@@ -3648,7 +3672,7 @@ MonoBehaviour:
   detachTargetRotation: {x: 0, y: 0, z: 0, w: 0}
   boostCameraActive: 0
   sidewaysLookCriteria: 0.3
-  forwardLookCriteria: 0.3
+  forwardLookCriteria: 0
   inputX: 0
   inputY: 0
   yaw: 0
@@ -3662,6 +3686,7 @@ MonoBehaviour:
   defaultRightHandRot: {x: 0, y: 0, z: 0, w: 0}
   defaultLeftHandOffset: {x: 0, y: 0, z: 0}
   defaultRightHandOffset: {x: 0, y: 0, z: 0}
+  actualMagnitude: 0
 --- !u!1 &6369462061008094767
 GameObject:
   m_ObjectHideFlags: 0

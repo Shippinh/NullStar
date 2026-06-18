@@ -44,6 +44,7 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField, Range(0f, 100f)] float jumpForce = 2f;
     [SerializeField, Range(0f, 100f)] float maxSpeedDecayRate = 2f;
     [SerializeField, Range(0f, 2000f)] float jetpackAcceleration = 10f;
+    [SerializeField] float noInputVelocityDrainRate = 2f;
     [SerializeField] float defaultMaxSpeed;
     [SerializeField] float gravityModifier = 1f;
 
@@ -107,6 +108,7 @@ public class SpaceShooterController : MonoBehaviour
     [SerializeField] float timeToImproveDodgeRechargeRate = 3f;
     [SerializeField] float dodgeRechargeRate = 3f;
     [SerializeField] float dodgeTimeLimit = 0.15f;
+    [SerializeField, Range(0f, 5f)] float consectuiveDodgeMaxSpeedMultiplierLimit = 1.5f;
     float dodgeTime;
     public bool isDodging = false;
 
@@ -189,6 +191,8 @@ public class SpaceShooterController : MonoBehaviour
 
     // Internal playerState Vectors
     public Vector3 velocity, desiredVelocity, desiredDodgeVelocity, externalVelocity, previousVelocity;
+    [SerializeField] Vector3 dodgeMomentum = Vector3.zero;
+    [SerializeField] public float currentSpeed;
 
 
     void OnValidate()
@@ -286,6 +290,8 @@ public class SpaceShooterController : MonoBehaviour
 
             if (healInput)
                 healthController.Heal(100, true);
+
+            DrainVelocityNoInput();
 
             body.velocity = (velocity - previousVelocity) + externalVelocity;
         }
@@ -393,6 +399,8 @@ public class SpaceShooterController : MonoBehaviour
         {
             contactNormal = Vector3.up;
         }
+
+        currentSpeed = body.velocity.magnitude;
     }
 
     void CalculateDesiredVelocity()
@@ -508,6 +516,16 @@ public class SpaceShooterController : MonoBehaviour
         velocity += zAxis * Mathf.Sign(deltaZ) * Mathf.Min(Mathf.Abs(deltaZ), acceleration * Time.fixedDeltaTime);
     }
 
+    void DrainVelocityNoInput()
+    {
+        if (!AnyMovementInput() && !isDodging)
+        {
+            float currentY = velocity.y;
+            velocity = Vector3.MoveTowards(velocity, desiredVelocity, noInputVelocityDrainRate * Time.fixedDeltaTime);
+            velocity.y = currentY;
+        }
+    }
+
     void AdjustBoostAirVelocity()
     {
         float currentY = velocity.y;
@@ -621,7 +639,7 @@ public class SpaceShooterController : MonoBehaviour
             maxOverboostSpeed = Mathf.Min(maxOverboostSpeed + perDodgeMaxOverboostSpeedIncrease, dodgeMaxOverboostSpeedCap);
 
             if (desiredDodgeVelocity != Vector3.zero)
-                velocity = desiredDodgeVelocity * dodgeMaxSpeed * (playerState == PlayerState.OverboostActive ? 1.5f : 1f);
+                ApplyDodgeMomentum(desiredDodgeVelocity, dodgeMaxSpeed * (playerState == PlayerState.OverboostActive ? 1f : 1f));
 
             horizontalDodgeInput = 0;
             verticalDodgeInput = 0;
@@ -661,7 +679,7 @@ public class SpaceShooterController : MonoBehaviour
             maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
 
             if (desiredDodgeVelocity != Vector3.zero)
-                velocity = desiredDodgeVelocity * dodgeMaxSpeed * 0.75f;
+                ApplyDodgeMomentum(desiredDodgeVelocity, dodgeMaxSpeed * 0.75f);
 
             horizontalDodgeInput = 0;
             verticalDodgeInput = 0;
@@ -701,7 +719,7 @@ public class SpaceShooterController : MonoBehaviour
             maxSpeed = Mathf.Min(maxSpeed + perDodgeMaxSpeedIncrease, dodgeMaxSpeedCap);
 
             if (desiredDodgeVelocity != Vector3.zero)
-                velocity = desiredDodgeVelocity * dodgeMaxSpeed * 0.75f;
+                ApplyDodgeMomentum(desiredDodgeVelocity, dodgeMaxSpeed * 0.75f);
 
             horizontalDodgeInput = 0;
             downwardDodgeInput = 0;
@@ -753,6 +771,22 @@ public class SpaceShooterController : MonoBehaviour
             horizontalDodgeInput = 0;
             verticalDodgeInput = 0;
         }
+    }
+
+    void ApplyDodgeMomentum(Vector3 direction, float speed)
+    {
+        float currentMag = dodgeMomentum.magnitude;
+
+        // Project existing momentum onto new direction
+        float aligned = Vector3.Dot(dodgeMomentum, direction); // how much is already going this way
+
+        // If we're moving against or perpendicular to new direction, redirect without losing much speed
+        // If already going same direction, stack up to cap
+        float newMag = Mathf.Max(aligned + speed * 0.5f, speed);
+        newMag = Mathf.Clamp(newMag, 0f, dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit); // hard cap
+
+        dodgeMomentum = direction * newMag;
+        velocity = dodgeMomentum; // initial frame
     }
 
     void HandleDodgeRecharge()

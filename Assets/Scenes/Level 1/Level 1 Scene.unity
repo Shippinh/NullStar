@@ -12618,18 +12618,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646371994}
   m_CullTransparentMesh: 1
---- !u!114 &653760249 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2408682915674673811, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-    type: 3}
-  m_PrefabInstance: {fileID: 5284074929448426815}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &657696596
 GameObject:
   m_ObjectHideFlags: 0
@@ -40947,41 +40935,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Object
       objectReference: {fileID: 0}
-    - target: {fileID: 980593685178658079, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: forwardLookCriteria
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2478522445378854452, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2917828405862756072, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: healthController
-      value: 
-      objectReference: {fileID: 653760249}
-    - target: {fileID: 2917828405862756072, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: boostDodgeMaxSpeed
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2917828405862756072, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: maxBoostAcceleration
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 2917828405862756072, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: maxBoostVerticalStrafeSpeed
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2917828405862756072, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: maxBoostHorizontalStrafeSpeed
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 4067537316343894829, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
         type: 3}
       propertyPath: tracerPool
@@ -40994,19 +40947,9 @@ PrefabInstance:
       objectReference: {fileID: 660332224}
     - target: {fileID: 4067537316343894829, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
         type: 3}
-      propertyPath: hitLayers.m_Bits
-      value: 277512
-      objectReference: {fileID: 0}
-    - target: {fileID: 4067537316343894829, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
       propertyPath: impactEffectPool
       value: 
       objectReference: {fileID: 660332224}
-    - target: {fileID: 4988508283564054945, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6621958274201599569, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -41056,16 +40999,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345669981496776060, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 393215
-      objectReference: {fileID: 0}
-    - target: {fileID: 7477805425586282077, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
-        type: 3}
-      propertyPath: MaxSpeed
-      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 7477805425586282077, guid: 9b1308f2fb0fbf946b37184b9fde2bdf,
         type: 3}
