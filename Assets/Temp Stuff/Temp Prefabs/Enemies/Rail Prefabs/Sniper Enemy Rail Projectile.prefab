@@ -275,6 +275,7 @@ MonoBehaviour:
   baseMaxRange: 0
   tiltSpeed: 45
   turretRef: {fileID: 8780728268576030519}
+  minShootingRange: 15
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -564,8 +565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 5
+  CurrentHP: 5
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0

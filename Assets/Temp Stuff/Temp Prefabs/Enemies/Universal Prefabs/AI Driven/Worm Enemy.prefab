@@ -1713,8 +1713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d47b163278a5764384188973064b473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avoidanceForce: 125
-  detectionRadius: 12.5
+  avoidanceForce: 62.5
+  detectionRadius: 50
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
@@ -1746,6 +1746,10 @@ MonoBehaviour:
   pivotDistance: 50
   pivotForwardPush: 6.25
   pivotHeightOffset: 6.25
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  wallLookAheadDistance: 60
   reinitializeOnEnable: 1
 --- !u!54 &1620553845512054945
 Rigidbody:

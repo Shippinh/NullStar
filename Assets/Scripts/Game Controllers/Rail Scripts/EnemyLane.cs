@@ -559,12 +559,5 @@ public class EnemyLane : MonoBehaviour
         for (int s = 0; s < steps; s++) Gizmos.DrawLine(points[s], points[s + 1]);
         Gizmos.color = Color.white;
         Gizmos.DrawSphere(points[0], 0.5f);
-        if (drawEndLink)
-        {
-            Gizmos.color = new Color(color.r, color.g, color.b, 0.5f);
-            Gizmos.DrawLine(points[steps], linkTarget);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(points[steps], 0.35f);
-        }
     }
 }

@@ -50,6 +50,10 @@ public class WormEnemy : EnemyAIComponent
     public float pivotForwardPush = 10f;   // worm goes past player
     public float pivotHeightOffset = 3f;   // lift pivot slightly above ground
 
+    [Header("Wall Avoidance")]
+    public LayerMask wallMask;
+    public float wallLookAheadDistance = 6f;
+
     [Header("Other")]
     public bool reinitializeOnEnable = true;
 
@@ -71,6 +75,7 @@ public class WormEnemy : EnemyAIComponent
         velocity = Vector3.zero;
         UpdateDirections();
         currentPivot = ChoosePivot();
+        nextPivotTime = Time.time + pivotChangeInterval * (UnityEngine.Random.value);
     }
 
     // Soft AI reinitialization
@@ -80,6 +85,7 @@ public class WormEnemy : EnemyAIComponent
         {
             velocity = Vector3.zero;
             desiredVelocity = Vector3.zero;
+            nextPivotTime = Time.time + pivotChangeInterval * (UnityEngine.Random.value);
         }
     }
 
@@ -137,11 +143,9 @@ public class WormEnemy : EnemyAIComponent
             nextPivotTime = Time.time + pivotChangeInterval;
         }
 
-        // Base target direction
         currentTarget = currentPivot != Vector3.zero ? currentPivot : player.transform.position;
         Vector3 toTarget = (currentTarget - transform.position).normalized;
 
-        // Oscillation
         oscillationTime += Time.fixedDeltaTime;
         Vector3 offset = Vector3.zero;
 
@@ -169,15 +173,36 @@ public class WormEnemy : EnemyAIComponent
                 break;
         }
 
-        // Primary movement direction
         Vector3 primaryDir = (toTarget + offset * oscillationStrengthFactor).normalized * maxSpeed;
-
-        // Avoidance as additive steering
         Vector3 avoidanceVector = CalculateObstacleAvoidance();
         Vector3 combined = primaryDir + avoidanceVector;
 
-        // Clamp final desired velocity
+        // Deflect away from walls before clamping
+        combined = DeflectFromWalls(combined);
+
         desiredVelocity = Vector3.ClampMagnitude(combined, maxSpeed);
+    }
+
+    // SphereCast along intended movement, slide velocity along wall normal if hit
+    Vector3 DeflectFromWalls(Vector3 intendedVelocity)
+    {
+        if (intendedVelocity.sqrMagnitude < 0.001f) return intendedVelocity;
+
+        Vector3 dir = intendedVelocity.normalized;
+        float speed = intendedVelocity.magnitude;
+        float castRadius = 0.5f; // should roughly match worm head collider radius
+
+        if (Physics.SphereCast(transform.position, castRadius, dir, out RaycastHit hit, wallLookAheadDistance, wallMask))
+        {
+            // Project intended velocity onto the wall plane — preserves speed, redirects direction
+            Vector3 deflected = Vector3.ProjectOnPlane(intendedVelocity, hit.normal);
+
+            // Blend toward full deflection as we get closer
+            float t = 1f - (hit.distance / wallLookAheadDistance);
+            return Vector3.Lerp(intendedVelocity, deflected, t);
+        }
+
+        return intendedVelocity;
     }
 
     Vector3 ChoosePivot()

@@ -782,7 +782,7 @@ public class SpaceShooterController : MonoBehaviour
 
         // If we're moving against or perpendicular to new direction, redirect without losing much speed
         // If already going same direction, stack up to cap
-        float newMag = Mathf.Max(aligned + speed * 0.5f, speed);
+        float newMag = Mathf.Max(aligned + speed * 0.75f, speed);
         newMag = Mathf.Clamp(newMag, 0f, dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit); // hard cap
 
         dodgeMomentum = direction * newMag;
@@ -850,9 +850,9 @@ public class SpaceShooterController : MonoBehaviour
             {
                 maxOverboostSpeed = defaultMaxOverboostSpeed;
                 if (lastExclusiveDirectionalInput.x != 0)
-                    body.velocity = cameraControllerRef.mainCameraRef.transform.right * lastExclusiveDirectionalInput.x * dodgeMaxSpeed;
+                    body.velocity = cameraControllerRef.mainCameraRef.transform.right * lastExclusiveDirectionalInput.x * (dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit * 0.35f);
                 else if (lastExclusiveDirectionalInput.z != 0)
-                    body.velocity = cameraControllerRef.mainCameraRef.transform.forward * lastExclusiveDirectionalInput.z * dodgeMaxSpeed;
+                    body.velocity = cameraControllerRef.mainCameraRef.transform.forward * lastExclusiveDirectionalInput.z * (dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit * 0.35f);
 
                 playerState = PlayerState.OverboostActive;
                 body.useGravity = true;

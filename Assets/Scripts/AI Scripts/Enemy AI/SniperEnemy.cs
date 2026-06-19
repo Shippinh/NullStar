@@ -26,6 +26,7 @@ public class SniperEnemy : EnemyAIComponent
 
     [Header("Turret Reference")]
     public TurretBehavior turretRef;
+    public float minShootingRange = 15f;
 
     [Header("Other")]
     public bool canAct = true;
@@ -52,7 +53,7 @@ public class SniperEnemy : EnemyAIComponent
 
         velocity = Vector3.zero;
 
-        turretRef.InitializeEnemyTurret(player, minRange, maxRange);
+        turretRef.InitializeEnemyTurret(player, minShootingRange, maxRange);
     }
 
 
@@ -71,7 +72,7 @@ public class SniperEnemy : EnemyAIComponent
             tiltAngle = 0f;
 
             // This will reinitialize the turret variables, might change some things because there are randomization options.
-            turretRef.InitializeEnemyTurret(player, minRange, maxRange);
+            turretRef.InitializeEnemyTurret(player, minShootingRange, maxRange);
 
             if (reinitializeCanAct)
                 canAct = true;

@@ -10797,7 +10797,13 @@ MonoBehaviour:
   radius: 2500
   forceStrength: 200
   attract: 1
+  forceMode: 0
+  affectedLayers:
+    serializedVersion: 2
+    m_Bits: 0
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  runUpdate: 1
+  playerForceMultiplier: 0.2
 --- !u!135 &363835672
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13140,7 +13146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &451543453
 Transform:
   m_ObjectHideFlags: 0
@@ -41954,6 +41960,8 @@ MonoBehaviour:
   coneMinAngle: 10
   coneMaxAngle: 45
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 12.5
   maxShootingRange: 100
   minShootingRangeIncrement: 0
@@ -48322,7 +48330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1490214298
 Transform:
   m_ObjectHideFlags: 0
@@ -56894,7 +56902,13 @@ MonoBehaviour:
   radius: 100
   forceStrength: 200
   attract: 1
+  forceMode: 0
+  affectedLayers:
+    serializedVersion: 2
+    m_Bits: 0
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  runUpdate: 1
+  playerForceMultiplier: 0.2
 --- !u!135 &1622916413
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -58436,6 +58450,11 @@ MonoBehaviour:
         targetUpwardPlaneSpeed: 10
         targetPlaneAcceleration: 35
         targetDodgeSpeed: 20
+        speedEasing: 0
+        sidewaysPlaneSpeedEasing: 0
+        upwardPlaneSpeedEasing: 0
+        planeAccelerationEasing: 0
+        dodgeSpeedEasing: 0
         transitionDuration: 0
     - rid: 1916255742863867904
       type: {class: DetachPlayerFromRail, ns: , asm: Assembly-CSharp}
