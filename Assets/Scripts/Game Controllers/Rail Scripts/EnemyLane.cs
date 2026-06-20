@@ -46,6 +46,9 @@ public class EnemyLane : MonoBehaviour
     public float repoolDelay = 0f;          // 0 = disabled
     private float _repoolCountdown = -1f;
 
+    [Header("Handoff")]
+    public float handoffBlendDuration = 0.4f;
+
     // ──────────────────────────────────────────────────────────────────────────
 
     [System.Serializable]
@@ -72,6 +75,11 @@ public class EnemyLane : MonoBehaviour
         [System.NonSerialized] public float localAnchorT;
         [System.NonSerialized] public float slotT;
         [System.NonSerialized] public bool passbyShootFired;
+
+        [System.NonSerialized] public bool isBlending;
+        [System.NonSerialized] public float blendT;
+        [System.NonSerialized] public Vector3 blendFromPos;
+        [System.NonSerialized] public Quaternion blendFromRot;
 
         public bool IsOnPath => entryPlayer != null && !entryPlayer.IsDone;
         public bool IsPassby => pathMode == SlotPathMode.Passby;
@@ -203,17 +211,22 @@ public class EnemyLane : MonoBehaviour
             }
             else
             {
-                // Hand off to lane
+                // Find where on the main spline the entry path actually ended
+                float bestT = FindClosestSplineT(pos);
+                slot.localAnchorT = Mathf.Repeat(bestT + i * tSpacing, 1f);
+                slot.slotT = bestT;
+
+                slot.enemy.SyncSplineT(slot.slotT);
                 slot.entryPlayer = null;
                 slot.handedOff = true;
                 slot.cursor?.Reset();
-                slot.localAnchorT = slots[0].localAnchorT;
-                slot.slotT = Mathf.Repeat(slot.localAnchorT - i * (enemySpacing / _splineLength), 1f);
-                slot.enemy.SyncSplineT(slot.slotT);
 
-                EvaluateSplineAt(slot.slotT, slot.cursor, out Vector3 ap, out Vector3 r, out Vector3 u, out Vector3 f);
-                Vector3 handoffPos = ap + r * slot.enemy.LaneRight + u * slot.enemy.LaneUp;
-                slot.enemy.SetFormationTarget(handoffPos, ComputeRotation(handoffPos, f, u), this);
+                // Blend from actual last path position, not a computed spline pos
+                slot.blendFromPos = pos;
+                slot.blendFromRot = rot;
+                slot.blendT = 0f;
+                slot.isBlending = true;
+
                 slot.enemy.TickPhysics(dt);
             }
             return;
@@ -239,8 +252,34 @@ public class EnemyLane : MonoBehaviour
         slot.enemy.SyncSplineT(slot.slotT);
 
         EvaluateSplineAt(slot.slotT, slot.cursor, out Vector3 pos, out Vector3 right, out Vector3 up, out Vector3 fwd);
-        Vector3 slotPos = pos + right * slot.enemy.LaneRight + up * slot.enemy.LaneUp;
-        slot.enemy.SetFormationTarget(slotPos, ComputeRotation(slotPos, fwd, up), this);
+        Vector3 lanePos = pos + right * slot.enemy.LaneRight + up * slot.enemy.LaneUp;
+        Quaternion laneRot = ComputeRotation(lanePos, fwd, up);
+
+        if (slot.isBlending && handoffBlendDuration > 0f)
+        {
+            slot.blendT += dt / handoffBlendDuration;
+            if (slot.blendT >= 1f)
+            {
+                slot.blendT = 1f;
+                slot.isBlending = false;
+            }
+
+            float ease = slot.blendT * slot.blendT * (3f - 2f * slot.blendT);
+            Vector3 blendedPos = Vector3.Lerp(slot.blendFromPos, lanePos, ease);
+            Quaternion blendedRot = Quaternion.Slerp(slot.blendFromRot, laneRot, ease);
+
+            // Advance the ghost source position at lane speed so it doesn't
+            // freeze in place while the lane target keeps moving away
+            EvaluateSplineAt(slot.slotT, slot.cursor, out _, out Vector3 ghostRight, out Vector3 ghostUp, out Vector3 ghostFwd);
+            slot.blendFromPos += ghostFwd * (speed * dt);
+
+            slot.enemy.SetFormationTarget(blendedPos, blendedRot, this);
+        }
+        else
+        {
+            slot.enemy.SetFormationTarget(lanePos, laneRot, this);
+        }
+
         slot.enemy.TickPhysics(dt);
     }
 
@@ -507,6 +546,38 @@ public class EnemyLane : MonoBehaviour
         if (slot.enemyController == null) return;
         foreach (var turret in slot.enemyController.GetComponentsInChildren<TurretBehavior>())
             turret.SyncState(shootingEnabled);
+    }
+
+    private float FindClosestSplineT(Vector3 worldPos, int steps = 64)
+    {
+        float bestT = 0f;
+        float bestDist = float.MaxValue;
+
+        for (int s = 0; s <= steps; s++)
+        {
+            float t = s / (float)steps;
+            EvaluateSplineAt(t, null, out Vector3 p, out _, out _, out _);
+            float d = (p - worldPos).sqrMagnitude;
+            if (d < bestDist) { bestDist = d; bestT = t; }
+        }
+
+        // Refine with a narrow bisection around bestT
+        float lo = Mathf.Max(0f, bestT - 1f / steps);
+        float hi = Mathf.Min(1f, bestT + 1f / steps);
+        for (int s = 0; s <= 16; s++)
+        {
+            float mid = (lo + hi) * 0.5f;
+            EvaluateSplineAt(mid, null, out Vector3 pMid, out _, out _, out _);
+            float tLeft = (lo + mid) * 0.5f;
+            EvaluateSplineAt(tLeft, null, out Vector3 pLeft, out _, out _, out _);
+
+            if ((pLeft - worldPos).sqrMagnitude < (pMid - worldPos).sqrMagnitude)
+                hi = mid;
+            else
+                lo = tLeft;
+        }
+
+        return (lo + hi) * 0.5f;
     }
 
     // ── Gizmos ────────────────────────────────────────────────────────────────
