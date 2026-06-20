@@ -2595,14 +2595,8 @@ MonoBehaviour:
   - rid: 5663855311788179460
   - rid: 5663855311788179461
   - rid: 5663855311788179462
-  - rid: 5663855311788179464
-  - rid: 5663855311788179465
-  - rid: 5663855311788179466
-  - rid: 5663855311788179467
-  - rid: 5663855311788179468
-  - rid: 5663855311788179469
-  - rid: 5663855311788179470
-  - rid: 5663855311788179471
+  - rid: 5663855336208728064
+  - rid: 5663855336208728066
   rangeEvents: []
   references:
     version: 2
@@ -2840,102 +2834,6 @@ MonoBehaviour:
         overrideShootT: -1
         shootActivation: 2
         shootType: 0
-    - rid: 5663855311788179464
-      type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.2475
-        enabled: 1
-        repeatable: 0
-        layerIndex: 11
-        targetLane: {fileID: 582010517}
-        enableOverride: 0
-        overrideShootT: -1
-        shootActivation: 2
-        shootType: 0
-    - rid: 5663855311788179465
-      type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.2475
-        enabled: 1
-        repeatable: 0
-        layerIndex: 11
-        targetLane: {fileID: 1507836291}
-        enableOverride: 0
-        overrideShootT: -1
-        shootActivation: 2
-        shootType: 0
-    - rid: 5663855311788179466
-      type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.2475
-        enabled: 1
-        repeatable: 0
-        layerIndex: 11
-        targetLane: {fileID: 2110091358}
-        enableOverride: 0
-        overrideShootT: -1
-        shootActivation: 2
-        shootType: 0
-    - rid: 5663855311788179467
-      type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.2475
-        enabled: 1
-        repeatable: 0
-        layerIndex: 11
-        targetLane: {fileID: 196503265}
-        enableOverride: 0
-        overrideShootT: -1
-        shootActivation: 2
-        shootType: 0
-    - rid: 5663855311788179468
-      type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.2475
-        enabled: 1
-        repeatable: 0
-        layerIndex: 11
-        targetLane: {fileID: 1040629382}
-        enableOverride: 0
-        overrideShootT: -1
-        shootActivation: 2
-        shootType: 0
-    - rid: 5663855311788179469
-      type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.2475
-        enabled: 1
-        repeatable: 0
-        layerIndex: 11
-        targetLane: {fileID: 1006325842}
-        enableOverride: 0
-        overrideShootT: -1
-        shootActivation: 2
-        shootType: 0
-    - rid: 5663855311788179470
-      type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.2475
-        enabled: 1
-        repeatable: 0
-        layerIndex: 11
-        targetLane: {fileID: 1529987092}
-        enableOverride: 0
-        overrideShootT: -1
-        shootActivation: 2
-        shootType: 0
-    - rid: 5663855311788179471
-      type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
-      data:
-        t: 0.2475
-        enabled: 1
-        repeatable: 0
-        layerIndex: 11
-        targetLane: {fileID: 1340176418}
-        enableOverride: 0
-        overrideShootT: -1
-        shootActivation: 2
-        shootType: 0
     - rid: 5663855311788179472
       type: {class: TriggerCameraShake, ns: , asm: Assembly-CSharp}
       data:
@@ -2945,6 +2843,32 @@ MonoBehaviour:
         layerIndex: 10
         magnitude: 0.05
         duration: 0.1
+    - rid: 5663855336208728064
+      type: {class: ActivateGroupEvent, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0
+        enabled: 1
+        repeatable: 0
+        layerIndex: 0
+        groupRoot: {fileID: 0}
+        filter: 0
+        enablePassbyOverride: 0
+        overrideShootT: 0.5
+        overrideShootActivation: 2
+        overrideShootType: 0
+    - rid: 5663855336208728066
+      type: {class: ActivateGroupEvent, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0.2475
+        enabled: 1
+        repeatable: 0
+        layerIndex: 11
+        groupRoot: {fileID: 1378269005}
+        filter: 0
+        enablePassbyOverride: 0
+        overrideShootT: 0.5
+        overrideShootActivation: 2
+        overrideShootType: 0
     - rid: 6254652222469832704
       type: {class: ActivateLaneEvent, ns: , asm: Assembly-CSharp}
       data:
@@ -5337,7 +5261,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1781453339}
-  m_Father: {fileID: 1221742818}
+  m_Father: {fileID: 1378269005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &196503265
 MonoBehaviour:
@@ -5396,6 +5320,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &205630084
 GameObject:
@@ -5813,6 +5738,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 1
   repoolDelay: 130
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &222686060
 GameObject:
@@ -12183,7 +12109,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 36142448}
-  m_Father: {fileID: 1221742818}
+  m_Father: {fileID: 1378269005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &582010517
 MonoBehaviour:
@@ -12242,6 +12168,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &588698579
 GameObject:
@@ -13934,6 +13861,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!4 &681652787
 Transform:
@@ -17558,6 +17486,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 1
   repoolDelay: 30
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &817483889
 GameObject:
@@ -21327,7 +21256,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1107484618}
-  m_Father: {fileID: 1221742818}
+  m_Father: {fileID: 1378269005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1006325842
 MonoBehaviour:
@@ -21386,6 +21315,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1009703894
 GameObject:
@@ -21963,7 +21893,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1801638571}
-  m_Father: {fileID: 1221742818}
+  m_Father: {fileID: 1378269005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1040629382
 MonoBehaviour:
@@ -22022,6 +21952,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1041478478
 GameObject:
@@ -22636,6 +22567,7 @@ MonoBehaviour:
     travelFrequency: 1
     pathMode: 1
   repoolDelay: 30
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1058079209
 GameObject:
@@ -23536,6 +23468,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1090751196
 GameObject:
@@ -25874,14 +25807,7 @@ Transform:
   - {fileID: 1299646721}
   - {fileID: 1571984745}
   - {fileID: 681652787}
-  - {fileID: 582010516}
-  - {fileID: 1507836290}
-  - {fileID: 2110091357}
-  - {fileID: 196503264}
-  - {fileID: 1040629381}
-  - {fileID: 1006325841}
-  - {fileID: 1529987091}
-  - {fileID: 1340176419}
+  - {fileID: 1378269005}
   m_Father: {fileID: 319805968}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1230644139
@@ -26949,6 +26875,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!4 &1299646721
 Transform:
@@ -27770,6 +27697,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!4 &1340176419
 Transform:
@@ -27785,7 +27713,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 775612240}
-  m_Father: {fileID: 1221742818}
+  m_Father: {fileID: 1378269005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1354655208
 GameObject:
@@ -28172,6 +28100,45 @@ Transform:
   - {fileID: 1854985304}
   m_Father: {fileID: 1771450851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1378269004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1378269005}
+  m_Layer: 0
+  m_Name: Group Pass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1378269005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378269004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 582010516}
+  - {fileID: 1507836290}
+  - {fileID: 2110091357}
+  - {fileID: 196503264}
+  - {fileID: 1040629381}
+  - {fileID: 1006325841}
+  - {fileID: 1529987091}
+  - {fileID: 1340176419}
+  m_Father: {fileID: 1221742818}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1378426307
 GameObject:
   m_ObjectHideFlags: 0
@@ -28402,6 +28369,7 @@ MonoBehaviour:
     travelFrequency: 1
     pathMode: 1
   repoolDelay: 30
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1392692551
 GameObject:
@@ -30068,6 +30036,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 1
   repoolDelay: 30
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1490710352
 GameObject:
@@ -30565,6 +30534,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 1
   repoolDelay: 30
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1496251372
 GameObject:
@@ -30885,7 +30855,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1642578941}
-  m_Father: {fileID: 1221742818}
+  m_Father: {fileID: 1378269005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1507836291
 MonoBehaviour:
@@ -30944,6 +30914,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1518182978
 GameObject:
@@ -31327,7 +31298,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 686752970}
-  m_Father: {fileID: 1221742818}
+  m_Father: {fileID: 1378269005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1529987092
 MonoBehaviour:
@@ -31386,6 +31357,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &1536410863
 GameObject:
@@ -32172,6 +32144,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!4 &1571984745
 Transform:
@@ -40175,6 +40148,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 1
   repoolDelay: 130
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!4 &1964749377
 Transform:
@@ -42401,7 +42375,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1983648386}
-  m_Father: {fileID: 1221742818}
+  m_Father: {fileID: 1378269005}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2110091358
 MonoBehaviour:
@@ -42460,6 +42434,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &2116450185
 GameObject:
@@ -43140,6 +43115,7 @@ MonoBehaviour:
     travelFrequency: 2
     pathMode: 2
   repoolDelay: 0
+  handoffBlendDuration: 0.4
   anchorT: 0
 --- !u!1 &2126761340
 GameObject:

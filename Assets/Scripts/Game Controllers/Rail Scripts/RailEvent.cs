@@ -282,6 +282,79 @@ public class ActivateLaneEvent : RailEvent
 }
 
 [System.Serializable]
+public class ActivateGroupEvent : RailEvent
+{
+    [Tooltip("Parent whose immediate children are searched for EnemyLane components.")]
+    public Transform groupRoot;
+
+    [Tooltip("Which lanes to activate. 'All' activates every lane found regardless of type.")]
+    public GroupActivationFilter filter = GroupActivationFilter.All;
+
+    // ── Passby overrides (only applied to passby lanes when filter allows them) ──
+
+    [Header("Passby Overrides")]
+    [Tooltip("When true, the fields below override each passby lane's shoot settings.")]
+    public bool enablePassbyOverride = false;
+
+    [Range(0f, 1f)]
+    public float overrideShootT = 0.5f;
+
+    public PassbyShootingActivation overrideShootActivation = PassbyShootingActivation.OnMiddle;
+    public PassbyShootingType overrideShootType = PassbyShootingType.SingleShot;
+
+    // ── RailEvent ──────────────────────────────────────────────────────────────
+
+    public override void Execute(PlayerRailController ctx)
+    {
+        if (groupRoot == null) return;
+
+        foreach (Transform child in groupRoot)
+        {
+            var lane = child.GetComponent<EnemyLane>();
+            if (lane == null) continue;
+
+            bool isPassby = lane.passbySpline != null;
+
+            bool shouldActivate = filter switch
+            {
+                GroupActivationFilter.All => true,
+                GroupActivationFilter.EntryOnly => !isPassby,
+                GroupActivationFilter.PassbyOnly => isPassby,
+                _ => true,
+            };
+
+            if (!shouldActivate) continue;
+
+            if (isPassby && enablePassbyOverride)
+            {
+                lane.passbyShootT = overrideShootT;
+                lane.passbyShootActivation = overrideShootActivation;
+                lane.passbyShootType = overrideShootType;
+            }
+
+            lane.Activate();
+        }
+    }
+
+    public override string EditorLabel
+    {
+        get
+        {
+            string root = groupRoot != null ? groupRoot.name : "—";
+            string filterStr = filter switch
+            {
+                GroupActivationFilter.EntryOnly => " [Only Lane]",
+                GroupActivationFilter.PassbyOnly => " [Only Passby]",
+                _ => "",
+            };
+            return $"Activate Group  [{root}]{filterStr}";
+        }
+    }
+
+    public override Color EditorColor => new Color(1f, 0.85f, 0.2f); // amber
+}
+
+[System.Serializable]
 public class TriggerCameraShake : RailEvent
 {
     [Header("Shake Parameters")]

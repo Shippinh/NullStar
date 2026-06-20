@@ -750,6 +750,7 @@ public class RailEventTimelineWindow : EditorWindow
         typeof(ActivateLaneEvent),
         typeof(ScriptedFormationShotEvent),
         typeof(TriggerCameraShake),
+        typeof(ActivateGroupEvent),
     };
 
     private static readonly Type[] RangeEventTypes =

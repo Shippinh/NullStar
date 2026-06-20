@@ -71,3 +71,13 @@ public enum PassbySplineMode
     /// </summary>
     PlayerRelative,
 }
+
+public enum GroupActivationFilter
+{
+    /// <summary>Activates every EnemyLane found on the children.</summary>
+    All,
+    /// <summary>Only activates lanes that use an entry spline (no passby spline set).</summary>
+    EntryOnly,
+    /// <summary>Only activates lanes that have a passby spline set.</summary>
+    PassbyOnly,
+}
