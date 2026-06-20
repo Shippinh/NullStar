@@ -586,10 +586,16 @@ public class SpaceShooterController : MonoBehaviour
         // Horizontal dodge — normal and overboost
         if (horizontalDodgeInput > 0 && !isDodging && dodgeCharges > 0 && playerState != PlayerState.BoostActive && !BoostTransitioning)
         {
-            if (rightInput + leftInput == 0 && lastExclusiveDirectionalInput.z != 0 && playerState == PlayerState.OverboostActive)
-                return;
-            if (forwardInput + backwardInput == 0 && lastExclusiveDirectionalInput.x != 0 && playerState == PlayerState.OverboostActive)
-                return;
+            if(playerState == PlayerState.OverboostActive)
+            {
+                bool isExactOpposite =
+                    (lastExclusiveDirectionalInput.x > 0 && rightInput + leftInput < 0 && forwardInput + backwardInput == 0) ||
+                    (lastExclusiveDirectionalInput.x < 0 && rightInput + leftInput > 0 && forwardInput + backwardInput == 0) ||
+                    (lastExclusiveDirectionalInput.z > 0 && forwardInput + backwardInput < 0 && rightInput + leftInput == 0) ||
+                    (lastExclusiveDirectionalInput.z < 0 && forwardInput + backwardInput > 0 && rightInput + leftInput == 0);
+
+                if (isExactOpposite) return;
+            }
 
             isDodging = true;
             timeSinceLastDodge = 0f;
@@ -849,10 +855,21 @@ public class SpaceShooterController : MonoBehaviour
             if (overboostChargeTimer >= overboostActivationDelay)
             {
                 maxOverboostSpeed = defaultMaxOverboostSpeed;
+
+                Vector3 launchDir = Vector3.zero;
                 if (lastExclusiveDirectionalInput.x != 0)
-                    body.velocity = cameraControllerRef.mainCameraRef.transform.right * lastExclusiveDirectionalInput.x * (dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit * 0.35f);
+                    launchDir = cameraControllerRef.mainCameraRef.transform.right * lastExclusiveDirectionalInput.x;
                 else if (lastExclusiveDirectionalInput.z != 0)
-                    body.velocity = cameraControllerRef.mainCameraRef.transform.forward * lastExclusiveDirectionalInput.z * (dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit * 0.35f);
+                    launchDir = cameraControllerRef.mainCameraRef.transform.forward * lastExclusiveDirectionalInput.z;
+
+                if (launchDir != Vector3.zero)
+                {
+                    launchDir.Normalize();
+                    float aligned = Vector3.Dot(body.velocity, launchDir);
+                    float launchSpeed = Mathf.Max(aligned + dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit * 0.35f, dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit * 0.35f);
+                    body.velocity = launchDir * launchSpeed;
+                }
+                // No exclusive input: velocity preserved as-is
 
                 playerState = PlayerState.OverboostActive;
                 body.useGravity = true;
