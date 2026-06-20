@@ -156,7 +156,10 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
             rb.MoveRotation(Quaternion.LookRotation(fwd*-1, up));
     }
 
-    protected virtual void OnTriggerEnter(Collider other) => HandleHit(other);
+    // These determine which logic we use for hit detection
+    public virtual void OnTriggerEnter(Collider other) => HandleHit(other);
+
+    public virtual void OnCollisionEnter(Collision other) { }
 
     protected void Impact()
     {
@@ -174,7 +177,9 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
     protected void HandleHit(Collider other)
     {
         if (((1 << other.gameObject.layer) & hitLayers) == 0) return;
-        other.GetComponent<EntityHealthController>()?.TakeDamage(damage, true);
+        //other.GetComponent<EntityHealthController>()?.TakeDamage(damage, true);
+        Debug.Log("Projectile hit on ["+ other.gameObject.name +"]");
+        
         Impact();
     }
 }

@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: -1463059722455509944}
   m_Layer: 7
   m_Name: Player Rail Space Relative Projectile
-  m_TagString: Untagged
+  m_TagString: Player 1 HP Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4947,10 +4947,10 @@ MonoBehaviour:
   _playerRightOffset: 0
   _playerUpOffset: 0
   _rayProgress: 0
-  _trackingRail: {fileID: 0}
-  _splineT: 0
-  _localRight: 0
-  _localUp: 0
+  _laneRail: {fileID: 0}
+  _laneSplineT: 0
+  _laneRight: 0
+  _laneUp: 0
 --- !u!135 &3328904270321274369
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4966,7 +4966,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 31679
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

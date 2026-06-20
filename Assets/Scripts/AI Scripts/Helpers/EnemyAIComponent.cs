@@ -44,46 +44,4 @@ public class EnemyAIComponent : MonoBehaviour
     {
         return rb;
     }
-
-    public void InitializeOnRail()
-    {
-
-    }
-
-    public void InitializeNormally()
-    {
-
-    }
-
-    /*public virtual void InitiateBoostModeAttach()
-    {
-        if (BoostTransitioning || enemyState == EnemyAIState.BoostActive) return;
-    }
-
-    public virtual void InitiateBoostModeDetach(float duration)
-    {
-        if (enemyState != EnemyAIState.BoostActive) return;
-    }
-
-    public virtual void HandleBoostModeTransition()
-    {
-        if (enemyState == EnemyAIState.BoostAttaching)
-            HandleBoostAttach();
-        else if (enemyState == EnemyAIState.BoostDetaching)
-            HandleBoostDetach();
-    }
-
-    public virtual void HandleBoostAttach()
-    {
-
-    }
-
-    public virtual void HandleBoostDetach()
-    {
-
-    }
-
-    public bool BoostTransitioning => enemyState == EnemyAIState.BoostAttaching
-                                || enemyState == EnemyAIState.BoostDetaching;
-    */
 }

@@ -275,6 +275,7 @@ MonoBehaviour:
   baseMaxRange: 0
   tiltSpeed: 45
   turretRef: {fileID: 8780728268576030519}
+  minShootingRange: 15
   canAct: 1
   actSlowdownDuration: 1
   canMove: 1
@@ -351,7 +352,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4654918671434767847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74fcd320a401b694fbeafd098a79084f, type: 3}
   m_Name: 

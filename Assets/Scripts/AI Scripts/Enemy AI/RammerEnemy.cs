@@ -194,7 +194,7 @@ public class RammerEnemy : EnemyAIComponent
     }
 
     // On actual physical collision
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         //Debug.Log(collision.gameObject.name);
 
@@ -211,7 +211,7 @@ public class RammerEnemy : EnemyAIComponent
             hpController.InstantlyDie();
             GetComponent<EnemyController>().entityHealthControllerRef.InstantlyDie(); // kill this enemy as well
         }
-    }
+    }*/
 
     void OnDrawGizmosSelected()
     {

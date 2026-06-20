@@ -127,7 +127,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4300115145832643847}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3cd7dee926262e347aff9b358872157d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4300115145832643847}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74fcd320a401b694fbeafd098a79084f, type: 3}
   m_Name: 
@@ -164,8 +164,7 @@ MonoBehaviour:
   splineLength: 0
   playerRailControllerRef: {fileID: 0}
   body: {fileID: 0}
-  rightOffset: 0
-  upOffset: 0
+  _debugLog: 0
 --- !u!1 &6484262195363316023
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +180,7 @@ GameObject:
   - component: {fileID: 6662441613116310777}
   m_Layer: 11
   m_Name: Mesh and Hitbox
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

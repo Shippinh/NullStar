@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f151c6bdd4f9644f820c7f14df9ce59, type: 3}
+  m_Name: Contact Damage Table
+  m_EditorClassIdentifier: 
+  entries:
+  - tag: Player Instakill
+    damage: 0
+    instantKill: 1
+  - tag: Player 1 HP Damage
+    damage: 1
+    instantKill: 0
+  - tag: Player 2 HP Damage
+    damage: 2
+    instantKill: 0

@@ -2960,7 +2960,7 @@ GameObject:
   - component: {fileID: 1699588521646893757}
   m_Layer: 12
   m_Name: Core Hitbox
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4314,6 +4314,12 @@ MonoBehaviour:
     m_Bits: 3072
   rb: {fileID: 0}
   avoidanceTrigger: {fileID: 0}
+  nearbyObstacles: []
+  velocity: {x: 0, y: 0, z: 0}
+  desiredVelocity: {x: 0, y: 0, z: 0}
+  contactNormal: {x: 0, y: 1, z: 0}
+  tiltAngle: 0
+  enemyState: 0
   player: {fileID: 0}
   maxSpeed: 25
   maxAcceleration: 10
@@ -4327,11 +4333,6 @@ MonoBehaviour:
   baseMinRange: 0
   baseMaxRange: 0
   tiltSpeed: 60
-  avoidanceForce: 125
-  detectionRadius: 16.25
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 3072
   turretRef: {fileID: 4019466211405734105}
   canAct: 1
   actSlowdownDuration: 2
@@ -4340,12 +4341,6 @@ MonoBehaviour:
   reinitializeCanAct: 1
   reinitializeCanMove: 1
   gunsDead: 0
-  rb: {fileID: 0}
-  nearbyObstacles: []
-  velocity: {x: 0, y: 0, z: 0}
-  desiredVelocity: {x: 0, y: 0, z: 0}
-  contactNormal: {x: 0, y: 1, z: 0}
-  tiltAngle: 0
   projectileEmittersControllerRef: {fileID: 7723051723367529157}
   shieldTiltPivot: {fileID: 6127139530685551880}
   shieldRing: {fileID: 2854808593370126626}
@@ -4456,6 +4451,8 @@ MonoBehaviour:
   coneMinAngle: 10
   coneMaxAngle: 45
   coneBlendStrength: 1
+  cardinalDir: {x: 0, y: 1, z: 0}
+  cardinalBasis: 1
   minShootingRange: 0
   maxShootingRange: 0
   minShootingRangeIncrement: 0

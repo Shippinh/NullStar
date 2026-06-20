@@ -688,6 +688,7 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
+  enemyState: 0
   player: {fileID: 0}
   pivot: {fileID: 6242473208403724724}
   childPivot: {fileID: 2878056350095977100}
@@ -716,6 +717,8 @@ MonoBehaviour:
   alignTimer: 0
   leftRightAlignTimer: 0
   attackTimer: 0
+  attackCooldownDuration: 5
+  attackCooldownTimer: 0
   isAttacking: 0
   randomizeABLeftRightPos: 1
   currentCollisionsBeforePrematureStop: 0

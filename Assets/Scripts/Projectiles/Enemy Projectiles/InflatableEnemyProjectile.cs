@@ -136,7 +136,12 @@ public class InflatableEnemyProjectile : SimpleEnemyProjectile
         state = SequencedProjectileState.Idle;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public override void OnTriggerEnter(Collider other)
+    {
+        //base.OnTriggerEnter(other);
+    }
+
+    public override void OnCollisionEnter(Collision collision)
     {
         HandleHit(collision.gameObject.GetComponent<Collider>());
     }

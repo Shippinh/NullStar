@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: -1463059722455509944}
   m_Layer: 7
   m_Name: Enemy Fast Projectile
-  m_TagString: Untagged
+  m_TagString: Player 1 HP Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4932,10 +4932,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   maxLifetime: 10
+  movementMode: 0
   damage: 1
   hitLayers:
     serializedVersion: 2
     m_Bits: 1088
+  rb: {fileID: 0}
+  col: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  impactHappened: 0
+  _turretRail: {fileID: 0}
+  _turretLocalOffset: {x: 0, y: 0, z: 0}
+  _playerRail: {fileID: 0}
+  _playerRightOffset: 0
+  _playerUpOffset: 0
+  _rayProgress: 0
+  _laneRail: {fileID: 0}
+  _laneSplineT: 0
+  _laneRight: 0
+  _laneUp: 0
 --- !u!135 &3328904270321274369
 SphereCollider:
   m_ObjectHideFlags: 0

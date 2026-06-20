@@ -62,5 +62,9 @@ public class ScriptedInflatableProjectile : InflatableEnemyProjectile
     }
 
     // Swallow collisions during flight
-    protected override void OnTriggerEnter(Collider other) { }
+    public override void OnTriggerEnter(Collider other) => HandleHit(other);
+    public override void OnCollisionEnter(Collision collision)
+    {
+        //HandleHit(collision.gameObject.GetComponent<Collider>());
+    }
 }

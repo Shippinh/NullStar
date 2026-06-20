@@ -223,7 +223,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
             velocity = Vector3.zero;
             desiredVelocity = Vector3.zero;
 
-            Debug.Log("Starting pre-attack burst!");
+            //Debug.Log("Starting pre-attack burst!");
         }
     }
 
@@ -247,7 +247,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
 
             rb.velocity = Vector3.zero;  // ← kill burst velocity cleanly
 
-            Debug.Log("Final burst complete, starting alignment phase!");
+            //Debug.Log("Final burst complete, starting alignment phase!");
         }
     }
 
@@ -267,7 +267,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
         if (!isAttacking && !burstingToPivot && !aligningToPivot && !aligningToAnchors && !enemiesAligned)
             return; // nothing to stop
 
-        Debug.Log("Attack forcibly stopped!");
+        //Debug.Log("Attack forcibly stopped!");
 
         // reset all attack-related states
         isAttacking = false;
@@ -322,7 +322,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
             // Done aligning
             if (alignTimer >= currentPreset.alignTime)
             {
-                Debug.Log("Done aligning");
+                //Debug.Log("Done aligning");
                 aligningToPivot = false;
                 aligningToAnchors = true;
                 leftRightAlignTimer = 0f;
@@ -376,7 +376,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
                 isAttacking = false;
                 enemiesAligned = false;
                 barrierObj.SetActive(false);
-                Debug.Log("Finishing the attack prematurely!");
+                //Debug.Log("Finishing the attack prematurely!");
             }
 
             attackTimer += Time.deltaTime;
@@ -412,7 +412,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
                 enemiesAligned = false;
                 barrierObj.SetActive(false);
                 attackCooldownTimer = 0f;
-                Debug.Log("Attack finished!");
+                //Debug.Log("Attack finished!");
             }
         }
     }
@@ -680,7 +680,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
     }
 
     // we'll use this later when i decide to add destructible cover / asteroids, etc. We'll limit the hit count and reset after each attack or end the attack prematurely if we the enemy destroys too much
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         // This will need some rework 
         //Debug.Log(collision.gameObject.name);
@@ -697,7 +697,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
             currentCollisionsBeforePrematureStop++;
             hpController.InstantlyDie();
         }
-    }
+    }*/
 
     Vector3 ChoosePivot()
     {

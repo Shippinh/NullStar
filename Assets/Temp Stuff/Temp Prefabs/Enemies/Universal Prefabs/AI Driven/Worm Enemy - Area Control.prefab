@@ -1667,7 +1667,7 @@ GameObject:
   - component: {fileID: 7604667182393370935}
   m_Layer: 3
   m_Name: Segment 2 Logic
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3111,7 +3111,7 @@ GameObject:
   - component: {fileID: 4086385787981638243}
   m_Layer: 3
   m_Name: Segment 4 Logic
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3309,7 +3309,7 @@ GameObject:
   - component: {fileID: 4941720676974568079}
   m_Layer: 3
   m_Name: Segment 3 Logic
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4813,7 +4813,7 @@ GameObject:
   - component: {fileID: 5785497429242900611}
   m_Layer: 3
   m_Name: Tail Logic
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5190,7 +5190,7 @@ GameObject:
   - component: {fileID: 7209252712334559607}
   m_Layer: 3
   m_Name: Segment 5 Logic
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5936,7 +5936,7 @@ GameObject:
   - component: {fileID: 720521080027874508}
   m_Layer: 3
   m_Name: Head Logic
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6018,7 +6018,7 @@ GameObject:
   - component: {fileID: 5004217010954404300}
   m_Layer: 3
   m_Name: Segment 1 Logic
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

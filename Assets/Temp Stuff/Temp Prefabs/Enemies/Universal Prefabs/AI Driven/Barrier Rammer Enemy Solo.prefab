@@ -223,6 +223,7 @@ MonoBehaviour:
   desiredVelocity: {x: 0, y: 0, z: 0}
   contactNormal: {x: 0, y: 1, z: 0}
   tiltAngle: 0
+  enemyState: 0
   player: {fileID: 0}
   pivot: {fileID: 3247158430386523086}
   childPivot: {fileID: 0}
@@ -247,6 +248,8 @@ MonoBehaviour:
   alignTimer: 0
   leftRightAlignTimer: 0
   attackTimer: 0
+  attackCooldownDuration: 5
+  attackCooldownTimer: 0
   isAttacking: 0
   randomizeABLeftRightPos: 0
   currentCollisionsBeforePrematureStop: 0
@@ -660,7 +663,7 @@ GameObject:
   - component: {fileID: 5270294878699746072}
   m_Layer: 12
   m_Name: A Mesh
-  m_TagString: Untagged
+  m_TagString: Player Instakill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
