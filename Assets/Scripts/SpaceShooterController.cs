@@ -502,16 +502,20 @@ public class SpaceShooterController : MonoBehaviour
     void AdjustVelocity()
     {
         float acceleration = OnGround ? maxAcceleration : maxAirAcceleration;
-        float currentY = velocity.y;
 
-        Vector3 flatVelocity = new Vector3(velocity.x, 0f, velocity.z);
-        Vector3 flatDesired = new Vector3(desiredVelocity.x, 0f, desiredVelocity.z);
+        Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
+        Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
 
-        flatVelocity = Vector3.MoveTowards(flatVelocity, flatDesired, acceleration * Time.fixedDeltaTime);
+        float currentX = Vector3.Dot(velocity, xAxis);
+        float currentZ = Vector3.Dot(velocity, zAxis);
 
-        velocity.x = flatVelocity.x;
-        velocity.z = flatVelocity.z;
-        velocity.y = currentY;
+        Vector2 current = new Vector2(currentX, currentZ);
+        Vector2 desired = new Vector2(desiredVelocity.x, desiredVelocity.z);
+
+        Vector2 corrected = Vector2.MoveTowards(current, desired, acceleration * Time.fixedDeltaTime);
+
+        velocity += xAxis * (corrected.x - currentX);
+        velocity += zAxis * (corrected.y - currentZ);
     }
 
     void DrainVelocityNoInput()
