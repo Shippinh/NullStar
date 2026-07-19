@@ -19,7 +19,7 @@ public class SpaceShooterHitDetector : MonoBehaviour
     {
         if (hitDetection == HitDetection.ColliderOnly || hitDetection == HitDetection.All)
         {
-            Debug.Log("Type = Collider");
+            //Debug.Log("Type = Collider");
             HandleHit(collision.collider);
         }
     }
@@ -28,7 +28,7 @@ public class SpaceShooterHitDetector : MonoBehaviour
     {
         if (hitDetection == HitDetection.TriggerOnly || hitDetection == HitDetection.All)
         {
-            Debug.Log("Type = Trigger");
+            //Debug.Log("Type = Trigger");
             HandleHit(other);
         }
     }

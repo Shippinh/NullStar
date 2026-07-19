@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 7077823806305008964}
   - component: {fileID: 5556106579418376609}
   - component: {fileID: 6645013776163822714}
+  - component: {fileID: 1475212565637354460}
   m_Layer: 11
   m_Name: Hitbox
   m_TagString: Untagged
@@ -355,6 +356,28 @@ MonoBehaviour:
   hasHealed: 0
   healingCooldown: 60
   currentHealingCooldown: 0
+--- !u!114 &1475212565637354460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4025599407691280107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &4737454640860362855
 GameObject:
   m_ObjectHideFlags: 0

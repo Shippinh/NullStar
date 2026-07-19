@@ -4,3 +4,8 @@
 Assets/Other/
 Assets/Separate Assets/
 !.gitignore
+
+!Library/
+!Library/PackageCache/
+!Library/PackageCache/com.unity.render-pipelines.universal@14.0.12/
+!Library/PackageCache/com.unity.render-pipelines.universal@14.0.12/*

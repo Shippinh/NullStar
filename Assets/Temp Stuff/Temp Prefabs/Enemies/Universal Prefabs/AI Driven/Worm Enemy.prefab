@@ -374,8 +374,9 @@ GameObject:
   - component: {fileID: 3092364384967981675}
   - component: {fileID: 3497985286094993639}
   - component: {fileID: 6874454009720445018}
+  - component: {fileID: 2864523971370620605}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -480,8 +481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -507,6 +508,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &2864523971370620605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944599404469851222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &1153306445724466342
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,8 +820,9 @@ GameObject:
   - component: {fileID: 664839521739591961}
   - component: {fileID: 6067602380980356983}
   - component: {fileID: 736641120090947189}
+  - component: {fileID: 4084330127263407531}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,8 +927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -932,6 +954,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &4084330127263407531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521821833032964763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &1549141010835932264
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,8 +988,9 @@ GameObject:
   - component: {fileID: 2097351013017964688}
   - component: {fileID: 6631960591575954846}
   - component: {fileID: 9139841370848283479}
+  - component: {fileID: 7211705233914320512}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1052,8 +1095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -1079,6 +1122,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &7211705233914320512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549141010835932264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &1695288401562521358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,8 +1595,9 @@ GameObject:
   - component: {fileID: 3272274888213725113}
   - component: {fileID: 5634318309414787159}
   - component: {fileID: 7966605970181893812}
+  - component: {fileID: 5231298122589303504}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1638,8 +1702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -1665,6 +1729,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &5231298122589303504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649225092649356271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &2678128455905674578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,8 +2245,9 @@ GameObject:
   - component: {fileID: 4974556795273363734}
   - component: {fileID: 1580069334469664905}
   - component: {fileID: 2729262710634443426}
+  - component: {fileID: 2760931448463204367}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2267,8 +2352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -2294,6 +2379,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &2760931448463204367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098422406844270470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &3178202279574599762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,8 +2477,9 @@ GameObject:
   - component: {fileID: 5396377611863127526}
   - component: {fileID: 6932362587332456586}
   - component: {fileID: 1466226653986133495}
+  - component: {fileID: 6964721932800785047}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2478,8 +2584,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -2505,6 +2611,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &6964721932800785047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387509478852947748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &3395853655503812467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,8 +2970,9 @@ GameObject:
   - component: {fileID: 3078869180358413263}
   - component: {fileID: 2865589494565730264}
   - component: {fileID: 1104945337880402168}
+  - component: {fileID: 2872563710333442772}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2950,8 +3077,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -2977,6 +3104,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &2872563710333442772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4428554062398902326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &4490173098053402073
 GameObject:
   m_ObjectHideFlags: 0
@@ -3296,8 +3443,9 @@ GameObject:
   - component: {fileID: 4027166509664067240}
   - component: {fileID: 683700112008187186}
   - component: {fileID: 584923154309323319}
+  - component: {fileID: 3173055616767842728}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3402,8 +3550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -3429,6 +3577,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &3173055616767842728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4703998343771436544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &4807265478897002693
 GameObject:
   m_ObjectHideFlags: 0
@@ -5059,8 +5227,9 @@ GameObject:
   - component: {fileID: 758793511285786149}
   - component: {fileID: 3572710635813919102}
   - component: {fileID: 6409986641373709174}
+  - component: {fileID: 524569214786803490}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5165,8 +5334,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -5192,6 +5361,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &524569214786803490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136599806317427635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &8194889838913286662
 GameObject:
   m_ObjectHideFlags: 0
@@ -5698,8 +5887,9 @@ GameObject:
   - component: {fileID: 6499281958222582610}
   - component: {fileID: 3192892866687824646}
   - component: {fileID: 1009618856198688081}
+  - component: {fileID: 5131457478329659856}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5804,8 +5994,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5d26d46fbba4a48bd1f7e7d134eab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 1
-  CurrentHP: 1
+  MaxHP: 3
+  CurrentHP: 3
   isAlive: 1
   canBeDamaged: 1
   isInvincible: 0
@@ -5831,6 +6021,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &5131457478329659856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8702070786368448978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &8716935406904530619
 GameObject:
   m_ObjectHideFlags: 0

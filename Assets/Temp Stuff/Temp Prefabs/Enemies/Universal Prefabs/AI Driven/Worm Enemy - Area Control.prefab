@@ -685,8 +685,9 @@ GameObject:
   - component: {fileID: 8553736666384596154}
   - component: {fileID: 8639694206233853184}
   - component: {fileID: 6027306059386527631}
+  - component: {fileID: 1302434069325547499}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -818,6 +819,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &1302434069325547499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401604446245227198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &422267382860624829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,8 +2016,9 @@ GameObject:
   - component: {fileID: 8138041350834722097}
   - component: {fileID: 3262755350672805177}
   - component: {fileID: 1175918573450622096}
+  - component: {fileID: 2863790218456192460}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2126,6 +2150,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &2863790218456192460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537568898860234616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &2713992469457770872
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,8 +2439,9 @@ GameObject:
   - component: {fileID: 6095517618275899144}
   - component: {fileID: 5035883630436003178}
   - component: {fileID: 7146733953160546256}
+  - component: {fileID: 3940125433388384597}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2526,6 +2573,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &3940125433388384597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808186983844601663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &2848186102013191672
 GameObject:
   m_ObjectHideFlags: 0
@@ -3362,8 +3431,9 @@ GameObject:
   - component: {fileID: 8936555945298545588}
   - component: {fileID: 6462618442313435709}
   - component: {fileID: 5231046056820976480}
+  - component: {fileID: 2066881126386820070}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3495,6 +3565,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &2066881126386820070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4994371655720177533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &5119659084689396050
 GameObject:
   m_ObjectHideFlags: 0
@@ -4107,8 +4199,9 @@ GameObject:
   - component: {fileID: 6502175129162250375}
   - component: {fileID: 2591631517080195217}
   - component: {fileID: 337691016574870626}
+  - component: {fileID: 1178785326373579632}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4240,6 +4333,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &1178785326373579632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499059666626544438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &6692784808028326582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4393,8 +4508,9 @@ GameObject:
   - component: {fileID: 5458342493171566617}
   - component: {fileID: 7217275953299108439}
   - component: {fileID: 1637903963954035636}
+  - component: {fileID: 5261478996135210064}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4526,6 +4642,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &5261478996135210064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212543395659183241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &7218490288589844583
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,8 +5036,9 @@ GameObject:
   - component: {fileID: 99406280203974164}
   - component: {fileID: 1850041543684635125}
   - component: {fileID: 8010591613219667398}
+  - component: {fileID: 3901510427483718106}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5031,6 +5170,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &3901510427483718106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662629254639168580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &7682664160142124219
 GameObject:
   m_ObjectHideFlags: 0
@@ -5045,8 +5206,9 @@ GameObject:
   - component: {fileID: 5516141288820641901}
   - component: {fileID: 7585525163399745886}
   - component: {fileID: 1818122235988584888}
+  - component: {fileID: 6208384079476525003}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5178,6 +5340,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &6208384079476525003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7682664160142124219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &8075728359713844152
 GameObject:
   m_ObjectHideFlags: 0
@@ -5243,8 +5427,9 @@ GameObject:
   - component: {fileID: 9089282894898397662}
   - component: {fileID: 7462377445573369955}
   - component: {fileID: 3854486060040089382}
+  - component: {fileID: 6218142655777215161}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5376,6 +5561,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &6218142655777215161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8162759399270264655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &8166947614399220156
 GameObject:
   m_ObjectHideFlags: 0
@@ -5422,8 +5629,9 @@ GameObject:
   - component: {fileID: 8738281362375587054}
   - component: {fileID: 7501200360459544811}
   - component: {fileID: 5171477602169650216}
+  - component: {fileID: 545728649386901371}
   m_Layer: 12
-  m_Name: Hitbox
+  m_Name: Hitbox Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5555,6 +5763,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityHealthControllerRef: {fileID: 0}
+--- !u!114 &545728649386901371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8214928269569663739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &8235858572637784394
 GameObject:
   m_ObjectHideFlags: 0

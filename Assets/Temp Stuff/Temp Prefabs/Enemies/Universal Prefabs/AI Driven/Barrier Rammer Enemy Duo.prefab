@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 2218345777068991537}
   - component: {fileID: 3852157604938989720}
   - component: {fileID: 5334032688702333413}
+  - component: {fileID: 1305535912162631376}
   m_Layer: 12
   m_Name: B Mesh
   m_TagString: Untagged
@@ -531,6 +532,28 @@ MonoBehaviour:
   hasHealed: 0
   healingCooldown: 60
   currentHealingCooldown: 0
+--- !u!114 &1305535912162631376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5344003268598825222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &6537635430583696403
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +838,7 @@ GameObject:
   - component: {fileID: 5898620175328597919}
   - component: {fileID: 8236284176168326300}
   - component: {fileID: 4367485166198755773}
+  - component: {fileID: 7265955520749792107}
   m_Layer: 12
   m_Name: A Mesh
   m_TagString: Untagged
@@ -949,6 +973,28 @@ MonoBehaviour:
   hasHealed: 0
   healingCooldown: 60
   currentHealingCooldown: 0
+--- !u!114 &7265955520749792107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7898219595598712035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &8801876513281171255
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1422419041451063428}
   - component: {fileID: -2949091283081387654}
   - component: {fileID: 9030302037994152222}
+  - component: {fileID: 8302124994269150076}
   m_Layer: 18
   m_Name: Enemy Inflatable Projectile Scripted
   m_TagString: Player 1 HP Damage
@@ -250,3 +251,25 @@ MonoBehaviour:
   entityHealthControllerRef: {fileID: -2949091283081387654}
   enemyName: Inflatable Scripted Projectile
   countsAsSeparateEnemy: 1
+--- !u!114 &8302124994269150076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6765627477619855397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 0}
+  flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0

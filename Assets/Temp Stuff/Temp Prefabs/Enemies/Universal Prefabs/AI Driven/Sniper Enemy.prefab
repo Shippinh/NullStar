@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 8001564511962229102}
   - component: {fileID: 1087823077828521215}
   - component: {fileID: 6168218098923556294}
+  - component: {fileID: 99217893898749741}
   m_Layer: 11
   m_Name: Mesh and Hitbox
   m_TagString: Untagged
@@ -495,6 +496,26 @@ MonoBehaviour:
   hasHealed: 0
   healingCooldown: 60
   currentHealingCooldown: 0
+--- !u!114 &99217893898749741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923262292816490582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b4592b5744f44fb43d65ae0d9e42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthControllerRef: {fileID: 6168218098923556294}
+  renderer: {fileID: 0}
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashInDuration: 0.05
+  flashHoldDuration: 0
+  flashOutDuration: 0.1
+  flashTimer: 0
+  flashPhase: 0
 --- !u!1 &8358988878065079457
 GameObject:
   m_ObjectHideFlags: 0

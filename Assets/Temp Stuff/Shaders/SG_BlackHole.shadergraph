@@ -1966,7 +1966,7 @@
     "m_Title": "Black Hole color",
     "m_Position": {
         "x": -433.142578125,
-        "y": 1142.8570556640625
+        "y": 1142.857177734375
     }
 }
 
@@ -1990,7 +1990,7 @@
     "m_Title": "Fresnel glow on edges on black hole",
     "m_Position": {
         "x": -1029.143310546875,
-        "y": 1495.9998779296875
+        "y": 1496.0
     }
 }
 
@@ -3948,7 +3948,7 @@
     "m_Title": "Minimize distortion at grazing angles",
     "m_Position": {
         "x": -2680.5712890625,
-        "y": 538.28564453125
+        "y": 538.2857666015625
     }
 }
 
@@ -4675,7 +4675,7 @@
     "m_Title": "Blackhole Mask",
     "m_Position": {
         "x": -2291.428466796875,
-        "y": 1306.8570556640625
+        "y": 1306.857177734375
     }
 }
 
@@ -4864,7 +4864,7 @@
     "m_Title": "Increase distortion towards black hole",
     "m_Position": {
         "x": -4240.57177734375,
-        "y": 260.5714111328125
+        "y": 260.5712890625
     }
 }
 
