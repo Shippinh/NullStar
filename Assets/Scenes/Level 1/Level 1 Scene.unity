@@ -19596,6 +19596,10 @@ MonoBehaviour:
     yOffset: 0
     newSplineT: 0
     initialSpeed: 112
+    maxBoostVerticalStrafeSpeed: 15
+    maxBoostHorizontalStrafeSpeed: 15
+    maxBoostAcceleration: 200
+    boostDodgeMaxSpeed: 60
 --- !u!65 &921758017
 BoxCollider:
   m_ObjectHideFlags: 0

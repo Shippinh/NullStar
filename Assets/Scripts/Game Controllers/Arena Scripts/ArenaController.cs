@@ -299,7 +299,7 @@ public class ArenaController : MonoBehaviour
             case ArenaCompletionPlayerEvent.None:
                 break;
             case ArenaCompletionPlayerEvent.AttachToRail:
-                playerRef.InitiateBoostModeAttach(railDirectAttachPtrs.newSplineContainer, railDirectAttachPtrs.transitionDuration, railDirectAttachPtrs.xOffset, railDirectAttachPtrs.yOffset, railDirectAttachPtrs.newSplineT, railDirectAttachPtrs.initialSpeed);
+                playerRef.InitiateBoostModeAttach(railDirectAttachPtrs);
                 break;
             case ArenaCompletionPlayerEvent.ActivateAttachToRailTrigger:
                 railAttachTriggerRef.SetActive(true);

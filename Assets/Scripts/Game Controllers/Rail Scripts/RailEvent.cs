@@ -56,6 +56,24 @@ public class ChangeSpeedEvent : RailEvent
             ctx.boostModeDodgeSpeedFade.SetSpeedOverTime(targetDodgeSpeed, transitionDuration, dodgeSpeedEasing);
     }
 
+    public void ExecuteWithoutEasing(PlayerRailController ctx)
+    {
+        if (targetSpeed >= 0f)
+            ctx.boostModeSpeedFade.SetSpeedOverTime(targetSpeed, transitionDuration, LerpFactorMethods.LerpFactor.None);
+
+        if (targetSidewaysPlaneSpeed >= 0f)
+            ctx.boostModeSidewaySplineMaxSpeedFade.SetSpeedOverTime(targetSidewaysPlaneSpeed, transitionDuration, LerpFactorMethods.LerpFactor.None);
+
+        if (targetUpwardPlaneSpeed >= 0f)
+            ctx.boostModeUpwardSplineMaxSpeedFade.SetSpeedOverTime(targetUpwardPlaneSpeed, transitionDuration, LerpFactorMethods.LerpFactor.None);
+
+        if (targetPlaneAcceleration >= 0f)
+            ctx.boostModeAccelerationFade.SetSpeedOverTime(targetPlaneAcceleration, transitionDuration, LerpFactorMethods.LerpFactor.None);
+
+        if (targetDodgeSpeed >= 0f)
+            ctx.boostModeDodgeSpeedFade.SetSpeedOverTime(targetDodgeSpeed, transitionDuration, LerpFactorMethods.LerpFactor.None);
+    }
+
     public override string EditorLabel => $"Speed → {targetSpeed} | S:{targetSidewaysPlaneSpeed} U:{targetUpwardPlaneSpeed} A:{targetPlaneAcceleration} D:{targetDodgeSpeed} over {transitionDuration}s";
 
     public override Color EditorColor => new Color(0.3f, 0.8f, 1f);

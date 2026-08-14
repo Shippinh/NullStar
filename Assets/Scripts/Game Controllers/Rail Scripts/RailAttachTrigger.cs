@@ -11,7 +11,8 @@ public class RailAttachTrigger : MonoBehaviour
             return;
 
         SpaceShooterController playerRef = other.GetComponent<SpaceShooterController>();
-        playerRef.InitiateBoostModeAttach(attachParameters.newSplineContainer, attachParameters.transitionDuration, attachParameters.xOffset, attachParameters.yOffset, attachParameters.newSplineT, attachParameters.initialSpeed);
+        //playerRef.InitiateBoostModeAttach(attachParameters.newSplineContainer, attachParameters.transitionDuration, attachParameters.xOffset, attachParameters.yOffset, attachParameters.newSplineT, attachParameters.initialSpeed);
+        playerRef.InitiateBoostModeAttach(attachParameters);
 
         gameObject.SetActive(false);
     }

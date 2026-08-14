@@ -1051,8 +1051,7 @@ public class SpaceShooterController : MonoBehaviour
             velocity += Vector3.up * jumpForce;
     }
 
-    // Called externally
-    public void InitiateBoostModeAttach(SplineContainer newSplineTarget, float duration, float xOffset, float yOffset, float initialSplineT, float initialRailSpeed)
+    public void InitiateBoostModeAttach(PlayerAttachParameters attachParams)
     {
         if (BoostTransitioning || playerState == PlayerState.BoostActive) return;
 
@@ -1067,33 +1066,45 @@ public class SpaceShooterController : MonoBehaviour
 
         // RailController Reinitialization
         railControllerRef.splineContainer?.gameObject.SetActive(false);
-        railControllerRef.splineContainer = newSplineTarget;
+        railControllerRef.splineContainer = attachParams.newSplineContainer;
 
-        var table = newSplineTarget.GetComponent<SplineArcLengthTable>();
+        var table = railControllerRef.splineContainer.GetComponent<SplineArcLengthTable>();
         if (table != null && !table.IsReady)
-            table.Bake(newSplineTarget.GetComponent<SplineContainer>().Spline);
+            table.Bake(railControllerRef.splineContainer.GetComponent<SplineContainer>().Spline);
 
         railControllerRef.InitializeSpline();
-        railControllerRef.splineT = initialSplineT;
-        railControllerRef.defaultSplineSpeed = initialRailSpeed;
-        railControllerRef.currentSplineSpeed.value = initialRailSpeed;
-        railControllerRef.MaxSpeed = initialRailSpeed;
-        railControllerRef.boostModeSpeedFade = new RailSpeedController(railControllerRef.currentSplineSpeed, initialRailSpeed);
+        railControllerRef.splineT = attachParams.newSplineT;
+        railControllerRef.defaultSplineSpeed = attachParams.initialSpeed;
+        railControllerRef.currentSplineSpeed.value = attachParams.initialSpeed;
+        railControllerRef.MaxSpeed = attachParams.initialSpeed;
+        railControllerRef.boostModeSpeedFade = new RailSpeedController(railControllerRef.currentSplineSpeed, attachParams.initialSpeed);
+
+        ChangeSpeedEvent attachSpeedEvent = new ChangeSpeedEvent();
+
+        attachSpeedEvent.targetSpeed = attachParams.initialSpeed;
+        attachSpeedEvent.targetUpwardPlaneSpeed = attachParams.maxBoostVerticalStrafeSpeed;
+        attachSpeedEvent.targetSidewaysPlaneSpeed = attachParams.maxBoostHorizontalStrafeSpeed;
+        attachSpeedEvent.targetPlaneAcceleration = attachParams.maxBoostAcceleration;
+        attachSpeedEvent.targetDodgeSpeed = attachParams.boostDodgeMaxSpeed;
+        attachSpeedEvent.transitionDuration = attachParams.transitionDuration;
+
         railControllerRef.InitializeSplineValues();
 
-        attachDuration = duration;
+        attachDuration = attachParams.transitionDuration;
         attachDurationCurrent = 0f;
         //transitionBlend = 0f;
         //transitionBlendVelocity = 0f;
         attachStartPosition = body.position;
         attachStartRotation = body.rotation;
-        attachDesiredOffsetX = xOffset;
-        attachDesiredOffsetY = yOffset;
+        attachDesiredOffsetX = attachParams.xOffset;
+        attachDesiredOffsetY = attachParams.yOffset;
 
         railControllerRef.splineContainer.gameObject.SetActive(true);
-        cameraControllerRef.BeginBoostModeAttachTransition(duration);
+        cameraControllerRef.BeginBoostModeAttachTransition(attachParams.transitionDuration);
 
         playerState = PlayerState.BoostAttaching;
+
+        attachSpeedEvent.ExecuteWithoutEasing(railControllerRef);
     }
 
     public void InitiateBoostModeDetach(float duration)
