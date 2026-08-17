@@ -2597,10 +2597,22 @@ MonoBehaviour:
   - rid: 5663855311788179462
   - rid: 5663855336208728064
   - rid: 5663855336208728066
+  - rid: 735007423653478402
   rangeEvents: []
   references:
     version: 2
     RefIds:
+    - rid: 735007423653478402
+      type: {class: LaneSpeedEvent, ns: , asm: Assembly-CSharp}
+      data:
+        t: 0.19
+        enabled: 1
+        repeatable: 0
+        layerIndex: 1
+        targetLane: {fileID: 1386488940}
+        targetSpeed: 112
+        speedEasing: 4
+        transitionDuration: 5
     - rid: 4570727494820823042
       type: {class: DetachPlayerFromRail, ns: , asm: Assembly-CSharp}
       data:
@@ -5256,7 +5268,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -5695,7 +5710,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 113
+  currentSpeed:
+    value: 0
   enemySpacing: 8
   startT: 0.3
   orientation: 0
@@ -12104,7 +12122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -13797,7 +13818,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 20
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -17423,7 +17447,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0.232
   orientation: 0
@@ -19594,7 +19621,7 @@ MonoBehaviour:
     transitionDuration: 0
     xOffset: 0
     yOffset: 0
-    newSplineT: 0
+    newSplineT: 0.15
     initialSpeed: 112
     maxBoostVerticalStrafeSpeed: 15
     maxBoostHorizontalStrafeSpeed: 15
@@ -21385,7 +21412,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -22022,7 +22052,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -22637,7 +22670,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0.2183
   orientation: 0
@@ -23559,7 +23595,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 112
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 0
@@ -27020,7 +27059,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 30
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -27842,7 +27884,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -28521,7 +28566,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0.2183
   orientation: 0
@@ -30188,7 +30236,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 112
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0.25
   orientation: 0
@@ -30679,7 +30730,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0.239
   orientation: 0
@@ -31059,7 +31113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -31502,7 +31559,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -32289,7 +32349,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 20
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -40314,7 +40377,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 113
+  currentSpeed:
+    value: 0
   enemySpacing: 8
   startT: 0.267
   orientation: 0
@@ -42579,7 +42645,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1
@@ -43260,7 +43329,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 76735316}
+  defaultSpeed: 10
   speed: 60
+  currentSpeed:
+    value: 0
   enemySpacing: 4
   startT: 0
   orientation: 1

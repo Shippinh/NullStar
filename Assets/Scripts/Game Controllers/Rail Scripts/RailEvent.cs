@@ -222,11 +222,13 @@ public class LaneSpeedEvent : RailEvent
 {
     public EnemyLane targetLane;
     public float targetSpeed = 10f;
+    public LerpFactorMethods.LerpFactor speedEasing = LerpFactorMethods.LerpFactor.None;
+    [Min(0f)] public float transitionDuration = 1f;
 
     public override void Execute(PlayerRailController ctx)
-        => targetLane?.SetSpeed(targetSpeed);
+        => targetLane?.speedController.SetSpeedOverTime(targetSpeed, transitionDuration, speedEasing);
 
-    public override string EditorLabel => $"Lane speed → {targetSpeed}";
+    public override string EditorLabel => $"Lane speed → {targetSpeed} over {transitionDuration}s, easing: {speedEasing.ToString()}";
     public override Color EditorColor => new Color(0.4f, 1f, 0.7f);
 }
 

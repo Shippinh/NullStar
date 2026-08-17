@@ -211,163 +211,151 @@ public class PlayerRailController : RailController
 
         Gizmos.DrawRay(center, rot * Vector3.forward * 2f);
     }
+}
 
-    // ── Shared ref wrapper ────────────────────────────────────────────────────
+public class RailSpeedController
+{
+    FloatRef currentSpeedRef;
+    float defaultSpeed;
 
-    [System.Serializable]
-    public class FloatRef
+    float speedStart;
+    float speedTarget;
+    float speedDuration;
+    float speedElapsed;
+    bool speedRunning;
+    LerpFactorMethods.LerpFactor speedEasing;
+
+    public RailSpeedController(FloatRef currentSpeedPtr, float defaultSpeedPtr)
     {
-        public float value;
+        currentSpeedRef = currentSpeedPtr;
+        defaultSpeed = defaultSpeedPtr;
     }
 
-    // ── RailSpeedController ───────────────────────────────────────────────────
-
-    public class RailSpeedController
+    public void SetSpeedOverTime(float target, float duration,
+        LerpFactorMethods.LerpFactor easing = LerpFactorMethods.LerpFactor.None)
     {
-        FloatRef currentSpeedRef;
-        float defaultSpeed;
-
-        float speedStart;
-        float speedTarget;
-        float speedDuration;
-        float speedElapsed;
-        bool speedRunning;
-        LerpFactorMethods.LerpFactor speedEasing;
-
-        public RailSpeedController(FloatRef currentSpeedPtr, float defaultSpeedPtr)
+        if (duration <= 0f)
         {
-            currentSpeedRef = currentSpeedPtr;
-            defaultSpeed = defaultSpeedPtr;
+            currentSpeedRef.value = target;
+            speedRunning = false;
+            return;
         }
 
-        public void SetSpeedOverTime(float target, float duration,
-            LerpFactorMethods.LerpFactor easing = LerpFactorMethods.LerpFactor.None)
-        {
-            if (duration <= 0f)
-            {
-                currentSpeedRef.value = target;
-                speedRunning = false;
-                return;
-            }
-
-            speedStart = currentSpeedRef.value;
-            speedTarget = target;
-            speedDuration = duration;
-            speedElapsed = 0f;
-            speedEasing = easing;
-            speedRunning = true;
-        }
-
-        public void ResetToDefault(float duration = 0f,
-            LerpFactorMethods.LerpFactor easing = LerpFactorMethods.LerpFactor.None)
-        {
-            SetSpeedOverTime(defaultSpeed, duration, easing);
-        }
-
-        public void Update(float dt)
-        {
-            if (!speedRunning) return;
-
-            speedElapsed += dt;
-            float t = Mathf.Clamp01(speedElapsed / speedDuration);
-            float curvedT = LerpFactorMethods.GetLerpFactor(speedEasing, t);
-
-            currentSpeedRef.value = Mathf.Lerp(speedStart, speedTarget, curvedT);
-
-            if (t >= 1f)
-            {
-                currentSpeedRef.value = speedTarget;
-                speedRunning = false;
-            }
-        }
+        speedStart = currentSpeedRef.value;
+        speedTarget = target;
+        speedDuration = duration;
+        speedElapsed = 0f;
+        speedEasing = easing;
+        speedRunning = true;
     }
 
-    // ── RailOffsetController ──────────────────────────────────────────────────
-
-    public class RailOffsetController
+    public void ResetToDefault(float duration = 0f,
+        LerpFactorMethods.LerpFactor easing = LerpFactorMethods.LerpFactor.None)
     {
-        FloatRef _sidewaysRef;
-        float _sidewaysTarget;
-        float _sidewaysSpeed;
-        bool _sidewaysRunning;
-        float _defaultSideways;
+        SetSpeedOverTime(defaultSpeed, duration, easing);
+    }
 
-        FloatRef _upwardRef;
-        float _upwardTarget;
-        float _upwardSpeed;
-        bool _upwardRunning;
-        float _defaultUpward;
+    public void Update(float dt)
+    {
+        if (!speedRunning) return;
 
-        public RailOffsetController(FloatRef sidewaysRef, float defaultSideways, FloatRef upwardRef, float defaultUpward)
+        speedElapsed += dt;
+        float t = Mathf.Clamp01(speedElapsed / speedDuration);
+        float curvedT = LerpFactorMethods.GetLerpFactor(speedEasing, t);
+
+        currentSpeedRef.value = Mathf.Lerp(speedStart, speedTarget, curvedT);
+
+        if (t >= 1f)
         {
-            _sidewaysRef = sidewaysRef;
-            _defaultSideways = defaultSideways;
-            _sidewaysTarget = defaultSideways;
+            currentSpeedRef.value = speedTarget;
+            speedRunning = false;
+        }
+    }
+}
 
-            _upwardRef = upwardRef;
-            _defaultUpward = defaultUpward;
-            _upwardTarget = defaultUpward;
+public class RailOffsetController
+{
+    FloatRef _sidewaysRef;
+    float _sidewaysTarget;
+    float _sidewaysSpeed;
+    bool _sidewaysRunning;
+    float _defaultSideways;
+
+    FloatRef _upwardRef;
+    float _upwardTarget;
+    float _upwardSpeed;
+    bool _upwardRunning;
+    float _defaultUpward;
+
+    public RailOffsetController(FloatRef sidewaysRef, float defaultSideways, FloatRef upwardRef, float defaultUpward)
+    {
+        _sidewaysRef = sidewaysRef;
+        _defaultSideways = defaultSideways;
+        _sidewaysTarget = defaultSideways;
+
+        _upwardRef = upwardRef;
+        _defaultUpward = defaultUpward;
+        _upwardTarget = defaultUpward;
+    }
+
+    public void SetOffsetOverTime(float targetSideways, float targetUpward, float duration)
+    {
+        targetSideways = Mathf.Max(0f, targetSideways);
+        targetUpward = Mathf.Max(0f, targetUpward);
+
+        if (duration <= 0f)
+        {
+            _sidewaysRef.value = targetSideways;
+            _upwardRef.value = targetUpward;
+            _sidewaysRunning = false;
+            _upwardRunning = false;
+            return;
         }
 
-        public void SetOffsetOverTime(float targetSideways, float targetUpward, float duration)
-        {
-            targetSideways = Mathf.Max(0f, targetSideways);
-            targetUpward = Mathf.Max(0f, targetUpward);
+        _sidewaysTarget = targetSideways;
+        _sidewaysSpeed = (targetSideways - _sidewaysRef.value) / duration;
+        _sidewaysRunning = !Mathf.Approximately(_sidewaysRef.value, targetSideways);
 
-            if (duration <= 0f)
+        _upwardTarget = targetUpward;
+        _upwardSpeed = (targetUpward - _upwardRef.value) / duration;
+        _upwardRunning = !Mathf.Approximately(_upwardRef.value, targetUpward);
+    }
+
+    public void ResetToDefault(float duration = 0f) => SetOffsetOverTime(_defaultSideways, _defaultUpward, duration);
+
+    public void Update(float dt)
+    {
+        if (!_sidewaysRunning && !_upwardRunning) return;
+
+        if (_sidewaysRunning)
+        {
+            float delta = _sidewaysSpeed * dt;
+            float remaining = _sidewaysTarget - _sidewaysRef.value;
+
+            if (Mathf.Abs(delta) >= Mathf.Abs(remaining))
             {
-                _sidewaysRef.value = targetSideways;
-                _upwardRef.value = targetUpward;
+                _sidewaysRef.value = _sidewaysTarget;
                 _sidewaysRunning = false;
-                _upwardRunning = false;
-                return;
             }
-
-            _sidewaysTarget = targetSideways;
-            _sidewaysSpeed = (targetSideways - _sidewaysRef.value) / duration;
-            _sidewaysRunning = !Mathf.Approximately(_sidewaysRef.value, targetSideways);
-
-            _upwardTarget = targetUpward;
-            _upwardSpeed = (targetUpward - _upwardRef.value) / duration;
-            _upwardRunning = !Mathf.Approximately(_upwardRef.value, targetUpward);
+            else
+            {
+                _sidewaysRef.value += delta;
+            }
         }
 
-        public void ResetToDefault(float duration = 0f) => SetOffsetOverTime(_defaultSideways, _defaultUpward, duration);
-
-        public void Update(float dt)
+        if (_upwardRunning)
         {
-            if (!_sidewaysRunning && !_upwardRunning) return;
+            float delta = _upwardSpeed * dt;
+            float remaining = _upwardTarget - _upwardRef.value;
 
-            if (_sidewaysRunning)
+            if (Mathf.Abs(delta) >= Mathf.Abs(remaining))
             {
-                float delta = _sidewaysSpeed * dt;
-                float remaining = _sidewaysTarget - _sidewaysRef.value;
-
-                if (Mathf.Abs(delta) >= Mathf.Abs(remaining))
-                {
-                    _sidewaysRef.value = _sidewaysTarget;
-                    _sidewaysRunning = false;
-                }
-                else
-                {
-                    _sidewaysRef.value += delta;
-                }
+                _upwardRef.value = _upwardTarget;
+                _upwardRunning = false;
             }
-
-            if (_upwardRunning)
+            else
             {
-                float delta = _upwardSpeed * dt;
-                float remaining = _upwardTarget - _upwardRef.value;
-
-                if (Mathf.Abs(delta) >= Mathf.Abs(remaining))
-                {
-                    _upwardRef.value = _upwardTarget;
-                    _upwardRunning = false;
-                }
-                else
-                {
-                    _upwardRef.value += delta;
-                }
+                _upwardRef.value += delta;
             }
         }
     }

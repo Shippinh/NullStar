@@ -12,9 +12,12 @@ public class EnemyLane : MonoBehaviour
     public SplineContainer splineContainer;
 
     [Header("Movement")]
+    public float defaultSpeed = 10f;
     public float speed = 10f;
+    public FloatRef currentSpeed;
     public float enemySpacing = 8f;
     [Range(0f, 1f)] public float startT = 0f;
+    public RailSpeedController speedController;
 
     [Header("Orientation")]
     public FormationOrientation orientation = FormationOrientation.TowardsMoveDirection;
@@ -106,6 +109,21 @@ public class EnemyLane : MonoBehaviour
         if (_arcTable == null) { Debug.LogError("[EnemyLane] Missing SplineArcLengthTable.", this); return; }
         anchorT = startT;
         if (!player) player = FindObjectOfType<PlayerRailController>();
+
+        InitializeFades();
+    }
+
+    private void InitializeFades()
+    {
+        defaultSpeed = speed;
+        currentSpeed.value = defaultSpeed;
+        speedController = new RailSpeedController(currentSpeed, defaultSpeed);
+    }
+
+    private void UpdateFades(float dt)
+    {
+        speed = currentSpeed.value;
+        speedController.Update(dt);
     }
 
     private void Start()
@@ -132,6 +150,9 @@ public class EnemyLane : MonoBehaviour
         if (_splineLength <= 0f || slots.Count == 0) return;
 
         float dt = Time.fixedDeltaTime;
+
+        UpdateFades(dt);
+
         float tDelta = speed * dt / _splineLength;
         float tSpacing = enemySpacing / _splineLength;
 
