@@ -2610,9 +2610,9 @@ MonoBehaviour:
         repeatable: 0
         layerIndex: 1
         targetLane: {fileID: 1386488940}
-        targetSpeed: 112
+        targetSpeed: 200
         speedEasing: 4
-        transitionDuration: 5
+        transitionDuration: 1
     - rid: 4570727494820823042
       type: {class: DetachPlayerFromRail, ns: , asm: Assembly-CSharp}
       data:

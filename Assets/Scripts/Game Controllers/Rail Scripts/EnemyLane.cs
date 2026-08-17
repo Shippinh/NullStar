@@ -212,7 +212,7 @@ public class EnemyLane : MonoBehaviour
     /// Unified tick for both entry and passby — same movement, different end behaviour.
     private void TickPathSlot(LaneSlot slot, int i, float dt, float tSpacing)
     {
-        Vector3 pos = slot.entryPlayer.Tick(dt, Vector3.zero, Quaternion.identity, out Quaternion rot);
+        Vector3 pos = slot.entryPlayer.Tick(dt, speed, Vector3.zero, Quaternion.identity, out Quaternion rot);
 
         // Per-slot individual shoot check (passby only)
         if (slot.IsPassby && passbyShootActivation == PassbyShootingActivation.OnIndividual)
@@ -457,7 +457,7 @@ public class EnemyLane : MonoBehaviour
                 slot.travelFrequency, phase: UnityEngine.Random.Range(0f, Mathf.PI * 2f));
 
         slot.entryPlayer = hasPath
-            ? new LaneEntryPlayer(pathSpline, speed, isPassby: slot.IsPassby)
+            ? new LaneEntryPlayer(pathSpline, isPassby: slot.IsPassby)
             : null;
 
         rail.SetFormationTarget(spawnPos, spawnRot, this);
