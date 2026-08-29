@@ -35,7 +35,7 @@ public class BorderSignFadeSprite : MonoBehaviour
         initialSpriteScale = spriteTransform.localScale;
 
         if (!player)
-            player = FindObjectOfType<SpaceShooterController>();
+            player = FindAnyObjectByType<SpaceShooterController>();
     }
 
     void LateUpdate()

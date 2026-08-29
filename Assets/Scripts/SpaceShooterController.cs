@@ -206,7 +206,7 @@ public class SpaceShooterController : MonoBehaviour
         QualitySettings.vSyncCount = 0;
 
         if (!cameraControllerRef)
-            cameraControllerRef = FindObjectOfType<CameraControllerNew>();
+            cameraControllerRef = FindAnyObjectByType<CameraControllerNew>();
 
         if (!gunControllerRef)
             gunControllerRef = GetComponentInChildren<SpaceShooterPlasmaGunController>();
@@ -268,7 +268,7 @@ public class SpaceShooterController : MonoBehaviour
         }
         else
         {
-            previousVelocity = body.velocity;
+            previousVelocity = body.linearVelocity;
 
             CalculateDesiredVelocity();
             AdjustVelocity();
@@ -293,7 +293,7 @@ public class SpaceShooterController : MonoBehaviour
 
             DrainVelocityNoInput();
 
-            body.velocity = (velocity - previousVelocity) + externalVelocity;
+            body.linearVelocity = (velocity - previousVelocity) + externalVelocity;
         }
 
         ClearState();
@@ -378,7 +378,7 @@ public class SpaceShooterController : MonoBehaviour
 
     void UpdateState()
     {
-        externalVelocity = body.velocity;
+        externalVelocity = body.linearVelocity;
 
         if (playerState == PlayerState.BoostActive)
         {
@@ -387,7 +387,7 @@ public class SpaceShooterController : MonoBehaviour
         }
         else
         {
-            velocity = body.velocity;
+            velocity = body.linearVelocity;
         }
 
         if (OnGround)
@@ -400,7 +400,7 @@ public class SpaceShooterController : MonoBehaviour
             contactNormal = Vector3.up;
         }
 
-        currentSpeed = body.velocity.magnitude;
+        currentSpeed = body.linearVelocity.magnitude;
     }
 
     void CalculateDesiredVelocity()
@@ -852,7 +852,7 @@ public class SpaceShooterController : MonoBehaviour
 
             float t = overboostChargeTimer / (overboostActivationDelay + 2f);
             float factor = 1f - (t * t);
-            body.velocity = new Vector3(body.velocity.x, body.velocity.y * factor, body.velocity.z); // brief stop only happens on y, other axis conserve momentum
+            body.linearVelocity = new Vector3(body.linearVelocity.x, body.linearVelocity.y * factor, body.linearVelocity.z); // brief stop only happens on y, other axis conserve momentum
 
             if (overboostChargeTimer >= overboostActivationDelay)
             {
@@ -867,9 +867,9 @@ public class SpaceShooterController : MonoBehaviour
                 if (launchDir != Vector3.zero)
                 {
                     launchDir.Normalize();
-                    float aligned = Vector3.Dot(body.velocity, launchDir);
+                    float aligned = Vector3.Dot(body.linearVelocity, launchDir);
                     float launchSpeed = Mathf.Max(aligned + dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit * 0.35f, dodgeMaxSpeed * consectuiveDodgeMaxSpeedMultiplierLimit * 0.35f);
-                    body.velocity = launchDir * launchSpeed;
+                    body.linearVelocity = launchDir * launchSpeed;
                 }
                 // No exclusive input: velocity preserved as-is
 
@@ -1058,7 +1058,7 @@ public class SpaceShooterController : MonoBehaviour
         if (playerState == PlayerState.OverboostActive || playerState == PlayerState.OverboostInitiating)
             CancelOverboostForBoostAttach();
 
-        attachStartSpeed = body.velocity.magnitude;
+        attachStartSpeed = body.linearVelocity.magnitude;
 
         body.useGravity = false;
         cameraControllerRef.canRotate = false;
@@ -1119,7 +1119,7 @@ public class SpaceShooterController : MonoBehaviour
 
         body.isKinematic = false;
         body.useGravity = true;
-        body.velocity = exitVelocity;
+        body.linearVelocity = exitVelocity;
 
         currentRightOffset = 0f;
         currentUpOffset = 0f;
@@ -1160,13 +1160,13 @@ public class SpaceShooterController : MonoBehaviour
 
         float remainingTime = Mathf.Max(attachDuration - attachDurationCurrent, Time.fixedDeltaTime);
         Vector3 requiredVelocity = (targetPos - body.position) / remainingTime;
-        body.velocity = Vector3.Lerp(body.velocity, requiredVelocity, smoothT);
+        body.linearVelocity = Vector3.Lerp(body.linearVelocity, requiredVelocity, smoothT);
 
         body.MoveRotation(Quaternion.Slerp(attachStartRotation, railControllerRef.SplineRotation, smoothT));
 
         if (t >= 1f)
         {
-            body.velocity = Vector3.zero;
+            body.linearVelocity = Vector3.zero;
             body.isKinematic = true;
             body.MovePosition(targetPos);
 
@@ -1308,7 +1308,7 @@ public class SpaceShooterController : MonoBehaviour
     }
 }
 
-
+[Serializable]
 public class InputToggle
 {
     private string axisName;

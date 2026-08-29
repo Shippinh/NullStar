@@ -29,7 +29,7 @@ public class SpaceShooterFeedbackController : MonoBehaviour
 
     [Header("Internals")]
     [SerializeField] private float flashTimer = 0f;
-    [SerializeField] private enum FlashPhase { Idle, In, Hold, Out }
+    private enum FlashPhase { Idle, In, Hold, Out }
     [SerializeField] private FlashPhase flashPhase = FlashPhase.Idle;
 
     private Color activeColor;

@@ -37,7 +37,7 @@ public class RammerEnemy : EnemyAIComponent
         base.Start();
 
         if (!player)
-            player = FindObjectOfType<SpaceShooterController>();
+            player = FindAnyObjectByType<SpaceShooterController>();
 
         velocity = Vector3.zero;
 
@@ -73,7 +73,7 @@ public class RammerEnemy : EnemyAIComponent
         AdjustVelocity();
         AdjustAirVelocity();
 
-        rb.velocity = velocity;
+        rb.linearVelocity = velocity;
     }
 
     void CalculateDesiredVelocity()

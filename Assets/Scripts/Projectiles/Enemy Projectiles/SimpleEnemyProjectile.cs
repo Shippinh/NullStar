@@ -80,7 +80,7 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
         transform.position = position;
         transform.rotation = rotation;
         rb.isKinematic = false;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         CancelInvoke();
         Invoke(nameof(Impact), maxLifetime);
@@ -91,7 +91,7 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
     {
         CancelInvoke();
         rb.isKinematic = false;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         gameObject.SetActive(false);
     }
@@ -100,7 +100,7 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
     {
         if (movementMode != MovementMode.Default) return;
         direction = (targetPosition - startPosition).normalized;
-        rb.velocity = direction * speed;
+        rb.linearVelocity = direction * speed;
     }
 
     private Vector3 GetRayOrigin() =>
@@ -171,7 +171,7 @@ public class SimpleEnemyProjectile : MonoBehaviour, IPoolable
     void OnDisable()
     {
         CancelInvoke();
-        if (rb != null && rb.isKinematic != true) { rb.velocity = Vector3.zero; rb.angularVelocity = Vector3.zero; }
+        if (rb != null && rb.isKinematic != true) { rb.linearVelocity = Vector3.zero; rb.angularVelocity = Vector3.zero; }
     }
 
     protected void HandleHit(Collider other)

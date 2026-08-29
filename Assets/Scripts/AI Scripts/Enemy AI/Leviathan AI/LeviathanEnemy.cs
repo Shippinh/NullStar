@@ -190,7 +190,7 @@ public class LeviathanEnemy : EnemyAIComponent
         {
             AdjustVelocity(currentAcceleration);
             AdjustAirVelocity(currentVerticalAcceleration);
-            rb.velocity = velocity;
+            rb.linearVelocity = velocity;
             RotateTowardsVelocity();
         }
     }

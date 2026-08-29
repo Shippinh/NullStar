@@ -52,7 +52,7 @@ public class RammingMineEnemy : BasicMineEnemy
     {
         if (reinitializeOnEnable)
         {
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
 
             if (reinitializeCanMove)
                 canMove = true;
@@ -71,16 +71,16 @@ public class RammingMineEnemy : BasicMineEnemy
 
         if (!canMove)
         {
-            rb.drag = motionlessDrag;
+            rb.linearDamping = motionlessDrag;
             return;
         }
         else
-            rb.drag = 0;
+            rb.linearDamping = 0;
 
         CalculateDesiredVelocity();
         AdjustVelocity();
         AdjustAirVelocity();
-        rb.velocity = velocity;
+        rb.linearVelocity = velocity;
     }
 
     void CalculateDesiredVelocity()

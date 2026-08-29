@@ -49,7 +49,7 @@ public class ScriptedInflatableProjectile : InflatableEnemyProjectile
 
         if (distance <= snapDistance)
         {
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
             rb.position = homingTarget;
             isHoming = false;
             state = SequencedProjectileState.SequenceStart;
@@ -58,7 +58,7 @@ public class ScriptedInflatableProjectile : InflatableEnemyProjectile
 
         homingTimer += Time.fixedDeltaTime;
         float remainingTime = Mathf.Max(travelDuration - homingTimer, Time.fixedDeltaTime);
-        rb.velocity = toTarget / remainingTime;
+        rb.linearVelocity = toTarget / remainingTime;
     }
 
     // Swallow collisions during flight

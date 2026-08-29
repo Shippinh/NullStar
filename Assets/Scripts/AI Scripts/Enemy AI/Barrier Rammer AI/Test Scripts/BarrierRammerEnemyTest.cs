@@ -77,7 +77,7 @@ public class BarrierRammerEnemyTest : MonoBehaviour
             velocity = Vector3.Lerp(velocity, Vector3.zero, 5f * Time.fixedDeltaTime);
         }
 
-        rb.velocity = velocity;
+        rb.linearVelocity = velocity;
     }
 
     void UpdatePairSync()
@@ -100,7 +100,7 @@ public class BarrierRammerEnemyTest : MonoBehaviour
 
             // Corrective velocity to keep partner exactly mirrored
             Vector3 correction = (desiredPartnerPos - partner.transform.position) / Time.fixedDeltaTime;
-            partner.rb.velocity = correction;
+            partner.rb.linearVelocity = correction;
 
             // Smoothly align rotation
             Quaternion targetRot = Quaternion.LookRotation((player.transform.position - vortexCenter).normalized, Vector3.up);

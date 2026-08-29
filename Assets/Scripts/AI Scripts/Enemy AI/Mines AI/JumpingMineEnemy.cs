@@ -20,20 +20,20 @@ public class JumpingMineEnemy : BasicMineEnemy
 
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
 
         SphereCollider trigger = GetComponent<SphereCollider>();
         trigger.isTrigger = true;
         trigger.radius = triggerRange;
 
-        rb.drag = explosionRadius / triggerRange * fuseDelay + 0.75f;
+        rb.linearDamping = explosionRadius / triggerRange * fuseDelay + 0.75f;
     }
 
     override protected void OnEnable()
     {
         if (reinitializeOnEnable)
         {
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
 
             Rearm();
         }

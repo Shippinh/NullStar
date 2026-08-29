@@ -108,7 +108,7 @@ public class CameraControllerNew : MonoBehaviour
         Cursor.visible = false;
 
         if (!playerRef)
-            playerRef = FindObjectOfType<SpaceShooterController>();
+            playerRef = FindAnyObjectByType<SpaceShooterController>();
 
         if (!mainCameraRef)
             mainCameraRef = GetComponentInChildren<Camera>();

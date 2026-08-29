@@ -27,7 +27,7 @@ public class RailEventController : MonoBehaviour
         ResetAll();
 
         if (!railControllerRef)
-            railControllerRef = FindObjectOfType<PlayerRailController>();
+            railControllerRef = FindAnyObjectByType<PlayerRailController>();
     }
 
     private void Update()

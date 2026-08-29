@@ -71,7 +71,7 @@ public class EnemyRailController : RailController
     public void InitializeEnemy()
     {
         if (!playerRailControllerRef)
-            playerRailControllerRef = FindObjectOfType<PlayerRailController>();
+            playerRailControllerRef = FindAnyObjectByType<PlayerRailController>();
         if (!body)
             body = GetComponent<Rigidbody>();
 

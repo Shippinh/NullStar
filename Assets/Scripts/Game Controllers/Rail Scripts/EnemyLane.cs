@@ -108,7 +108,7 @@ public class EnemyLane : MonoBehaviour
         _arcTable = splineContainer.GetComponent<SplineArcLengthTable>();
         if (_arcTable == null) { Debug.LogError("[EnemyLane] Missing SplineArcLengthTable.", this); return; }
         anchorT = startT;
-        if (!player) player = FindObjectOfType<PlayerRailController>();
+        if (!player) player = FindAnyObjectByType<PlayerRailController>();
 
         InitializeFades();
     }

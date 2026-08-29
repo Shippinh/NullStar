@@ -46,7 +46,7 @@ public class SniperEnemy : EnemyAIComponent
         base.Start();
 
         if(!player)
-            player = FindObjectOfType<SpaceShooterController>();
+            player = FindAnyObjectByType<SpaceShooterController>();
 
         baseMinRange = minRange;
         baseMaxRange = maxRange;
@@ -121,7 +121,7 @@ public class SniperEnemy : EnemyAIComponent
         {
             AdjustVelocity(currentAcceleration);
             AdjustAirVelocity(currentVerticalAcceleration);
-            rb.velocity = velocity;
+            rb.linearVelocity = velocity;
         }
     }
 

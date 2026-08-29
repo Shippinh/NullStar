@@ -74,7 +74,7 @@ public class BarrierRammerEnemy : MonoBehaviour
             velocity = Vector3.Lerp(velocity, Vector3.zero, 5f * Time.fixedDeltaTime);
         }
 
-        rb.velocity = velocity;
+        rb.linearVelocity = velocity;
     }
 
     void UpdatePairSync()
@@ -104,7 +104,7 @@ public class BarrierRammerEnemy : MonoBehaviour
 
         // Small corrective velocity to keep symmetry tight
         Vector3 correction = (desiredPartnerPos - partner.transform.position);
-        partner.rb.velocity += correction * 2f; // push toward symmetric position
+        partner.rb.linearVelocity += correction * 2f; // push toward symmetric position
     }
 
 

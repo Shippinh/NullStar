@@ -13,8 +13,8 @@ public class InflatableEnemyProjectile : SimpleEnemyProjectile
     }
 
     [Header("References")]
-    private PhysicMaterial defaultPhysicsRef;
-    public PhysicMaterial bouncyPhysicsRef;
+    private PhysicsMaterial defaultPhysicsRef;
+    public PhysicsMaterial bouncyPhysicsRef;
     public EntityHealthController healthControllerRef;
     public RadialForceField forceFieldRef;
 

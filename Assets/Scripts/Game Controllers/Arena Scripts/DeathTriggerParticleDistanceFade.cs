@@ -24,7 +24,7 @@ public class DeathTriggerParticleDistanceFade : MonoBehaviour
     void Awake()
     {
         if (!player)
-            player = FindObjectOfType<SpaceShooterController>();
+            player = FindAnyObjectByType<SpaceShooterController>();
 
         if (!particleSystemRef)
             particleSystemRef = GetComponentInChildren<ParticleSystem>();

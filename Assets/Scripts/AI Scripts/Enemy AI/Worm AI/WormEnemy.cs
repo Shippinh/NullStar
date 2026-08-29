@@ -68,7 +68,7 @@ public class WormEnemy : EnemyAIComponent
         base.Start();
 
         if (!player)
-            player = FindObjectOfType<SpaceShooterController>();
+            player = FindAnyObjectByType<SpaceShooterController>();
 
         playerCamera = Camera.main;
 
@@ -104,7 +104,7 @@ public class WormEnemy : EnemyAIComponent
 
             AdjustVelocity();
             AdjustAirVelocity();
-            rb.velocity = velocity;
+            rb.linearVelocity = velocity;
 
 
             // Rotation
@@ -114,7 +114,7 @@ public class WormEnemy : EnemyAIComponent
             }
             else
             {
-                Vector3 playerDir = player.body.velocity.normalized;
+                Vector3 playerDir = player.body.linearVelocity.normalized;
                 if (playerDir != Vector3.zero)
                     transform.rotation = Quaternion.LookRotation(playerDir, Vector3.up);
             }
@@ -303,7 +303,7 @@ public class WormEnemy : EnemyAIComponent
     {
         if (player != null && player.body != null)
         {
-            Vector3 vel = player.body.velocity;
+            Vector3 vel = player.body.linearVelocity;
 
             if (vel.sqrMagnitude > 0.01f)
             {

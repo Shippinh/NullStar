@@ -1,3 +1,4 @@
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -213,6 +214,7 @@ public class PlayerRailController : RailController
     }
 }
 
+[Serializable]
 public class RailSpeedController
 {
     FloatRef currentSpeedRef;
@@ -273,6 +275,7 @@ public class RailSpeedController
     }
 }
 
+[Serializable]
 public class RailOffsetController
 {
     FloatRef _sidewaysRef;

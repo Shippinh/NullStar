@@ -102,7 +102,7 @@ public class ArenaController : MonoBehaviour
         spawnPoints.AddRange(GetComponentsInChildren<ArenaEntitySpawn>(false));
 
         if (!playerRef)
-            playerRef = FindObjectOfType<SpaceShooterController>();
+            playerRef = FindAnyObjectByType<SpaceShooterController>();
 
         bool arenaCompletionPlayerEventInitializationOutcome = true;
         switch (arenaCompletionPlayerEvent)

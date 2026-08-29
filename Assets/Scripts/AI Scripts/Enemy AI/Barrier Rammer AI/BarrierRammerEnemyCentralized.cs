@@ -81,7 +81,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
     void Awake()
     {
         if (!player)
-            player = FindObjectOfType<SpaceShooterController>();
+            player = FindAnyObjectByType<SpaceShooterController>();
 
         playerCamera = Camera.main;
 
@@ -202,7 +202,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
         // ← SwitchPivotPoints removed from here
 
         AdjustVelocity();
-        rb.velocity = velocity;
+        rb.linearVelocity = velocity;
     }
 
     void HandleAttackInitiation()
@@ -234,7 +234,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
         burstTimer += Time.fixedDeltaTime;  // ← fixedDeltaTime since this runs in FixedUpdate
 
         // Drive through rigidbody so physics stays consistent
-        rb.velocity = burstDir * currentPreset.burstSpeed;  // ← was transform.position +=
+        rb.linearVelocity = burstDir * currentPreset.burstSpeed;  // ← was transform.position +=
 
         if (burstTimer >= burstDuration)
         {
@@ -245,7 +245,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
             anchorStartAPos = enemyA.position;
             anchorStartBPos = enemyB.position;
 
-            rb.velocity = Vector3.zero;  // ← kill burst velocity cleanly
+            rb.linearVelocity = Vector3.zero;  // ← kill burst velocity cleanly
 
             //Debug.Log("Final burst complete, starting alignment phase!");
         }
@@ -473,7 +473,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
     void CalculateDesiredVelocity()
     {
         // unique noise seed per instance (for distinct motion patterns)
-        float seed = transform.GetInstanceID() * 0.001f;
+        float seed = transform.GetEntityId().GetHashCode() * 0.001f;
 
         // --- Chaotic offset for duo movement ---
             float sideNoise = Mathf.PerlinNoise(Time.time * 0.3f + seed, transform.position.x * 0.15f) - 0.5f;
@@ -789,7 +789,7 @@ public class BarrierRammerEnemyCentralized : EnemyAIComponent
     {
         if (player != null && player.body != null)
         {
-            Vector3 vel = player.body.velocity;
+            Vector3 vel = player.body.linearVelocity;
 
             if (vel.sqrMagnitude > 0.01f)
             {

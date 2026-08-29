@@ -48,7 +48,7 @@ public class BasicMineEnemy : MonoBehaviour
     protected void Initialize()
     {
         if (!player)
-            player = FindObjectOfType<SpaceShooterController>();
+            player = FindAnyObjectByType<SpaceShooterController>();
 
         enemyControllerRef = GetComponent<EnemyController>();
         if (enemyControllerRef != null)
