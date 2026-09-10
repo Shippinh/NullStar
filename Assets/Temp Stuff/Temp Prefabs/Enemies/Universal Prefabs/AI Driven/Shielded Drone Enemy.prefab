@@ -62,6 +62,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,9 +88,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4536356060596227627
 BoxCollider:
@@ -161,6 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -229,6 +238,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -250,9 +264,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &3507394969146866465
 BoxCollider:
@@ -328,6 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -396,6 +414,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -417,9 +440,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2432961076308560679
 MonoBehaviour:
@@ -495,6 +520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashInDuration: 0.05
   flashHoldDuration: 0
@@ -563,6 +590,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -584,9 +616,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2619935477753998234
 BoxCollider:
@@ -662,6 +696,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -817,6 +853,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -838,9 +879,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1921393419157392775
 BoxCollider:
@@ -916,6 +959,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -984,6 +1029,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1005,9 +1055,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &5915114745206386553
 BoxCollider:
@@ -1083,6 +1135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -1151,6 +1205,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1172,9 +1231,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2363525414529020317
 MonoBehaviour:
@@ -1250,6 +1311,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashInDuration: 0.05
   flashHoldDuration: 0
@@ -1373,6 +1436,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1394,9 +1462,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6102878138909005125
 BoxCollider:
@@ -1472,6 +1542,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -1540,6 +1612,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1561,9 +1638,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &7627346081535100784
 BoxCollider:
@@ -1639,6 +1718,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -1707,6 +1788,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1728,9 +1814,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6970531748404987042
 BoxCollider:
@@ -1806,6 +1894,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -1874,6 +1964,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1895,9 +1990,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8798204742961107005
 BoxCollider:
@@ -1973,6 +2070,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -2041,6 +2140,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2062,9 +2166,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6060760521545449813
 BoxCollider:
@@ -2140,6 +2246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -2208,6 +2316,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2229,9 +2342,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &8584384773999760461
 MonoBehaviour:
@@ -2307,6 +2422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashInDuration: 0.05
   flashHoldDuration: 0
@@ -2517,6 +2634,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2538,9 +2660,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &517168905624347789
 BoxCollider:
@@ -2616,6 +2740,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -2684,6 +2810,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2705,9 +2836,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6970185375849762723
 BoxCollider:
@@ -2783,6 +2916,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -2851,6 +2986,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2872,9 +3012,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &3979117541585269587
 BoxCollider:
@@ -2950,6 +3092,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -3050,6 +3194,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3071,9 +3220,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6241130329700593742
 BoxCollider:
@@ -3149,6 +3300,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -3217,6 +3370,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3238,9 +3396,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &8690283235389534378
 BoxCollider:
@@ -3316,6 +3476,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -3384,6 +3546,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3405,9 +3572,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &4010713847967753832
 SphereCollider:
@@ -3485,6 +3654,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashInDuration: 0.05
   flashHoldDuration: 0
@@ -3553,6 +3724,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3574,9 +3750,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4429484644090749835
 BoxCollider:
@@ -3652,6 +3830,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -3720,6 +3900,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3741,9 +3926,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &5030655731213006547
 BoxCollider:
@@ -3819,6 +4006,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -3887,6 +4076,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3908,9 +4102,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &3335936692296098404
 BoxCollider:
@@ -3986,6 +4182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -4054,6 +4252,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4075,9 +4278,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4470302450273033862
 BoxCollider:
@@ -4153,6 +4358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -4221,6 +4428,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4242,9 +4454,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &5918082835024515523
 BoxCollider:
@@ -4320,6 +4534,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -4388,6 +4604,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4409,9 +4630,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2042984821391451273
 BoxCollider:
@@ -4487,6 +4710,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -4555,6 +4780,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4576,9 +4806,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &7725219178181787854
 BoxCollider:
@@ -4654,6 +4886,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -4722,6 +4956,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4743,9 +4982,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4708179255579236522
 BoxCollider:
@@ -4821,6 +5062,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0
@@ -4879,8 +5122,8 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  rb: {fileID: 0}
-  avoidanceTrigger: {fileID: 0}
+  rb: {fileID: 9084587941220844120}
+  avoidanceTrigger: {fileID: 7542398726603983457}
   nearbyObstacles: []
   velocity: {x: 0, y: 0, z: 0}
   desiredVelocity: {x: 0, y: 0, z: 0}
@@ -4921,10 +5164,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8707553545667161472}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 0.125
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_LinearDamping: 0
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5101,6 +5344,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5122,9 +5370,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1016499905341415276
 MonoBehaviour:
@@ -5200,6 +5450,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashInDuration: 0.05
   flashHoldDuration: 0
@@ -5268,6 +5520,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5289,9 +5546,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &6177729971855990335
 BoxCollider:
@@ -5367,6 +5626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthControllerRef: {fileID: 0}
   flashRenderer: {fileID: 0}
+  flashExtraRenderers: 0
+  extraRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   flashInDuration: 0
   flashHoldDuration: 0

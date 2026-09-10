@@ -177,8 +177,8 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 3072
-  rb: {fileID: 0}
-  avoidanceTrigger: {fileID: 0}
+  rb: {fileID: 6453383009823562384}
+  avoidanceTrigger: {fileID: 8870890144738698369}
   nearbyObstacles: []
   velocity: {x: 0, y: 0, z: 0}
   desiredVelocity: {x: 0, y: 0, z: 0}

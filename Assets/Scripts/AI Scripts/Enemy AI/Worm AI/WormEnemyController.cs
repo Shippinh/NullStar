@@ -96,6 +96,7 @@ public class WormEnemyController : EnemyController
 
     public override void HandleRailAttach(float initialRailSpeed)
     {
+        base.HandleRailAttach(initialRailSpeed);
         HandleRailSpeedChange(initialRailSpeed);
     }
 

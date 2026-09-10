@@ -104,6 +104,7 @@ public class WormEnemy : EnemyAIComponent
 
             AdjustVelocity();
             AdjustAirVelocity();
+            
             rb.linearVelocity = velocity;
 
 

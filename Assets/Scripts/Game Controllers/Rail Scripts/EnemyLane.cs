@@ -438,9 +438,6 @@ public class EnemyLane : MonoBehaviour
         var rail = obj.GetComponentInChildren<EnemyRailController>();
         if (rail == null) return;
 
-        var ai = obj.GetComponentInChildren<EnemyAIComponent>();
-        if (ai != null) ai.enabled = false;
-
         var controller = obj.GetComponent<EnemyController>();
         controller?.HandleRailAttach(speed);
 

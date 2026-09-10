@@ -18,14 +18,33 @@ public class EnemyController : DestructibleController, IPoolable
         Initialize();
     }
 
+    public EnemyAIComponent GetAIComponent()
+    {
+        return enemyAIRef;
+    }
+
     public virtual void HandleRailAttach(float initialRailSpeed)
     {
-        // Does nothing at base
+
+        if (enemyAIRef != null)
+        {
+            //Debug.Log(name.ToString() + " handling rail attach");
+            enemyAIRef.enabled = false;
+        }
+    }
+
+    public virtual void HandleRailDettach()
+    {
+        if (enemyAIRef != null)
+        {
+            enemyAIRef.enabled = true;
+            enemyAIRef.GetRidigbody().isKinematic = false;
+        }
     }
 
     public virtual void HandleRailSpeedChange(float newSpeed)
     {
-        // Does nothing at base
+
     }
 
     // When grabbing from the pool
@@ -58,6 +77,11 @@ public class EnemyController : DestructibleController, IPoolable
         // Then return to pool if it's a standalone enemy and was taken from the pool before
         if(!string.IsNullOrEmpty(IPoolableTag) && countsAsSeparateEnemy)
             ObjectPool.Instance.ReturnToPool(gameObject, IPoolableTag);
+
+        if (enemyAIRef != null)
+        {
+            HandleRailDettach();
+        }
     }
 
     // On revival
@@ -80,7 +104,7 @@ public class EnemyController : DestructibleController, IPoolable
         base.Initialize();
 
         if (!enemyAIRef)
-            enemyAIRef = GetComponent<EnemyAIComponent>();
+            enemyAIRef = GetComponentInChildren<EnemyAIComponent>();
 
         if (enemyTurretsRefs == null)
             enemyTurretsRefs = GetComponentsInChildren<TurretBehavior>();
