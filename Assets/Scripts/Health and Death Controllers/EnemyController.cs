@@ -10,7 +10,7 @@ public class EnemyController : DestructibleController, IPoolable
     public bool countsAsSeparateEnemy = true;
     private float waveToAppear;
 
-    protected EnemyAIComponent enemyAIRef;
+    [SerializeField] protected EnemyAIComponent enemyAIRef;
     protected TurretBehavior[] enemyTurretsRefs;
     // Use this for initialization
     void Awake()

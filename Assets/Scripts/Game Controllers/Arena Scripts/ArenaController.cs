@@ -237,6 +237,9 @@ public class ArenaController : MonoBehaviour
         if (!enemy)
             return;
 
+        // STUPID HACK
+        enemy.HandleRailDettach();
+
         var hc = enemy.GetHealthController();
         if (!hc)
             return;

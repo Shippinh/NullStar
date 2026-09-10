@@ -13,6 +13,8 @@ public class RammerEnemy : EnemyAIComponent
     public bool randomizeMaxAirAcceleration = true;
     public float maxAirAccelerationRandomRange = 10f;
     public bool canMove = true;
+    [Range(0f, 1f)] public float groundAvoidanceScale = 0.3f; // how much of the vertical avoidance component to keep
+
 
     [Header("Chaotic offset parameters")]
     // Scale chaotic vertical offset based on distance
@@ -83,17 +85,17 @@ public class RammerEnemy : EnemyAIComponent
 
         Vector3 chaoticOffset = CalculateChaoticOffset(rawToPlayer, distanceToPlayer);
 
-        // Always move at maxSpeed toward player
         Vector3 toPlayerDir = (rawToPlayer + chaoticOffset).normalized * maxSpeed;
 
-        // Calculate avoidance
         Vector3 avoidanceVector = CalculateObstacleAvoidance();
-        avoidanceVector = ProjectOnContactPlane(avoidanceVector);
+        Vector3 verticalPart = contactNormal * Vector3.Dot(avoidanceVector, contactNormal);
+        Vector3 lateralPart = avoidanceVector - verticalPart;
 
-        // Combine direction + avoidance
+        float distanceScaler = Mathf.Clamp01((distanceToPlayer - scalerDistance) / (farDistance - scalerDistance));
+        avoidanceVector = lateralPart + verticalPart * groundAvoidanceScale * distanceScaler;
+
         Vector3 combined = toPlayerDir + avoidanceVector;
 
-        // Optional: clamp final speed to maxSpeed + some margin if needed
         if (combined.magnitude > maxSpeed * 1.5f)
             combined = combined.normalized * maxSpeed * 1.5f;
 

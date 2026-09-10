@@ -19101,7 +19101,7 @@ MonoBehaviour:
     transitionDuration: 0
     xOffset: 0
     yOffset: 0
-    newSplineT: 0.35
+    newSplineT: 0.95
     initialSpeed: 115
     maxBoostVerticalStrafeSpeed: 15
     maxBoostHorizontalStrafeSpeed: 15
