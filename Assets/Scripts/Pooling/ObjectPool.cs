@@ -50,21 +50,24 @@ public class ObjectPool : MonoBehaviour
     }
 
     // Grabs an object from the pool and changes its position and orientation to the new ones
-    public GameObject GetPooledObject(string tag, Vector3 position, Quaternion rotation, bool shouldBeRequeued)
+    public GameObject GetPooledObject(string tag, Vector3 position, Quaternion rotation,
+                                   IPooledSpawnOwner owner, bool shouldBeRequeued = false)
     {
-        if (!poolDictionary.ContainsKey(tag))
+        if (!poolDictionary.TryGetValue(tag, out var queue) || queue.Count == 0)
         {
-            //Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
+            Debug.LogWarning($"Pool '{tag}' is empty or doesn't exist.");
             return null;
         }
 
-        GameObject obj = poolDictionary[tag].Dequeue();
+        GameObject obj = queue.Dequeue();
         IPoolable poolable = obj.GetComponent<IPoolable>();
         poolable?.HandleDepool(tag, position, rotation);
 
-        // This is for objects we might run out, but it's not that critical so we can reuse them
+        if (owner != null && poolable is IOwnedPoolable owned)
+            owned.ClaimOwnership(owner);
+
         if (shouldBeRequeued)
-            poolDictionary[tag].Enqueue(obj);
+            queue.Enqueue(obj);
 
         return obj;
     }
@@ -95,7 +98,19 @@ public class ObjectPool : MonoBehaviour
     // Returns the object to pool
     public void ReturnToPool(GameObject obj, string tag)
     {
+        if (!poolDictionary.ContainsKey(tag))
+        {
+            Debug.LogWarning($"Pool '{tag}' doesn't exist — can't return object.");
+            return;
+        }
+
         IPoolable poolable = obj.GetComponent<IPoolable>();
+
+        // Release fires before HandleRepool, so an owner's cleanup can still
+        // read the object's state if it needs to (e.g. last known position).
+        if (poolable is IOwnedPoolable owned)
+            owned.ReleaseOwnership();
+
         poolable?.HandleRepool();
         poolDictionary[tag].Enqueue(obj);
     }

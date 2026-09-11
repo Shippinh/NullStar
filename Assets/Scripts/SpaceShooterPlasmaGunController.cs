@@ -88,7 +88,7 @@ public class SpaceShooterPlasmaGunController : MonoBehaviour
         if (string.IsNullOrEmpty(projectileTag)) return;
 
         // This is for visuals ONLY
-        GameObject projectile = projectilePool.GetPooledObject(projectileTag, muzzlePoint.position, Quaternion.LookRotation(targetPoint - muzzlePoint.position), true);
+        GameObject projectile = projectilePool.GetPooledObject(projectileTag, muzzlePoint.position, Quaternion.LookRotation(targetPoint - muzzlePoint.position), null, true);
         if (projectile != null)
             projectile.GetComponent<Projectile>().Initialize(muzzlePoint.position, targetPoint);
 

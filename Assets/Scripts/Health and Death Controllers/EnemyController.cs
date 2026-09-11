@@ -2,9 +2,9 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-public class EnemyController : DestructibleController, IPoolable
+public class EnemyController : DestructibleController, IOwnedPoolable
 {
-    public string IPoolableTag {  get; set; } // always gets set, because no enemy can exists without getting depooled first, unless scripted to be like that specifically
+    public string IPoolableTag { get; set; } // always gets set, because no enemy can exists without getting depooled first, unless scripted to be like that specifically
 
     public string enemyName = "Default Enemy Name";
     public bool countsAsSeparateEnemy = true;
@@ -12,6 +12,9 @@ public class EnemyController : DestructibleController, IPoolable
 
     [SerializeField] protected EnemyAIComponent enemyAIRef;
     protected TurretBehavior[] enemyTurretsRefs;
+
+    private IPooledSpawnOwner currentOwner;
+
     // Use this for initialization
     void Awake()
     {
@@ -25,7 +28,6 @@ public class EnemyController : DestructibleController, IPoolable
 
     public virtual void HandleRailAttach(float initialRailSpeed)
     {
-
         if (enemyAIRef != null)
         {
             //Debug.Log(name.ToString() + " handling rail attach");
@@ -47,6 +49,27 @@ public class EnemyController : DestructibleController, IPoolable
 
     }
 
+    // ── Ownership ─────────────────────────────────────────────────────────
+
+    public void ClaimOwnership(IPooledSpawnOwner newOwner)
+    {
+        if (currentOwner != null && currentOwner != newOwner)
+        {
+            Debug.LogWarning($"[EnemyController:{name}] {currentOwner} still owned this " +
+                              $"when {newOwner} claimed it — forcing release of stale owner.");
+            currentOwner.OnEntityReleased(this);
+        }
+        currentOwner = newOwner;
+    }
+
+    public void ReleaseOwnership()
+    {
+        currentOwner?.OnEntityReleased(this);
+        currentOwner = null;
+    }
+
+    // ── Pooling ───────────────────────────────────────────────────────────
+
     // When grabbing from the pool
     public virtual void HandleDepool(string poolableTag, Vector3 position, Quaternion rotation)
     {
@@ -57,15 +80,16 @@ public class EnemyController : DestructibleController, IPoolable
 
         // Revive (prepare entity health controller) - "true" will call HandleRevival() after Revive() is done
         entityHealthControllerRef.Revive(true);
-    }
 
+        // NOTE: ownership is claimed by ObjectPool.GetPooledObject right after this call returns,
+        // not here — HandleDepool doesn't know who's asking.
+    }
 
     // When returning to the pool
     public virtual void HandleRepool()
     {
-
         this.gameObject.SetActive(false);
-        //HandleDeath();
+        // ReleaseOwnership() is already called by ObjectPool.ReturnToPool before HandleRepool runs.
     }
 
     // On death
@@ -75,8 +99,8 @@ public class EnemyController : DestructibleController, IPoolable
         base.HandleDeath();
 
         // Then return to pool if it's a standalone enemy and was taken from the pool before
-        if(!string.IsNullOrEmpty(IPoolableTag) && countsAsSeparateEnemy)
-            ObjectPool.Instance.ReturnToPool(gameObject, IPoolableTag);
+        if (!string.IsNullOrEmpty(IPoolableTag) && countsAsSeparateEnemy)
+            ObjectPool.Instance.ReturnToPool(gameObject, IPoolableTag); // ownership release happens here
 
         if (enemyAIRef != null)
         {

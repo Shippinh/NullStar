@@ -29,7 +29,7 @@ public enum ArenaCompletionPlayerEvent
     StartNextArena                  // Start next arena immediately after this arena completes
 }
 
-public class ArenaController : MonoBehaviour
+public class ArenaController : MonoBehaviour, IPooledSpawnOwner
 {
     [Header("Arena Settings")]
     public ArenaStartMode startMode = ArenaStartMode.OnStart;
@@ -71,9 +71,6 @@ public class ArenaController : MonoBehaviour
 
     private readonly List<ArenaEntitySpawn> pendingSpawns = new List<ArenaEntitySpawn>();
     private float spawnTimer = 0f;
-
-    private readonly Dictionary<EntityHealthController, Action> deathHandlers
-        = new Dictionary<EntityHealthController, Action>();
 
     private bool initialized = false;
 
@@ -228,7 +225,8 @@ public class ArenaController : MonoBehaviour
             sp.poolableEnemyTag,
             sp.transform.position,
             sp.transform.rotation,
-            false);
+            this,               // owner — claims automatically inside GetPooledObject
+            shouldBeRequeued: false);
 
         if (!pooledObj)
             return;
@@ -246,16 +244,9 @@ public class ArenaController : MonoBehaviour
 
         pendingSpawns.RemoveAt(0);
         aliveEnemies++;
-
-        if (deathHandlers.TryGetValue(hc, out var oldHandler))
-            hc.Died -= oldHandler;
-
-        Action handler = () => OnEnemyDied(hc);
-        deathHandlers[hc] = handler;
-        hc.Died += handler;
     }
 
-    private void OnEnemyDied(EntityHealthController hc)
+    public void OnEntityReleased(MonoBehaviour releasedObject)
     {
         aliveEnemies--;
 
@@ -294,7 +285,7 @@ public class ArenaController : MonoBehaviour
     {
         SetState(ArenaState.Completed);
 
-        switch(arenaCompletionPlayerEvent)
+        switch (arenaCompletionPlayerEvent)
         {
             case ArenaCompletionPlayerEvent.StartNextArena:
                 nextArenaControllerRef.gameObject.SetActive(true);

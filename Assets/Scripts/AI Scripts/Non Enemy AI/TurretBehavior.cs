@@ -239,7 +239,7 @@ public class TurretBehavior : MonoBehaviour
         for (int i = 0; i < targets.Length; i++)
         {
             Transform gun = guns[i % guns.Count];
-            var obj = ObjectPool.Instance.GetPooledObject(tag, gun.position, gun.rotation, false);
+            var obj = ObjectPool.Instance.GetPooledObject(tag, gun.position, gun.rotation, null, false);
             if (obj == null) continue;
             var proj = obj.GetComponent<ScriptedInflatableProjectile>();
             if (proj == null) continue;

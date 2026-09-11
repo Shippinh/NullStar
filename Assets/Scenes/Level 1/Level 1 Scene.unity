@@ -22654,7 +22654,7 @@ MonoBehaviour:
   setActiveStartTrigger: 1
   spawnPoints: []
   totalWaveCount: 5
-  baseDelay: 0.25
+  baseDelay: 0.025
   randomExtraDelay: 0.1
   nextArenaControllerRef: {fileID: 0}
   perfectTime: 80

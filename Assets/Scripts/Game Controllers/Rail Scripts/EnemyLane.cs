@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
 [DefaultExecutionOrder(-100)]
-public class EnemyLane : MonoBehaviour
+public class EnemyLane : MonoBehaviour, IPooledSpawnOwner
 {
     // ── Inspector ─────────────────────────────────────────────────────────────
 
@@ -45,8 +44,6 @@ public class EnemyLane : MonoBehaviour
 
     [Header("Slots")]
     public List<LaneSlot> slots = new();
-    private readonly Dictionary<EntityHealthController, Action> laneDeathHandlers = new();
-
 
     [Header("Repool")]
     public float repoolDelay = 0f;          // 0 = disabled
@@ -101,6 +98,10 @@ public class EnemyLane : MonoBehaviour
     private float _nextSpawnCountdown;
     private bool _activated;
     private bool _passbyShootFired;
+
+    // Maps a currently-owned controller back to the LaneSlot it occupies,
+    // so OnEntityReleased can reset the right slot in O(1) instead of scanning `slots`.
+    private readonly Dictionary<EnemyController, LaneSlot> ownedSlots = new();
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
 
@@ -370,7 +371,7 @@ public class EnemyLane : MonoBehaviour
             GameObject obj = slot.enemyController != null
                 ? slot.enemyController.gameObject
                 : slot.enemy.gameObject;
-            ObjectPool.Instance.ReturnToPool(obj, slot.activePoolTag);
+            ObjectPool.Instance.ReturnToPool(obj, slot.activePoolTag); // this releases ownership too
         }
 
         slot.enemy = null;
@@ -435,7 +436,8 @@ public class EnemyLane : MonoBehaviour
             spawnRot = Quaternion.LookRotation(f, u);
         }
 
-        GameObject obj = ObjectPool.Instance.GetPooledObject(slot.poolTag, spawnPos, spawnRot, shouldBeRequeued: false);
+        GameObject obj = ObjectPool.Instance.GetPooledObject(
+            slot.poolTag, spawnPos, spawnRot, this, shouldBeRequeued: false);
         if (obj == null) return;
 
         var rail = obj.GetComponentInChildren<EnemyRailController>();
@@ -444,22 +446,13 @@ public class EnemyLane : MonoBehaviour
         var controller = obj.GetComponent<EnemyController>();
         controller?.HandleRailAttach(speed);
 
+        if (controller != null)
+            ownedSlots[controller] = slot;
+
         rail.splineContainer = splineContainer;
         rail.InitializeSpline();
         rail.SyncSplineT(slot.slotT);
         rail.InitializeEnemy();
-
-        var hc = controller != null ? controller.GetHealthController() : null;
-        if (hc != null)
-        {
-            if (laneDeathHandlers.TryGetValue(hc, out var oldHandler))
-                hc.Died -= oldHandler;
-
-            Action handler = () => HandleSlotDeath(rail);
-            laneDeathHandlers[hc] = handler;
-            hc.Died += handler;
-        }
-
         rail.body.isKinematic = true;
         rail.body.interpolation = RigidbodyInterpolation.Interpolate;
         rail.SetLane(slot.rightOffset, slot.upOffset, duration: 0f);
@@ -480,6 +473,24 @@ public class EnemyLane : MonoBehaviour
         slot.activePoolTag = slot.poolTag;
 
         SyncShooting(slot);
+    }
+
+    // ── Ownership ─────────────────────────────────────────────────────────────
+
+    public void OnEntityReleased(MonoBehaviour releasedObject)
+    {
+        var controller = releasedObject as EnemyController;
+        if (controller == null || !ownedSlots.TryGetValue(controller, out var slot))
+            return;
+
+        ownedSlots.Remove(controller);
+
+        slot.enemy = null;
+        slot.enemyController = null;
+        slot.isAlive = false;
+        slot.entryPlayer = null;
+        slot.handedOff = false;
+        slot.cursor = null;
     }
 
     // ── Spline helpers ────────────────────────────────────────────────────────
@@ -518,21 +529,6 @@ public class EnemyLane : MonoBehaviour
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
-
-    public void HandleSlotDeath(EnemyRailController enemy)
-    {
-        foreach (var slot in slots)
-        {
-            if (slot.enemy != enemy) continue;
-            slot.enemy = null;
-            slot.enemyController = null;
-            slot.isAlive = false;
-            slot.entryPlayer = null;
-            slot.handedOff = false;
-            slot.cursor = null;
-            break;
-        }
-    }
 
     public void ChangeLane(float targetRight, float targetUp, float duration)
     {
