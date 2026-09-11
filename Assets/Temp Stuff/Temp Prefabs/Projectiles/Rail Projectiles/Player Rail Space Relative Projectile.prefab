@@ -4943,7 +4943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c95f2532375fb4e81909a7ef43b640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 30
   maxLifetime: 8
   movementMode: 1
   overrideDefaultSpeedOnPlayerSpace: 1

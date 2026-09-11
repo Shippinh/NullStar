@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -44,6 +45,8 @@ public class EnemyLane : MonoBehaviour
 
     [Header("Slots")]
     public List<LaneSlot> slots = new();
+    private readonly Dictionary<EntityHealthController, Action> laneDeathHandlers = new();
+
 
     [Header("Repool")]
     public float repoolDelay = 0f;          // 0 = disabled
@@ -445,6 +448,18 @@ public class EnemyLane : MonoBehaviour
         rail.InitializeSpline();
         rail.SyncSplineT(slot.slotT);
         rail.InitializeEnemy();
+
+        var hc = controller != null ? controller.GetHealthController() : null;
+        if (hc != null)
+        {
+            if (laneDeathHandlers.TryGetValue(hc, out var oldHandler))
+                hc.Died -= oldHandler;
+
+            Action handler = () => HandleSlotDeath(rail);
+            laneDeathHandlers[hc] = handler;
+            hc.Died += handler;
+        }
+
         rail.body.isKinematic = true;
         rail.body.interpolation = RigidbodyInterpolation.Interpolate;
         rail.SetLane(slot.rightOffset, slot.upOffset, duration: 0f);
